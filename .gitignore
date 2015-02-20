@@ -1,0 +1,12 @@
+/*/bin
+/*/build.gradle
+/*/classes
+/*/ivy.xml.MD5
+/*/javadoc
+/*/lib
+/*/test-classes
+/*/test-results
+
+/*/docroot/css/*/.sass-cache
+/*/docroot/WEB-INF/classes
+/*/docroot/WEB-INF/lib
