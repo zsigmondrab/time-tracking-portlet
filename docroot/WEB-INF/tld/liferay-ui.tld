@@ -2,7 +2,7 @@
 
 <taglib
 	version="2.1"
-	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 >
@@ -11,7 +11,6 @@
 	<short-name>liferay-ui</short-name>
 	<uri>http://liferay.com/tld/ui</uri>
 	<tag>
-		<description>Deprecated as of 7.0.0, replaced by liferay-aui:nav-item</description>
 		<name>app-view-display-style</name>
 		<tag-class>com.liferay.taglib.ui.AppViewDisplayStyleTag</tag-class>
 		<body-content>empty</body-content>
@@ -26,18 +25,8 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>displayStyleURL</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>eventName</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>requestParams</name>
-			<required>false</required>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
@@ -121,11 +110,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>iconCssClass</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>latestApprovedVersion</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -187,7 +171,7 @@
 		</attribute>
 		<attribute>
 			<name>thumbnailSrc</name>
-			<required>false</required>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
@@ -201,17 +185,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>classTypeName</name>
+			<name>version</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
 			<name>url</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>version</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -326,11 +305,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>highlightEnabled</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>locked</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -387,62 +361,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>asset-add-button</name>
-		<tag-class>com.liferay.taglib.ui.AssetAddButtonTag</tag-class>
-		<body-content>JSP</body-content>
-
-		<attribute>
-			<name>addDisplayPageParameter</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>allAssetCategoryIds</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>allAssetTagNames</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>classNameIds</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>classTypeIds</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>groupIds</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>redirect</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>asset-categories-available</name>
-		<tag-class>com.liferay.taglib.ui.AssetCategoriesAvailableTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>className</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>classPK</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>asset-categories-error</name>
 		<tag-class>com.liferay.taglib.ui.AssetCategoriesErrorTag</tag-class>
 		<body-content>JSP</body-content>
@@ -477,22 +395,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>classTypePK</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>contentCallback</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
 			<name>curCategoryIds</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>groupIds</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -544,46 +452,6 @@
 		<attribute>
 			<name>classPK</name>
 			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>asset-metadata</name>
-		<tag-class>com.liferay.taglib.ui.AssetMetadataTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>className</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>classPK</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>filterByMetadata</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>metadataFields</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>asset-tags-available</name>
-		<tag-class>com.liferay.taglib.ui.AssetTagsAvailableTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>className</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>classPK</name>
-			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
@@ -712,7 +580,27 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>portletURL</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>selLayout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>selLayoutParam</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>showCurrentGroup</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showCurrentPortlet</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -738,7 +626,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a calendar UI with configurable events.</description>
+		<description>Creates a calendar UI Component.</description>
 		<name>calendar</name>
 		<tag-class>com.liferay.taglib.ui.CalendarTag</tag-class>
 		<body-content>JSP</body-content>
@@ -907,42 +795,12 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>ddm-template-renderer</name>
-		<tag-class>com.liferay.taglib.ui.DDMTemplateRendererTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>contextObjects</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>displayStyle</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>displayStyleGroupId</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>entries</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>ddm-template-selector</name>
 		<tag-class>com.liferay.taglib.ui.DDMTemplateSelectorTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>classNameId</name>
 			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>defaultDisplayStyle</name>
-			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
@@ -1012,51 +870,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>diff-version-comparator</name>
-		<tag-class>com.liferay.taglib.ui.DiffVersionComparatorTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>availableLocales</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>diffHtmlResults</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>diffVersionsInfo</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>languageId</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>portletURL</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>resourceURL</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>sourceVersion</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>targetVersion</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>discussion</name>
 		<tag-class>com.liferay.taglib.ui.DiscussionTag</tag-class>
 		<body-content>JSP</body-content>
@@ -1088,11 +901,6 @@
 		<attribute>
 			<name>hideControls</name>
 			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>paginationURL</name>
-			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
@@ -1128,91 +936,26 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>email-notification-settings</name>
-		<tag-class>com.liferay.taglib.ui.EmailNotificationSettingsTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>bodyLabel</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>emailBody</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>emailDefinitionTerms</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>emailEnabled</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>emailParam</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>emailSubject</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>fieldPrefix</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>fieldPrefixSeparator</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>helpMessage</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>showEmailEnabled</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>showSubject</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<description>Creates an error message to display to the user.</description>
 		<name>error</name>
 		<tag-class>com.liferay.taglib.ui.ErrorTag</tag-class>
 		<tei-class>com.liferay.taglib.ui.ErrorTei</tei-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<description>Sets a class for the exception.</description>
 			<name>exception</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the name of the field that the error message is focused on.</description>
 			<name>focusField</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets a key to be placed in the <![CDATA[<code>SessionErrors</code>]]> object to trigger the error message.</description>
 			<name>key</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets explicit message text or sets the name of a language key from which to derive text for the message.</description>
 			<name>message</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -1223,17 +966,10 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to translate the message into the user's language. The default value is <![CDATA[<code>true</code>]]>.</description>
 			<name>translateMessage</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
-	</tag>
-	<tag>
-		<name>error-header</name>
-		<tag-class>com.liferay.taglib.ui.ErrorHeaderTag</tag-class>
-		<body-content>JSP</body-content>
 	</tag>
 	<tag>
 		<name>error-marker</name>
@@ -1461,7 +1197,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a header that displays its text above a horizontal rule accompanied by a configurable back URL button.</description>
+		<description>Creates a header UI component.</description>
 		<name>header</name>
 		<tag-class>com.liferay.taglib.ui.HeaderTag</tag-class>
 		<body-content>JSP</body-content>
@@ -1512,7 +1248,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a fully configurable icon that provides access to current Liferay theme icons.</description>
+		<description>Creates an icon UI component.</description>
 		<name>icon</name>
 		<tag-class>com.liferay.taglib.ui.IconTag</tag-class>
 		<body-content>JSP</body-content>
@@ -1535,7 +1271,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Stores miscellaneous data via a map. This data is not shared with the browser. The map holds key value pairs of type <![CDATA[<code>&lt;String, Object&gt;</code>]]>.</description>
+			<description>Stores miscellaneous data. This data is not shared with the browser. The Map holds key, value pairs of <![CDATA[<String, Object>]]>.</description>
 			<name>data</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -1560,7 +1296,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the icon to display on mouse over of the icon. The icon image comes from the current theme. The value can be the filename prefix of any image file in the theme's <![CDATA[<code>common</code>]]> image folder.</description>
 			<name>imageHover</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -1616,7 +1351,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the location of the image file to use on mouse over of the icon. This value takes precedence over the <![CDATA[<code>imageHover</code>]]> attribute. This image takes precedence over icons set with the <![CDATA[<code>imageHover</code>]]> attribute.</description>
 			<name>srcHover</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -1649,100 +1383,84 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates an icon to associate with deactivating an item.</description>
 		<name>icon-deactivate</name>
 		<tag-class>com.liferay.taglib.ui.IconDeactivateTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<description>Sets whether to display a message on the icon's label on mouse over of the icon. The default value is <![CDATA[<code>false</code>]]>.</description>
 			<name>label</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets the URL navigated to when the icon is clicked.</description>
 			<name>url</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a configurable icon to associate with deleting or removing an item.</description>
 		<name>icon-delete</name>
 		<tag-class>com.liferay.taglib.ui.IconDeleteTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<description>Sets text to use in place of the text from the default deletion confirmation message language key <![CDATA[<code>are-you-sure-you-want-to-delete-this</code>]]>. If the <![CDATA[<code>trash</code>]]> attribute is set to <![CDATA[<code>true</code>]]>, no confirmation message is shown.</description>
 			<name>confirmation</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets a CSS class for styling this component.</description>
 			<name>cssClass</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Identifies the component instance.</description>
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the icon's image using an image icon from the current theme. The value can be the filename prefix of any image file in the theme's <![CDATA[<code>common</code>]]> image folder. The image takes precedence over any default icon images.</description>
 			<name>image</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to display the <![CDATA[<code>message</code>]]> attribute's value as the icon's label. The default value is <![CDATA[<code>false</code>]]>.</description>
 			<name>label</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets the text to be displayed on mouse over of the icon.</description>
 			<name>message</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets an HTTP request method to be invoked. Possible values are <![CDATA[<code>get</code>]]> and <![CDATA[<code>post</code>]]>.</description>
 			<name>method</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to use the trash icon instead of the remove icon. The default value is<![CDATA[<code>false</code>]]>.</description>
 			<name>trash</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets the URL navigated to when the icon is clicked.</description>
 			<name>url</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a help icon that displays a custom message as a tooltip on mouse over of the help icon.</description>
+		<description>Creates a help icon tooltip UI component.</description>
 		<name>icon-help</name>
 		<tag-class>com.liferay.taglib.ui.IconHelpTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<description>Sets the text to be displayed on mouse over of the icon.</description>
+			<description>Sets the text to be displayed on mouse over of the help icon.</description>
 			<name>message</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a list of icons from a list of child components.</description>
+		<description>Creates an icon list UI component from a list of child components.</description>
 		<name>icon-list</name>
 		<tag-class>com.liferay.taglib.ui.IconListTag</tag-class>
 		<body-content>JSP</body-content>
@@ -1755,7 +1473,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates an icon menu from a list of child components.</description>
+		<description>Creates an icon menu UI component from a list of child components.</description>
 		<name>icon-menu</name>
 		<tag-class>com.liferay.taglib.ui.IconMenuTag</tag-class>
 		<body-content>JSP</body-content>
@@ -1786,7 +1504,6 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets the location of the image file to use in the icon.</description>
 			<name>icon</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -1818,7 +1535,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to add the <![CDATA[<code>select</code>]]> CSS class to the icon menu. If set to <![CDATA[<code>true</code>]]>, the selected icon is added to the icon menu's trigger when the icon is selected. The default value is <![CDATA[<code>false</code>]]>.</description>
 			<name>select</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -1856,42 +1572,6 @@
 			<name>useIconCaret</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
-		</attribute>
-	</tag>
-	<tag>
-		<name>image-selector</name>
-		<tag-class>com.liferay.taglib.ui.ImageSelectorTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>draggableImage</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>fileEntryId</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>maxFileSize</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>paramName</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>uploadURL</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>validExtensions</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
 	<tag>
@@ -1915,7 +1595,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a configurable input checkbox.</description>
+		<description>Creates an input checkbox UI component.</description>
 		<name>input-checkbox</name>
 		<tag-class>com.liferay.taglib.ui.InputCheckBoxTag</tag-class>
 		<body-content>JSP</body-content>
@@ -1965,7 +1645,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a date input field that displays a calendar UI for date selection.</description>
+		<description>Creates a date input field UI component.</description>
 		<name>input-date</name>
 		<tag-class>com.liferay.taglib.ui.InputDateTag</tag-class>
 		<body-content>JSP</body-content>
@@ -2068,46 +1748,21 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates an input field for editing rich text.</description>
 		<name>input-editor</name>
 		<tag-class>com.liferay.taglib.ui.InputEditorTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>allowBrowseDocuments</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>autoCreate</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<description>Sets configuration parameters using a map. The map holds key value pairs of type <![CDATA[<code>&lt;String, String&gt;</code>]]>.</description>
 			<name>configParams</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.util.Map</type>
 		</attribute>
 		<attribute>
-			<name>contents</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<description>Sets the language ID of the input editor's text.</description>
 			<name>contentsLanguageId</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the CSS class for styling this component.</description>
 			<name>cssClass</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>data</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -2127,11 +1782,9 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets configuration parameters using a map. The map holds key value pairs of <![CDATA[<code>&lt;String, String&gt;</code>]]>.</description>
 			<name>fileBrowserParams</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.util.Map</type>
 		</attribute>
 		<attribute>
 			<name>height</name>
@@ -2139,69 +1792,41 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:input-editor#contents</description>
 			<name>initMethod</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the input editor's name. The default value is <![CDATA[<code>editor</code>]]>.</description>
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets a function to be called when the input editor loses focus.</description>
 			<name>onBlurMethod</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets a function to be called on a change in the input editor.</description>
 			<name>onChangeMethod</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets a function to be called when the input editor gets focus.</description>
 			<name>onFocusMethod</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets a function to be called when the input editor initializes.</description>
-			<name>onInitMethod</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<description>Sets placeholder text to display in the input editor.</description>
-			<name>placeholder</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<description>Sets whether the field for the input editor is resizable. The default value is <![CDATA[<code>true</code>]]>.</description>
 			<name>resizable</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets whether to enable editing the HTML source code of the content. The default value is <![CDATA[<code>true</code>]]>.</description>
-			<name>showSource</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<description>Sets whether to skip loading resources necessary for the CKEditor. The default value is <![CDATA[<code>false</code>]]>.</description>
 			<name>skipEditorLoading</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets the toolbar for the input editor. The default value is <![CDATA[<code>liferay</code>]]>. Possible values are <![CDATA[<code>bbcode</code>]]>, <![CDATA[<code>creole</code>]]>, <![CDATA[<code>editInPlace</code>]]>, <![CDATA[<code>email</code>]]>, <![CDATA[<code>liferay</code>]]>, <![CDATA[<code>liferayArticle</code>]]>, <![CDATA[<code>phone</code>]]>, <![CDATA[<code>simple</code>]]>, and <![CDATA[<code>tablet</code>]]>.</description>
 			<name>toolbarSet</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -2216,11 +1841,6 @@
 		<name>input-field</name>
 		<tag-class>com.liferay.taglib.ui.InputFieldTag</tag-class>
 		<body-content>JSP</body-content>
-		<attribute>
-			<name>autoComplete</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
 		<attribute>
 			<name>autoFocus</name>
 			<required>false</required>
@@ -2347,16 +1967,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>fieldPrefix</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>fieldPrefixSeparator</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>formName</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -2387,11 +1997,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>toolbarSet</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -2404,7 +2009,7 @@
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
-		<description>Creates an input move boxes UI component comprised of two columns of key value pairs that can be rearranged.</description>
+		<description>Creates an input move boxes UI component.</description>
 		<name>input-move-boxes</name>
 		<tag-class>com.liferay.taglib.ui.InputMoveBoxesTag</tag-class>
 		<body-content>JSP</body-content>
@@ -2550,7 +2155,7 @@
 		<body-content>JSP</body-content>
 	</tag>
 	<tag>
-		<description>Creates a configurable search box UI component.</description>
+		<description>Creates a search box UI component.</description>
 		<name>input-search</name>
 		<tag-class>com.liferay.taglib.ui.InputSearchTag</tag-class>
 		<body-content>JSP</body-content>
@@ -2651,7 +2256,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a configurable text area input field.</description>
+		<description>Creates a text area input field UI component.</description>
 		<name>input-textarea</name>
 		<tag-class>com.liferay.taglib.ui.InputTextAreaTag</tag-class>
 		<body-content>JSP</body-content>
@@ -2682,12 +2287,12 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a time input field that provides a scrollable dropdown list of hours, in intervals designated by the <![CDATA[<code>minuteInterval</code>]]> attribute.</description>
+		<description>Creates a time input field UI component.</description>
 		<name>input-time</name>
 		<tag-class>com.liferay.taglib.ui.InputTimeTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<description>Sets the name of the AM/PM parameter for the time input. An acceptable value is <![CDATA[<code>ampm</code>]]>.</description>
+			<description>Sets the ampm parameter for the time input. An acceptable value is <![CDATA[<code>ampm</code>]]>.</description>
 			<name>amPmParam</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -2766,7 +2371,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a configurable timezone drop-down menu.</description>
+		<description>Creates a timezone drop-down menu UI component.</description>
 		<name>input-time-zone</name>
 		<tag-class>com.liferay.taglib.ui.InputTimeZoneTag</tag-class>
 		<body-content>JSP</body-content>
@@ -2854,11 +2459,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>portletRequestModel</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>showAvailableLocales</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -2869,7 +2469,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>ddmTemplateKey</name>
+			<name>templateId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>xmlRequest</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -2935,81 +2540,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>layouts-tree</name>
-		<tag-class>com.liferay.taglib.ui.LayoutsTreeTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>checkContentDisplayPage</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>defaultStateChecked</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>draggableTree</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>expandFirstNode</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>groupId</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>incomplete</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>portletURL</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>privateLayout</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>rootNodeName</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>saveState</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>selectableTree</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>selectedLayoutIds</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>selPlid</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>treeId</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>logo-selector</name>
 		<tag-class>com.liferay.taglib.ui.LogoSelectorTag</tag-class>
 		<body-content>JSP</body-content>
@@ -3019,17 +2549,17 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>defaultLogo</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>defaultLogoURL</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>editLogoFn</name>
+			<name>editLogoURL</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>imageId</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -3039,73 +2569,8 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>maxFileSize</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>showBackground</name>
 			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>tempImageFileName</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>map</name>
-		<tag-class>com.liferay.taglib.ui.MapTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>geolocation</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>latitude</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>longitude</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>name</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>points</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>provider</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>menu</name>
-		<tag-class>com.liferay.taglib.ui.MenuTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>menu</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>menu-item</name>
-		<tag-class>com.liferay.taglib.ui.MenuItemTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>menuItem</name>
-			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
@@ -3115,54 +2580,33 @@
 		<body-content>JSP</body-content>
 	</tag>
 	<tag>
-		<description>Creates a message to display to the user.</description>
 		<name>message</name>
 		<tag-class>com.liferay.taglib.ui.MessageTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<description>Passes arguments for the language key, if the language key is configured to recieve arguments.</description>
 			<name>arguments</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to escape the language key value so that it is safe to use in HTML.</description>
-			<name>escape</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
-		</attribute>
-		<attribute>
-			<name>escapeAttribute</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
-		</attribute>
-		<attribute>
-			<description>Sets the name of the language key from which to derive the message to be displayed.</description>
 			<name>key</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to translate the language key value into the user's language. The default value is <![CDATA[<code>true</code>]]>.</description>
 			<name>localizeKey</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets whether to translate the arguments into the user's language. The default value is <![CDATA[<code>true</code>]]>.</description>
 			<name>translateArguments</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
 			<name>unicode</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 	</tag>
 	<tag>
@@ -3306,7 +2750,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a collapsible panel UI for housing content.</description>
+		<description>Creates a collapsible panel UI component.</description>
 		<name>panel</name>
 		<tag-class>com.liferay.taglib.ui.PanelTag</tag-class>
 		<body-content>JSP</body-content>
@@ -3324,7 +2768,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the default component's state. Possible values are <![CDATA[<code>open</code>]]> and any string other than open. Any string other than <![CDATA[<code>open</code>]]> collapses the panel. The default value is <![CDATA[<code>open</code>]]>.</description>
+			<description>Sets the default state of the panel. Possible values are <![CDATA[<code>open</code>]]> and any string other than open. Any string other than <![CDATA[<code>open</code>]]> collapses the panel. The default value is <![CDATA[<code>open</code>]]>.</description>
 			<name>defaultState</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -3343,7 +2787,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the icon to display next to the panel's title. The icon can be specified using the name of one of the Bootstrap icon CSS classes found at <![CDATA[<a href="http://marcoceppi.github.io/bootstrap-glyphicons/" >http://marcoceppi.github.io/bootstrap-glyphicons/</a>]]>.</description>
 			<name>iconCssClass</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -3361,14 +2804,13 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to remember the component's state and persist it to the database. The default value is <![CDATA[<code>false</code>]]>.</description>
 			<name>persistState</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets the component's state. Possible values are <![CDATA[<code>open</code>]]> and any string other than open. Any string other than <![CDATA[<code>open</code>]]> collapses the panel.</description>
+			<description>Sets the state of the panel. Possible values are <![CDATA[<code>open</code>]]> and any string other than open. Any string other than <![CDATA[<code>open</code>]]> collapses the panel.</description>
 			<name>state</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -3381,42 +2823,33 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a collapsible container to house <![CDATA[<code>liferay-ui:panel</code>]]> components.</description>
 		<name>panel-container</name>
 		<tag-class>com.liferay.taglib.ui.PanelContainerTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<description>Sets whether only one panel can be shown at a time. As one panel is opened, the others close, creating an accordian effect. The default value is <![CDATA[<code>false<code>]]>.</description>
 			<name>accordion</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets a CSS class for styling this component.</description>
 			<name>cssClass</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to extend the interface with additional styling. The default value is <![CDATA[<code>false</code>]]>.</description>
 			<name>extended</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Identifies the component instance.</description>
 			<name>id</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to remember the component's state and persist it to the database. The default value is <![CDATA[<code>false</code>]]>.</description>
 			<name>persistState</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 	</tag>
 	<tag>
@@ -3435,29 +2868,23 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Renders a PNG image with the source given for the <![CDATA[<code>image</code>]]> attribute.</description>
 		<name>png-image</name>
 		<tag-class>com.liferay.taglib.ui.PngImageTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<description>Sets the height of the image in pixels. A possible value would be <![CDATA[<code>16</code>]]>. <![CDATA[<code>px</code>]]> is then appended to the end of the value.</description>
 			<name>height</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>int</type>
 		</attribute>
 		<attribute>
-			<description>Sets the location of the PNG image file to use.</description>
 			<name>image</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the height of the image in pixels. A possible value would be <![CDATA[<code>16</code>]]>. <![CDATA[<code>px</code>]]> is then appended to the end of the value.</description>
 			<name>width</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>int</type>
 		</attribute>
 	</tag>
 	<tag>
@@ -3516,11 +2943,6 @@
 		</attribute>
 		<attribute>
 			<name>ratingsStats</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>round</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -3651,7 +3073,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a search form, with an additional select input to set the scope of the search.</description>
 		<name>search</name>
 		<tag-class>com.liferay.taglib.ui.SearchTag</tag-class>
 		<body-content>JSP</body-content>
@@ -4059,71 +3480,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>search-container-column-user</name>
-		<tag-class>com.liferay.taglib.ui.SearchContainerColumnUserTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>align</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>colspan</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>cssClass</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>date</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>href</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>index</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>name</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>orderable</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>orderableProperty</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>property</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>userId</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>valign</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>search-container-results</name>
 		<tag-class>com.liferay.taglib.ui.SearchContainerResultsTag</tag-class>
 		<tei-class>com.liferay.taglib.ui.SearchContainerResultsTei</tei-class>
@@ -4326,6 +3682,11 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>section</name>
@@ -4418,16 +3779,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>icon</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>displayStyle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>target</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -4484,53 +3835,78 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>social-bookmarks-settings</name>
-		<tag-class>com.liferay.taglib.ui.SocialBookmarksSettingsTag</tag-class>
+		<name>staging</name>
+		<tag-class>com.liferay.taglib.ui.StagingTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>displayPosition</name>
+			<name>cssClass</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>displayStyle</name>
+			<name>extended</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>enabled</name>
+			<name>groupId</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>types</name>
+			<name>icon</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>layoutSetBranchId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>message</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>onlyActions</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>privateLayout</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>selPlid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showManageBranches</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a success message to display to the user.</description>
 		<name>success</name>
 		<tag-class>com.liferay.taglib.ui.SuccessTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
-			<description>Sets the key to be placed in the <![CDATA[<code>SessionMessages</code>]]> object to trigger the success message.</description>
 			<name>key</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets explicit message text or sets the name of a language key from which to derive the message text.</description>
 			<name>message</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets whether to translate the success message into the user's language. The default value is <![CDATA[<code>true</code>]]>.</description>
 			<name>translateMessage</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
 		</attribute>
 	</tag>
 	<tag>
@@ -4580,7 +3956,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a tabbed UI of section dividers that each house their own content.</description>
+		<description>Creates a tabs UI component.</description>
 		<name>tabs</name>
 		<tag-class>com.liferay.taglib.ui.TabsTag</tag-class>
 		<body-content>JSP</body-content>
@@ -4655,66 +4031,60 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>urls</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:tabs#urls</description>
 			<name>url0</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:tabs#urls</description>
+			<description>Sets the URL for the second tab.</description>
 			<name>url1</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:tabs#urls</description>
+			<description>Sets the URL for the third tab.</description>
 			<name>url2</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:tabs#urls</description>
+			<description>Sets the URL for the fourth tab.</description>
 			<name>url3</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:tabs#urls</description>
+			<description>Sets the URL for the fifth tab.</description>
 			<name>url4</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:tabs#urls</description>
+			<description>Sets the URL for the sixth tab.</description>
 			<name>url5</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:tabs#urls</description>
+			<description>Sets the URL for the seventh tab.</description>
 			<name>url6</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:tabs#urls</description>
+			<description>Sets the URL for the eighth tab.</description>
 			<name>url7</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:tabs#urls</description>
+			<description>Sets the URL for the ninth tab.</description>
 			<name>url8</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Deprecated as of 7.0.0, replaced by liferay-ui:tabs#urls</description>
+			<description>Sets the URL for the tenth tab.</description>
 			<name>url9</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -4727,49 +4097,46 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Creates a UI component that toggles the visibility of the content of the component matching the given <![CDATA[<code>id</code>]]>. Default icons are used as the component's default mechanism for showing and hiding the content.</description>
+		<description>Creates a toggle UI component.</description>
 		<name>toggle</name>
 		<tag-class>com.liferay.taglib.ui.ToggleTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<description>Sets whether to initially show content by default. The default value is <![CDATA[<code>true</code>]]>.</description>
+			<description>Sets whether to show content by default.</description>
 			<name>defaultShowContent</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<description>Sets an icon as the mechanism to hide the content. You can specify the location of an image file to use in the icon; otherwise a default icon is used.</description>
 			<name>hideImage</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets the text to display as a link to hide the content. It overrides the <![CDATA[<code>hideImage</code>]]> attribute. Note that the <![CDATA[<code>showMessage</code>]]> attribute must also be configured in order for the hide message to render.</description>
+			<description>Sets the text to display for the link to hide the content.</description>
 			<name>hideMessage</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Identifies the component instance whose content to toggle.</description>
+			<description>Identifies the component instance.</description>
 			<name>id</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets an icon as the mechanism to show the content. You can specify the location of an image file to use in the icon; otherwise a default icon is used.</description>
 			<name>showImage</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets a link as the mechanism to show the content. The text value of this attribute is used as the link's text. The message takes precedence over showing an image, via the <![CDATA[<code>showImage</code>]]> attribute. If you specify a <![CDATA[<code>showMessage</code>]]> attribute, you should also specify the <![CDATA[<code>hideMessage</code>]]> attribute; a <![CDATA[<code>null</code>]]> is otherwise displayed for the text of the hide link.</description>
+			<description>Sets the text to display for the link to show the content.</description>
 			<name>showMessage</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<description>Sets text to be prefixed to the <![CDATA[<code>Toggle()</code>]]> function that is called to toggle the content. If this is not configured, a random key is generated and prefixed to the <![CDATA[<code>Toggle()</code>]]>  function. For example, a value of <![CDATA[<code>run</code>]]> would result in a function named <![CDATA[<code>runToggle()</code>]]>.</description>
 			<name>stateVar</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -4836,21 +4203,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>toolbar-item</name>
-		<tag-class>com.liferay.taglib.ui.ToolbarItemTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>toolbarItem</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>var</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>trash-empty</name>
 		<tag-class>com.liferay.taglib.ui.TrashEmptyTag</tag-class>
 		<body-content>empty</body-content>
@@ -4886,41 +4238,11 @@
 		<body-content>empty</body-content>
 		<attribute>
 			<name>portletURL</name>
-			<required>false</required>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
 			<name>redirect</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>quick-access</name>
-		<tag-class>com.liferay.taglib.ui.QuickAccessTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>contentId</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>quick-access-entry</name>
-		<tag-class>com.liferay.taglib.ui.QuickAccessEntryTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>label</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>onClick</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>url</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -4961,27 +4283,7 @@
 		<tei-class>com.liferay.taglib.ui.UserDisplayTei</tei-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>author</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>displayStyle</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>imageCssClass</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>showUserDetails</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>showUserName</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
