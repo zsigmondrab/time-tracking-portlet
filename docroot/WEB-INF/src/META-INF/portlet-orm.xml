@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.liferay.timetracking.model.impl.WorkDayModelImpl">
+		<attributes>
+			<id name="workDayId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="dayOfYearId" />
+			<basic name="userId" />
+			<basic name="startTime" />
+			<basic name="endTime" />
+			<basic name="lunchBreak" />
+			<basic name="timestamp">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.liferay.timetracking.model.impl.WorkDayImpl" name="WorkDay">
+		<table name="TimeTracking_WorkDay" />
+		<attributes />
+	</entity>
+</entity-mappings>
