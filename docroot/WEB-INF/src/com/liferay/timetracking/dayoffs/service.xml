@@ -4,13 +4,23 @@
 	<author></author>
 	<namespace>TimeTracking</namespace>
 
-	<entity name="DaysOfYear" local-service="true" remote-service="false">
+	<entity name="DaysOfYear" local-service="true" remote-service="true">
 
 		<!-- PK Fields -->
 
 		<column name="dayOfYearId" primary="true" type="long"/>
 
-		<!-- Audit Fields -->
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
 
 		<!-- Other Fields -->
 
