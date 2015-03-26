@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.timetracking.model.WorkDay">
+		<field name="workDayId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="dayOfYearId" type="long" />
+		<field name="userId" type="long" />
+		<field name="startTime" type="int" />
+		<field name="endTime" type="int" />
+		<field name="lunchBreak" type="int" />
+		<field name="timestamp" type="Date" />
+	</model>
+</model-hints>
