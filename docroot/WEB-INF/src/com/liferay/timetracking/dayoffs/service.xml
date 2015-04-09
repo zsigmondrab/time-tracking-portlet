@@ -1,8 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 <service-builder package-path="com.liferay.timetracking.dayoffs">
-	<author></author>
+	<author>László Hudák</author>
 	<namespace>TimeTracking</namespace>
+	
+	<entity name="Ruling" local-service="true" remote-service="true">
+
+		<!-- PK Fields -->
+
+		<column name="ruleId" primary="true" type="long"/>
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other Fields -->
+
+		<column name="ruleName" type="String" />
+		<column name="multiplier" type="double" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="ruleName" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="RuleId" return-type="Ruling">
+			<finder-column name="ruleId" />
+		</finder>
+		<finder name="RuleName" return-type="RuleName">
+			<finder-column name="ruleName" />
+		</finder>
+		<finder name="RuleType" return-type="Collection">
+			<finder-column name="multiplier" />
+		</finder>
+	</entity>
 
 	<entity name="DaysOfYear" local-service="true" remote-service="true">
 
@@ -24,6 +66,39 @@
 
 		<!-- Other Fields -->
 
+		<column name="dayId" type="Date" />
+		<column name="ruleId" type="long" />
+		<column name="unitId" type="long" />
+		<column name="unitType" type="int" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="dayId" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="DaysOfYearId" return-type="DaysOfYear">
+			<finder-column name="dayOfYearId" />
+		</finder>
+		<finder name="DateDay" return-type="Collection">
+			<finder-column name="dayId" />
+		</finder>
+		<finder name="Unit" return-type="Collection">
+			<finder-column name="unitId" />
+		</finder>
+		<finder name="UnitType" return-type="Collection">
+			<finder-column name="unitType" />
+		</finder>
+		<finder name="D_U" return-type="DaysOfYear">
+			<finder-column name="dayId" />
+			<finder-column name="unitId" />
+		</finder>
+		<finder name="D_UT" return-type="Collection">
+			<finder-column name="dayId" />
+			<finder-column name="unitType" />
+		</finder>
 	</entity>
 
 </service-builder>
