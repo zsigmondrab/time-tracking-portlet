@@ -54,12 +54,42 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl">
+		<attributes>
+			<id name="workDayId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="dayOfYearId" />
+			<basic name="startTime" />
+			<basic name="endTime" />
+			<basic name="lunchBreak" />
+			<basic name="timestamp">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.liferay.timetracking.activities.model.impl.ActivityImpl" name="Activity">
 		<table name="TimeTracking_Activity" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.timetracking.activities.model.impl.ActivityAssignmentImpl" name="ActivityAssignment">
 		<table name="TimeTracking_ActivityAssignment" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.timetracking.timesheet.model.impl.WorkDayImpl" name="WorkDay">
+		<table name="TimeTracking_WorkDay" />
 		<attributes />
 	</entity>
 </entity-mappings>

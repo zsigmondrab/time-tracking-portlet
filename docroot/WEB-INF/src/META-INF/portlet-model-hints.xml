@@ -24,4 +24,18 @@
 		<field name="startTime" type="Date" />
 		<field name="endTime" type="Date" />
 	</model>
+	<model name="com.liferay.timetracking.timesheet.model.WorkDay">
+		<field name="workDayId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="dayOfYearId" type="long" />
+		<field name="startTime" type="int" />
+		<field name="endTime" type="int" />
+		<field name="lunchBreak" type="int" />
+		<field name="timestamp" type="Date" />
+	</model>
 </model-hints>

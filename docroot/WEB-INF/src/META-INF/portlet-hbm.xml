@@ -4,6 +4,7 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.liferay.timetracking.activities.model.Activity" />
 	<import class="com.liferay.timetracking.activities.model.ActivityAssignment" />
+	<import class="com.liferay.timetracking.timesheet.model.WorkDay" />
 	<class name="com.liferay.timetracking.activities.model.impl.ActivityImpl" table="TimeTracking_Activity">
 		<cache usage="read-write" />
 		<id name="activityId" type="long">
@@ -32,5 +33,22 @@
 		<property name="workDayId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="startTime" type="org.hibernate.type.TimestampType" />
 		<property name="endTime" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.liferay.timetracking.timesheet.model.impl.WorkDayImpl" table="TimeTracking_WorkDay">
+		<cache usage="read-write" />
+		<id name="workDayId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="dayOfYearId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="startTime" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="endTime" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="lunchBreak" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="timestamp" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>

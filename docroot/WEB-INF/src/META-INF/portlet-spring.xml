@@ -7,4 +7,7 @@
 	<bean id="com.liferay.timetracking.activities.service.ActivityAssignmentLocalService" class="com.liferay.timetracking.activities.service.impl.ActivityAssignmentLocalServiceImpl" />
 	<bean id="com.liferay.timetracking.activities.service.ActivityAssignmentService" class="com.liferay.timetracking.activities.service.impl.ActivityAssignmentServiceImpl" />
 	<bean id="com.liferay.timetracking.activities.service.persistence.ActivityAssignmentPersistence" class="com.liferay.timetracking.activities.service.persistence.ActivityAssignmentPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.timetracking.timesheet.service.WorkDayLocalService" class="com.liferay.timetracking.timesheet.service.impl.WorkDayLocalServiceImpl" />
+	<bean id="com.liferay.timetracking.timesheet.service.WorkDayService" class="com.liferay.timetracking.timesheet.service.impl.WorkDayServiceImpl" />
+	<bean id="com.liferay.timetracking.timesheet.service.persistence.WorkDayPersistence" class="com.liferay.timetracking.timesheet.service.persistence.WorkDayPersistenceImpl" parent="basePersistence" />
 </beans>
