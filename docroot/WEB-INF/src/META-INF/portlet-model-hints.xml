@@ -33,9 +33,8 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="dayOfYearId" type="long" />
-		<field name="startTime" type="int" />
-		<field name="endTime" type="int" />
-		<field name="lunchBreak" type="int" />
-		<field name="timestamp" type="Date" />
+		<field name="startTime" type="Date" />
+		<field name="endTime" type="Date" />
+		<field name="pause" type="int" />
 	</model>
 </model-hints>

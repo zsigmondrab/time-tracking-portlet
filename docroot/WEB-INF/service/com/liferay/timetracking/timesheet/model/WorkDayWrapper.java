@@ -59,8 +59,7 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 		attributes.put("dayOfYearId", getDayOfYearId());
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
-		attributes.put("lunchBreak", getLunchBreak());
-		attributes.put("timestamp", getTimestamp());
+		attributes.put("pause", getPause());
 
 		return attributes;
 	}
@@ -115,28 +114,22 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 			setDayOfYearId(dayOfYearId);
 		}
 
-		Integer startTime = (Integer)attributes.get("startTime");
+		Date startTime = (Date)attributes.get("startTime");
 
 		if (startTime != null) {
 			setStartTime(startTime);
 		}
 
-		Integer endTime = (Integer)attributes.get("endTime");
+		Date endTime = (Date)attributes.get("endTime");
 
 		if (endTime != null) {
 			setEndTime(endTime);
 		}
 
-		Integer lunchBreak = (Integer)attributes.get("lunchBreak");
+		Integer pause = (Integer)attributes.get("pause");
 
-		if (lunchBreak != null) {
-			setLunchBreak(lunchBreak);
-		}
-
-		Date timestamp = (Date)attributes.get("timestamp");
-
-		if (timestamp != null) {
-			setTimestamp(timestamp);
+		if (pause != null) {
+			setPause(pause);
 		}
 	}
 
@@ -348,7 +341,7 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 	* @return the start time of this work day
 	*/
 	@Override
-	public int getStartTime() {
+	public java.util.Date getStartTime() {
 		return _workDay.getStartTime();
 	}
 
@@ -358,7 +351,7 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 	* @param startTime the start time of this work day
 	*/
 	@Override
-	public void setStartTime(int startTime) {
+	public void setStartTime(java.util.Date startTime) {
 		_workDay.setStartTime(startTime);
 	}
 
@@ -368,7 +361,7 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 	* @return the end time of this work day
 	*/
 	@Override
-	public int getEndTime() {
+	public java.util.Date getEndTime() {
 		return _workDay.getEndTime();
 	}
 
@@ -378,48 +371,28 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 	* @param endTime the end time of this work day
 	*/
 	@Override
-	public void setEndTime(int endTime) {
+	public void setEndTime(java.util.Date endTime) {
 		_workDay.setEndTime(endTime);
 	}
 
 	/**
-	* Returns the lunch break of this work day.
+	* Returns the pause of this work day.
 	*
-	* @return the lunch break of this work day
+	* @return the pause of this work day
 	*/
 	@Override
-	public int getLunchBreak() {
-		return _workDay.getLunchBreak();
+	public int getPause() {
+		return _workDay.getPause();
 	}
 
 	/**
-	* Sets the lunch break of this work day.
+	* Sets the pause of this work day.
 	*
-	* @param lunchBreak the lunch break of this work day
+	* @param pause the pause of this work day
 	*/
 	@Override
-	public void setLunchBreak(int lunchBreak) {
-		_workDay.setLunchBreak(lunchBreak);
-	}
-
-	/**
-	* Returns the timestamp of this work day.
-	*
-	* @return the timestamp of this work day
-	*/
-	@Override
-	public java.util.Date getTimestamp() {
-		return _workDay.getTimestamp();
-	}
-
-	/**
-	* Sets the timestamp of this work day.
-	*
-	* @param timestamp the timestamp of this work day
-	*/
-	@Override
-	public void setTimestamp(java.util.Date timestamp) {
-		_workDay.setTimestamp(timestamp);
+	public void setPause(int pause) {
+		_workDay.setPause(pause);
 	}
 
 	@Override

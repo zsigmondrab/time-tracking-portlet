@@ -27,7 +27,7 @@
 		<column name="dayOfYearId" type="long" />
 		<column name="startTime" type="Date" />
 		<column name="endTime" type="Date" />
-		<column name="break" type="int" />
+		<column name="pause" type="int" />
 
 		<!-- Order -->
 

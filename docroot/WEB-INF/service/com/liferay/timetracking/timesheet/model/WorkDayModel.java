@@ -208,56 +208,42 @@ public interface WorkDayModel extends BaseModel<WorkDay>, GroupedModel {
 	 *
 	 * @return the start time of this work day
 	 */
-	public int getStartTime();
+	public Date getStartTime();
 
 	/**
 	 * Sets the start time of this work day.
 	 *
 	 * @param startTime the start time of this work day
 	 */
-	public void setStartTime(int startTime);
+	public void setStartTime(Date startTime);
 
 	/**
 	 * Returns the end time of this work day.
 	 *
 	 * @return the end time of this work day
 	 */
-	public int getEndTime();
+	public Date getEndTime();
 
 	/**
 	 * Sets the end time of this work day.
 	 *
 	 * @param endTime the end time of this work day
 	 */
-	public void setEndTime(int endTime);
+	public void setEndTime(Date endTime);
 
 	/**
-	 * Returns the lunch break of this work day.
+	 * Returns the pause of this work day.
 	 *
-	 * @return the lunch break of this work day
+	 * @return the pause of this work day
 	 */
-	public int getLunchBreak();
+	public int getPause();
 
 	/**
-	 * Sets the lunch break of this work day.
+	 * Sets the pause of this work day.
 	 *
-	 * @param lunchBreak the lunch break of this work day
+	 * @param pause the pause of this work day
 	 */
-	public void setLunchBreak(int lunchBreak);
-
-	/**
-	 * Returns the timestamp of this work day.
-	 *
-	 * @return the timestamp of this work day
-	 */
-	public Date getTimestamp();
-
-	/**
-	 * Sets the timestamp of this work day.
-	 *
-	 * @param timestamp the timestamp of this work day
-	 */
-	public void setTimestamp(Date timestamp);
+	public void setPause(int pause);
 
 	@Override
 	public boolean isNew();

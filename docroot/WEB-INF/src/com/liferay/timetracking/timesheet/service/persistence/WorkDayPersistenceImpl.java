@@ -327,8 +327,7 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 		workDayImpl.setDayOfYearId(workDay.getDayOfYearId());
 		workDayImpl.setStartTime(workDay.getStartTime());
 		workDayImpl.setEndTime(workDay.getEndTime());
-		workDayImpl.setLunchBreak(workDay.getLunchBreak());
-		workDayImpl.setTimestamp(workDay.getTimestamp());
+		workDayImpl.setPause(workDay.getPause());
 
 		return workDayImpl;
 	}

@@ -37,7 +37,7 @@ import java.util.Date;
 public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{workDayId=");
 		sb.append(workDayId);
@@ -59,10 +59,8 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 		sb.append(startTime);
 		sb.append(", endTime=");
 		sb.append(endTime);
-		sb.append(", lunchBreak=");
-		sb.append(lunchBreak);
-		sb.append(", timestamp=");
-		sb.append(timestamp);
+		sb.append(", pause=");
+		sb.append(pause);
 		sb.append("}");
 
 		return sb.toString();
@@ -99,16 +97,22 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 		}
 
 		workDayImpl.setDayOfYearId(dayOfYearId);
-		workDayImpl.setStartTime(startTime);
-		workDayImpl.setEndTime(endTime);
-		workDayImpl.setLunchBreak(lunchBreak);
 
-		if (timestamp == Long.MIN_VALUE) {
-			workDayImpl.setTimestamp(null);
+		if (startTime == Long.MIN_VALUE) {
+			workDayImpl.setStartTime(null);
 		}
 		else {
-			workDayImpl.setTimestamp(new Date(timestamp));
+			workDayImpl.setStartTime(new Date(startTime));
 		}
+
+		if (endTime == Long.MIN_VALUE) {
+			workDayImpl.setEndTime(null);
+		}
+		else {
+			workDayImpl.setEndTime(new Date(endTime));
+		}
+
+		workDayImpl.setPause(pause);
 
 		workDayImpl.resetOriginalValues();
 
@@ -125,10 +129,9 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		dayOfYearId = objectInput.readLong();
-		startTime = objectInput.readInt();
-		endTime = objectInput.readInt();
-		lunchBreak = objectInput.readInt();
-		timestamp = objectInput.readLong();
+		startTime = objectInput.readLong();
+		endTime = objectInput.readLong();
+		pause = objectInput.readInt();
 	}
 
 	@Override
@@ -149,10 +152,9 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeLong(dayOfYearId);
-		objectOutput.writeInt(startTime);
-		objectOutput.writeInt(endTime);
-		objectOutput.writeInt(lunchBreak);
-		objectOutput.writeLong(timestamp);
+		objectOutput.writeLong(startTime);
+		objectOutput.writeLong(endTime);
+		objectOutput.writeInt(pause);
 	}
 
 	public long workDayId;
@@ -163,8 +165,7 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 	public long createDate;
 	public long modifiedDate;
 	public long dayOfYearId;
-	public int startTime;
-	public int endTime;
-	public int lunchBreak;
-	public long timestamp;
+	public long startTime;
+	public long endTime;
+	public int pause;
 }

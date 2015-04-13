@@ -32,8 +32,7 @@ create table TimeTracking_WorkDay (
 	createDate DATE null,
 	modifiedDate DATE null,
 	dayOfYearId LONG,
-	startTime INTEGER,
-	endTime INTEGER,
-	lunchBreak INTEGER,
-	timestamp DATE null
+	startTime DATE null,
+	endTime DATE null,
+	pause INTEGER
 );

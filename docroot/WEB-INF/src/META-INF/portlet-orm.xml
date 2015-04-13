@@ -68,12 +68,13 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="dayOfYearId" />
-			<basic name="startTime" />
-			<basic name="endTime" />
-			<basic name="lunchBreak" />
-			<basic name="timestamp">
+			<basic name="startTime">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="endTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="pause" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

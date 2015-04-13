@@ -17,6 +17,7 @@ package com.liferay.timetracking.timesheet.model.impl;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSON;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -74,15 +75,14 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "dayOfYearId", Types.BIGINT },
-			{ "startTime", Types.INTEGER },
-			{ "endTime", Types.INTEGER },
-			{ "lunchBreak", Types.INTEGER },
-			{ "timestamp", Types.TIMESTAMP }
+			{ "startTime", Types.TIMESTAMP },
+			{ "endTime", Types.TIMESTAMP },
+			{ "pause", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TimeTracking_WorkDay (workDayId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,dayOfYearId LONG,startTime INTEGER,endTime INTEGER,lunchBreak INTEGER,timestamp DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table TimeTracking_WorkDay (workDayId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,dayOfYearId LONG,startTime DATE null,endTime DATE null,pause INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table TimeTracking_WorkDay";
-	public static final String ORDER_BY_JPQL = " ORDER BY workDay.workDayId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY TimeTracking_WorkDay.workDayId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY workDay.startTime ASC, workDay.endTime ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY TimeTracking_WorkDay.startTime ASC, TimeTracking_WorkDay.endTime ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -117,8 +117,7 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		model.setDayOfYearId(soapModel.getDayOfYearId());
 		model.setStartTime(soapModel.getStartTime());
 		model.setEndTime(soapModel.getEndTime());
-		model.setLunchBreak(soapModel.getLunchBreak());
-		model.setTimestamp(soapModel.getTimestamp());
+		model.setPause(soapModel.getPause());
 
 		return model;
 	}
@@ -193,8 +192,7 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		attributes.put("dayOfYearId", getDayOfYearId());
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
-		attributes.put("lunchBreak", getLunchBreak());
-		attributes.put("timestamp", getTimestamp());
+		attributes.put("pause", getPause());
 
 		return attributes;
 	}
@@ -249,28 +247,22 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 			setDayOfYearId(dayOfYearId);
 		}
 
-		Integer startTime = (Integer)attributes.get("startTime");
+		Date startTime = (Date)attributes.get("startTime");
 
 		if (startTime != null) {
 			setStartTime(startTime);
 		}
 
-		Integer endTime = (Integer)attributes.get("endTime");
+		Date endTime = (Date)attributes.get("endTime");
 
 		if (endTime != null) {
 			setEndTime(endTime);
 		}
 
-		Integer lunchBreak = (Integer)attributes.get("lunchBreak");
+		Integer pause = (Integer)attributes.get("pause");
 
-		if (lunchBreak != null) {
-			setLunchBreak(lunchBreak);
-		}
-
-		Date timestamp = (Date)attributes.get("timestamp");
-
-		if (timestamp != null) {
-			setTimestamp(timestamp);
+		if (pause != null) {
+			setPause(pause);
 		}
 	}
 
@@ -379,46 +371,35 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 
 	@JSON
 	@Override
-	public int getStartTime() {
+	public Date getStartTime() {
 		return _startTime;
 	}
 
 	@Override
-	public void setStartTime(int startTime) {
+	public void setStartTime(Date startTime) {
 		_startTime = startTime;
 	}
 
 	@JSON
 	@Override
-	public int getEndTime() {
+	public Date getEndTime() {
 		return _endTime;
 	}
 
 	@Override
-	public void setEndTime(int endTime) {
+	public void setEndTime(Date endTime) {
 		_endTime = endTime;
 	}
 
 	@JSON
 	@Override
-	public int getLunchBreak() {
-		return _lunchBreak;
+	public int getPause() {
+		return _pause;
 	}
 
 	@Override
-	public void setLunchBreak(int lunchBreak) {
-		_lunchBreak = lunchBreak;
-	}
-
-	@JSON
-	@Override
-	public Date getTimestamp() {
-		return _timestamp;
-	}
-
-	@Override
-	public void setTimestamp(Date timestamp) {
-		_timestamp = timestamp;
+	public void setPause(int pause) {
+		_pause = pause;
 	}
 
 	@Override
@@ -458,8 +439,7 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		workDayImpl.setDayOfYearId(getDayOfYearId());
 		workDayImpl.setStartTime(getStartTime());
 		workDayImpl.setEndTime(getEndTime());
-		workDayImpl.setLunchBreak(getLunchBreak());
-		workDayImpl.setTimestamp(getTimestamp());
+		workDayImpl.setPause(getPause());
 
 		workDayImpl.resetOriginalValues();
 
@@ -468,17 +448,21 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 
 	@Override
 	public int compareTo(WorkDay workDay) {
-		long primaryKey = workDay.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = DateUtil.compareTo(getStartTime(), workDay.getStartTime());
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+
+		value = DateUtil.compareTo(getEndTime(), workDay.getEndTime());
+
+		if (value != 0) {
+			return value;
 		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override
@@ -552,27 +536,32 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 
 		workDayCacheModel.dayOfYearId = getDayOfYearId();
 
-		workDayCacheModel.startTime = getStartTime();
+		Date startTime = getStartTime();
 
-		workDayCacheModel.endTime = getEndTime();
-
-		workDayCacheModel.lunchBreak = getLunchBreak();
-
-		Date timestamp = getTimestamp();
-
-		if (timestamp != null) {
-			workDayCacheModel.timestamp = timestamp.getTime();
+		if (startTime != null) {
+			workDayCacheModel.startTime = startTime.getTime();
 		}
 		else {
-			workDayCacheModel.timestamp = Long.MIN_VALUE;
+			workDayCacheModel.startTime = Long.MIN_VALUE;
 		}
+
+		Date endTime = getEndTime();
+
+		if (endTime != null) {
+			workDayCacheModel.endTime = endTime.getTime();
+		}
+		else {
+			workDayCacheModel.endTime = Long.MIN_VALUE;
+		}
+
+		workDayCacheModel.pause = getPause();
 
 		return workDayCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{workDayId=");
 		sb.append(getWorkDayId());
@@ -594,10 +583,8 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		sb.append(getStartTime());
 		sb.append(", endTime=");
 		sb.append(getEndTime());
-		sb.append(", lunchBreak=");
-		sb.append(getLunchBreak());
-		sb.append(", timestamp=");
-		sb.append(getTimestamp());
+		sb.append(", pause=");
+		sb.append(getPause());
 		sb.append("}");
 
 		return sb.toString();
@@ -605,7 +592,7 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.timetracking.timesheet.model.WorkDay");
@@ -652,12 +639,8 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		sb.append(getEndTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>lunchBreak</column-name><column-value><![CDATA[");
-		sb.append(getLunchBreak());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>timestamp</column-name><column-value><![CDATA[");
-		sb.append(getTimestamp());
+			"<column><column-name>pause</column-name><column-value><![CDATA[");
+		sb.append(getPause());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -678,9 +661,8 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _dayOfYearId;
-	private int _startTime;
-	private int _endTime;
-	private int _lunchBreak;
-	private Date _timestamp;
+	private Date _startTime;
+	private Date _endTime;
+	private int _pause;
 	private WorkDay _escapedModel;
 }

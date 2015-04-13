@@ -41,8 +41,7 @@ public class WorkDaySoap implements Serializable {
 		soapModel.setDayOfYearId(model.getDayOfYearId());
 		soapModel.setStartTime(model.getStartTime());
 		soapModel.setEndTime(model.getEndTime());
-		soapModel.setLunchBreak(model.getLunchBreak());
-		soapModel.setTimestamp(model.getTimestamp());
+		soapModel.setPause(model.getPause());
 
 		return soapModel;
 	}
@@ -159,36 +158,28 @@ public class WorkDaySoap implements Serializable {
 		_dayOfYearId = dayOfYearId;
 	}
 
-	public int getStartTime() {
+	public Date getStartTime() {
 		return _startTime;
 	}
 
-	public void setStartTime(int startTime) {
+	public void setStartTime(Date startTime) {
 		_startTime = startTime;
 	}
 
-	public int getEndTime() {
+	public Date getEndTime() {
 		return _endTime;
 	}
 
-	public void setEndTime(int endTime) {
+	public void setEndTime(Date endTime) {
 		_endTime = endTime;
 	}
 
-	public int getLunchBreak() {
-		return _lunchBreak;
+	public int getPause() {
+		return _pause;
 	}
 
-	public void setLunchBreak(int lunchBreak) {
-		_lunchBreak = lunchBreak;
-	}
-
-	public Date getTimestamp() {
-		return _timestamp;
-	}
-
-	public void setTimestamp(Date timestamp) {
-		_timestamp = timestamp;
+	public void setPause(int pause) {
+		_pause = pause;
 	}
 
 	private long _workDayId;
@@ -199,8 +190,7 @@ public class WorkDaySoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _dayOfYearId;
-	private int _startTime;
-	private int _endTime;
-	private int _lunchBreak;
-	private Date _timestamp;
+	private Date _startTime;
+	private Date _endTime;
+	private int _pause;
 }

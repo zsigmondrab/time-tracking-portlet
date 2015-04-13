@@ -46,9 +46,8 @@
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="dayOfYearId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="startTime" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="endTime" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="lunchBreak" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="timestamp" type="org.hibernate.type.TimestampType" />
+		<property name="startTime" type="org.hibernate.type.TimestampType" />
+		<property name="endTime" type="org.hibernate.type.TimestampType" />
+		<property name="pause" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 </hibernate-mapping>

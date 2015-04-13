@@ -16,6 +16,7 @@ package com.liferay.timetracking.timesheet.model;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
@@ -84,8 +85,7 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		attributes.put("dayOfYearId", getDayOfYearId());
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
-		attributes.put("lunchBreak", getLunchBreak());
-		attributes.put("timestamp", getTimestamp());
+		attributes.put("pause", getPause());
 
 		return attributes;
 	}
@@ -140,28 +140,22 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 			setDayOfYearId(dayOfYearId);
 		}
 
-		Integer startTime = (Integer)attributes.get("startTime");
+		Date startTime = (Date)attributes.get("startTime");
 
 		if (startTime != null) {
 			setStartTime(startTime);
 		}
 
-		Integer endTime = (Integer)attributes.get("endTime");
+		Date endTime = (Date)attributes.get("endTime");
 
 		if (endTime != null) {
 			setEndTime(endTime);
 		}
 
-		Integer lunchBreak = (Integer)attributes.get("lunchBreak");
+		Integer pause = (Integer)attributes.get("pause");
 
-		if (lunchBreak != null) {
-			setLunchBreak(lunchBreak);
-		}
-
-		Date timestamp = (Date)attributes.get("timestamp");
-
-		if (timestamp != null) {
-			setTimestamp(timestamp);
+		if (pause != null) {
+			setPause(pause);
 		}
 	}
 
@@ -360,19 +354,19 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 	}
 
 	@Override
-	public int getStartTime() {
+	public Date getStartTime() {
 		return _startTime;
 	}
 
 	@Override
-	public void setStartTime(int startTime) {
+	public void setStartTime(Date startTime) {
 		_startTime = startTime;
 
 		if (_workDayRemoteModel != null) {
 			try {
 				Class<?> clazz = _workDayRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setStartTime", int.class);
+				Method method = clazz.getMethod("setStartTime", Date.class);
 
 				method.invoke(_workDayRemoteModel, startTime);
 			}
@@ -383,19 +377,19 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 	}
 
 	@Override
-	public int getEndTime() {
+	public Date getEndTime() {
 		return _endTime;
 	}
 
 	@Override
-	public void setEndTime(int endTime) {
+	public void setEndTime(Date endTime) {
 		_endTime = endTime;
 
 		if (_workDayRemoteModel != null) {
 			try {
 				Class<?> clazz = _workDayRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEndTime", int.class);
+				Method method = clazz.getMethod("setEndTime", Date.class);
 
 				method.invoke(_workDayRemoteModel, endTime);
 			}
@@ -406,44 +400,21 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 	}
 
 	@Override
-	public int getLunchBreak() {
-		return _lunchBreak;
+	public int getPause() {
+		return _pause;
 	}
 
 	@Override
-	public void setLunchBreak(int lunchBreak) {
-		_lunchBreak = lunchBreak;
+	public void setPause(int pause) {
+		_pause = pause;
 
 		if (_workDayRemoteModel != null) {
 			try {
 				Class<?> clazz = _workDayRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setLunchBreak", int.class);
+				Method method = clazz.getMethod("setPause", int.class);
 
-				method.invoke(_workDayRemoteModel, lunchBreak);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public Date getTimestamp() {
-		return _timestamp;
-	}
-
-	@Override
-	public void setTimestamp(Date timestamp) {
-		_timestamp = timestamp;
-
-		if (_workDayRemoteModel != null) {
-			try {
-				Class<?> clazz = _workDayRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setTimestamp", Date.class);
-
-				method.invoke(_workDayRemoteModel, timestamp);
+				method.invoke(_workDayRemoteModel, pause);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -530,25 +501,28 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		clone.setDayOfYearId(getDayOfYearId());
 		clone.setStartTime(getStartTime());
 		clone.setEndTime(getEndTime());
-		clone.setLunchBreak(getLunchBreak());
-		clone.setTimestamp(getTimestamp());
+		clone.setPause(getPause());
 
 		return clone;
 	}
 
 	@Override
 	public int compareTo(WorkDay workDay) {
-		long primaryKey = workDay.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = DateUtil.compareTo(getStartTime(), workDay.getStartTime());
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+
+		value = DateUtil.compareTo(getEndTime(), workDay.getEndTime());
+
+		if (value != 0) {
+			return value;
 		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override
@@ -584,7 +558,7 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{workDayId=");
 		sb.append(getWorkDayId());
@@ -606,10 +580,8 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		sb.append(getStartTime());
 		sb.append(", endTime=");
 		sb.append(getEndTime());
-		sb.append(", lunchBreak=");
-		sb.append(getLunchBreak());
-		sb.append(", timestamp=");
-		sb.append(getTimestamp());
+		sb.append(", pause=");
+		sb.append(getPause());
 		sb.append("}");
 
 		return sb.toString();
@@ -617,7 +589,7 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.timetracking.timesheet.model.WorkDay");
@@ -664,12 +636,8 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		sb.append(getEndTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>lunchBreak</column-name><column-value><![CDATA[");
-		sb.append(getLunchBreak());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>timestamp</column-name><column-value><![CDATA[");
-		sb.append(getTimestamp());
+			"<column><column-name>pause</column-name><column-value><![CDATA[");
+		sb.append(getPause());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -686,10 +654,9 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _dayOfYearId;
-	private int _startTime;
-	private int _endTime;
-	private int _lunchBreak;
-	private Date _timestamp;
+	private Date _startTime;
+	private Date _endTime;
+	private int _pause;
 	private BaseModel<?> _workDayRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.timetracking.timesheet.service.ClpSerializer.class;
 }
