@@ -25,10 +25,16 @@
 		<!-- Other Fields -->
 
 		<column name="dayOfYearId" type="long" />
-		<column name="startTime" type="int" />
-		<column name="endTime" type="int" />
-		<column name="lunchBreak" type="int" />
-		<column name="timestamp" type="Date" />
+		<column name="startTime" type="Date" />
+		<column name="endTime" type="Date" />
+		<column name="break" type="int" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="startTime" />
+			<order-column name="endTime" />
+		</order>
 
 	</entity>
 
