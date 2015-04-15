@@ -23,6 +23,32 @@ create table TimeTracking_ActivityAssignment (
 	endTime DATE null
 );
 
+create table TimeTracking_DaysOfYear (
+	dayOfYearId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	dayId DATE null,
+	ruleId LONG,
+	unitId LONG,
+	unitType INTEGER
+);
+
+create table TimeTracking_Ruling (
+	ruleId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	ruleName VARCHAR(75) null,
+	multiplier DOUBLE
+);
+
 create table TimeTracking_WorkDay (
 	workDayId LONG not null primary key,
 	groupId LONG,

@@ -37,4 +37,28 @@
 		<field name="endTime" type="Date" />
 		<field name="pause" type="int" />
 	</model>
+	<model name="com.liferay.timetracking.dayoffs.model.DaysOfYear">
+		<field name="dayOfYearId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="dayId" type="Date" />
+		<field name="ruleId" type="long" />
+		<field name="unitId" type="long" />
+		<field name="unitType" type="int" />
+	</model>
+	<model name="com.liferay.timetracking.dayoffs.model.Ruling">
+		<field name="ruleId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="ruleName" type="String" />
+		<field name="multiplier" type="double" />
+	</model>
 </model-hints>

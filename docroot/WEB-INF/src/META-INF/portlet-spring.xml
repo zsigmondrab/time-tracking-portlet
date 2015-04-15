@@ -10,4 +10,10 @@
 	<bean id="com.liferay.timetracking.timesheet.service.WorkDayLocalService" class="com.liferay.timetracking.timesheet.service.impl.WorkDayLocalServiceImpl" />
 	<bean id="com.liferay.timetracking.timesheet.service.WorkDayService" class="com.liferay.timetracking.timesheet.service.impl.WorkDayServiceImpl" />
 	<bean id="com.liferay.timetracking.timesheet.service.persistence.WorkDayPersistence" class="com.liferay.timetracking.timesheet.service.persistence.WorkDayPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.timetracking.dayoffs.service.DaysOfYearLocalService" class="com.liferay.timetracking.dayoffs.service.impl.DaysOfYearLocalServiceImpl" />
+	<bean id="com.liferay.timetracking.dayoffs.service.DaysOfYearService" class="com.liferay.timetracking.dayoffs.service.impl.DaysOfYearServiceImpl" />
+	<bean id="com.liferay.timetracking.dayoffs.service.persistence.DaysOfYearPersistence" class="com.liferay.timetracking.dayoffs.service.persistence.DaysOfYearPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.timetracking.dayoffs.service.RulingLocalService" class="com.liferay.timetracking.dayoffs.service.impl.RulingLocalServiceImpl" />
+	<bean id="com.liferay.timetracking.dayoffs.service.RulingService" class="com.liferay.timetracking.dayoffs.service.impl.RulingServiceImpl" />
+	<bean id="com.liferay.timetracking.dayoffs.service.persistence.RulingPersistence" class="com.liferay.timetracking.dayoffs.service.persistence.RulingPersistenceImpl" parent="basePersistence" />
 </beans>
