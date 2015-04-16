@@ -36,6 +36,8 @@
 			<order-column name="endTime" />
 		</order>
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 	</entity>
-
 </service-builder>
