@@ -15,20 +15,20 @@
 package com.liferay.timetracking.dayoffs.model.impl;
 
 /**
- * The extended model implementation for the Ruling service. Represents a row in the &quot;TimeTracking_Ruling&quot; database table, with each column mapped to a property of this class.
+ * The extended model implementation for the Rule service. Represents a row in the &quot;TimeTracking_Rule&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.timetracking.dayoffs.model.Ruling} interface.
+ * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.timetracking.dayoffs.model.Rule} interface.
  * </p>
  *
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  */
-public class RulingImpl extends RulingBaseImpl {
+public class RuleImpl extends RuleBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this class directly. All methods that expect a ruling model instance should use the {@link com.liferay.timetracking.dayoffs.model.Ruling} interface instead.
+	 * Never reference this class directly. All methods that expect a rule model instance should use the {@link com.liferay.timetracking.dayoffs.model.Rule} interface instead.
 	 */
-	public RulingImpl() {
+	public RuleImpl() {
 	}
 }

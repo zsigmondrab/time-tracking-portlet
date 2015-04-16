@@ -23,26 +23,26 @@ import java.util.Map;
 
 /**
  * <p>
- * This class is a wrapper for {@link Ruling}.
+ * This class is a wrapper for {@link Rule}.
  * </p>
  *
- * @author LĂˇszlĂł HudĂˇk
- * @see Ruling
+ * @author LÃ¡szlÃ³ HudÃ¡k
+ * @see Rule
  * @generated
  */
-public class RulingWrapper implements Ruling, ModelWrapper<Ruling> {
-	public RulingWrapper(Ruling ruling) {
-		_ruling = ruling;
+public class RuleWrapper implements Rule, ModelWrapper<Rule> {
+	public RuleWrapper(Rule rule) {
+		_rule = rule;
 	}
 
 	@Override
 	public Class<?> getModelClass() {
-		return Ruling.class;
+		return Rule.class;
 	}
 
 	@Override
 	public String getModelClassName() {
-		return Ruling.class.getName();
+		return Rule.class.getName();
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class RulingWrapper implements Ruling, ModelWrapper<Ruling> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("ruleName", getRuleName());
+		attributes.put("name", getName());
 		attributes.put("multiplier", getMultiplier());
 
 		return attributes;
@@ -106,10 +106,10 @@ public class RulingWrapper implements Ruling, ModelWrapper<Ruling> {
 			setModifiedDate(modifiedDate);
 		}
 
-		String ruleName = (String)attributes.get("ruleName");
+		String name = (String)attributes.get("name");
 
-		if (ruleName != null) {
-			setRuleName(ruleName);
+		if (name != null) {
+			setName(name);
 		}
 
 		Double multiplier = (Double)attributes.get("multiplier");
@@ -120,329 +120,329 @@ public class RulingWrapper implements Ruling, ModelWrapper<Ruling> {
 	}
 
 	/**
-	* Returns the primary key of this ruling.
+	* Returns the primary key of this rule.
 	*
-	* @return the primary key of this ruling
+	* @return the primary key of this rule
 	*/
 	@Override
 	public long getPrimaryKey() {
-		return _ruling.getPrimaryKey();
+		return _rule.getPrimaryKey();
 	}
 
 	/**
-	* Sets the primary key of this ruling.
+	* Sets the primary key of this rule.
 	*
-	* @param primaryKey the primary key of this ruling
+	* @param primaryKey the primary key of this rule
 	*/
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		_ruling.setPrimaryKey(primaryKey);
+		_rule.setPrimaryKey(primaryKey);
 	}
 
 	/**
-	* Returns the rule ID of this ruling.
+	* Returns the rule ID of this rule.
 	*
-	* @return the rule ID of this ruling
+	* @return the rule ID of this rule
 	*/
 	@Override
 	public long getRuleId() {
-		return _ruling.getRuleId();
+		return _rule.getRuleId();
 	}
 
 	/**
-	* Sets the rule ID of this ruling.
+	* Sets the rule ID of this rule.
 	*
-	* @param ruleId the rule ID of this ruling
+	* @param ruleId the rule ID of this rule
 	*/
 	@Override
 	public void setRuleId(long ruleId) {
-		_ruling.setRuleId(ruleId);
+		_rule.setRuleId(ruleId);
 	}
 
 	/**
-	* Returns the group ID of this ruling.
+	* Returns the group ID of this rule.
 	*
-	* @return the group ID of this ruling
+	* @return the group ID of this rule
 	*/
 	@Override
 	public long getGroupId() {
-		return _ruling.getGroupId();
+		return _rule.getGroupId();
 	}
 
 	/**
-	* Sets the group ID of this ruling.
+	* Sets the group ID of this rule.
 	*
-	* @param groupId the group ID of this ruling
+	* @param groupId the group ID of this rule
 	*/
 	@Override
 	public void setGroupId(long groupId) {
-		_ruling.setGroupId(groupId);
+		_rule.setGroupId(groupId);
 	}
 
 	/**
-	* Returns the company ID of this ruling.
+	* Returns the company ID of this rule.
 	*
-	* @return the company ID of this ruling
+	* @return the company ID of this rule
 	*/
 	@Override
 	public long getCompanyId() {
-		return _ruling.getCompanyId();
+		return _rule.getCompanyId();
 	}
 
 	/**
-	* Sets the company ID of this ruling.
+	* Sets the company ID of this rule.
 	*
-	* @param companyId the company ID of this ruling
+	* @param companyId the company ID of this rule
 	*/
 	@Override
 	public void setCompanyId(long companyId) {
-		_ruling.setCompanyId(companyId);
+		_rule.setCompanyId(companyId);
 	}
 
 	/**
-	* Returns the user ID of this ruling.
+	* Returns the user ID of this rule.
 	*
-	* @return the user ID of this ruling
+	* @return the user ID of this rule
 	*/
 	@Override
 	public long getUserId() {
-		return _ruling.getUserId();
+		return _rule.getUserId();
 	}
 
 	/**
-	* Sets the user ID of this ruling.
+	* Sets the user ID of this rule.
 	*
-	* @param userId the user ID of this ruling
+	* @param userId the user ID of this rule
 	*/
 	@Override
 	public void setUserId(long userId) {
-		_ruling.setUserId(userId);
+		_rule.setUserId(userId);
 	}
 
 	/**
-	* Returns the user uuid of this ruling.
+	* Returns the user uuid of this rule.
 	*
-	* @return the user uuid of this ruling
+	* @return the user uuid of this rule
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ruling.getUserUuid();
+		return _rule.getUserUuid();
 	}
 
 	/**
-	* Sets the user uuid of this ruling.
+	* Sets the user uuid of this rule.
 	*
-	* @param userUuid the user uuid of this ruling
+	* @param userUuid the user uuid of this rule
 	*/
 	@Override
 	public void setUserUuid(java.lang.String userUuid) {
-		_ruling.setUserUuid(userUuid);
+		_rule.setUserUuid(userUuid);
 	}
 
 	/**
-	* Returns the user name of this ruling.
+	* Returns the user name of this rule.
 	*
-	* @return the user name of this ruling
+	* @return the user name of this rule
 	*/
 	@Override
 	public java.lang.String getUserName() {
-		return _ruling.getUserName();
+		return _rule.getUserName();
 	}
 
 	/**
-	* Sets the user name of this ruling.
+	* Sets the user name of this rule.
 	*
-	* @param userName the user name of this ruling
+	* @param userName the user name of this rule
 	*/
 	@Override
 	public void setUserName(java.lang.String userName) {
-		_ruling.setUserName(userName);
+		_rule.setUserName(userName);
 	}
 
 	/**
-	* Returns the create date of this ruling.
+	* Returns the create date of this rule.
 	*
-	* @return the create date of this ruling
+	* @return the create date of this rule
 	*/
 	@Override
 	public java.util.Date getCreateDate() {
-		return _ruling.getCreateDate();
+		return _rule.getCreateDate();
 	}
 
 	/**
-	* Sets the create date of this ruling.
+	* Sets the create date of this rule.
 	*
-	* @param createDate the create date of this ruling
+	* @param createDate the create date of this rule
 	*/
 	@Override
 	public void setCreateDate(java.util.Date createDate) {
-		_ruling.setCreateDate(createDate);
+		_rule.setCreateDate(createDate);
 	}
 
 	/**
-	* Returns the modified date of this ruling.
+	* Returns the modified date of this rule.
 	*
-	* @return the modified date of this ruling
+	* @return the modified date of this rule
 	*/
 	@Override
 	public java.util.Date getModifiedDate() {
-		return _ruling.getModifiedDate();
+		return _rule.getModifiedDate();
 	}
 
 	/**
-	* Sets the modified date of this ruling.
+	* Sets the modified date of this rule.
 	*
-	* @param modifiedDate the modified date of this ruling
+	* @param modifiedDate the modified date of this rule
 	*/
 	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
-		_ruling.setModifiedDate(modifiedDate);
+		_rule.setModifiedDate(modifiedDate);
 	}
 
 	/**
-	* Returns the rule name of this ruling.
+	* Returns the name of this rule.
 	*
-	* @return the rule name of this ruling
+	* @return the name of this rule
 	*/
 	@Override
-	public java.lang.String getRuleName() {
-		return _ruling.getRuleName();
+	public java.lang.String getName() {
+		return _rule.getName();
 	}
 
 	/**
-	* Sets the rule name of this ruling.
+	* Sets the name of this rule.
 	*
-	* @param ruleName the rule name of this ruling
+	* @param name the name of this rule
 	*/
 	@Override
-	public void setRuleName(java.lang.String ruleName) {
-		_ruling.setRuleName(ruleName);
+	public void setName(java.lang.String name) {
+		_rule.setName(name);
 	}
 
 	/**
-	* Returns the multiplier of this ruling.
+	* Returns the multiplier of this rule.
 	*
-	* @return the multiplier of this ruling
+	* @return the multiplier of this rule
 	*/
 	@Override
 	public double getMultiplier() {
-		return _ruling.getMultiplier();
+		return _rule.getMultiplier();
 	}
 
 	/**
-	* Sets the multiplier of this ruling.
+	* Sets the multiplier of this rule.
 	*
-	* @param multiplier the multiplier of this ruling
+	* @param multiplier the multiplier of this rule
 	*/
 	@Override
 	public void setMultiplier(double multiplier) {
-		_ruling.setMultiplier(multiplier);
+		_rule.setMultiplier(multiplier);
 	}
 
 	@Override
 	public boolean isNew() {
-		return _ruling.isNew();
+		return _rule.isNew();
 	}
 
 	@Override
 	public void setNew(boolean n) {
-		_ruling.setNew(n);
+		_rule.setNew(n);
 	}
 
 	@Override
 	public boolean isCachedModel() {
-		return _ruling.isCachedModel();
+		return _rule.isCachedModel();
 	}
 
 	@Override
 	public void setCachedModel(boolean cachedModel) {
-		_ruling.setCachedModel(cachedModel);
+		_rule.setCachedModel(cachedModel);
 	}
 
 	@Override
 	public boolean isEscapedModel() {
-		return _ruling.isEscapedModel();
+		return _rule.isEscapedModel();
 	}
 
 	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
-		return _ruling.getPrimaryKeyObj();
+		return _rule.getPrimaryKeyObj();
 	}
 
 	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
-		_ruling.setPrimaryKeyObj(primaryKeyObj);
+		_rule.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
-		return _ruling.getExpandoBridge();
+		return _rule.getExpandoBridge();
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
-		_ruling.setExpandoBridgeAttributes(baseModel);
+		_rule.setExpandoBridgeAttributes(baseModel);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
-		_ruling.setExpandoBridgeAttributes(expandoBridge);
+		_rule.setExpandoBridgeAttributes(expandoBridge);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		_ruling.setExpandoBridgeAttributes(serviceContext);
+		_rule.setExpandoBridgeAttributes(serviceContext);
 	}
 
 	@Override
 	public java.lang.Object clone() {
-		return new RulingWrapper((Ruling)_ruling.clone());
+		return new RuleWrapper((Rule)_rule.clone());
 	}
 
 	@Override
-	public int compareTo(com.liferay.timetracking.dayoffs.model.Ruling ruling) {
-		return _ruling.compareTo(ruling);
+	public int compareTo(Rule rule) {
+		return _rule.compareTo(rule);
 	}
 
 	@Override
 	public int hashCode() {
-		return _ruling.hashCode();
+		return _rule.hashCode();
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.timetracking.dayoffs.model.Ruling> toCacheModel() {
-		return _ruling.toCacheModel();
+	public com.liferay.portal.model.CacheModel<Rule> toCacheModel() {
+		return _rule.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.Ruling toEscapedModel() {
-		return new RulingWrapper(_ruling.toEscapedModel());
+	public Rule toEscapedModel() {
+		return new RuleWrapper(_rule.toEscapedModel());
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.Ruling toUnescapedModel() {
-		return new RulingWrapper(_ruling.toUnescapedModel());
+	public Rule toUnescapedModel() {
+		return new RuleWrapper(_rule.toUnescapedModel());
 	}
 
 	@Override
 	public java.lang.String toString() {
-		return _ruling.toString();
+		return _rule.toString();
 	}
 
 	@Override
 	public java.lang.String toXmlString() {
-		return _ruling.toXmlString();
+		return _rule.toXmlString();
 	}
 
 	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_ruling.persist();
+		_rule.persist();
 	}
 
 	@Override
@@ -451,13 +451,13 @@ public class RulingWrapper implements Ruling, ModelWrapper<Ruling> {
 			return true;
 		}
 
-		if (!(obj instanceof RulingWrapper)) {
+		if (!(obj instanceof RuleWrapper)) {
 			return false;
 		}
 
-		RulingWrapper rulingWrapper = (RulingWrapper)obj;
+		RuleWrapper ruleWrapper = (RuleWrapper)obj;
 
-		if (Validator.equals(_ruling, rulingWrapper._ruling)) {
+		if (Validator.equals(_rule, ruleWrapper._rule)) {
 			return true;
 		}
 
@@ -467,19 +467,19 @@ public class RulingWrapper implements Ruling, ModelWrapper<Ruling> {
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
 	 */
-	public Ruling getWrappedRuling() {
-		return _ruling;
+	public Rule getWrappedRule() {
+		return _rule;
 	}
 
 	@Override
-	public Ruling getWrappedModel() {
-		return _ruling;
+	public Rule getWrappedModel() {
+		return _rule;
 	}
 
 	@Override
 	public void resetOriginalValues() {
-		_ruling.resetOriginalValues();
+		_rule.resetOriginalValues();
 	}
 
-	private Ruling _ruling;
+	private Rule _rule;
 }

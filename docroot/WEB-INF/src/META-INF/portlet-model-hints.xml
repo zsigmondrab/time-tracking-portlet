@@ -47,10 +47,10 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="dayId" type="Date" />
 		<field name="ruleId" type="long" />
-		<field name="unitId" type="long" />
-		<field name="unitType" type="int" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 	</model>
-	<model name="com.liferay.timetracking.dayoffs.model.Ruling">
+	<model name="com.liferay.timetracking.dayoffs.model.Rule">
 		<field name="ruleId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -58,7 +58,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="ruleName" type="String" />
+		<field name="name" type="String" />
 		<field name="multiplier" type="double" />
 	</model>
 </model-hints>

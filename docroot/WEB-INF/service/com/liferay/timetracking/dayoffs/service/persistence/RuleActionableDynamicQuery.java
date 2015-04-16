@@ -17,18 +17,18 @@ package com.liferay.timetracking.dayoffs.service.persistence;
 import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 
-import com.liferay.timetracking.dayoffs.model.Ruling;
-import com.liferay.timetracking.dayoffs.service.RulingLocalServiceUtil;
+import com.liferay.timetracking.dayoffs.model.Rule;
+import com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil;
 
 /**
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @generated
  */
-public abstract class RulingActionableDynamicQuery
+public abstract class RuleActionableDynamicQuery
 	extends BaseActionableDynamicQuery {
-	public RulingActionableDynamicQuery() throws SystemException {
-		setBaseLocalService(RulingLocalServiceUtil.getService());
-		setClass(Ruling.class);
+	public RuleActionableDynamicQuery() throws SystemException {
+		setBaseLocalService(RuleLocalServiceUtil.getService());
+		setClass(Rule.class);
 
 		setClassLoader(com.liferay.timetracking.dayoffs.service.ClpSerializer.class.getClassLoader());
 

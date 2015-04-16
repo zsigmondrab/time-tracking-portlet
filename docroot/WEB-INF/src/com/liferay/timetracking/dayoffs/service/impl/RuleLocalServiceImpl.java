@@ -14,26 +14,26 @@
 
 package com.liferay.timetracking.dayoffs.service.impl;
 
-import com.liferay.timetracking.dayoffs.service.base.RulingLocalServiceBaseImpl;
+import com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl;
 
 /**
- * The implementation of the ruling local service.
+ * The implementation of the rule local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.timetracking.dayoffs.service.RulingLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.timetracking.dayoffs.service.RuleLocalService} interface.
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author LĂˇszlĂł HudĂˇk
- * @see com.liferay.timetracking.dayoffs.service.base.RulingLocalServiceBaseImpl
- * @see com.liferay.timetracking.dayoffs.service.RulingLocalServiceUtil
+ * @author LÃ¡szlÃ³ HudÃ¡k
+ * @see com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl
+ * @see com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil
  */
-public class RulingLocalServiceImpl extends RulingLocalServiceBaseImpl {
+public class RuleLocalServiceImpl extends RuleLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.dayoffs.service.RulingLocalServiceUtil} to access the ruling local service.
+	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil} to access the rule local service.
 	 */
 }

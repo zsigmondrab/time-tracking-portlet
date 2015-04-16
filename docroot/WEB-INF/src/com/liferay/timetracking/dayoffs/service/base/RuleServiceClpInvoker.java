@@ -14,16 +14,16 @@
 
 package com.liferay.timetracking.dayoffs.service.base;
 
-import com.liferay.timetracking.dayoffs.service.RulingServiceUtil;
+import com.liferay.timetracking.dayoffs.service.RuleServiceUtil;
 
 import java.util.Arrays;
 
 /**
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @generated
  */
-public class RulingServiceClpInvoker {
-	public RulingServiceClpInvoker() {
+public class RuleServiceClpInvoker {
+	public RuleServiceClpInvoker() {
 		_methodName24 = "getBeanIdentifier";
 
 		_methodParameterTypes24 = new String[] {  };
@@ -37,12 +37,12 @@ public class RulingServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName24.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes24, parameterTypes)) {
-			return RulingServiceUtil.getBeanIdentifier();
+			return RuleServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName25.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes25, parameterTypes)) {
-			RulingServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			RuleServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}

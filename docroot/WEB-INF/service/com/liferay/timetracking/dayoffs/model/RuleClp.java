@@ -23,7 +23,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.timetracking.dayoffs.service.ClpSerializer;
-import com.liferay.timetracking.dayoffs.service.RulingLocalServiceUtil;
+import com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -36,18 +36,18 @@ import java.util.Map;
 /**
  * @author László Hudák
  */
-public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
-	public RulingClp() {
+public class RuleClp extends BaseModelImpl<Rule> implements Rule {
+	public RuleClp() {
 	}
 
 	@Override
 	public Class<?> getModelClass() {
-		return Ruling.class;
+		return Rule.class;
 	}
 
 	@Override
 	public String getModelClassName() {
-		return Ruling.class.getName();
+		return Rule.class.getName();
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("ruleName", getRuleName());
+		attributes.put("name", getName());
 		attributes.put("multiplier", getMultiplier());
 
 		return attributes;
@@ -131,10 +131,10 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 			setModifiedDate(modifiedDate);
 		}
 
-		String ruleName = (String)attributes.get("ruleName");
+		String name = (String)attributes.get("name");
 
-		if (ruleName != null) {
-			setRuleName(ruleName);
+		if (name != null) {
+			setName(name);
 		}
 
 		Double multiplier = (Double)attributes.get("multiplier");
@@ -153,13 +153,13 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	public void setRuleId(long ruleId) {
 		_ruleId = ruleId;
 
-		if (_rulingRemoteModel != null) {
+		if (_ruleRemoteModel != null) {
 			try {
-				Class<?> clazz = _rulingRemoteModel.getClass();
+				Class<?> clazz = _ruleRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setRuleId", long.class);
 
-				method.invoke(_rulingRemoteModel, ruleId);
+				method.invoke(_ruleRemoteModel, ruleId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -176,13 +176,13 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 
-		if (_rulingRemoteModel != null) {
+		if (_ruleRemoteModel != null) {
 			try {
-				Class<?> clazz = _rulingRemoteModel.getClass();
+				Class<?> clazz = _ruleRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setGroupId", long.class);
 
-				method.invoke(_rulingRemoteModel, groupId);
+				method.invoke(_ruleRemoteModel, groupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -199,13 +199,13 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 
-		if (_rulingRemoteModel != null) {
+		if (_ruleRemoteModel != null) {
 			try {
-				Class<?> clazz = _rulingRemoteModel.getClass();
+				Class<?> clazz = _ruleRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setCompanyId", long.class);
 
-				method.invoke(_rulingRemoteModel, companyId);
+				method.invoke(_ruleRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -222,13 +222,13 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	public void setUserId(long userId) {
 		_userId = userId;
 
-		if (_rulingRemoteModel != null) {
+		if (_ruleRemoteModel != null) {
 			try {
-				Class<?> clazz = _rulingRemoteModel.getClass();
+				Class<?> clazz = _ruleRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setUserId", long.class);
 
-				method.invoke(_rulingRemoteModel, userId);
+				method.invoke(_ruleRemoteModel, userId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -255,13 +255,13 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	public void setUserName(String userName) {
 		_userName = userName;
 
-		if (_rulingRemoteModel != null) {
+		if (_ruleRemoteModel != null) {
 			try {
-				Class<?> clazz = _rulingRemoteModel.getClass();
+				Class<?> clazz = _ruleRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setUserName", String.class);
 
-				method.invoke(_rulingRemoteModel, userName);
+				method.invoke(_ruleRemoteModel, userName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -278,13 +278,13 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 
-		if (_rulingRemoteModel != null) {
+		if (_ruleRemoteModel != null) {
 			try {
-				Class<?> clazz = _rulingRemoteModel.getClass();
+				Class<?> clazz = _ruleRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setCreateDate", Date.class);
 
-				method.invoke(_rulingRemoteModel, createDate);
+				method.invoke(_ruleRemoteModel, createDate);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -301,13 +301,13 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 
-		if (_rulingRemoteModel != null) {
+		if (_ruleRemoteModel != null) {
 			try {
-				Class<?> clazz = _rulingRemoteModel.getClass();
+				Class<?> clazz = _ruleRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setModifiedDate", Date.class);
 
-				method.invoke(_rulingRemoteModel, modifiedDate);
+				method.invoke(_ruleRemoteModel, modifiedDate);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -316,21 +316,21 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	}
 
 	@Override
-	public String getRuleName() {
-		return _ruleName;
+	public String getName() {
+		return _name;
 	}
 
 	@Override
-	public void setRuleName(String ruleName) {
-		_ruleName = ruleName;
+	public void setName(String name) {
+		_name = name;
 
-		if (_rulingRemoteModel != null) {
+		if (_ruleRemoteModel != null) {
 			try {
-				Class<?> clazz = _rulingRemoteModel.getClass();
+				Class<?> clazz = _ruleRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setRuleName", String.class);
+				Method method = clazz.getMethod("setName", String.class);
 
-				method.invoke(_rulingRemoteModel, ruleName);
+				method.invoke(_ruleRemoteModel, name);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -347,13 +347,13 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	public void setMultiplier(double multiplier) {
 		_multiplier = multiplier;
 
-		if (_rulingRemoteModel != null) {
+		if (_ruleRemoteModel != null) {
 			try {
-				Class<?> clazz = _rulingRemoteModel.getClass();
+				Class<?> clazz = _ruleRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setMultiplier", double.class);
 
-				method.invoke(_rulingRemoteModel, multiplier);
+				method.invoke(_ruleRemoteModel, multiplier);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -361,12 +361,12 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 		}
 	}
 
-	public BaseModel<?> getRulingRemoteModel() {
-		return _rulingRemoteModel;
+	public BaseModel<?> getRuleRemoteModel() {
+		return _ruleRemoteModel;
 	}
 
-	public void setRulingRemoteModel(BaseModel<?> rulingRemoteModel) {
-		_rulingRemoteModel = rulingRemoteModel;
+	public void setRuleRemoteModel(BaseModel<?> ruleRemoteModel) {
+		_ruleRemoteModel = ruleRemoteModel;
 	}
 
 	public Object invokeOnRemoteModel(String methodName,
@@ -380,7 +380,7 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 			}
 		}
 
-		Class<?> remoteModelClass = _rulingRemoteModel.getClass();
+		Class<?> remoteModelClass = _ruleRemoteModel.getClass();
 
 		ClassLoader remoteModelClassLoader = remoteModelClass.getClassLoader();
 
@@ -400,7 +400,7 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 		Method method = remoteModelClass.getMethod(methodName,
 				remoteParameterTypes);
 
-		Object returnValue = method.invoke(_rulingRemoteModel,
+		Object returnValue = method.invoke(_ruleRemoteModel,
 				remoteParameterValues);
 
 		if (returnValue != null) {
@@ -413,22 +413,22 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
-			RulingLocalServiceUtil.addRuling(this);
+			RuleLocalServiceUtil.addRule(this);
 		}
 		else {
-			RulingLocalServiceUtil.updateRuling(this);
+			RuleLocalServiceUtil.updateRule(this);
 		}
 	}
 
 	@Override
-	public Ruling toEscapedModel() {
-		return (Ruling)ProxyUtil.newProxyInstance(Ruling.class.getClassLoader(),
-			new Class[] { Ruling.class }, new AutoEscapeBeanHandler(this));
+	public Rule toEscapedModel() {
+		return (Rule)ProxyUtil.newProxyInstance(Rule.class.getClassLoader(),
+			new Class[] { Rule.class }, new AutoEscapeBeanHandler(this));
 	}
 
 	@Override
 	public Object clone() {
-		RulingClp clone = new RulingClp();
+		RuleClp clone = new RuleClp();
 
 		clone.setRuleId(getRuleId());
 		clone.setGroupId(getGroupId());
@@ -437,17 +437,17 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setRuleName(getRuleName());
+		clone.setName(getName());
 		clone.setMultiplier(getMultiplier());
 
 		return clone;
 	}
 
 	@Override
-	public int compareTo(Ruling ruling) {
+	public int compareTo(Rule rule) {
 		int value = 0;
 
-		value = getRuleName().compareTo(ruling.getRuleName());
+		value = getName().compareTo(rule.getName());
 
 		if (value != 0) {
 			return value;
@@ -462,13 +462,13 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 			return true;
 		}
 
-		if (!(obj instanceof RulingClp)) {
+		if (!(obj instanceof RuleClp)) {
 			return false;
 		}
 
-		RulingClp ruling = (RulingClp)obj;
+		RuleClp rule = (RuleClp)obj;
 
-		long primaryKey = ruling.getPrimaryKey();
+		long primaryKey = rule.getPrimaryKey();
 
 		if (getPrimaryKey() == primaryKey) {
 			return true;
@@ -505,8 +505,8 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", ruleName=");
-		sb.append(getRuleName());
+		sb.append(", name=");
+		sb.append(getName());
 		sb.append(", multiplier=");
 		sb.append(getMultiplier());
 		sb.append("}");
@@ -519,7 +519,7 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
-		sb.append("com.liferay.timetracking.dayoffs.model.Ruling");
+		sb.append("com.liferay.timetracking.dayoffs.model.Rule");
 		sb.append("</model-name>");
 
 		sb.append(
@@ -551,8 +551,8 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>ruleName</column-name><column-value><![CDATA[");
-		sb.append(getRuleName());
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>multiplier</column-name><column-value><![CDATA[");
@@ -572,8 +572,8 @@ public class RulingClp extends BaseModelImpl<Ruling> implements Ruling {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _ruleName;
+	private String _name;
 	private double _multiplier;
-	private BaseModel<?> _rulingRemoteModel;
+	private BaseModel<?> _ruleRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.timetracking.dayoffs.service.ClpSerializer.class;
 }

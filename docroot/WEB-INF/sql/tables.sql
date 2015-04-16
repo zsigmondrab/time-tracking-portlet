@@ -33,8 +33,20 @@ create table TimeTracking_DaysOfYear (
 	modifiedDate DATE null,
 	dayId DATE null,
 	ruleId LONG,
-	unitId LONG,
-	unitType INTEGER
+	classNameId LONG,
+	classPK LONG
+);
+
+create table TimeTracking_Rule (
+	ruleId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	multiplier DOUBLE
 );
 
 create table TimeTracking_Ruling (

@@ -14,34 +14,34 @@
 
 package com.liferay.timetracking.dayoffs.service.base;
 
-import com.liferay.timetracking.dayoffs.service.RulingLocalServiceUtil;
+import com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil;
 
 import java.util.Arrays;
 
 /**
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @generated
  */
-public class RulingLocalServiceClpInvoker {
-	public RulingLocalServiceClpInvoker() {
-		_methodName0 = "addRuling";
+public class RuleLocalServiceClpInvoker {
+	public RuleLocalServiceClpInvoker() {
+		_methodName0 = "addRule";
 
 		_methodParameterTypes0 = new String[] {
-				"com.liferay.timetracking.dayoffs.model.Ruling"
+				"com.liferay.timetracking.dayoffs.model.Rule"
 			};
 
-		_methodName1 = "createRuling";
+		_methodName1 = "createRule";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteRuling";
+		_methodName2 = "deleteRule";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteRuling";
+		_methodName3 = "deleteRule";
 
 		_methodParameterTypes3 = new String[] {
-				"com.liferay.timetracking.dayoffs.model.Ruling"
+				"com.liferay.timetracking.dayoffs.model.Rule"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class RulingLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchRuling";
+		_methodName10 = "fetchRule";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getRuling";
+		_methodName11 = "getRule";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class RulingLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getRulings";
+		_methodName13 = "getRules";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getRulingsCount";
+		_methodName14 = "getRulesCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateRuling";
+		_methodName15 = "updateRule";
 
 		_methodParameterTypes15 = new String[] {
-				"com.liferay.timetracking.dayoffs.model.Ruling"
+				"com.liferay.timetracking.dayoffs.model.Rule"
 			};
 
 		_methodName40 = "getBeanIdentifier";
@@ -119,44 +119,44 @@ public class RulingLocalServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return RulingLocalServiceUtil.addRuling((com.liferay.timetracking.dayoffs.model.Ruling)arguments[0]);
+			return RuleLocalServiceUtil.addRule((com.liferay.timetracking.dayoffs.model.Rule)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return RulingLocalServiceUtil.createRuling(((Long)arguments[0]).longValue());
+			return RuleLocalServiceUtil.createRule(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return RulingLocalServiceUtil.deleteRuling(((Long)arguments[0]).longValue());
+			return RuleLocalServiceUtil.deleteRule(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return RulingLocalServiceUtil.deleteRuling((com.liferay.timetracking.dayoffs.model.Ruling)arguments[0]);
+			return RuleLocalServiceUtil.deleteRule((com.liferay.timetracking.dayoffs.model.Rule)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return RulingLocalServiceUtil.dynamicQuery();
+			return RuleLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return RulingLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return RuleLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return RulingLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return RuleLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return RulingLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return RuleLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -164,54 +164,54 @@ public class RulingLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return RulingLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return RuleLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return RulingLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return RuleLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return RulingLocalServiceUtil.fetchRuling(((Long)arguments[0]).longValue());
+			return RuleLocalServiceUtil.fetchRule(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return RulingLocalServiceUtil.getRuling(((Long)arguments[0]).longValue());
+			return RuleLocalServiceUtil.getRule(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return RulingLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return RuleLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return RulingLocalServiceUtil.getRulings(((Integer)arguments[0]).intValue(),
+			return RuleLocalServiceUtil.getRules(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return RulingLocalServiceUtil.getRulingsCount();
+			return RuleLocalServiceUtil.getRulesCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return RulingLocalServiceUtil.updateRuling((com.liferay.timetracking.dayoffs.model.Ruling)arguments[0]);
+			return RuleLocalServiceUtil.updateRule((com.liferay.timetracking.dayoffs.model.Rule)arguments[0]);
 		}
 
 		if (_methodName40.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
-			return RulingLocalServiceUtil.getBeanIdentifier();
+			return RuleLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName41.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
-			RulingLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			RuleLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}

@@ -19,24 +19,24 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableService;
 
 /**
- * Provides the remote service utility for Ruling. This utility wraps
- * {@link com.liferay.timetracking.dayoffs.service.impl.RulingServiceImpl} and is the
+ * Provides the remote service utility for Rule. This utility wraps
+ * {@link com.liferay.timetracking.dayoffs.service.impl.RuleServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on a remote server. Methods of this service are expected to have security
  * checks based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
- * @author LĂˇszlĂł HudĂˇk
- * @see RulingService
- * @see com.liferay.timetracking.dayoffs.service.base.RulingServiceBaseImpl
- * @see com.liferay.timetracking.dayoffs.service.impl.RulingServiceImpl
+ * @author LÃ¡szlÃ³ HudÃ¡k
+ * @see RuleService
+ * @see com.liferay.timetracking.dayoffs.service.base.RuleServiceBaseImpl
+ * @see com.liferay.timetracking.dayoffs.service.impl.RuleServiceImpl
  * @generated
  */
-public class RulingServiceUtil {
+public class RuleServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.timetracking.dayoffs.service.impl.RulingServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.timetracking.dayoffs.service.impl.RuleServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -67,19 +67,19 @@ public class RulingServiceUtil {
 		_service = null;
 	}
 
-	public static RulingService getService() {
+	public static RuleService getService() {
 		if (_service == null) {
 			InvokableService invokableService = (InvokableService)PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
-					RulingService.class.getName());
+					RuleService.class.getName());
 
-			if (invokableService instanceof RulingService) {
-				_service = (RulingService)invokableService;
+			if (invokableService instanceof RuleService) {
+				_service = (RuleService)invokableService;
 			}
 			else {
-				_service = new RulingServiceClp(invokableService);
+				_service = new RuleServiceClp(invokableService);
 			}
 
-			ReferenceRegistry.registerReference(RulingServiceUtil.class,
+			ReferenceRegistry.registerReference(RuleServiceUtil.class,
 				"_service");
 		}
 
@@ -89,8 +89,8 @@ public class RulingServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
-	public void setService(RulingService service) {
+	public void setService(RuleService service) {
 	}
 
-	private static RulingService _service;
+	private static RuleService _service;
 }

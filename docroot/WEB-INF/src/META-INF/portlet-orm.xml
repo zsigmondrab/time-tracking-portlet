@@ -98,15 +98,16 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="ruleId" />
-			<basic name="unitId" />
-			<basic name="unitType" />
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<transient name="className" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.timetracking.dayoffs.model.impl.RulingModelImpl">
+	<mapped-superclass class="com.liferay.timetracking.dayoffs.model.impl.RuleModelImpl">
 		<attributes>
 			<id name="ruleId" />
 			<basic name="groupId" />
@@ -119,7 +120,7 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="ruleName" />
+			<basic name="name" />
 			<basic name="multiplier" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
@@ -143,8 +144,8 @@
 		<table name="TimeTracking_DaysOfYear" />
 		<attributes />
 	</entity>
-	<entity class="com.liferay.timetracking.dayoffs.model.impl.RulingImpl" name="Ruling">
-		<table name="TimeTracking_Ruling" />
+	<entity class="com.liferay.timetracking.dayoffs.model.impl.RuleImpl" name="Rule">
+		<table name="TimeTracking_Rule" />
 		<attributes />
 	</entity>
 </entity-mappings>

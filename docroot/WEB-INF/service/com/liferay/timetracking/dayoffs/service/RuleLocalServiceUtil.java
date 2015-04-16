@@ -19,76 +19,76 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * Provides the local service utility for Ruling. This utility wraps
- * {@link com.liferay.timetracking.dayoffs.service.impl.RulingLocalServiceImpl} and is the
+ * Provides the local service utility for Rule. This utility wraps
+ * {@link com.liferay.timetracking.dayoffs.service.impl.RuleLocalServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on the local server. Methods of this service will not have security checks
  * based on the propagated JAAS credentials because this service can only be
  * accessed from within the same VM.
  *
- * @author LĂˇszlĂł HudĂˇk
- * @see RulingLocalService
- * @see com.liferay.timetracking.dayoffs.service.base.RulingLocalServiceBaseImpl
- * @see com.liferay.timetracking.dayoffs.service.impl.RulingLocalServiceImpl
+ * @author LÃ¡szlÃ³ HudÃ¡k
+ * @see RuleLocalService
+ * @see com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl
+ * @see com.liferay.timetracking.dayoffs.service.impl.RuleLocalServiceImpl
  * @generated
  */
-public class RulingLocalServiceUtil {
+public class RuleLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.timetracking.dayoffs.service.impl.RulingLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.timetracking.dayoffs.service.impl.RuleLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
-	* Adds the ruling to the database. Also notifies the appropriate model listeners.
+	* Adds the rule to the database. Also notifies the appropriate model listeners.
 	*
-	* @param ruling the ruling
-	* @return the ruling that was added
+	* @param rule the rule
+	* @return the rule that was added
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.timetracking.dayoffs.model.Ruling addRuling(
-		com.liferay.timetracking.dayoffs.model.Ruling ruling)
+	public static com.liferay.timetracking.dayoffs.model.Rule addRule(
+		com.liferay.timetracking.dayoffs.model.Rule rule)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().addRuling(ruling);
+		return getService().addRule(rule);
 	}
 
 	/**
-	* Creates a new ruling with the primary key. Does not add the ruling to the database.
+	* Creates a new rule with the primary key. Does not add the rule to the database.
 	*
-	* @param ruleId the primary key for the new ruling
-	* @return the new ruling
+	* @param ruleId the primary key for the new rule
+	* @return the new rule
 	*/
-	public static com.liferay.timetracking.dayoffs.model.Ruling createRuling(
+	public static com.liferay.timetracking.dayoffs.model.Rule createRule(
 		long ruleId) {
-		return getService().createRuling(ruleId);
+		return getService().createRule(ruleId);
 	}
 
 	/**
-	* Deletes the ruling with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the rule with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param ruleId the primary key of the ruling
-	* @return the ruling that was removed
-	* @throws PortalException if a ruling with the primary key could not be found
+	* @param ruleId the primary key of the rule
+	* @return the rule that was removed
+	* @throws PortalException if a rule with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.timetracking.dayoffs.model.Ruling deleteRuling(
+	public static com.liferay.timetracking.dayoffs.model.Rule deleteRule(
 		long ruleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().deleteRuling(ruleId);
+		return getService().deleteRule(ruleId);
 	}
 
 	/**
-	* Deletes the ruling from the database. Also notifies the appropriate model listeners.
+	* Deletes the rule from the database. Also notifies the appropriate model listeners.
 	*
-	* @param ruling the ruling
-	* @return the ruling that was removed
+	* @param rule the rule
+	* @return the rule that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.timetracking.dayoffs.model.Ruling deleteRuling(
-		com.liferay.timetracking.dayoffs.model.Ruling ruling)
+	public static com.liferay.timetracking.dayoffs.model.Rule deleteRule(
+		com.liferay.timetracking.dayoffs.model.Rule rule)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().deleteRuling(ruling);
+		return getService().deleteRule(rule);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
@@ -113,7 +113,7 @@ public class RulingLocalServiceUtil {
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.RulingModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.RuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -133,7 +133,7 @@ public class RulingLocalServiceUtil {
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.RulingModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.RuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -181,24 +181,24 @@ public class RulingLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static com.liferay.timetracking.dayoffs.model.Ruling fetchRuling(
+	public static com.liferay.timetracking.dayoffs.model.Rule fetchRule(
 		long ruleId) throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().fetchRuling(ruleId);
+		return getService().fetchRule(ruleId);
 	}
 
 	/**
-	* Returns the ruling with the primary key.
+	* Returns the rule with the primary key.
 	*
-	* @param ruleId the primary key of the ruling
-	* @return the ruling
-	* @throws PortalException if a ruling with the primary key could not be found
+	* @param ruleId the primary key of the rule
+	* @return the rule
+	* @throws PortalException if a rule with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.timetracking.dayoffs.model.Ruling getRuling(
+	public static com.liferay.timetracking.dayoffs.model.Rule getRule(
 		long ruleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getRuling(ruleId);
+		return getService().getRule(ruleId);
 	}
 
 	public static com.liferay.portal.model.PersistedModel getPersistedModel(
@@ -209,45 +209,45 @@ public class RulingLocalServiceUtil {
 	}
 
 	/**
-	* Returns a range of all the rulings.
+	* Returns a range of all the rules.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.RulingModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.RuleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of rulings
-	* @param end the upper bound of the range of rulings (not inclusive)
-	* @return the range of rulings
+	* @param start the lower bound of the range of rules
+	* @param end the upper bound of the range of rules (not inclusive)
+	* @return the range of rules
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.timetracking.dayoffs.model.Ruling> getRulings(
+	public static java.util.List<com.liferay.timetracking.dayoffs.model.Rule> getRules(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getRulings(start, end);
+		return getService().getRules(start, end);
 	}
 
 	/**
-	* Returns the number of rulings.
+	* Returns the number of rules.
 	*
-	* @return the number of rulings
+	* @return the number of rules
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int getRulingsCount()
+	public static int getRulesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getRulingsCount();
+		return getService().getRulesCount();
 	}
 
 	/**
-	* Updates the ruling in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Updates the rule in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
-	* @param ruling the ruling
-	* @return the ruling that was updated
+	* @param rule the rule
+	* @return the rule that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.timetracking.dayoffs.model.Ruling updateRuling(
-		com.liferay.timetracking.dayoffs.model.Ruling ruling)
+	public static com.liferay.timetracking.dayoffs.model.Rule updateRule(
+		com.liferay.timetracking.dayoffs.model.Rule rule)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateRuling(ruling);
+		return getService().updateRule(rule);
 	}
 
 	/**
@@ -278,19 +278,19 @@ public class RulingLocalServiceUtil {
 		_service = null;
 	}
 
-	public static RulingLocalService getService() {
+	public static RuleLocalService getService() {
 		if (_service == null) {
 			InvokableLocalService invokableLocalService = (InvokableLocalService)PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
-					RulingLocalService.class.getName());
+					RuleLocalService.class.getName());
 
-			if (invokableLocalService instanceof RulingLocalService) {
-				_service = (RulingLocalService)invokableLocalService;
+			if (invokableLocalService instanceof RuleLocalService) {
+				_service = (RuleLocalService)invokableLocalService;
 			}
 			else {
-				_service = new RulingLocalServiceClp(invokableLocalService);
+				_service = new RuleLocalServiceClp(invokableLocalService);
 			}
 
-			ReferenceRegistry.registerReference(RulingLocalServiceUtil.class,
+			ReferenceRegistry.registerReference(RuleLocalServiceUtil.class,
 				"_service");
 		}
 
@@ -300,8 +300,8 @@ public class RulingLocalServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
-	public void setService(RulingLocalService service) {
+	public void setService(RuleLocalService service) {
 	}
 
-	private static RulingLocalService _service;
+	private static RuleLocalService _service;
 }

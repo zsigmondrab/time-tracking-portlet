@@ -19,21 +19,21 @@ import com.liferay.portal.NoSuchModelException;
 /**
  * @author László Hudák
  */
-public class NoSuchRulingException extends NoSuchModelException {
+public class NoSuchRuleException extends NoSuchModelException {
 
-	public NoSuchRulingException() {
+	public NoSuchRuleException() {
 		super();
 	}
 
-	public NoSuchRulingException(String msg) {
+	public NoSuchRuleException(String msg) {
 		super(msg);
 	}
 
-	public NoSuchRulingException(String msg, Throwable cause) {
+	public NoSuchRuleException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public NoSuchRulingException(Throwable cause) {
+	public NoSuchRuleException(Throwable cause) {
 		super(cause);
 	}
 

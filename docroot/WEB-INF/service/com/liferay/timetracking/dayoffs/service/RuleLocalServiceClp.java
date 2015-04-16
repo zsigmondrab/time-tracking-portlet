@@ -17,31 +17,31 @@ package com.liferay.timetracking.dayoffs.service;
 import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @generated
  */
-public class RulingLocalServiceClp implements RulingLocalService {
-	public RulingLocalServiceClp(InvokableLocalService invokableLocalService) {
+public class RuleLocalServiceClp implements RuleLocalService {
+	public RuleLocalServiceClp(InvokableLocalService invokableLocalService) {
 		_invokableLocalService = invokableLocalService;
 
-		_methodName0 = "addRuling";
+		_methodName0 = "addRule";
 
 		_methodParameterTypes0 = new String[] {
-				"com.liferay.timetracking.dayoffs.model.Ruling"
+				"com.liferay.timetracking.dayoffs.model.Rule"
 			};
 
-		_methodName1 = "createRuling";
+		_methodName1 = "createRule";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteRuling";
+		_methodName2 = "deleteRule";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteRuling";
+		_methodName3 = "deleteRule";
 
 		_methodParameterTypes3 = new String[] {
-				"com.liferay.timetracking.dayoffs.model.Ruling"
+				"com.liferay.timetracking.dayoffs.model.Rule"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class RulingLocalServiceClp implements RulingLocalService {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchRuling";
+		_methodName10 = "fetchRule";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getRuling";
+		_methodName11 = "getRule";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class RulingLocalServiceClp implements RulingLocalService {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getRulings";
+		_methodName13 = "getRules";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getRulingsCount";
+		_methodName14 = "getRulesCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateRuling";
+		_methodName15 = "updateRule";
 
 		_methodParameterTypes15 = new String[] {
-				"com.liferay.timetracking.dayoffs.model.Ruling"
+				"com.liferay.timetracking.dayoffs.model.Rule"
 			};
 
 		_methodName16 = "getBeanIdentifier";
@@ -116,15 +116,15 @@ public class RulingLocalServiceClp implements RulingLocalService {
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.Ruling addRuling(
-		com.liferay.timetracking.dayoffs.model.Ruling ruling)
+	public com.liferay.timetracking.dayoffs.model.Rule addRule(
+		com.liferay.timetracking.dayoffs.model.Rule rule)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName0,
 					_methodParameterTypes0,
-					new Object[] { ClpSerializer.translateInput(ruling) });
+					new Object[] { ClpSerializer.translateInput(rule) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -142,12 +142,11 @@ public class RulingLocalServiceClp implements RulingLocalService {
 			}
 		}
 
-		return (com.liferay.timetracking.dayoffs.model.Ruling)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.timetracking.dayoffs.model.Rule)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.Ruling createRuling(
-		long ruleId) {
+	public com.liferay.timetracking.dayoffs.model.Rule createRule(long ruleId) {
 		Object returnObj = null;
 
 		try {
@@ -166,12 +165,11 @@ public class RulingLocalServiceClp implements RulingLocalService {
 			}
 		}
 
-		return (com.liferay.timetracking.dayoffs.model.Ruling)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.timetracking.dayoffs.model.Rule)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.Ruling deleteRuling(
-		long ruleId)
+	public com.liferay.timetracking.dayoffs.model.Rule deleteRule(long ruleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -200,19 +198,19 @@ public class RulingLocalServiceClp implements RulingLocalService {
 			}
 		}
 
-		return (com.liferay.timetracking.dayoffs.model.Ruling)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.timetracking.dayoffs.model.Rule)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.Ruling deleteRuling(
-		com.liferay.timetracking.dayoffs.model.Ruling ruling)
+	public com.liferay.timetracking.dayoffs.model.Rule deleteRule(
+		com.liferay.timetracking.dayoffs.model.Rule rule)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName3,
 					_methodParameterTypes3,
-					new Object[] { ClpSerializer.translateInput(ruling) });
+					new Object[] { ClpSerializer.translateInput(rule) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -230,7 +228,7 @@ public class RulingLocalServiceClp implements RulingLocalService {
 			}
 		}
 
-		return (com.liferay.timetracking.dayoffs.model.Ruling)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.timetracking.dayoffs.model.Rule)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -431,8 +429,8 @@ public class RulingLocalServiceClp implements RulingLocalService {
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.Ruling fetchRuling(
-		long ruleId) throws com.liferay.portal.kernel.exception.SystemException {
+	public com.liferay.timetracking.dayoffs.model.Rule fetchRule(long ruleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
@@ -455,11 +453,11 @@ public class RulingLocalServiceClp implements RulingLocalService {
 			}
 		}
 
-		return (com.liferay.timetracking.dayoffs.model.Ruling)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.timetracking.dayoffs.model.Rule)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.Ruling getRuling(long ruleId)
+	public com.liferay.timetracking.dayoffs.model.Rule getRule(long ruleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -488,7 +486,7 @@ public class RulingLocalServiceClp implements RulingLocalService {
 			}
 		}
 
-		return (com.liferay.timetracking.dayoffs.model.Ruling)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.timetracking.dayoffs.model.Rule)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -527,7 +525,7 @@ public class RulingLocalServiceClp implements RulingLocalService {
 	}
 
 	@Override
-	public java.util.List<com.liferay.timetracking.dayoffs.model.Ruling> getRulings(
+	public java.util.List<com.liferay.timetracking.dayoffs.model.Rule> getRules(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -552,11 +550,11 @@ public class RulingLocalServiceClp implements RulingLocalService {
 			}
 		}
 
-		return (java.util.List<com.liferay.timetracking.dayoffs.model.Ruling>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.liferay.timetracking.dayoffs.model.Rule>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public int getRulingsCount()
+	public int getRulesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -584,15 +582,15 @@ public class RulingLocalServiceClp implements RulingLocalService {
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.Ruling updateRuling(
-		com.liferay.timetracking.dayoffs.model.Ruling ruling)
+	public com.liferay.timetracking.dayoffs.model.Rule updateRule(
+		com.liferay.timetracking.dayoffs.model.Rule rule)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName15,
 					_methodParameterTypes15,
-					new Object[] { ClpSerializer.translateInput(ruling) });
+					new Object[] { ClpSerializer.translateInput(rule) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -610,7 +608,7 @@ public class RulingLocalServiceClp implements RulingLocalService {
 			}
 		}
 
-		return (com.liferay.timetracking.dayoffs.model.Ruling)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.timetracking.dayoffs.model.Rule)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override

@@ -6,7 +6,7 @@
 	<import class="com.liferay.timetracking.activities.model.ActivityAssignment" />
 	<import class="com.liferay.timetracking.timesheet.model.WorkDay" />
 	<import class="com.liferay.timetracking.dayoffs.model.DaysOfYear" />
-	<import class="com.liferay.timetracking.dayoffs.model.Ruling" />
+	<import class="com.liferay.timetracking.dayoffs.model.Rule" />
 	<class name="com.liferay.timetracking.activities.model.impl.ActivityImpl" table="TimeTracking_Activity">
 		<cache usage="read-write" />
 		<id name="activityId" type="long">
@@ -65,10 +65,10 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="dayId" type="org.hibernate.type.TimestampType" />
 		<property name="ruleId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="unitId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="unitType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
-	<class name="com.liferay.timetracking.dayoffs.model.impl.RulingImpl" table="TimeTracking_Ruling">
+	<class name="com.liferay.timetracking.dayoffs.model.impl.RuleImpl" table="TimeTracking_Rule">
 		<cache usage="read-write" />
 		<id name="ruleId" type="long">
 			<generator class="assigned" />
@@ -79,7 +79,7 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="ruleName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="multiplier" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>
 </hibernate-mapping>

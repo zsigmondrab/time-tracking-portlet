@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 
-import com.liferay.timetracking.dayoffs.model.Ruling;
+import com.liferay.timetracking.dayoffs.model.Rule;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -28,13 +28,13 @@ import java.io.ObjectOutput;
 import java.util.Date;
 
 /**
- * The cache model class for representing Ruling in entity cache.
+ * The cache model class for representing Rule in entity cache.
  *
- * @author LĂˇszlĂł HudĂˇk
- * @see Ruling
+ * @author LÃ¡szlÃ³ HudÃ¡k
+ * @see Rule
  * @generated
  */
-public class RulingCacheModel implements CacheModel<Ruling>, Externalizable {
+public class RuleCacheModel implements CacheModel<Rule>, Externalizable {
 	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
@@ -53,8 +53,8 @@ public class RulingCacheModel implements CacheModel<Ruling>, Externalizable {
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", ruleName=");
-		sb.append(ruleName);
+		sb.append(", name=");
+		sb.append(name);
 		sb.append(", multiplier=");
 		sb.append(multiplier);
 		sb.append("}");
@@ -63,47 +63,47 @@ public class RulingCacheModel implements CacheModel<Ruling>, Externalizable {
 	}
 
 	@Override
-	public Ruling toEntityModel() {
-		RulingImpl rulingImpl = new RulingImpl();
+	public Rule toEntityModel() {
+		RuleImpl ruleImpl = new RuleImpl();
 
-		rulingImpl.setRuleId(ruleId);
-		rulingImpl.setGroupId(groupId);
-		rulingImpl.setCompanyId(companyId);
-		rulingImpl.setUserId(userId);
+		ruleImpl.setRuleId(ruleId);
+		ruleImpl.setGroupId(groupId);
+		ruleImpl.setCompanyId(companyId);
+		ruleImpl.setUserId(userId);
 
 		if (userName == null) {
-			rulingImpl.setUserName(StringPool.BLANK);
+			ruleImpl.setUserName(StringPool.BLANK);
 		}
 		else {
-			rulingImpl.setUserName(userName);
+			ruleImpl.setUserName(userName);
 		}
 
 		if (createDate == Long.MIN_VALUE) {
-			rulingImpl.setCreateDate(null);
+			ruleImpl.setCreateDate(null);
 		}
 		else {
-			rulingImpl.setCreateDate(new Date(createDate));
+			ruleImpl.setCreateDate(new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
-			rulingImpl.setModifiedDate(null);
+			ruleImpl.setModifiedDate(null);
 		}
 		else {
-			rulingImpl.setModifiedDate(new Date(modifiedDate));
+			ruleImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		if (ruleName == null) {
-			rulingImpl.setRuleName(StringPool.BLANK);
+		if (name == null) {
+			ruleImpl.setName(StringPool.BLANK);
 		}
 		else {
-			rulingImpl.setRuleName(ruleName);
+			ruleImpl.setName(name);
 		}
 
-		rulingImpl.setMultiplier(multiplier);
+		ruleImpl.setMultiplier(multiplier);
 
-		rulingImpl.resetOriginalValues();
+		ruleImpl.resetOriginalValues();
 
-		return rulingImpl;
+		return ruleImpl;
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class RulingCacheModel implements CacheModel<Ruling>, Externalizable {
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		ruleName = objectInput.readUTF();
+		name = objectInput.readUTF();
 		multiplier = objectInput.readDouble();
 	}
 
@@ -137,11 +137,11 @@ public class RulingCacheModel implements CacheModel<Ruling>, Externalizable {
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		if (ruleName == null) {
+		if (name == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(ruleName);
+			objectOutput.writeUTF(name);
 		}
 
 		objectOutput.writeDouble(multiplier);
@@ -154,6 +154,6 @@ public class RulingCacheModel implements CacheModel<Ruling>, Externalizable {
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public String ruleName;
+	public String name;
 	public double multiplier;
 }

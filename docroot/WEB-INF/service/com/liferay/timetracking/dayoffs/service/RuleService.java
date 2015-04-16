@@ -24,25 +24,25 @@ import com.liferay.portal.service.BaseService;
 import com.liferay.portal.service.InvokableService;
 
 /**
- * Provides the remote service interface for Ruling. Methods of this
+ * Provides the remote service interface for Rule. Methods of this
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
- * @author LĂˇszlĂł HudĂˇk
- * @see RulingServiceUtil
- * @see com.liferay.timetracking.dayoffs.service.base.RulingServiceBaseImpl
- * @see com.liferay.timetracking.dayoffs.service.impl.RulingServiceImpl
+ * @author LÃ¡szlÃ³ HudÃ¡k
+ * @see RuleServiceUtil
+ * @see com.liferay.timetracking.dayoffs.service.base.RuleServiceBaseImpl
+ * @see com.liferay.timetracking.dayoffs.service.impl.RuleServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface RulingService extends BaseService, InvokableService {
+public interface RuleService extends BaseService, InvokableService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link RulingServiceUtil} to access the ruling remote service. Add custom service methods to {@link com.liferay.timetracking.dayoffs.service.impl.RulingServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link RuleServiceUtil} to access the rule remote service. Add custom service methods to {@link com.liferay.timetracking.dayoffs.service.impl.RuleServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**

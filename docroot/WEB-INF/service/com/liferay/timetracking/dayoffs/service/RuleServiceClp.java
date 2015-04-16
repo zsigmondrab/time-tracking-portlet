@@ -17,11 +17,11 @@ package com.liferay.timetracking.dayoffs.service;
 import com.liferay.portal.service.InvokableService;
 
 /**
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @generated
  */
-public class RulingServiceClp implements RulingService {
-	public RulingServiceClp(InvokableService invokableService) {
+public class RuleServiceClp implements RuleService {
+	public RuleServiceClp(InvokableService invokableService) {
 		_invokableService = invokableService;
 
 		_methodName0 = "getBeanIdentifier";

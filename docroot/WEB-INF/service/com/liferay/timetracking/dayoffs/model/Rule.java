@@ -17,18 +17,18 @@ package com.liferay.timetracking.dayoffs.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the Ruling service. Represents a row in the &quot;TimeTracking_Ruling&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the Rule service. Represents a row in the &quot;TimeTracking_Rule&quot; database table, with each column mapped to a property of this class.
  *
- * @author LĂˇszlĂł HudĂˇk
- * @see RulingModel
- * @see com.liferay.timetracking.dayoffs.model.impl.RulingImpl
- * @see com.liferay.timetracking.dayoffs.model.impl.RulingModelImpl
+ * @author LÃ¡szlÃ³ HudÃ¡k
+ * @see RuleModel
+ * @see com.liferay.timetracking.dayoffs.model.impl.RuleImpl
+ * @see com.liferay.timetracking.dayoffs.model.impl.RuleModelImpl
  * @generated
  */
-public interface Ruling extends RulingModel, PersistedModel {
+public interface Rule extends RuleModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.timetracking.dayoffs.model.impl.RulingImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.timetracking.dayoffs.model.impl.RuleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

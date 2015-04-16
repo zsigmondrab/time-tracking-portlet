@@ -21,15 +21,15 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.liferay.timetracking.dayoffs.service.http.RulingServiceSoap}.
+ * This class is used by SOAP remote services, specifically {@link com.liferay.timetracking.dayoffs.service.http.RuleServiceSoap}.
  *
- * @author LĂˇszlĂł HudĂˇk
- * @see com.liferay.timetracking.dayoffs.service.http.RulingServiceSoap
+ * @author LÃ¡szlÃ³ HudÃ¡k
+ * @see com.liferay.timetracking.dayoffs.service.http.RuleServiceSoap
  * @generated
  */
-public class RulingSoap implements Serializable {
-	public static RulingSoap toSoapModel(Ruling model) {
-		RulingSoap soapModel = new RulingSoap();
+public class RuleSoap implements Serializable {
+	public static RuleSoap toSoapModel(Rule model) {
+		RuleSoap soapModel = new RuleSoap();
 
 		soapModel.setRuleId(model.getRuleId());
 		soapModel.setGroupId(model.getGroupId());
@@ -38,14 +38,14 @@ public class RulingSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setRuleName(model.getRuleName());
+		soapModel.setName(model.getName());
 		soapModel.setMultiplier(model.getMultiplier());
 
 		return soapModel;
 	}
 
-	public static RulingSoap[] toSoapModels(Ruling[] models) {
-		RulingSoap[] soapModels = new RulingSoap[models.length];
+	public static RuleSoap[] toSoapModels(Rule[] models) {
+		RuleSoap[] soapModels = new RuleSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -54,14 +54,14 @@ public class RulingSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static RulingSoap[][] toSoapModels(Ruling[][] models) {
-		RulingSoap[][] soapModels = null;
+	public static RuleSoap[][] toSoapModels(Rule[][] models) {
+		RuleSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new RulingSoap[models.length][models[0].length];
+			soapModels = new RuleSoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new RulingSoap[0][0];
+			soapModels = new RuleSoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -71,17 +71,17 @@ public class RulingSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static RulingSoap[] toSoapModels(List<Ruling> models) {
-		List<RulingSoap> soapModels = new ArrayList<RulingSoap>(models.size());
+	public static RuleSoap[] toSoapModels(List<Rule> models) {
+		List<RuleSoap> soapModels = new ArrayList<RuleSoap>(models.size());
 
-		for (Ruling model : models) {
+		for (Rule model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new RulingSoap[soapModels.size()]);
+		return soapModels.toArray(new RuleSoap[soapModels.size()]);
 	}
 
-	public RulingSoap() {
+	public RuleSoap() {
 	}
 
 	public long getPrimaryKey() {
@@ -148,12 +148,12 @@ public class RulingSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getRuleName() {
-		return _ruleName;
+	public String getName() {
+		return _name;
 	}
 
-	public void setRuleName(String ruleName) {
-		_ruleName = ruleName;
+	public void setName(String name) {
+		_name = name;
 	}
 
 	public double getMultiplier() {
@@ -171,6 +171,6 @@ public class RulingSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _ruleName;
+	private String _name;
 	private double _multiplier;
 }

@@ -17,16 +17,16 @@ package com.liferay.timetracking.dayoffs.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * Provides a wrapper for {@link RulingService}.
+ * Provides a wrapper for {@link RuleService}.
  *
- * @author LĂˇszlĂł HudĂˇk
- * @see RulingService
+ * @author LÃ¡szlÃ³ HudÃ¡k
+ * @see RuleService
  * @generated
  */
-public class RulingServiceWrapper implements RulingService,
-	ServiceWrapper<RulingService> {
-	public RulingServiceWrapper(RulingService rulingService) {
-		_rulingService = rulingService;
+public class RuleServiceWrapper implements RuleService,
+	ServiceWrapper<RuleService> {
+	public RuleServiceWrapper(RuleService ruleService) {
+		_ruleService = ruleService;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class RulingServiceWrapper implements RulingService,
 	*/
 	@Override
 	public java.lang.String getBeanIdentifier() {
-		return _rulingService.getBeanIdentifier();
+		return _ruleService.getBeanIdentifier();
 	}
 
 	/**
@@ -46,39 +46,39 @@ public class RulingServiceWrapper implements RulingService,
 	*/
 	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
-		_rulingService.setBeanIdentifier(beanIdentifier);
+		_ruleService.setBeanIdentifier(beanIdentifier);
 	}
 
 	@Override
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
-		return _rulingService.invokeMethod(name, parameterTypes, arguments);
+		return _ruleService.invokeMethod(name, parameterTypes, arguments);
 	}
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
-	public RulingService getWrappedRulingService() {
-		return _rulingService;
+	public RuleService getWrappedRuleService() {
+		return _ruleService;
 	}
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
 	 */
-	public void setWrappedRulingService(RulingService rulingService) {
-		_rulingService = rulingService;
+	public void setWrappedRuleService(RuleService ruleService) {
+		_ruleService = ruleService;
 	}
 
 	@Override
-	public RulingService getWrappedService() {
-		return _rulingService;
+	public RuleService getWrappedService() {
+		return _ruleService;
 	}
 
 	@Override
-	public void setWrappedService(RulingService rulingService) {
-		_rulingService = rulingService;
+	public void setWrappedService(RuleService ruleService) {
+		_ruleService = ruleService;
 	}
 
-	private RulingService _rulingService;
+	private RuleService _ruleService;
 }
