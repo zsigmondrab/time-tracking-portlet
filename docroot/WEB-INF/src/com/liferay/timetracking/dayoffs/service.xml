@@ -4,7 +4,7 @@
 	<author>László Hudák</author>
 	<namespace>TimeTracking</namespace>
 	
-	<entity name="Ruling" local-service="true" remote-service="true">
+	<entity name="Rule" local-service="true" remote-service="true">
 
 		<!-- PK Fields -->
 
@@ -24,25 +24,25 @@
 
 		<!-- Other Fields -->
 
-		<column name="ruleName" type="String" />
+		<column name="name" type="String" />
 		<column name="multiplier" type="double" />
 
 		<!-- Order -->
 
 		<order by="asc">
-			<order-column name="ruleName" />
+			<order-column name="name" />
 		</order>
 
 		<!-- Finder methods -->
 
-		<finder name="RuleId" return-type="Ruling">
-			<finder-column name="ruleId" />
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
 		</finder>
-		<finder name="RuleName" return-type="RuleName">
-			<finder-column name="ruleName" />
-		</finder>
-		<finder name="RuleType" return-type="Collection">
+		<finder name="Multiplier" return-type="Collection">
 			<finder-column name="multiplier" />
+		</finder>
+		<finder name="Name" return-type="Rule">
+			<finder-column name="name" />
 		</finder>
 	</entity>
 
@@ -68,8 +68,8 @@
 
 		<column name="dayId" type="Date" />
 		<column name="ruleId" type="long" />
-		<column name="unitId" type="long" />
-		<column name="unitType" type="int" />
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 
 		<!-- Order -->
 
@@ -79,26 +79,30 @@
 
 		<!-- Finder methods -->
 
-		<finder name="DaysOfYearId" return-type="DaysOfYear">
-			<finder-column name="dayOfYearId" />
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
 		</finder>
-		<finder name="DateDay" return-type="Collection">
+		<finder name="ClassNameId" return-type="Collection">
+			<finder-column name="classNameId" />
+		</finder>
+		<finder name="ClassPK" return-type="Collection">
+			<finder-column name="classPK" />
+		</finder>
+		<finder name="DayId" return-type="Collection">
 			<finder-column name="dayId" />
 		</finder>
-		<finder name="Unit" return-type="Collection">
-			<finder-column name="unitId" />
-		</finder>
-		<finder name="UnitType" return-type="Collection">
-			<finder-column name="unitType" />
-		</finder>
-		<finder name="D_U" return-type="DaysOfYear">
+		<finder name="D_C" return-type="Collection">
 			<finder-column name="dayId" />
-			<finder-column name="unitId" />
+			<finder-column name="classNameId" />
 		</finder>
-		<finder name="D_UT" return-type="Collection">
+		<finder name="D_C_C" return-type="DaysOfYear">
 			<finder-column name="dayId" />
-			<finder-column name="unitType" />
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+		</finder>
+		<finder name="D_C_C" return-type="DaysOfYear">
+			<finder-column name="dayId" />
+			<finder-column name="classPK" />
 		</finder>
 	</entity>
-
 </service-builder>
