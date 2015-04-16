@@ -19,7 +19,7 @@ import com.liferay.timetracking.dayoffs.service.DaysOfYearServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @generated
  */
 public class DaysOfYearServiceClpInvoker {

@@ -56,7 +56,7 @@ public class ActivityWrapper implements Activity, ModelWrapper<Activity> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("activityName", getActivityName());
+		attributes.put("name", getName());
 
 		return attributes;
 	}
@@ -105,10 +105,10 @@ public class ActivityWrapper implements Activity, ModelWrapper<Activity> {
 			setModifiedDate(modifiedDate);
 		}
 
-		String activityName = (String)attributes.get("activityName");
+		String name = (String)attributes.get("name");
 
-		if (activityName != null) {
-			setActivityName(activityName);
+		if (name != null) {
+			setName(name);
 		}
 	}
 
@@ -295,23 +295,23 @@ public class ActivityWrapper implements Activity, ModelWrapper<Activity> {
 	}
 
 	/**
-	* Returns the activity name of this activity.
+	* Returns the name of this activity.
 	*
-	* @return the activity name of this activity
+	* @return the name of this activity
 	*/
 	@Override
-	public java.lang.String getActivityName() {
-		return _activity.getActivityName();
+	public java.lang.String getName() {
+		return _activity.getName();
 	}
 
 	/**
-	* Sets the activity name of this activity.
+	* Sets the name of this activity.
 	*
-	* @param activityName the activity name of this activity
+	* @param name the name of this activity
 	*/
 	@Override
-	public void setActivityName(java.lang.String activityName) {
-		_activity.setActivityName(activityName);
+	public void setName(java.lang.String name) {
+		_activity.setName(name);
 	}
 
 	@Override

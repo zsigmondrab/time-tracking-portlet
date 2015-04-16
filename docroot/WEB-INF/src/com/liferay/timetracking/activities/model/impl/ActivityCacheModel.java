@@ -53,8 +53,8 @@ public class ActivityCacheModel implements CacheModel<Activity>, Externalizable 
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", activityName=");
-		sb.append(activityName);
+		sb.append(", name=");
+		sb.append(name);
 		sb.append("}");
 
 		return sb.toString();
@@ -90,11 +90,11 @@ public class ActivityCacheModel implements CacheModel<Activity>, Externalizable 
 			activityImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		if (activityName == null) {
-			activityImpl.setActivityName(StringPool.BLANK);
+		if (name == null) {
+			activityImpl.setName(StringPool.BLANK);
 		}
 		else {
-			activityImpl.setActivityName(activityName);
+			activityImpl.setName(name);
 		}
 
 		activityImpl.resetOriginalValues();
@@ -111,7 +111,7 @@ public class ActivityCacheModel implements CacheModel<Activity>, Externalizable 
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		activityName = objectInput.readUTF();
+		name = objectInput.readUTF();
 	}
 
 	@Override
@@ -132,11 +132,11 @@ public class ActivityCacheModel implements CacheModel<Activity>, Externalizable 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		if (activityName == null) {
+		if (name == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(activityName);
+			objectOutput.writeUTF(name);
 		}
 	}
 
@@ -147,5 +147,5 @@ public class ActivityCacheModel implements CacheModel<Activity>, Externalizable 
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public String activityName;
+	public String name;
 }

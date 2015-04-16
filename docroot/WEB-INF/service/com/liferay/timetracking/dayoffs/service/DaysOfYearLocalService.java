@@ -30,7 +30,7 @@ import com.liferay.portal.service.PersistedModelLocalService;
  * credentials because this service can only be accessed from within the same
  * VM.
  *
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @see DaysOfYearLocalServiceUtil
  * @see com.liferay.timetracking.dayoffs.service.base.DaysOfYearLocalServiceBaseImpl
  * @see com.liferay.timetracking.dayoffs.service.impl.DaysOfYearLocalServiceImpl

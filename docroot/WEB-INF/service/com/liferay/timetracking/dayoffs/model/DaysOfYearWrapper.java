@@ -26,7 +26,7 @@ import java.util.Map;
  * This class is a wrapper for {@link DaysOfYear}.
  * </p>
  *
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @see DaysOfYear
  * @generated
  */
@@ -58,8 +58,8 @@ public class DaysOfYearWrapper implements DaysOfYear, ModelWrapper<DaysOfYear> {
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("dayId", getDayId());
 		attributes.put("ruleId", getRuleId());
-		attributes.put("unitId", getUnitId());
-		attributes.put("unitType", getUnitType());
+		attributes.put("classNameId", getClassNameId());
+		attributes.put("classPK", getClassPK());
 
 		return attributes;
 	}
@@ -120,16 +120,16 @@ public class DaysOfYearWrapper implements DaysOfYear, ModelWrapper<DaysOfYear> {
 			setRuleId(ruleId);
 		}
 
-		Long unitId = (Long)attributes.get("unitId");
+		Long classNameId = (Long)attributes.get("classNameId");
 
-		if (unitId != null) {
-			setUnitId(unitId);
+		if (classNameId != null) {
+			setClassNameId(classNameId);
 		}
 
-		Integer unitType = (Integer)attributes.get("unitType");
+		Long classPK = (Long)attributes.get("classPK");
 
-		if (unitType != null) {
-			setUnitType(unitType);
+		if (classPK != null) {
+			setClassPK(classPK);
 		}
 	}
 
@@ -356,43 +356,58 @@ public class DaysOfYearWrapper implements DaysOfYear, ModelWrapper<DaysOfYear> {
 	}
 
 	/**
-	* Returns the unit ID of this days of year.
+	* Returns the fully qualified class name of this days of year.
 	*
-	* @return the unit ID of this days of year
+	* @return the fully qualified class name of this days of year
 	*/
 	@Override
-	public long getUnitId() {
-		return _daysOfYear.getUnitId();
+	public java.lang.String getClassName() {
+		return _daysOfYear.getClassName();
+	}
+
+	@Override
+	public void setClassName(java.lang.String className) {
+		_daysOfYear.setClassName(className);
 	}
 
 	/**
-	* Sets the unit ID of this days of year.
+	* Returns the class name ID of this days of year.
 	*
-	* @param unitId the unit ID of this days of year
+	* @return the class name ID of this days of year
 	*/
 	@Override
-	public void setUnitId(long unitId) {
-		_daysOfYear.setUnitId(unitId);
+	public long getClassNameId() {
+		return _daysOfYear.getClassNameId();
 	}
 
 	/**
-	* Returns the unit type of this days of year.
+	* Sets the class name ID of this days of year.
 	*
-	* @return the unit type of this days of year
+	* @param classNameId the class name ID of this days of year
 	*/
 	@Override
-	public int getUnitType() {
-		return _daysOfYear.getUnitType();
+	public void setClassNameId(long classNameId) {
+		_daysOfYear.setClassNameId(classNameId);
 	}
 
 	/**
-	* Sets the unit type of this days of year.
+	* Returns the class p k of this days of year.
 	*
-	* @param unitType the unit type of this days of year
+	* @return the class p k of this days of year
 	*/
 	@Override
-	public void setUnitType(int unitType) {
-		_daysOfYear.setUnitType(unitType);
+	public long getClassPK() {
+		return _daysOfYear.getClassPK();
+	}
+
+	/**
+	* Sets the class p k of this days of year.
+	*
+	* @param classPK the class p k of this days of year
+	*/
+	@Override
+	public void setClassPK(long classPK) {
+		_daysOfYear.setClassPK(classPK);
 	}
 
 	@Override

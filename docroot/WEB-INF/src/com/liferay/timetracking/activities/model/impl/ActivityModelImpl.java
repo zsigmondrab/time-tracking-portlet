@@ -73,12 +73,12 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "activityName", Types.VARCHAR }
+			{ "name", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TimeTracking_Activity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,activityName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table TimeTracking_Activity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table TimeTracking_Activity";
-	public static final String ORDER_BY_JPQL = " ORDER BY activity.activityName ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY TimeTracking_Activity.activityName ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY activity.name ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY TimeTracking_Activity.name ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -88,7 +88,11 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.timetracking.activities.model.Activity"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.timetracking.activities.model.Activity"),
+			true);
+	public static long GROUPID_COLUMN_BITMASK = 1L;
+	public static long NAME_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -110,7 +114,7 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setActivityName(soapModel.getActivityName());
+		model.setName(soapModel.getName());
 
 		return model;
 	}
@@ -182,7 +186,7 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("activityName", getActivityName());
+		attributes.put("name", getName());
 
 		return attributes;
 	}
@@ -231,10 +235,10 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 			setModifiedDate(modifiedDate);
 		}
 
-		String activityName = (String)attributes.get("activityName");
+		String name = (String)attributes.get("name");
 
-		if (activityName != null) {
-			setActivityName(activityName);
+		if (name != null) {
+			setName(name);
 		}
 	}
 
@@ -257,7 +261,19 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 
 	@Override
 	public void setGroupId(long groupId) {
+		_columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -332,18 +348,24 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 
 	@JSON
 	@Override
-	public String getActivityName() {
-		if (_activityName == null) {
+	public String getName() {
+		if (_name == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _activityName;
+			return _name;
 		}
 	}
 
 	@Override
-	public void setActivityName(String activityName) {
-		_activityName = activityName;
+	public void setName(String name) {
+		_columnBitmask = -1L;
+
+		_name = name;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -380,7 +402,7 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		activityImpl.setUserName(getUserName());
 		activityImpl.setCreateDate(getCreateDate());
 		activityImpl.setModifiedDate(getModifiedDate());
-		activityImpl.setActivityName(getActivityName());
+		activityImpl.setName(getName());
 
 		activityImpl.resetOriginalValues();
 
@@ -391,7 +413,7 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 	public int compareTo(Activity activity) {
 		int value = 0;
 
-		value = getActivityName().compareTo(activity.getActivityName());
+		value = getName().compareTo(activity.getName());
 
 		if (value != 0) {
 			return value;
@@ -429,6 +451,13 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 
 	@Override
 	public void resetOriginalValues() {
+		ActivityModelImpl activityModelImpl = this;
+
+		activityModelImpl._originalGroupId = activityModelImpl._groupId;
+
+		activityModelImpl._setOriginalGroupId = false;
+
+		activityModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -469,12 +498,12 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 			activityCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		activityCacheModel.activityName = getActivityName();
+		activityCacheModel.name = getName();
 
-		String activityName = activityCacheModel.activityName;
+		String name = activityCacheModel.name;
 
-		if ((activityName != null) && (activityName.length() == 0)) {
-			activityCacheModel.activityName = null;
+		if ((name != null) && (name.length() == 0)) {
+			activityCacheModel.name = null;
 		}
 
 		return activityCacheModel;
@@ -498,8 +527,8 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", activityName=");
-		sb.append(getActivityName());
+		sb.append(", name=");
+		sb.append(getName());
 		sb.append("}");
 
 		return sb.toString();
@@ -542,8 +571,8 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>activityName</column-name><column-value><![CDATA[");
-		sb.append(getActivityName());
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -557,12 +586,15 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		};
 	private long _activityId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _activityName;
+	private String _name;
+	private long _columnBitmask;
 	private Activity _escapedModel;
 }

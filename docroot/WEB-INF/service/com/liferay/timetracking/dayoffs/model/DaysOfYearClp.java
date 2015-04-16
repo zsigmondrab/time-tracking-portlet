@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -85,8 +87,8 @@ public class DaysOfYearClp extends BaseModelImpl<DaysOfYear>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("dayId", getDayId());
 		attributes.put("ruleId", getRuleId());
-		attributes.put("unitId", getUnitId());
-		attributes.put("unitType", getUnitType());
+		attributes.put("classNameId", getClassNameId());
+		attributes.put("classPK", getClassPK());
 
 		return attributes;
 	}
@@ -147,16 +149,16 @@ public class DaysOfYearClp extends BaseModelImpl<DaysOfYear>
 			setRuleId(ruleId);
 		}
 
-		Long unitId = (Long)attributes.get("unitId");
+		Long classNameId = (Long)attributes.get("classNameId");
 
-		if (unitId != null) {
-			setUnitId(unitId);
+		if (classNameId != null) {
+			setClassNameId(classNameId);
 		}
 
-		Integer unitType = (Integer)attributes.get("unitType");
+		Long classPK = (Long)attributes.get("classPK");
 
-		if (unitType != null) {
-			setUnitType(unitType);
+		if (classPK != null) {
+			setClassPK(classPK);
 		}
 	}
 
@@ -378,21 +380,41 @@ public class DaysOfYearClp extends BaseModelImpl<DaysOfYear>
 	}
 
 	@Override
-	public long getUnitId() {
-		return _unitId;
+	public String getClassName() {
+		if (getClassNameId() <= 0) {
+			return StringPool.BLANK;
+		}
+
+		return PortalUtil.getClassName(getClassNameId());
 	}
 
 	@Override
-	public void setUnitId(long unitId) {
-		_unitId = unitId;
+	public void setClassName(String className) {
+		long classNameId = 0;
+
+		if (Validator.isNotNull(className)) {
+			classNameId = PortalUtil.getClassNameId(className);
+		}
+
+		setClassNameId(classNameId);
+	}
+
+	@Override
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	@Override
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
 
 		if (_daysOfYearRemoteModel != null) {
 			try {
 				Class<?> clazz = _daysOfYearRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setUnitId", long.class);
+				Method method = clazz.getMethod("setClassNameId", long.class);
 
-				method.invoke(_daysOfYearRemoteModel, unitId);
+				method.invoke(_daysOfYearRemoteModel, classNameId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -401,21 +423,21 @@ public class DaysOfYearClp extends BaseModelImpl<DaysOfYear>
 	}
 
 	@Override
-	public int getUnitType() {
-		return _unitType;
+	public long getClassPK() {
+		return _classPK;
 	}
 
 	@Override
-	public void setUnitType(int unitType) {
-		_unitType = unitType;
+	public void setClassPK(long classPK) {
+		_classPK = classPK;
 
 		if (_daysOfYearRemoteModel != null) {
 			try {
 				Class<?> clazz = _daysOfYearRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setUnitType", int.class);
+				Method method = clazz.getMethod("setClassPK", long.class);
 
-				method.invoke(_daysOfYearRemoteModel, unitType);
+				method.invoke(_daysOfYearRemoteModel, classPK);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -501,8 +523,8 @@ public class DaysOfYearClp extends BaseModelImpl<DaysOfYear>
 		clone.setModifiedDate(getModifiedDate());
 		clone.setDayId(getDayId());
 		clone.setRuleId(getRuleId());
-		clone.setUnitId(getUnitId());
-		clone.setUnitType(getUnitType());
+		clone.setClassNameId(getClassNameId());
+		clone.setClassPK(getClassPK());
 
 		return clone;
 	}
@@ -573,10 +595,10 @@ public class DaysOfYearClp extends BaseModelImpl<DaysOfYear>
 		sb.append(getDayId());
 		sb.append(", ruleId=");
 		sb.append(getRuleId());
-		sb.append(", unitId=");
-		sb.append(getUnitId());
-		sb.append(", unitType=");
-		sb.append(getUnitType());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
 		sb.append("}");
 
 		return sb.toString();
@@ -627,12 +649,12 @@ public class DaysOfYearClp extends BaseModelImpl<DaysOfYear>
 		sb.append(getRuleId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>unitId</column-name><column-value><![CDATA[");
-		sb.append(getUnitId());
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>unitType</column-name><column-value><![CDATA[");
-		sb.append(getUnitType());
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -650,8 +672,8 @@ public class DaysOfYearClp extends BaseModelImpl<DaysOfYear>
 	private Date _modifiedDate;
 	private Date _dayId;
 	private long _ruleId;
-	private long _unitId;
-	private int _unitType;
+	private long _classNameId;
+	private long _classPK;
 	private BaseModel<?> _daysOfYearRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.timetracking.dayoffs.service.ClpSerializer.class;
 }

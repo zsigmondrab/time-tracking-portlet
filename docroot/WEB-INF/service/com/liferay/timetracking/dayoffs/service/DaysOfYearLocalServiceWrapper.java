@@ -19,7 +19,7 @@ import com.liferay.portal.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link DaysOfYearLocalService}.
  *
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @see DaysOfYearLocalService
  * @generated
  */

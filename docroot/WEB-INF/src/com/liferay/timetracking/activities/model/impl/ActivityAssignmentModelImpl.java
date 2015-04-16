@@ -92,7 +92,11 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.timetracking.activities.model.ActivityAssignment"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.timetracking.activities.model.ActivityAssignment"),
+			true);
+	public static long GROUPID_COLUMN_BITMASK = 1L;
+	public static long STARTTIME_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -286,7 +290,19 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 
 	@Override
 	public void setGroupId(long groupId) {
+		_columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -389,6 +405,8 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 
 	@Override
 	public void setStartTime(Date startTime) {
+		_columnBitmask = -1L;
+
 		_startTime = startTime;
 	}
 
@@ -401,6 +419,10 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 	@Override
 	public void setEndTime(Date endTime) {
 		_endTime = endTime;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -490,6 +512,13 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 
 	@Override
 	public void resetOriginalValues() {
+		ActivityAssignmentModelImpl activityAssignmentModelImpl = this;
+
+		activityAssignmentModelImpl._originalGroupId = activityAssignmentModelImpl._groupId;
+
+		activityAssignmentModelImpl._setOriginalGroupId = false;
+
+		activityAssignmentModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -651,6 +680,8 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 		};
 	private long _activityAssignmentId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
@@ -661,5 +692,6 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 	private long _workDayId;
 	private Date _startTime;
 	private Date _endTime;
+	private long _columnBitmask;
 	private ActivityAssignment _escapedModel;
 }

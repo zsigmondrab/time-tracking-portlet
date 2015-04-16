@@ -1,3 +1,7 @@
+create index IX_50AE851A on TimeTracking_Activity (groupId);
+
+create index IX_9DC2208D on TimeTracking_ActivityAssignment (groupId);
+
 create index IX_DA8BA622 on TimeTracking_DaysOfYear (classNameId);
 create index IX_4E8B0AB7 on TimeTracking_DaysOfYear (classPK);
 create index IX_59886E9B on TimeTracking_DaysOfYear (dayId);
@@ -18,3 +22,5 @@ create index IX_EE5651BC on TimeTracking_Rule (name);
 create index IX_AE27A06F on TimeTracking_Ruling (multiplier);
 create index IX_62872C65 on TimeTracking_Ruling (ruleId);
 create index IX_E5EB27D5 on TimeTracking_Ruling (ruleName);
+
+create index IX_40AFAB74 on TimeTracking_WorkDay (groupId);

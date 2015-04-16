@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 
 import com.liferay.timetracking.dayoffs.model.DaysOfYearClp;
-import com.liferay.timetracking.dayoffs.model.RulingClp;
+import com.liferay.timetracking.dayoffs.model.RuleClp;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -107,8 +107,8 @@ public class ClpSerializer {
 			return translateInputDaysOfYear(oldModel);
 		}
 
-		if (oldModelClassName.equals(RulingClp.class.getName())) {
-			return translateInputRuling(oldModel);
+		if (oldModelClassName.equals(RuleClp.class.getName())) {
+			return translateInputRule(oldModel);
 		}
 
 		return oldModel;
@@ -136,10 +136,10 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateInputRuling(BaseModel<?> oldModel) {
-		RulingClp oldClpModel = (RulingClp)oldModel;
+	public static Object translateInputRule(BaseModel<?> oldModel) {
+		RuleClp oldClpModel = (RuleClp)oldModel;
 
-		BaseModel<?> newModel = oldClpModel.getRulingRemoteModel();
+		BaseModel<?> newModel = oldClpModel.getRuleRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -201,8 +201,8 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
-					"com.liferay.timetracking.dayoffs.model.impl.RulingImpl")) {
-			return translateOutputRuling(oldModel);
+					"com.liferay.timetracking.dayoffs.model.impl.RuleImpl")) {
+			return translateOutputRule(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -323,8 +323,8 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
-					"com.liferay.timetracking.dayoffs.NoSuchRulingException")) {
-			return new com.liferay.timetracking.dayoffs.NoSuchRulingException();
+					"com.liferay.timetracking.dayoffs.NoSuchRuleException")) {
+			return new com.liferay.timetracking.dayoffs.NoSuchRuleException();
 		}
 
 		return throwable;
@@ -340,12 +340,12 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateOutputRuling(BaseModel<?> oldModel) {
-		RulingClp newModel = new RulingClp();
+	public static Object translateOutputRule(BaseModel<?> oldModel) {
+		RuleClp newModel = new RuleClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
-		newModel.setRulingRemoteModel(oldModel);
+		newModel.setRuleRemoteModel(oldModel);
 
 		return newModel;
 	}

@@ -190,19 +190,19 @@ public interface ActivityModel extends BaseModel<Activity>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the activity name of this activity.
+	 * Returns the name of this activity.
 	 *
-	 * @return the activity name of this activity
+	 * @return the name of this activity
 	 */
 	@AutoEscape
-	public String getActivityName();
+	public String getName();
 
 	/**
-	 * Sets the activity name of this activity.
+	 * Sets the name of this activity.
 	 *
-	 * @param activityName the activity name of this activity
+	 * @param name the name of this activity
 	 */
-	public void setActivityName(String activityName);
+	public void setName(String name);
 
 	@Override
 	public boolean isNew();

@@ -92,7 +92,12 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.timetracking.timesheet.model.WorkDay"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.timetracking.timesheet.model.WorkDay"),
+			true);
+	public static long GROUPID_COLUMN_BITMASK = 1L;
+	public static long STARTTIME_COLUMN_BITMASK = 2L;
+	public static long ENDTIME_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -285,7 +290,19 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 
 	@Override
 	public void setGroupId(long groupId) {
+		_columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -377,6 +394,8 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 
 	@Override
 	public void setStartTime(Date startTime) {
+		_columnBitmask = -1L;
+
 		_startTime = startTime;
 	}
 
@@ -388,6 +407,8 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 
 	@Override
 	public void setEndTime(Date endTime) {
+		_columnBitmask = -1L;
+
 		_endTime = endTime;
 	}
 
@@ -400,6 +421,10 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 	@Override
 	public void setPause(int pause) {
 		_pause = pause;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -494,6 +519,13 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 
 	@Override
 	public void resetOriginalValues() {
+		WorkDayModelImpl workDayModelImpl = this;
+
+		workDayModelImpl._originalGroupId = workDayModelImpl._groupId;
+
+		workDayModelImpl._setOriginalGroupId = false;
+
+		workDayModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -654,6 +686,8 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		};
 	private long _workDayId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
@@ -664,5 +698,6 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 	private Date _startTime;
 	private Date _endTime;
 	private int _pause;
+	private long _columnBitmask;
 	private WorkDay _escapedModel;
 }

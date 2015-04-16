@@ -20,8 +20,8 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.timetracking.dayoffs.service.ClpSerializer;
 import com.liferay.timetracking.dayoffs.service.DaysOfYearLocalServiceUtil;
 import com.liferay.timetracking.dayoffs.service.DaysOfYearServiceUtil;
-import com.liferay.timetracking.dayoffs.service.RulingLocalServiceUtil;
-import com.liferay.timetracking.dayoffs.service.RulingServiceUtil;
+import com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil;
+import com.liferay.timetracking.dayoffs.service.RuleServiceUtil;
 
 /**
  * @author László Hudák
@@ -41,9 +41,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			DaysOfYearLocalServiceUtil.clearService();
 
 			DaysOfYearServiceUtil.clearService();
-			RulingLocalServiceUtil.clearService();
+			RuleLocalServiceUtil.clearService();
 
-			RulingServiceUtil.clearService();
+			RuleServiceUtil.clearService();
 		}
 	}
 }

@@ -38,7 +38,7 @@ public class ActivitySoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setActivityName(model.getActivityName());
+		soapModel.setName(model.getName());
 
 		return soapModel;
 	}
@@ -147,12 +147,12 @@ public class ActivitySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getActivityName() {
-		return _activityName;
+	public String getName() {
+		return _name;
 	}
 
-	public void setActivityName(String activityName) {
-		_activityName = activityName;
+	public void setName(String name) {
+		_name = name;
 	}
 
 	private long _activityId;
@@ -162,5 +162,5 @@ public class ActivitySoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _activityName;
+	private String _name;
 }

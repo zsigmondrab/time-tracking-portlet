@@ -59,7 +59,7 @@ import java.util.List;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @see DaysOfYearPersistence
  * @see DaysOfYearUtil
  * @generated
@@ -85,96 +85,127 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_FETCH_BY_DAYSOFYEARID = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByDaysOfYearId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+		new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
 			new String[] { Long.class.getName() },
-			DaysOfYearModelImpl.DAYOFYEARID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_DAYSOFYEARID = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.GROUPID_COLUMN_BITMASK |
+			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByDaysOfYearId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns the days of year where dayOfYearId = &#63; or throws a {@link com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException} if it could not be found.
+	 * Returns all the days of years where groupId = &#63;.
 	 *
-	 * @param dayOfYearId the day of year ID
-	 * @return the matching days of year
-	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
+	 * @param groupId the group ID
+	 * @return the matching days of years
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear findByDaysOfYearId(long dayOfYearId)
-		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByDaysOfYearId(dayOfYearId);
-
-		if (daysOfYear == null) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("dayOfYearId=");
-			msg.append(dayOfYearId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchDaysOfYearException(msg.toString());
-		}
-
-		return daysOfYear;
-	}
-
-	/**
-	 * Returns the days of year where dayOfYearId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param dayOfYearId the day of year ID
-	 * @return the matching days of year, or <code>null</code> if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear fetchByDaysOfYearId(long dayOfYearId)
+	public List<DaysOfYear> findByGroupId(long groupId)
 		throws SystemException {
-		return fetchByDaysOfYearId(dayOfYearId, true);
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns the days of year where dayOfYearId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns a range of all the days of years where groupId = &#63;.
 	 *
-	 * @param dayOfYearId the day of year ID
-	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of days of years
+	 * @param end the upper bound of the range of days of years (not inclusive)
+	 * @return the range of matching days of years
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear fetchByDaysOfYearId(long dayOfYearId,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { dayOfYearId };
+	public List<DaysOfYear> findByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return findByGroupId(groupId, start, end, null);
+	}
 
-		Object result = null;
+	/**
+	 * Returns an ordered range of all the days of years where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of days of years
+	 * @param end the upper bound of the range of days of years (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<DaysOfYear> findByGroupId(long groupId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
 
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_DAYSOFYEARID,
-					finderArgs, this);
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
+			finderArgs = new Object[] { groupId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
+			finderArgs = new Object[] { groupId, start, end, orderByComparator };
 		}
 
-		if (result instanceof DaysOfYear) {
-			DaysOfYear daysOfYear = (DaysOfYear)result;
+		List<DaysOfYear> list = (List<DaysOfYear>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
 
-			if ((dayOfYearId != daysOfYear.getDayOfYearId())) {
-				result = null;
+		if ((list != null) && !list.isEmpty()) {
+			for (DaysOfYear daysOfYear : list) {
+				if ((groupId != daysOfYear.getGroupId())) {
+					list = null;
+
+					break;
+				}
 			}
 		}
 
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
 
-			query.append(_FINDER_COLUMN_DAYSOFYEARID_DAYOFYEARID_2);
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(DaysOfYearModelImpl.ORDER_BY_JPQL);
+			}
 
 			String sql = query.toString();
 
@@ -187,37 +218,27 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(dayOfYearId);
+				qPos.add(groupId);
 
-				List<DaysOfYear> list = q.list();
+				if (!pagination) {
+					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
+							start, end, false);
 
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DAYSOFYEARID,
-						finderArgs, list);
+					Collections.sort(list);
+
+					list = new UnmodifiableList<DaysOfYear>(list);
 				}
 				else {
-					if ((list.size() > 1) && _log.isWarnEnabled()) {
-						_log.warn(
-							"DaysOfYearPersistenceImpl.fetchByDaysOfYearId(long, boolean) with parameters (" +
-							StringUtil.merge(finderArgs) +
-							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
-					}
-
-					DaysOfYear daysOfYear = list.get(0);
-
-					result = daysOfYear;
-
-					cacheResult(daysOfYear);
-
-					if ((daysOfYear.getDayOfYearId() != dayOfYearId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DAYSOFYEARID,
-							finderArgs, daysOfYear);
-					}
+					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
+							start, end);
 				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DAYSOFYEARID,
-					finderArgs);
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
 
 				throw processException(e);
 			}
@@ -226,41 +247,290 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 			}
 		}
 
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (DaysOfYear)result;
-		}
+		return list;
 	}
 
 	/**
-	 * Removes the days of year where dayOfYearId = &#63; from the database.
+	 * Returns the first days of year in the ordered set where groupId = &#63;.
 	 *
-	 * @param dayOfYearId the day of year ID
-	 * @return the days of year that was removed
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear removeByDaysOfYearId(long dayOfYearId)
+	public DaysOfYear findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = findByDaysOfYearId(dayOfYearId);
+		DaysOfYear daysOfYear = fetchByGroupId_First(groupId, orderByComparator);
 
-		return remove(daysOfYear);
+		if (daysOfYear != null) {
+			return daysOfYear;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchDaysOfYearException(msg.toString());
 	}
 
 	/**
-	 * Returns the number of days of years where dayOfYearId = &#63;.
+	 * Returns the first days of year in the ordered set where groupId = &#63;.
 	 *
-	 * @param dayOfYearId the day of year ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear fetchByGroupId_First(long groupId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<DaysOfYear> list = findByGroupId(groupId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last days of year in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = fetchByGroupId_Last(groupId, orderByComparator);
+
+		if (daysOfYear != null) {
+			return daysOfYear;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchDaysOfYearException(msg.toString());
+	}
+
+	/**
+	 * Returns the last days of year in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear fetchByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<DaysOfYear> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the days of years before and after the current days of year in the ordered set where groupId = &#63;.
+	 *
+	 * @param dayOfYearId the primary key of the current days of year
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a days of year with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear[] findByGroupId_PrevAndNext(long dayOfYearId,
+		long groupId, OrderByComparator orderByComparator)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = findByPrimaryKey(dayOfYearId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DaysOfYear[] array = new DaysOfYearImpl[3];
+
+			array[0] = getByGroupId_PrevAndNext(session, daysOfYear, groupId,
+					orderByComparator, true);
+
+			array[1] = daysOfYear;
+
+			array[2] = getByGroupId_PrevAndNext(session, daysOfYear, groupId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DaysOfYear getByGroupId_PrevAndNext(Session session,
+		DaysOfYear daysOfYear, long groupId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(DaysOfYearModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(daysOfYear);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DaysOfYear> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the days of years where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByGroupId(long groupId) throws SystemException {
+		for (DaysOfYear daysOfYear : findByGroupId(groupId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(daysOfYear);
+		}
+	}
+
+	/**
+	 * Returns the number of days of years where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
 	 * @return the number of matching days of years
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByDaysOfYearId(long dayOfYearId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_DAYSOFYEARID;
+	public int countByGroupId(long groupId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
-		Object[] finderArgs = new Object[] { dayOfYearId };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -270,7 +540,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 
 			query.append(_SQL_COUNT_DAYSOFYEAR_WHERE);
 
-			query.append(_FINDER_COLUMN_DAYSOFYEARID_DAYOFYEARID_2);
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = query.toString();
 
@@ -283,7 +553,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(dayOfYearId);
+				qPos.add(groupId);
 
 				count = (Long)q.uniqueResult();
 
@@ -302,25 +572,1005 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_DAYSOFYEARID_DAYOFYEARID_2 = "daysOfYear.dayOfYearId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_DATEDAY = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "daysOfYear.groupId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CLASSNAMEID =
+		new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByDateDay",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByClassNameId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CLASSNAMEID =
+		new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByClassNameId",
+			new String[] { Long.class.getName() },
+			DaysOfYearModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_CLASSNAMEID = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByClassNameId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the days of years where classNameId = &#63;.
+	 *
+	 * @param classNameId the class name ID
+	 * @return the matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<DaysOfYear> findByClassNameId(long classNameId)
+		throws SystemException {
+		return findByClassNameId(classNameId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the days of years where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param classNameId the class name ID
+	 * @param start the lower bound of the range of days of years
+	 * @param end the upper bound of the range of days of years (not inclusive)
+	 * @return the range of matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<DaysOfYear> findByClassNameId(long classNameId, int start,
+		int end) throws SystemException {
+		return findByClassNameId(classNameId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the days of years where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param classNameId the class name ID
+	 * @param start the lower bound of the range of days of years
+	 * @param end the upper bound of the range of days of years (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<DaysOfYear> findByClassNameId(long classNameId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CLASSNAMEID;
+			finderArgs = new Object[] { classNameId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CLASSNAMEID;
+			finderArgs = new Object[] { classNameId, start, end, orderByComparator };
+		}
+
+		List<DaysOfYear> list = (List<DaysOfYear>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (DaysOfYear daysOfYear : list) {
+				if ((classNameId != daysOfYear.getClassNameId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
+
+			query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(DaysOfYearModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				if (!pagination) {
+					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<DaysOfYear>(list);
+				}
+				else {
+					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first days of year in the ordered set where classNameId = &#63;.
+	 *
+	 * @param classNameId the class name ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear findByClassNameId_First(long classNameId,
+		OrderByComparator orderByComparator)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = fetchByClassNameId_First(classNameId,
+				orderByComparator);
+
+		if (daysOfYear != null) {
+			return daysOfYear;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("classNameId=");
+		msg.append(classNameId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchDaysOfYearException(msg.toString());
+	}
+
+	/**
+	 * Returns the first days of year in the ordered set where classNameId = &#63;.
+	 *
+	 * @param classNameId the class name ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear fetchByClassNameId_First(long classNameId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<DaysOfYear> list = findByClassNameId(classNameId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last days of year in the ordered set where classNameId = &#63;.
+	 *
+	 * @param classNameId the class name ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear findByClassNameId_Last(long classNameId,
+		OrderByComparator orderByComparator)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = fetchByClassNameId_Last(classNameId,
+				orderByComparator);
+
+		if (daysOfYear != null) {
+			return daysOfYear;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("classNameId=");
+		msg.append(classNameId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchDaysOfYearException(msg.toString());
+	}
+
+	/**
+	 * Returns the last days of year in the ordered set where classNameId = &#63;.
+	 *
+	 * @param classNameId the class name ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear fetchByClassNameId_Last(long classNameId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByClassNameId(classNameId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<DaysOfYear> list = findByClassNameId(classNameId, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the days of years before and after the current days of year in the ordered set where classNameId = &#63;.
+	 *
+	 * @param dayOfYearId the primary key of the current days of year
+	 * @param classNameId the class name ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a days of year with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear[] findByClassNameId_PrevAndNext(long dayOfYearId,
+		long classNameId, OrderByComparator orderByComparator)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = findByPrimaryKey(dayOfYearId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DaysOfYear[] array = new DaysOfYearImpl[3];
+
+			array[0] = getByClassNameId_PrevAndNext(session, daysOfYear,
+					classNameId, orderByComparator, true);
+
+			array[1] = daysOfYear;
+
+			array[2] = getByClassNameId_PrevAndNext(session, daysOfYear,
+					classNameId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DaysOfYear getByClassNameId_PrevAndNext(Session session,
+		DaysOfYear daysOfYear, long classNameId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
+
+		query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(DaysOfYearModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(classNameId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(daysOfYear);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DaysOfYear> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the days of years where classNameId = &#63; from the database.
+	 *
+	 * @param classNameId the class name ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByClassNameId(long classNameId) throws SystemException {
+		for (DaysOfYear daysOfYear : findByClassNameId(classNameId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(daysOfYear);
+		}
+	}
+
+	/**
+	 * Returns the number of days of years where classNameId = &#63;.
+	 *
+	 * @param classNameId the class name ID
+	 * @return the number of matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByClassNameId(long classNameId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CLASSNAMEID;
+
+		Object[] finderArgs = new Object[] { classNameId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DAYSOFYEAR_WHERE);
+
+			query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2 = "daysOfYear.classNameId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CLASSPK = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByClassPK",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CLASSPK =
+		new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByClassPK",
+			new String[] { Long.class.getName() },
+			DaysOfYearModelImpl.CLASSPK_COLUMN_BITMASK |
+			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_CLASSPK = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByClassPK",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the days of years where classPK = &#63;.
+	 *
+	 * @param classPK the class p k
+	 * @return the matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<DaysOfYear> findByClassPK(long classPK)
+		throws SystemException {
+		return findByClassPK(classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the days of years where classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param classPK the class p k
+	 * @param start the lower bound of the range of days of years
+	 * @param end the upper bound of the range of days of years (not inclusive)
+	 * @return the range of matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<DaysOfYear> findByClassPK(long classPK, int start, int end)
+		throws SystemException {
+		return findByClassPK(classPK, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the days of years where classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param classPK the class p k
+	 * @param start the lower bound of the range of days of years
+	 * @param end the upper bound of the range of days of years (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<DaysOfYear> findByClassPK(long classPK, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CLASSPK;
+			finderArgs = new Object[] { classPK };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CLASSPK;
+			finderArgs = new Object[] { classPK, start, end, orderByComparator };
+		}
+
+		List<DaysOfYear> list = (List<DaysOfYear>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (DaysOfYear daysOfYear : list) {
+				if ((classPK != daysOfYear.getClassPK())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
+
+			query.append(_FINDER_COLUMN_CLASSPK_CLASSPK_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(DaysOfYearModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classPK);
+
+				if (!pagination) {
+					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<DaysOfYear>(list);
+				}
+				else {
+					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first days of year in the ordered set where classPK = &#63;.
+	 *
+	 * @param classPK the class p k
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear findByClassPK_First(long classPK,
+		OrderByComparator orderByComparator)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = fetchByClassPK_First(classPK, orderByComparator);
+
+		if (daysOfYear != null) {
+			return daysOfYear;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("classPK=");
+		msg.append(classPK);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchDaysOfYearException(msg.toString());
+	}
+
+	/**
+	 * Returns the first days of year in the ordered set where classPK = &#63;.
+	 *
+	 * @param classPK the class p k
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear fetchByClassPK_First(long classPK,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<DaysOfYear> list = findByClassPK(classPK, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last days of year in the ordered set where classPK = &#63;.
+	 *
+	 * @param classPK the class p k
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear findByClassPK_Last(long classPK,
+		OrderByComparator orderByComparator)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = fetchByClassPK_Last(classPK, orderByComparator);
+
+		if (daysOfYear != null) {
+			return daysOfYear;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("classPK=");
+		msg.append(classPK);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchDaysOfYearException(msg.toString());
+	}
+
+	/**
+	 * Returns the last days of year in the ordered set where classPK = &#63;.
+	 *
+	 * @param classPK the class p k
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear fetchByClassPK_Last(long classPK,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByClassPK(classPK);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<DaysOfYear> list = findByClassPK(classPK, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the days of years before and after the current days of year in the ordered set where classPK = &#63;.
+	 *
+	 * @param dayOfYearId the primary key of the current days of year
+	 * @param classPK the class p k
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a days of year with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear[] findByClassPK_PrevAndNext(long dayOfYearId,
+		long classPK, OrderByComparator orderByComparator)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = findByPrimaryKey(dayOfYearId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DaysOfYear[] array = new DaysOfYearImpl[3];
+
+			array[0] = getByClassPK_PrevAndNext(session, daysOfYear, classPK,
+					orderByComparator, true);
+
+			array[1] = daysOfYear;
+
+			array[2] = getByClassPK_PrevAndNext(session, daysOfYear, classPK,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DaysOfYear getByClassPK_PrevAndNext(Session session,
+		DaysOfYear daysOfYear, long classPK,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
+
+		query.append(_FINDER_COLUMN_CLASSPK_CLASSPK_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(DaysOfYearModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(classPK);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(daysOfYear);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DaysOfYear> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the days of years where classPK = &#63; from the database.
+	 *
+	 * @param classPK the class p k
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByClassPK(long classPK) throws SystemException {
+		for (DaysOfYear daysOfYear : findByClassPK(classPK, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(daysOfYear);
+		}
+	}
+
+	/**
+	 * Returns the number of days of years where classPK = &#63;.
+	 *
+	 * @param classPK the class p k
+	 * @return the number of matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByClassPK(long classPK) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CLASSPK;
+
+		Object[] finderArgs = new Object[] { classPK };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DAYSOFYEAR_WHERE);
+
+			query.append(_FINDER_COLUMN_CLASSPK_CLASSPK_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classPK);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_CLASSPK_CLASSPK_2 = "daysOfYear.classPK = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_DAYID = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByDayId",
 			new String[] {
 				Date.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DATEDAY =
-		new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DAYID = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByDateDay",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByDayId",
 			new String[] { Date.class.getName() },
 			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_DATEDAY = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_DAYID = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByDateDay",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByDayId",
 			new String[] { Date.class.getName() });
 
 	/**
@@ -331,8 +1581,8 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<DaysOfYear> findByDateDay(Date dayId) throws SystemException {
-		return findByDateDay(dayId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<DaysOfYear> findByDayId(Date dayId) throws SystemException {
+		return findByDayId(dayId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
@@ -349,9 +1599,9 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<DaysOfYear> findByDateDay(Date dayId, int start, int end)
+	public List<DaysOfYear> findByDayId(Date dayId, int start, int end)
 		throws SystemException {
-		return findByDateDay(dayId, start, end, null);
+		return findByDayId(dayId, start, end, null);
 	}
 
 	/**
@@ -369,7 +1619,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<DaysOfYear> findByDateDay(Date dayId, int start, int end,
+	public List<DaysOfYear> findByDayId(Date dayId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -378,11 +1628,11 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DATEDAY;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DAYID;
 			finderArgs = new Object[] { dayId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_DATEDAY;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_DAYID;
 			finderArgs = new Object[] { dayId, start, end, orderByComparator };
 		}
 
@@ -415,12 +1665,12 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 			boolean bindDayId = false;
 
 			if (dayId == null) {
-				query.append(_FINDER_COLUMN_DATEDAY_DAYID_1);
+				query.append(_FINDER_COLUMN_DAYID_DAYID_1);
 			}
 			else {
 				bindDayId = true;
 
-				query.append(_FINDER_COLUMN_DATEDAY_DAYID_2);
+				query.append(_FINDER_COLUMN_DAYID_DAYID_2);
 			}
 
 			if (orderByComparator != null) {
@@ -487,10 +1737,10 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear findByDateDay_First(Date dayId,
+	public DaysOfYear findByDayId_First(Date dayId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByDateDay_First(dayId, orderByComparator);
+		DaysOfYear daysOfYear = fetchByDayId_First(dayId, orderByComparator);
 
 		if (daysOfYear != null) {
 			return daysOfYear;
@@ -517,9 +1767,9 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear fetchByDateDay_First(Date dayId,
+	public DaysOfYear fetchByDayId_First(Date dayId,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<DaysOfYear> list = findByDateDay(dayId, 0, 1, orderByComparator);
+		List<DaysOfYear> list = findByDayId(dayId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -538,10 +1788,10 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear findByDateDay_Last(Date dayId,
+	public DaysOfYear findByDayId_Last(Date dayId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByDateDay_Last(dayId, orderByComparator);
+		DaysOfYear daysOfYear = fetchByDayId_Last(dayId, orderByComparator);
 
 		if (daysOfYear != null) {
 			return daysOfYear;
@@ -568,15 +1818,15 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear fetchByDateDay_Last(Date dayId,
+	public DaysOfYear fetchByDayId_Last(Date dayId,
 		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByDateDay(dayId);
+		int count = countByDayId(dayId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<DaysOfYear> list = findByDateDay(dayId, count - 1, count,
+		List<DaysOfYear> list = findByDayId(dayId, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -597,7 +1847,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear[] findByDateDay_PrevAndNext(long dayOfYearId, Date dayId,
+	public DaysOfYear[] findByDayId_PrevAndNext(long dayOfYearId, Date dayId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDaysOfYearException, SystemException {
 		DaysOfYear daysOfYear = findByPrimaryKey(dayOfYearId);
@@ -609,12 +1859,12 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 
 			DaysOfYear[] array = new DaysOfYearImpl[3];
 
-			array[0] = getByDateDay_PrevAndNext(session, daysOfYear, dayId,
+			array[0] = getByDayId_PrevAndNext(session, daysOfYear, dayId,
 					orderByComparator, true);
 
 			array[1] = daysOfYear;
 
-			array[2] = getByDateDay_PrevAndNext(session, daysOfYear, dayId,
+			array[2] = getByDayId_PrevAndNext(session, daysOfYear, dayId,
 					orderByComparator, false);
 
 			return array;
@@ -627,7 +1877,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		}
 	}
 
-	protected DaysOfYear getByDateDay_PrevAndNext(Session session,
+	protected DaysOfYear getByDayId_PrevAndNext(Session session,
 		DaysOfYear daysOfYear, Date dayId, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -645,12 +1895,12 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		boolean bindDayId = false;
 
 		if (dayId == null) {
-			query.append(_FINDER_COLUMN_DATEDAY_DAYID_1);
+			query.append(_FINDER_COLUMN_DAYID_DAYID_1);
 		}
 		else {
 			bindDayId = true;
 
-			query.append(_FINDER_COLUMN_DATEDAY_DAYID_2);
+			query.append(_FINDER_COLUMN_DAYID_DAYID_2);
 		}
 
 		if (orderByComparator != null) {
@@ -750,8 +2000,8 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByDateDay(Date dayId) throws SystemException {
-		for (DaysOfYear daysOfYear : findByDateDay(dayId, QueryUtil.ALL_POS,
+	public void removeByDayId(Date dayId) throws SystemException {
+		for (DaysOfYear daysOfYear : findByDayId(dayId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
 			remove(daysOfYear);
 		}
@@ -765,8 +2015,8 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByDateDay(Date dayId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_DATEDAY;
+	public int countByDayId(Date dayId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_DAYID;
 
 		Object[] finderArgs = new Object[] { dayId };
 
@@ -781,12 +2031,12 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 			boolean bindDayId = false;
 
 			if (dayId == null) {
-				query.append(_FINDER_COLUMN_DATEDAY_DAYID_1);
+				query.append(_FINDER_COLUMN_DAYID_DAYID_1);
 			}
 			else {
 				bindDayId = true;
 
-				query.append(_FINDER_COLUMN_DATEDAY_DAYID_2);
+				query.append(_FINDER_COLUMN_DAYID_DAYID_2);
 			}
 
 			String sql = query.toString();
@@ -821,1310 +2071,72 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_DATEDAY_DAYID_1 = "daysOfYear.dayId IS NULL";
-	private static final String _FINDER_COLUMN_DATEDAY_DAYID_2 = "daysOfYear.dayId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UNIT = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_DAYID_DAYID_1 = "daysOfYear.dayId IS NULL";
+	private static final String _FINDER_COLUMN_DAYID_DAYID_2 = "daysOfYear.dayId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_D_C = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUnit",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByD_C",
 			new String[] {
-				Long.class.getName(),
+				Date.class.getName(), Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UNIT = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_C = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUnit",
-			new String[] { Long.class.getName() },
-			DaysOfYearModelImpl.UNITID_COLUMN_BITMASK |
-			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_UNIT = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
-			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUnit",
-			new String[] { Long.class.getName() });
-
-	/**
-	 * Returns all the days of years where unitId = &#63;.
-	 *
-	 * @param unitId the unit ID
-	 * @return the matching days of years
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<DaysOfYear> findByUnit(long unitId) throws SystemException {
-		return findByUnit(unitId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the days of years where unitId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param unitId the unit ID
-	 * @param start the lower bound of the range of days of years
-	 * @param end the upper bound of the range of days of years (not inclusive)
-	 * @return the range of matching days of years
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<DaysOfYear> findByUnit(long unitId, int start, int end)
-		throws SystemException {
-		return findByUnit(unitId, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the days of years where unitId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param unitId the unit ID
-	 * @param start the lower bound of the range of days of years
-	 * @param end the upper bound of the range of days of years (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching days of years
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<DaysOfYear> findByUnit(long unitId, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UNIT;
-			finderArgs = new Object[] { unitId };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_UNIT;
-			finderArgs = new Object[] { unitId, start, end, orderByComparator };
-		}
-
-		List<DaysOfYear> list = (List<DaysOfYear>)FinderCacheUtil.getResult(finderPath,
-				finderArgs, this);
-
-		if ((list != null) && !list.isEmpty()) {
-			for (DaysOfYear daysOfYear : list) {
-				if ((unitId != daysOfYear.getUnitId())) {
-					list = null;
-
-					break;
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
-
-			query.append(_FINDER_COLUMN_UNIT_UNITID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(DaysOfYearModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(unitId);
-
-				if (!pagination) {
-					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
-							start, end, false);
-
-					Collections.sort(list);
-
-					list = new UnmodifiableList<DaysOfYear>(list);
-				}
-				else {
-					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
-							start, end);
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first days of year in the ordered set where unitId = &#63;.
-	 *
-	 * @param unitId the unit ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching days of year
-	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear findByUnit_First(long unitId,
-		OrderByComparator orderByComparator)
-		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByUnit_First(unitId, orderByComparator);
-
-		if (daysOfYear != null) {
-			return daysOfYear;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("unitId=");
-		msg.append(unitId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchDaysOfYearException(msg.toString());
-	}
-
-	/**
-	 * Returns the first days of year in the ordered set where unitId = &#63;.
-	 *
-	 * @param unitId the unit ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching days of year, or <code>null</code> if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear fetchByUnit_First(long unitId,
-		OrderByComparator orderByComparator) throws SystemException {
-		List<DaysOfYear> list = findByUnit(unitId, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last days of year in the ordered set where unitId = &#63;.
-	 *
-	 * @param unitId the unit ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching days of year
-	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear findByUnit_Last(long unitId,
-		OrderByComparator orderByComparator)
-		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByUnit_Last(unitId, orderByComparator);
-
-		if (daysOfYear != null) {
-			return daysOfYear;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("unitId=");
-		msg.append(unitId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchDaysOfYearException(msg.toString());
-	}
-
-	/**
-	 * Returns the last days of year in the ordered set where unitId = &#63;.
-	 *
-	 * @param unitId the unit ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching days of year, or <code>null</code> if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear fetchByUnit_Last(long unitId,
-		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByUnit(unitId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<DaysOfYear> list = findByUnit(unitId, count - 1, count,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the days of years before and after the current days of year in the ordered set where unitId = &#63;.
-	 *
-	 * @param dayOfYearId the primary key of the current days of year
-	 * @param unitId the unit ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next days of year
-	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a days of year with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear[] findByUnit_PrevAndNext(long dayOfYearId, long unitId,
-		OrderByComparator orderByComparator)
-		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = findByPrimaryKey(dayOfYearId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DaysOfYear[] array = new DaysOfYearImpl[3];
-
-			array[0] = getByUnit_PrevAndNext(session, daysOfYear, unitId,
-					orderByComparator, true);
-
-			array[1] = daysOfYear;
-
-			array[2] = getByUnit_PrevAndNext(session, daysOfYear, unitId,
-					orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected DaysOfYear getByUnit_PrevAndNext(Session session,
-		DaysOfYear daysOfYear, long unitId,
-		OrderByComparator orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
-
-		query.append(_FINDER_COLUMN_UNIT_UNITID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(DaysOfYearModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(unitId);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(daysOfYear);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<DaysOfYear> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the days of years where unitId = &#63; from the database.
-	 *
-	 * @param unitId the unit ID
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public void removeByUnit(long unitId) throws SystemException {
-		for (DaysOfYear daysOfYear : findByUnit(unitId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
-			remove(daysOfYear);
-		}
-	}
-
-	/**
-	 * Returns the number of days of years where unitId = &#63;.
-	 *
-	 * @param unitId the unit ID
-	 * @return the number of matching days of years
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public int countByUnit(long unitId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_UNIT;
-
-		Object[] finderArgs = new Object[] { unitId };
-
-		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
-				this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_DAYSOFYEAR_WHERE);
-
-			query.append(_FINDER_COLUMN_UNIT_UNITID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(unitId);
-
-				count = (Long)q.uniqueResult();
-
-				FinderCacheUtil.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_UNIT_UNITID_2 = "daysOfYear.unitId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UNITTYPE = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
-			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUnitType",
-			new String[] {
-				Integer.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UNITTYPE =
-		new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
-			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUnitType",
-			new String[] { Integer.class.getName() },
-			DaysOfYearModelImpl.UNITTYPE_COLUMN_BITMASK |
-			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_UNITTYPE = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
-			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUnitType",
-			new String[] { Integer.class.getName() });
-
-	/**
-	 * Returns all the days of years where unitType = &#63;.
-	 *
-	 * @param unitType the unit type
-	 * @return the matching days of years
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<DaysOfYear> findByUnitType(int unitType)
-		throws SystemException {
-		return findByUnitType(unitType, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
-	}
-
-	/**
-	 * Returns a range of all the days of years where unitType = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param unitType the unit type
-	 * @param start the lower bound of the range of days of years
-	 * @param end the upper bound of the range of days of years (not inclusive)
-	 * @return the range of matching days of years
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<DaysOfYear> findByUnitType(int unitType, int start, int end)
-		throws SystemException {
-		return findByUnitType(unitType, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the days of years where unitType = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param unitType the unit type
-	 * @param start the lower bound of the range of days of years
-	 * @param end the upper bound of the range of days of years (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching days of years
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<DaysOfYear> findByUnitType(int unitType, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UNITTYPE;
-			finderArgs = new Object[] { unitType };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_UNITTYPE;
-			finderArgs = new Object[] { unitType, start, end, orderByComparator };
-		}
-
-		List<DaysOfYear> list = (List<DaysOfYear>)FinderCacheUtil.getResult(finderPath,
-				finderArgs, this);
-
-		if ((list != null) && !list.isEmpty()) {
-			for (DaysOfYear daysOfYear : list) {
-				if ((unitType != daysOfYear.getUnitType())) {
-					list = null;
-
-					break;
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
-
-			query.append(_FINDER_COLUMN_UNITTYPE_UNITTYPE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(DaysOfYearModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(unitType);
-
-				if (!pagination) {
-					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
-							start, end, false);
-
-					Collections.sort(list);
-
-					list = new UnmodifiableList<DaysOfYear>(list);
-				}
-				else {
-					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
-							start, end);
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first days of year in the ordered set where unitType = &#63;.
-	 *
-	 * @param unitType the unit type
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching days of year
-	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear findByUnitType_First(int unitType,
-		OrderByComparator orderByComparator)
-		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByUnitType_First(unitType,
-				orderByComparator);
-
-		if (daysOfYear != null) {
-			return daysOfYear;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("unitType=");
-		msg.append(unitType);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchDaysOfYearException(msg.toString());
-	}
-
-	/**
-	 * Returns the first days of year in the ordered set where unitType = &#63;.
-	 *
-	 * @param unitType the unit type
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching days of year, or <code>null</code> if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear fetchByUnitType_First(int unitType,
-		OrderByComparator orderByComparator) throws SystemException {
-		List<DaysOfYear> list = findByUnitType(unitType, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last days of year in the ordered set where unitType = &#63;.
-	 *
-	 * @param unitType the unit type
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching days of year
-	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear findByUnitType_Last(int unitType,
-		OrderByComparator orderByComparator)
-		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByUnitType_Last(unitType, orderByComparator);
-
-		if (daysOfYear != null) {
-			return daysOfYear;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("unitType=");
-		msg.append(unitType);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchDaysOfYearException(msg.toString());
-	}
-
-	/**
-	 * Returns the last days of year in the ordered set where unitType = &#63;.
-	 *
-	 * @param unitType the unit type
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching days of year, or <code>null</code> if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear fetchByUnitType_Last(int unitType,
-		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByUnitType(unitType);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<DaysOfYear> list = findByUnitType(unitType, count - 1, count,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the days of years before and after the current days of year in the ordered set where unitType = &#63;.
-	 *
-	 * @param dayOfYearId the primary key of the current days of year
-	 * @param unitType the unit type
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next days of year
-	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a days of year with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear[] findByUnitType_PrevAndNext(long dayOfYearId,
-		int unitType, OrderByComparator orderByComparator)
-		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = findByPrimaryKey(dayOfYearId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DaysOfYear[] array = new DaysOfYearImpl[3];
-
-			array[0] = getByUnitType_PrevAndNext(session, daysOfYear, unitType,
-					orderByComparator, true);
-
-			array[1] = daysOfYear;
-
-			array[2] = getByUnitType_PrevAndNext(session, daysOfYear, unitType,
-					orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected DaysOfYear getByUnitType_PrevAndNext(Session session,
-		DaysOfYear daysOfYear, int unitType,
-		OrderByComparator orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
-
-		query.append(_FINDER_COLUMN_UNITTYPE_UNITTYPE_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(DaysOfYearModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(unitType);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(daysOfYear);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<DaysOfYear> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the days of years where unitType = &#63; from the database.
-	 *
-	 * @param unitType the unit type
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public void removeByUnitType(int unitType) throws SystemException {
-		for (DaysOfYear daysOfYear : findByUnitType(unitType,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(daysOfYear);
-		}
-	}
-
-	/**
-	 * Returns the number of days of years where unitType = &#63;.
-	 *
-	 * @param unitType the unit type
-	 * @return the number of matching days of years
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public int countByUnitType(int unitType) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_UNITTYPE;
-
-		Object[] finderArgs = new Object[] { unitType };
-
-		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
-				this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_DAYSOFYEAR_WHERE);
-
-			query.append(_FINDER_COLUMN_UNITTYPE_UNITTYPE_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(unitType);
-
-				count = (Long)q.uniqueResult();
-
-				FinderCacheUtil.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_UNITTYPE_UNITTYPE_2 = "daysOfYear.unitType = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_D_U = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
-			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByD_U",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByD_C",
 			new String[] { Date.class.getName(), Long.class.getName() },
 			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK |
-			DaysOfYearModelImpl.UNITID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_D_U = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.CLASSNAMEID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_D_C = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByD_U",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByD_C",
 			new String[] { Date.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns the days of year where dayId = &#63; and unitId = &#63; or throws a {@link com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException} if it could not be found.
+	 * Returns all the days of years where dayId = &#63; and classNameId = &#63;.
 	 *
 	 * @param dayId the day ID
-	 * @param unitId the unit ID
-	 * @return the matching days of year
-	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear findByD_U(Date dayId, long unitId)
-		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByD_U(dayId, unitId);
-
-		if (daysOfYear == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("dayId=");
-			msg.append(dayId);
-
-			msg.append(", unitId=");
-			msg.append(unitId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchDaysOfYearException(msg.toString());
-		}
-
-		return daysOfYear;
-	}
-
-	/**
-	 * Returns the days of year where dayId = &#63; and unitId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param dayId the day ID
-	 * @param unitId the unit ID
-	 * @return the matching days of year, or <code>null</code> if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear fetchByD_U(Date dayId, long unitId)
-		throws SystemException {
-		return fetchByD_U(dayId, unitId, true);
-	}
-
-	/**
-	 * Returns the days of year where dayId = &#63; and unitId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param dayId the day ID
-	 * @param unitId the unit ID
-	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching days of year, or <code>null</code> if a matching days of year could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear fetchByD_U(Date dayId, long unitId,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { dayId, unitId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_D_U,
-					finderArgs, this);
-		}
-
-		if (result instanceof DaysOfYear) {
-			DaysOfYear daysOfYear = (DaysOfYear)result;
-
-			if (!Validator.equals(dayId, daysOfYear.getDayId()) ||
-					(unitId != daysOfYear.getUnitId())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
-
-			boolean bindDayId = false;
-
-			if (dayId == null) {
-				query.append(_FINDER_COLUMN_D_U_DAYID_1);
-			}
-			else {
-				bindDayId = true;
-
-				query.append(_FINDER_COLUMN_D_U_DAYID_2);
-			}
-
-			query.append(_FINDER_COLUMN_D_U_UNITID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindDayId) {
-					qPos.add(CalendarUtil.getTimestamp(dayId));
-				}
-
-				qPos.add(unitId);
-
-				List<DaysOfYear> list = q.list();
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_U,
-						finderArgs, list);
-				}
-				else {
-					if ((list.size() > 1) && _log.isWarnEnabled()) {
-						_log.warn(
-							"DaysOfYearPersistenceImpl.fetchByD_U(Date, long, boolean) with parameters (" +
-							StringUtil.merge(finderArgs) +
-							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
-					}
-
-					DaysOfYear daysOfYear = list.get(0);
-
-					result = daysOfYear;
-
-					cacheResult(daysOfYear);
-
-					if ((daysOfYear.getDayId() == null) ||
-							!daysOfYear.getDayId().equals(dayId) ||
-							(daysOfYear.getUnitId() != unitId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_U,
-							finderArgs, daysOfYear);
-					}
-				}
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_U,
-					finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (DaysOfYear)result;
-		}
-	}
-
-	/**
-	 * Removes the days of year where dayId = &#63; and unitId = &#63; from the database.
-	 *
-	 * @param dayId the day ID
-	 * @param unitId the unit ID
-	 * @return the days of year that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DaysOfYear removeByD_U(Date dayId, long unitId)
-		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = findByD_U(dayId, unitId);
-
-		return remove(daysOfYear);
-	}
-
-	/**
-	 * Returns the number of days of years where dayId = &#63; and unitId = &#63;.
-	 *
-	 * @param dayId the day ID
-	 * @param unitId the unit ID
-	 * @return the number of matching days of years
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public int countByD_U(Date dayId, long unitId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_U;
-
-		Object[] finderArgs = new Object[] { dayId, unitId };
-
-		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
-				this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_DAYSOFYEAR_WHERE);
-
-			boolean bindDayId = false;
-
-			if (dayId == null) {
-				query.append(_FINDER_COLUMN_D_U_DAYID_1);
-			}
-			else {
-				bindDayId = true;
-
-				query.append(_FINDER_COLUMN_D_U_DAYID_2);
-			}
-
-			query.append(_FINDER_COLUMN_D_U_UNITID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindDayId) {
-					qPos.add(CalendarUtil.getTimestamp(dayId));
-				}
-
-				qPos.add(unitId);
-
-				count = (Long)q.uniqueResult();
-
-				FinderCacheUtil.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_D_U_DAYID_1 = "daysOfYear.dayId IS NULL AND ";
-	private static final String _FINDER_COLUMN_D_U_DAYID_2 = "daysOfYear.dayId = ? AND ";
-	private static final String _FINDER_COLUMN_D_U_UNITID_2 = "daysOfYear.unitId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_D_UT = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
-			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByD_UT",
-			new String[] {
-				Date.class.getName(), Integer.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_UT = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
-			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByD_UT",
-			new String[] { Date.class.getName(), Integer.class.getName() },
-			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK |
-			DaysOfYearModelImpl.UNITTYPE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_D_UT = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
-			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByD_UT",
-			new String[] { Date.class.getName(), Integer.class.getName() });
-
-	/**
-	 * Returns all the days of years where dayId = &#63; and unitType = &#63;.
-	 *
-	 * @param dayId the day ID
-	 * @param unitType the unit type
+	 * @param classNameId the class name ID
 	 * @return the matching days of years
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<DaysOfYear> findByD_UT(Date dayId, int unitType)
+	public List<DaysOfYear> findByD_C(Date dayId, long classNameId)
 		throws SystemException {
-		return findByD_UT(dayId, unitType, QueryUtil.ALL_POS,
+		return findByD_C(dayId, classNameId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the days of years where dayId = &#63; and unitType = &#63;.
+	 * Returns a range of all the days of years where dayId = &#63; and classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dayId the day ID
-	 * @param unitType the unit type
+	 * @param classNameId the class name ID
 	 * @param start the lower bound of the range of days of years
 	 * @param end the upper bound of the range of days of years (not inclusive)
 	 * @return the range of matching days of years
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<DaysOfYear> findByD_UT(Date dayId, int unitType, int start,
+	public List<DaysOfYear> findByD_C(Date dayId, long classNameId, int start,
 		int end) throws SystemException {
-		return findByD_UT(dayId, unitType, start, end, null);
+		return findByD_C(dayId, classNameId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the days of years where dayId = &#63; and unitType = &#63;.
+	 * Returns an ordered range of all the days of years where dayId = &#63; and classNameId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param dayId the day ID
-	 * @param unitType the unit type
+	 * @param classNameId the class name ID
 	 * @param start the lower bound of the range of days of years
 	 * @param end the upper bound of the range of days of years (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -2132,7 +2144,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<DaysOfYear> findByD_UT(Date dayId, int unitType, int start,
+	public List<DaysOfYear> findByD_C(Date dayId, long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2141,13 +2153,13 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_UT;
-			finderArgs = new Object[] { dayId, unitType };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_C;
+			finderArgs = new Object[] { dayId, classNameId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_D_UT;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_D_C;
 			finderArgs = new Object[] {
-					dayId, unitType,
+					dayId, classNameId,
 					
 					start, end, orderByComparator
 				};
@@ -2159,7 +2171,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		if ((list != null) && !list.isEmpty()) {
 			for (DaysOfYear daysOfYear : list) {
 				if (!Validator.equals(dayId, daysOfYear.getDayId()) ||
-						(unitType != daysOfYear.getUnitType())) {
+						(classNameId != daysOfYear.getClassNameId())) {
 					list = null;
 
 					break;
@@ -2183,15 +2195,15 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 			boolean bindDayId = false;
 
 			if (dayId == null) {
-				query.append(_FINDER_COLUMN_D_UT_DAYID_1);
+				query.append(_FINDER_COLUMN_D_C_DAYID_1);
 			}
 			else {
 				bindDayId = true;
 
-				query.append(_FINDER_COLUMN_D_UT_DAYID_2);
+				query.append(_FINDER_COLUMN_D_C_DAYID_2);
 			}
 
-			query.append(_FINDER_COLUMN_D_UT_UNITTYPE_2);
+			query.append(_FINDER_COLUMN_D_C_CLASSNAMEID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2217,7 +2229,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 					qPos.add(CalendarUtil.getTimestamp(dayId));
 				}
 
-				qPos.add(unitType);
+				qPos.add(classNameId);
 
 				if (!pagination) {
 					list = (List<DaysOfYear>)QueryUtil.list(q, getDialect(),
@@ -2250,20 +2262,20 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	}
 
 	/**
-	 * Returns the first days of year in the ordered set where dayId = &#63; and unitType = &#63;.
+	 * Returns the first days of year in the ordered set where dayId = &#63; and classNameId = &#63;.
 	 *
 	 * @param dayId the day ID
-	 * @param unitType the unit type
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching days of year
 	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear findByD_UT_First(Date dayId, int unitType,
+	public DaysOfYear findByD_C_First(Date dayId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByD_UT_First(dayId, unitType,
+		DaysOfYear daysOfYear = fetchByD_C_First(dayId, classNameId,
 				orderByComparator);
 
 		if (daysOfYear != null) {
@@ -2277,8 +2289,8 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		msg.append("dayId=");
 		msg.append(dayId);
 
-		msg.append(", unitType=");
-		msg.append(unitType);
+		msg.append(", classNameId=");
+		msg.append(classNameId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2286,18 +2298,18 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	}
 
 	/**
-	 * Returns the first days of year in the ordered set where dayId = &#63; and unitType = &#63;.
+	 * Returns the first days of year in the ordered set where dayId = &#63; and classNameId = &#63;.
 	 *
 	 * @param dayId the day ID
-	 * @param unitType the unit type
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching days of year, or <code>null</code> if a matching days of year could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear fetchByD_UT_First(Date dayId, int unitType,
+	public DaysOfYear fetchByD_C_First(Date dayId, long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<DaysOfYear> list = findByD_UT(dayId, unitType, 0, 1,
+		List<DaysOfYear> list = findByD_C(dayId, classNameId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2308,20 +2320,20 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	}
 
 	/**
-	 * Returns the last days of year in the ordered set where dayId = &#63; and unitType = &#63;.
+	 * Returns the last days of year in the ordered set where dayId = &#63; and classNameId = &#63;.
 	 *
 	 * @param dayId the day ID
-	 * @param unitType the unit type
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching days of year
 	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear findByD_UT_Last(Date dayId, int unitType,
+	public DaysOfYear findByD_C_Last(Date dayId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByD_UT_Last(dayId, unitType,
+		DaysOfYear daysOfYear = fetchByD_C_Last(dayId, classNameId,
 				orderByComparator);
 
 		if (daysOfYear != null) {
@@ -2335,8 +2347,8 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		msg.append("dayId=");
 		msg.append(dayId);
 
-		msg.append(", unitType=");
-		msg.append(unitType);
+		msg.append(", classNameId=");
+		msg.append(classNameId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2344,24 +2356,24 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	}
 
 	/**
-	 * Returns the last days of year in the ordered set where dayId = &#63; and unitType = &#63;.
+	 * Returns the last days of year in the ordered set where dayId = &#63; and classNameId = &#63;.
 	 *
 	 * @param dayId the day ID
-	 * @param unitType the unit type
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching days of year, or <code>null</code> if a matching days of year could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear fetchByD_UT_Last(Date dayId, int unitType,
+	public DaysOfYear fetchByD_C_Last(Date dayId, long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByD_UT(dayId, unitType);
+		int count = countByD_C(dayId, classNameId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<DaysOfYear> list = findByD_UT(dayId, unitType, count - 1, count,
+		List<DaysOfYear> list = findByD_C(dayId, classNameId, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2372,19 +2384,19 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	}
 
 	/**
-	 * Returns the days of years before and after the current days of year in the ordered set where dayId = &#63; and unitType = &#63;.
+	 * Returns the days of years before and after the current days of year in the ordered set where dayId = &#63; and classNameId = &#63;.
 	 *
 	 * @param dayOfYearId the primary key of the current days of year
 	 * @param dayId the day ID
-	 * @param unitType the unit type
+	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next days of year
 	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a days of year with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear[] findByD_UT_PrevAndNext(long dayOfYearId, Date dayId,
-		int unitType, OrderByComparator orderByComparator)
+	public DaysOfYear[] findByD_C_PrevAndNext(long dayOfYearId, Date dayId,
+		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchDaysOfYearException, SystemException {
 		DaysOfYear daysOfYear = findByPrimaryKey(dayOfYearId);
 
@@ -2395,13 +2407,13 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 
 			DaysOfYear[] array = new DaysOfYearImpl[3];
 
-			array[0] = getByD_UT_PrevAndNext(session, daysOfYear, dayId,
-					unitType, orderByComparator, true);
+			array[0] = getByD_C_PrevAndNext(session, daysOfYear, dayId,
+					classNameId, orderByComparator, true);
 
 			array[1] = daysOfYear;
 
-			array[2] = getByD_UT_PrevAndNext(session, daysOfYear, dayId,
-					unitType, orderByComparator, false);
+			array[2] = getByD_C_PrevAndNext(session, daysOfYear, dayId,
+					classNameId, orderByComparator, false);
 
 			return array;
 		}
@@ -2413,8 +2425,8 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		}
 	}
 
-	protected DaysOfYear getByD_UT_PrevAndNext(Session session,
-		DaysOfYear daysOfYear, Date dayId, int unitType,
+	protected DaysOfYear getByD_C_PrevAndNext(Session session,
+		DaysOfYear daysOfYear, Date dayId, long classNameId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -2431,15 +2443,15 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		boolean bindDayId = false;
 
 		if (dayId == null) {
-			query.append(_FINDER_COLUMN_D_UT_DAYID_1);
+			query.append(_FINDER_COLUMN_D_C_DAYID_1);
 		}
 		else {
 			bindDayId = true;
 
-			query.append(_FINDER_COLUMN_D_UT_DAYID_2);
+			query.append(_FINDER_COLUMN_D_C_DAYID_2);
 		}
 
-		query.append(_FINDER_COLUMN_D_UT_UNITTYPE_2);
+		query.append(_FINDER_COLUMN_D_C_CLASSNAMEID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -2513,7 +2525,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 			qPos.add(CalendarUtil.getTimestamp(dayId));
 		}
 
-		qPos.add(unitType);
+		qPos.add(classNameId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(daysOfYear);
@@ -2534,34 +2546,35 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	}
 
 	/**
-	 * Removes all the days of years where dayId = &#63; and unitType = &#63; from the database.
+	 * Removes all the days of years where dayId = &#63; and classNameId = &#63; from the database.
 	 *
 	 * @param dayId the day ID
-	 * @param unitType the unit type
+	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByD_UT(Date dayId, int unitType)
+	public void removeByD_C(Date dayId, long classNameId)
 		throws SystemException {
-		for (DaysOfYear daysOfYear : findByD_UT(dayId, unitType,
+		for (DaysOfYear daysOfYear : findByD_C(dayId, classNameId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(daysOfYear);
 		}
 	}
 
 	/**
-	 * Returns the number of days of years where dayId = &#63; and unitType = &#63;.
+	 * Returns the number of days of years where dayId = &#63; and classNameId = &#63;.
 	 *
 	 * @param dayId the day ID
-	 * @param unitType the unit type
+	 * @param classNameId the class name ID
 	 * @return the number of matching days of years
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByD_UT(Date dayId, int unitType) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_UT;
+	public int countByD_C(Date dayId, long classNameId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_C;
 
-		Object[] finderArgs = new Object[] { dayId, unitType };
+		Object[] finderArgs = new Object[] { dayId, classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -2574,15 +2587,15 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 			boolean bindDayId = false;
 
 			if (dayId == null) {
-				query.append(_FINDER_COLUMN_D_UT_DAYID_1);
+				query.append(_FINDER_COLUMN_D_C_DAYID_1);
 			}
 			else {
 				bindDayId = true;
 
-				query.append(_FINDER_COLUMN_D_UT_DAYID_2);
+				query.append(_FINDER_COLUMN_D_C_DAYID_2);
 			}
 
-			query.append(_FINDER_COLUMN_D_UT_UNITTYPE_2);
+			query.append(_FINDER_COLUMN_D_C_CLASSNAMEID_2);
 
 			String sql = query.toString();
 
@@ -2599,7 +2612,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 					qPos.add(CalendarUtil.getTimestamp(dayId));
 				}
 
-				qPos.add(unitType);
+				qPos.add(classNameId);
 
 				count = (Long)q.uniqueResult();
 
@@ -2618,9 +2631,558 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_D_UT_DAYID_1 = "daysOfYear.dayId IS NULL AND ";
-	private static final String _FINDER_COLUMN_D_UT_DAYID_2 = "daysOfYear.dayId = ? AND ";
-	private static final String _FINDER_COLUMN_D_UT_UNITTYPE_2 = "daysOfYear.unitType = ?";
+	private static final String _FINDER_COLUMN_D_C_DAYID_1 = "daysOfYear.dayId IS NULL AND ";
+	private static final String _FINDER_COLUMN_D_C_DAYID_2 = "daysOfYear.dayId = ? AND ";
+	private static final String _FINDER_COLUMN_D_C_CLASSNAMEID_2 = "daysOfYear.classNameId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_D_C_C = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByD_C_C",
+			new String[] {
+				Date.class.getName(), Long.class.getName(), Long.class.getName()
+			},
+			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK |
+			DaysOfYearModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			DaysOfYearModelImpl.CLASSPK_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_D_C_C = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByD_C_C",
+			new String[] {
+				Date.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+
+	/**
+	 * Returns the days of year where dayId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException} if it could not be found.
+	 *
+	 * @param dayId the day ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @return the matching days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear findByD_C_C(Date dayId, long classNameId, long classPK)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = fetchByD_C_C(dayId, classNameId, classPK);
+
+		if (daysOfYear == null) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("dayId=");
+			msg.append(dayId);
+
+			msg.append(", classNameId=");
+			msg.append(classNameId);
+
+			msg.append(", classPK=");
+			msg.append(classPK);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchDaysOfYearException(msg.toString());
+		}
+
+		return daysOfYear;
+	}
+
+	/**
+	 * Returns the days of year where dayId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param dayId the day ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @return the matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear fetchByD_C_C(Date dayId, long classNameId, long classPK)
+		throws SystemException {
+		return fetchByD_C_C(dayId, classNameId, classPK, true);
+	}
+
+	/**
+	 * Returns the days of year where dayId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param dayId the day ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear fetchByD_C_C(Date dayId, long classNameId, long classPK,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { dayId, classNameId, classPK };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_D_C_C,
+					finderArgs, this);
+		}
+
+		if (result instanceof DaysOfYear) {
+			DaysOfYear daysOfYear = (DaysOfYear)result;
+
+			if (!Validator.equals(dayId, daysOfYear.getDayId()) ||
+					(classNameId != daysOfYear.getClassNameId()) ||
+					(classPK != daysOfYear.getClassPK())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
+
+			boolean bindDayId = false;
+
+			if (dayId == null) {
+				query.append(_FINDER_COLUMN_D_C_C_DAYID_1);
+			}
+			else {
+				bindDayId = true;
+
+				query.append(_FINDER_COLUMN_D_C_C_DAYID_2);
+			}
+
+			query.append(_FINDER_COLUMN_D_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_D_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindDayId) {
+					qPos.add(CalendarUtil.getTimestamp(dayId));
+				}
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				List<DaysOfYear> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"DaysOfYearPersistenceImpl.fetchByD_C_C(Date, long, long, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					DaysOfYear daysOfYear = list.get(0);
+
+					result = daysOfYear;
+
+					cacheResult(daysOfYear);
+
+					if ((daysOfYear.getDayId() == null) ||
+							!daysOfYear.getDayId().equals(dayId) ||
+							(daysOfYear.getClassNameId() != classNameId) ||
+							(daysOfYear.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C,
+							finderArgs, daysOfYear);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_C_C,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (DaysOfYear)result;
+		}
+	}
+
+	/**
+	 * Removes the days of year where dayId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param dayId the day ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @return the days of year that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear removeByD_C_C(Date dayId, long classNameId, long classPK)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = findByD_C_C(dayId, classNameId, classPK);
+
+		return remove(daysOfYear);
+	}
+
+	/**
+	 * Returns the number of days of years where dayId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param dayId the day ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @return the number of matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByD_C_C(Date dayId, long classNameId, long classPK)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_C_C;
+
+		Object[] finderArgs = new Object[] { dayId, classNameId, classPK };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_DAYSOFYEAR_WHERE);
+
+			boolean bindDayId = false;
+
+			if (dayId == null) {
+				query.append(_FINDER_COLUMN_D_C_C_DAYID_1);
+			}
+			else {
+				bindDayId = true;
+
+				query.append(_FINDER_COLUMN_D_C_C_DAYID_2);
+			}
+
+			query.append(_FINDER_COLUMN_D_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_D_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindDayId) {
+					qPos.add(CalendarUtil.getTimestamp(dayId));
+				}
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_D_C_C_DAYID_1 = "daysOfYear.dayId IS NULL AND ";
+	private static final String _FINDER_COLUMN_D_C_C_DAYID_2 = "daysOfYear.dayId = ? AND ";
+	private static final String _FINDER_COLUMN_D_C_C_CLASSNAMEID_2 = "daysOfYear.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_D_C_C_CLASSPK_2 = "daysOfYear.classPK = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_D_C_C = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByD_C_C",
+			new String[] { Date.class.getName(), Long.class.getName() },
+			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK |
+			DaysOfYearModelImpl.CLASSPK_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_D_C_C = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByD_C_C",
+			new String[] { Date.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns the days of year where dayId = &#63; and classPK = &#63; or throws a {@link com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException} if it could not be found.
+	 *
+	 * @param dayId the day ID
+	 * @param classPK the class p k
+	 * @return the matching days of year
+	 * @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear findByD_C_C(Date dayId, long classPK)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = fetchByD_C_C(dayId, classPK);
+
+		if (daysOfYear == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("dayId=");
+			msg.append(dayId);
+
+			msg.append(", classPK=");
+			msg.append(classPK);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchDaysOfYearException(msg.toString());
+		}
+
+		return daysOfYear;
+	}
+
+	/**
+	 * Returns the days of year where dayId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param dayId the day ID
+	 * @param classPK the class p k
+	 * @return the matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear fetchByD_C_C(Date dayId, long classPK)
+		throws SystemException {
+		return fetchByD_C_C(dayId, classPK, true);
+	}
+
+	/**
+	 * Returns the days of year where dayId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param dayId the day ID
+	 * @param classPK the class p k
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching days of year, or <code>null</code> if a matching days of year could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear fetchByD_C_C(Date dayId, long classPK,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { dayId, classPK };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_D_C_C,
+					finderArgs, this);
+		}
+
+		if (result instanceof DaysOfYear) {
+			DaysOfYear daysOfYear = (DaysOfYear)result;
+
+			if (!Validator.equals(dayId, daysOfYear.getDayId()) ||
+					(classPK != daysOfYear.getClassPK())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_DAYSOFYEAR_WHERE);
+
+			boolean bindDayId = false;
+
+			if (dayId == null) {
+				query.append(_FINDER_COLUMN_D_C_C_DAYID_1);
+			}
+			else {
+				bindDayId = true;
+
+				query.append(_FINDER_COLUMN_D_C_C_DAYID_2);
+			}
+
+			query.append(_FINDER_COLUMN_D_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindDayId) {
+					qPos.add(CalendarUtil.getTimestamp(dayId));
+				}
+
+				qPos.add(classPK);
+
+				List<DaysOfYear> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"DaysOfYearPersistenceImpl.fetchByD_C_C(Date, long, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					DaysOfYear daysOfYear = list.get(0);
+
+					result = daysOfYear;
+
+					cacheResult(daysOfYear);
+
+					if ((daysOfYear.getDayId() == null) ||
+							!daysOfYear.getDayId().equals(dayId) ||
+							(daysOfYear.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C,
+							finderArgs, daysOfYear);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_C_C,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (DaysOfYear)result;
+		}
+	}
+
+	/**
+	 * Removes the days of year where dayId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param dayId the day ID
+	 * @param classPK the class p k
+	 * @return the days of year that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DaysOfYear removeByD_C_C(Date dayId, long classPK)
+		throws NoSuchDaysOfYearException, SystemException {
+		DaysOfYear daysOfYear = findByD_C_C(dayId, classPK);
+
+		return remove(daysOfYear);
+	}
+
+	/**
+	 * Returns the number of days of years where dayId = &#63; and classPK = &#63;.
+	 *
+	 * @param dayId the day ID
+	 * @param classPK the class p k
+	 * @return the number of matching days of years
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByD_C_C(Date dayId, long classPK) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_C_C;
+
+		Object[] finderArgs = new Object[] { dayId, classPK };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_DAYSOFYEAR_WHERE);
+
+			boolean bindDayId = false;
+
+			if (dayId == null) {
+				query.append(_FINDER_COLUMN_D_C_C_DAYID_1);
+			}
+			else {
+				bindDayId = true;
+
+				query.append(_FINDER_COLUMN_D_C_C_DAYID_2);
+			}
+
+			query.append(_FINDER_COLUMN_D_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindDayId) {
+					qPos.add(CalendarUtil.getTimestamp(dayId));
+				}
+
+				qPos.add(classPK);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_D_C_C_DAYID_1 = "daysOfYear.dayId IS NULL AND ";
+	private static final String _FINDER_COLUMN_D_C_C_DAYID_2 = "daysOfYear.dayId = ? AND ";
+	private static final String _FINDER_COLUMN_D_C_C_CLASSPK_2 = "daysOfYear.classPK = ?";
 
 	public DaysOfYearPersistenceImpl() {
 		setModelClass(DaysOfYear.class);
@@ -2636,11 +3198,14 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		EntityCacheUtil.putResult(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearImpl.class, daysOfYear.getPrimaryKey(), daysOfYear);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DAYSOFYEARID,
-			new Object[] { daysOfYear.getDayOfYearId() }, daysOfYear);
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C,
+			new Object[] {
+				daysOfYear.getDayId(), daysOfYear.getClassNameId(),
+				daysOfYear.getClassPK()
+			}, daysOfYear);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_U,
-			new Object[] { daysOfYear.getDayId(), daysOfYear.getUnitId() },
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C,
+			new Object[] { daysOfYear.getDayId(), daysOfYear.getClassPK() },
 			daysOfYear);
 
 		daysOfYear.resetOriginalValues();
@@ -2718,41 +3283,48 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 
 	protected void cacheUniqueFindersCache(DaysOfYear daysOfYear) {
 		if (daysOfYear.isNew()) {
-			Object[] args = new Object[] { daysOfYear.getDayOfYearId() };
+			Object[] args = new Object[] {
+					daysOfYear.getDayId(), daysOfYear.getClassNameId(),
+					daysOfYear.getClassPK()
+				};
 
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DAYSOFYEARID, args,
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_C_C, args,
 				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DAYSOFYEARID, args,
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C, args,
 				daysOfYear);
 
-			args = new Object[] { daysOfYear.getDayId(), daysOfYear.getUnitId() };
+			args = new Object[] { daysOfYear.getDayId(), daysOfYear.getClassPK() };
 
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_U, args,
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_C_C, args,
 				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_U, args, daysOfYear);
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C, args,
+				daysOfYear);
 		}
 		else {
 			DaysOfYearModelImpl daysOfYearModelImpl = (DaysOfYearModelImpl)daysOfYear;
 
 			if ((daysOfYearModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_DAYSOFYEARID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] { daysOfYear.getDayOfYearId() };
+					FINDER_PATH_FETCH_BY_D_C_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						daysOfYear.getDayId(), daysOfYear.getClassNameId(),
+						daysOfYear.getClassPK()
+					};
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DAYSOFYEARID,
-					args, Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DAYSOFYEARID,
-					args, daysOfYear);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_C_C, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C, args,
+					daysOfYear);
 			}
 
 			if ((daysOfYearModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_D_U.getColumnBitmask()) != 0) {
+					FINDER_PATH_FETCH_BY_D_C_C.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						daysOfYear.getDayId(), daysOfYear.getUnitId()
+						daysOfYear.getDayId(), daysOfYear.getClassPK()
 					};
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_U, args,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_C_C, args,
 					Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_U, args,
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C, args,
 					daysOfYear);
 			}
 		}
@@ -2761,33 +3333,40 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	protected void clearUniqueFindersCache(DaysOfYear daysOfYear) {
 		DaysOfYearModelImpl daysOfYearModelImpl = (DaysOfYearModelImpl)daysOfYear;
 
-		Object[] args = new Object[] { daysOfYear.getDayOfYearId() };
+		Object[] args = new Object[] {
+				daysOfYear.getDayId(), daysOfYear.getClassNameId(),
+				daysOfYear.getClassPK()
+			};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DAYSOFYEARID, args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DAYSOFYEARID, args);
-
-		if ((daysOfYearModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_DAYSOFYEARID.getColumnBitmask()) != 0) {
-			args = new Object[] { daysOfYearModelImpl.getOriginalDayOfYearId() };
-
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DAYSOFYEARID, args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DAYSOFYEARID, args);
-		}
-
-		args = new Object[] { daysOfYear.getDayId(), daysOfYear.getUnitId() };
-
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_U, args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_U, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_C_C, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_C_C, args);
 
 		if ((daysOfYearModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_D_U.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_D_C_C.getColumnBitmask()) != 0) {
 			args = new Object[] {
 					daysOfYearModelImpl.getOriginalDayId(),
-					daysOfYearModelImpl.getOriginalUnitId()
+					daysOfYearModelImpl.getOriginalClassNameId(),
+					daysOfYearModelImpl.getOriginalClassPK()
 				};
 
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_U, args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_U, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_C_C, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_C_C, args);
+		}
+
+		args = new Object[] { daysOfYear.getDayId(), daysOfYear.getClassPK() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_C_C, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_C_C, args);
+
+		if ((daysOfYearModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_D_C_C.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					daysOfYearModelImpl.getOriginalDayId(),
+					daysOfYearModelImpl.getOriginalClassPK()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_C_C, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_C_C, args);
 		}
 	}
 
@@ -2934,74 +3513,93 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 
 		else {
 			if ((daysOfYearModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DATEDAY.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						daysOfYearModelImpl.getOriginalGroupId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+					args);
+
+				args = new Object[] { daysOfYearModelImpl.getGroupId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+					args);
+			}
+
+			if ((daysOfYearModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CLASSNAMEID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						daysOfYearModelImpl.getOriginalClassNameId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CLASSNAMEID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CLASSNAMEID,
+					args);
+
+				args = new Object[] { daysOfYearModelImpl.getClassNameId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CLASSNAMEID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CLASSNAMEID,
+					args);
+			}
+
+			if ((daysOfYearModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CLASSPK.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						daysOfYearModelImpl.getOriginalClassPK()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CLASSPK, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CLASSPK,
+					args);
+
+				args = new Object[] { daysOfYearModelImpl.getClassPK() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CLASSPK, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CLASSPK,
+					args);
+			}
+
+			if ((daysOfYearModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DAYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						daysOfYearModelImpl.getOriginalDayId()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DATEDAY, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DATEDAY,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DAYID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DAYID,
 					args);
 
 				args = new Object[] { daysOfYearModelImpl.getDayId() };
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DATEDAY, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DATEDAY,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DAYID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DAYID,
 					args);
 			}
 
 			if ((daysOfYearModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UNIT.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						daysOfYearModelImpl.getOriginalUnitId()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UNIT, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UNIT,
-					args);
-
-				args = new Object[] { daysOfYearModelImpl.getUnitId() };
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UNIT, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UNIT,
-					args);
-			}
-
-			if ((daysOfYearModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UNITTYPE.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						daysOfYearModelImpl.getOriginalUnitType()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UNITTYPE, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UNITTYPE,
-					args);
-
-				args = new Object[] { daysOfYearModelImpl.getUnitType() };
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UNITTYPE, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UNITTYPE,
-					args);
-			}
-
-			if ((daysOfYearModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_UT.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_C.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						daysOfYearModelImpl.getOriginalDayId(),
-						daysOfYearModelImpl.getOriginalUnitType()
+						daysOfYearModelImpl.getOriginalClassNameId()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_UT, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_UT,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_C,
 					args);
 
 				args = new Object[] {
 						daysOfYearModelImpl.getDayId(),
-						daysOfYearModelImpl.getUnitType()
+						daysOfYearModelImpl.getClassNameId()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_UT, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_UT,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_D_C,
 					args);
 			}
 		}
@@ -3034,8 +3632,8 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		daysOfYearImpl.setModifiedDate(daysOfYear.getModifiedDate());
 		daysOfYearImpl.setDayId(daysOfYear.getDayId());
 		daysOfYearImpl.setRuleId(daysOfYear.getRuleId());
-		daysOfYearImpl.setUnitId(daysOfYear.getUnitId());
-		daysOfYearImpl.setUnitType(daysOfYear.getUnitType());
+		daysOfYearImpl.setClassNameId(daysOfYear.getClassNameId());
+		daysOfYearImpl.setClassPK(daysOfYear.getClassPK());
 
 		return daysOfYearImpl;
 	}

@@ -28,7 +28,7 @@ import com.liferay.portal.service.InvokableService;
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @see DaysOfYearServiceUtil
  * @see com.liferay.timetracking.dayoffs.service.base.DaysOfYearServiceBaseImpl
  * @see com.liferay.timetracking.dayoffs.service.impl.DaysOfYearServiceImpl

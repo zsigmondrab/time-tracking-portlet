@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * This class is used by SOAP remote services, specifically {@link com.liferay.timetracking.dayoffs.service.http.DaysOfYearServiceSoap}.
  *
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @see com.liferay.timetracking.dayoffs.service.http.DaysOfYearServiceSoap
  * @generated
  */
@@ -40,8 +40,8 @@ public class DaysOfYearSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setDayId(model.getDayId());
 		soapModel.setRuleId(model.getRuleId());
-		soapModel.setUnitId(model.getUnitId());
-		soapModel.setUnitType(model.getUnitType());
+		soapModel.setClassNameId(model.getClassNameId());
+		soapModel.setClassPK(model.getClassPK());
 
 		return soapModel;
 	}
@@ -166,20 +166,20 @@ public class DaysOfYearSoap implements Serializable {
 		_ruleId = ruleId;
 	}
 
-	public long getUnitId() {
-		return _unitId;
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setUnitId(long unitId) {
-		_unitId = unitId;
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
 	}
 
-	public int getUnitType() {
-		return _unitType;
+	public long getClassPK() {
+		return _classPK;
 	}
 
-	public void setUnitType(int unitType) {
-		_unitType = unitType;
+	public void setClassPK(long classPK) {
+		_classPK = classPK;
 	}
 
 	private long _dayOfYearId;
@@ -191,6 +191,6 @@ public class DaysOfYearSoap implements Serializable {
 	private Date _modifiedDate;
 	private Date _dayId;
 	private long _ruleId;
-	private long _unitId;
-	private int _unitType;
+	private long _classNameId;
+	private long _classPK;
 }

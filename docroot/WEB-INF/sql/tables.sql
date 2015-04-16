@@ -6,7 +6,7 @@ create table TimeTracking_Activity (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	activityName VARCHAR(75) null
+	name VARCHAR(75) null
 );
 
 create table TimeTracking_ActivityAssignment (

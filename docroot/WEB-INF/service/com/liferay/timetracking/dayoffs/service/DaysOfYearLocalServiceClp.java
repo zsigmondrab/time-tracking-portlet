@@ -17,7 +17,7 @@ package com.liferay.timetracking.dayoffs.service;
 import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @generated
  */
 public class DaysOfYearLocalServiceClp implements DaysOfYearLocalService {

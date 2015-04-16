@@ -30,7 +30,7 @@ import java.util.Date;
 /**
  * The cache model class for representing DaysOfYear in entity cache.
  *
- * @author LĂˇszlĂł HudĂˇk
+ * @author LÃ¡szlÃ³ HudÃ¡k
  * @see DaysOfYear
  * @generated
  */
@@ -58,10 +58,10 @@ public class DaysOfYearCacheModel implements CacheModel<DaysOfYear>,
 		sb.append(dayId);
 		sb.append(", ruleId=");
 		sb.append(ruleId);
-		sb.append(", unitId=");
-		sb.append(unitId);
-		sb.append(", unitType=");
-		sb.append(unitType);
+		sb.append(", classNameId=");
+		sb.append(classNameId);
+		sb.append(", classPK=");
+		sb.append(classPK);
 		sb.append("}");
 
 		return sb.toString();
@@ -105,8 +105,8 @@ public class DaysOfYearCacheModel implements CacheModel<DaysOfYear>,
 		}
 
 		daysOfYearImpl.setRuleId(ruleId);
-		daysOfYearImpl.setUnitId(unitId);
-		daysOfYearImpl.setUnitType(unitType);
+		daysOfYearImpl.setClassNameId(classNameId);
+		daysOfYearImpl.setClassPK(classPK);
 
 		daysOfYearImpl.resetOriginalValues();
 
@@ -124,8 +124,8 @@ public class DaysOfYearCacheModel implements CacheModel<DaysOfYear>,
 		modifiedDate = objectInput.readLong();
 		dayId = objectInput.readLong();
 		ruleId = objectInput.readLong();
-		unitId = objectInput.readLong();
-		unitType = objectInput.readInt();
+		classNameId = objectInput.readLong();
+		classPK = objectInput.readLong();
 	}
 
 	@Override
@@ -147,8 +147,8 @@ public class DaysOfYearCacheModel implements CacheModel<DaysOfYear>,
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeLong(dayId);
 		objectOutput.writeLong(ruleId);
-		objectOutput.writeLong(unitId);
-		objectOutput.writeInt(unitType);
+		objectOutput.writeLong(classNameId);
+		objectOutput.writeLong(classPK);
 	}
 
 	public long dayOfYearId;
@@ -160,6 +160,6 @@ public class DaysOfYearCacheModel implements CacheModel<DaysOfYear>,
 	public long modifiedDate;
 	public long dayId;
 	public long ruleId;
-	public long unitId;
-	public int unitType;
+	public long classNameId;
+	public long classPK;
 }

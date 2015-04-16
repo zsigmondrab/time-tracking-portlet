@@ -81,7 +81,7 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("activityName", getActivityName());
+		attributes.put("name", getName());
 
 		return attributes;
 	}
@@ -130,10 +130,10 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 			setModifiedDate(modifiedDate);
 		}
 
-		String activityName = (String)attributes.get("activityName");
+		String name = (String)attributes.get("name");
 
-		if (activityName != null) {
-			setActivityName(activityName);
+		if (name != null) {
+			setName(name);
 		}
 	}
 
@@ -309,21 +309,21 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 	}
 
 	@Override
-	public String getActivityName() {
-		return _activityName;
+	public String getName() {
+		return _name;
 	}
 
 	@Override
-	public void setActivityName(String activityName) {
-		_activityName = activityName;
+	public void setName(String name) {
+		_name = name;
 
 		if (_activityRemoteModel != null) {
 			try {
 				Class<?> clazz = _activityRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setActivityName", String.class);
+				Method method = clazz.getMethod("setName", String.class);
 
-				method.invoke(_activityRemoteModel, activityName);
+				method.invoke(_activityRemoteModel, name);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -407,7 +407,7 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setActivityName(getActivityName());
+		clone.setName(getName());
 
 		return clone;
 	}
@@ -416,7 +416,7 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 	public int compareTo(Activity activity) {
 		int value = 0;
 
-		value = getActivityName().compareTo(activity.getActivityName());
+		value = getName().compareTo(activity.getName());
 
 		if (value != 0) {
 			return value;
@@ -474,8 +474,8 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", activityName=");
-		sb.append(getActivityName());
+		sb.append(", name=");
+		sb.append(getName());
 		sb.append("}");
 
 		return sb.toString();
@@ -518,8 +518,8 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>activityName</column-name><column-value><![CDATA[");
-		sb.append(getActivityName());
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -535,7 +535,7 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _activityName;
+	private String _name;
 	private BaseModel<?> _activityRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.timetracking.activities.service.ClpSerializer.class;
 }
