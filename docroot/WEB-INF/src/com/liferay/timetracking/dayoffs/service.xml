@@ -100,7 +100,7 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="D_C_C" return-type="DaysOfYear">
+		<finder name="D_CPK" return-type="DaysOfYear">
 			<finder-column name="dayId" />
 			<finder-column name="classPK" />
 		</finder>
