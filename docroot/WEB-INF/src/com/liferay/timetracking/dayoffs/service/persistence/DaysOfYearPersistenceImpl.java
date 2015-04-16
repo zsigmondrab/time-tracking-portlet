@@ -2921,15 +2921,15 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	private static final String _FINDER_COLUMN_D_C_C_DAYID_2 = "daysOfYear.dayId = ? AND ";
 	private static final String _FINDER_COLUMN_D_C_C_CLASSNAMEID_2 = "daysOfYear.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_D_C_C_CLASSPK_2 = "daysOfYear.classPK = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_D_C_C = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_D_CPK = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, DaysOfYearImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByD_C_C",
+			FINDER_CLASS_NAME_ENTITY, "fetchByD_CPK",
 			new String[] { Date.class.getName(), Long.class.getName() },
 			DaysOfYearModelImpl.DAYID_COLUMN_BITMASK |
 			DaysOfYearModelImpl.CLASSPK_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_D_C_C = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_D_CPK = new FinderPath(DaysOfYearModelImpl.ENTITY_CACHE_ENABLED,
 			DaysOfYearModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByD_C_C",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByD_CPK",
 			new String[] { Date.class.getName(), Long.class.getName() });
 
 	/**
@@ -2942,9 +2942,9 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear findByD_C_C(Date dayId, long classPK)
+	public DaysOfYear findByD_CPK(Date dayId, long classPK)
 		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = fetchByD_C_C(dayId, classPK);
+		DaysOfYear daysOfYear = fetchByD_CPK(dayId, classPK);
 
 		if (daysOfYear == null) {
 			StringBundler msg = new StringBundler(6);
@@ -2978,9 +2978,9 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear fetchByD_C_C(Date dayId, long classPK)
+	public DaysOfYear fetchByD_CPK(Date dayId, long classPK)
 		throws SystemException {
-		return fetchByD_C_C(dayId, classPK, true);
+		return fetchByD_CPK(dayId, classPK, true);
 	}
 
 	/**
@@ -2993,14 +2993,14 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear fetchByD_C_C(Date dayId, long classPK,
+	public DaysOfYear fetchByD_CPK(Date dayId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { dayId, classPK };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_D_C_C,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_D_CPK,
 					finderArgs, this);
 		}
 
@@ -3021,15 +3021,15 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 			boolean bindDayId = false;
 
 			if (dayId == null) {
-				query.append(_FINDER_COLUMN_D_C_C_DAYID_1);
+				query.append(_FINDER_COLUMN_D_CPK_DAYID_1);
 			}
 			else {
 				bindDayId = true;
 
-				query.append(_FINDER_COLUMN_D_C_C_DAYID_2);
+				query.append(_FINDER_COLUMN_D_CPK_DAYID_2);
 			}
 
-			query.append(_FINDER_COLUMN_D_C_C_CLASSPK_2);
+			query.append(_FINDER_COLUMN_D_CPK_CLASSPK_2);
 
 			String sql = query.toString();
 
@@ -3051,13 +3051,13 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 				List<DaysOfYear> list = q.list();
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_CPK,
 						finderArgs, list);
 				}
 				else {
 					if ((list.size() > 1) && _log.isWarnEnabled()) {
 						_log.warn(
-							"DaysOfYearPersistenceImpl.fetchByD_C_C(Date, long, boolean) with parameters (" +
+							"DaysOfYearPersistenceImpl.fetchByD_CPK(Date, long, boolean) with parameters (" +
 							StringUtil.merge(finderArgs) +
 							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 					}
@@ -3071,13 +3071,13 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 					if ((daysOfYear.getDayId() == null) ||
 							!daysOfYear.getDayId().equals(dayId) ||
 							(daysOfYear.getClassPK() != classPK)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C,
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_CPK,
 							finderArgs, daysOfYear);
 					}
 				}
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_C_C,
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_CPK,
 					finderArgs);
 
 				throw processException(e);
@@ -3104,9 +3104,9 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public DaysOfYear removeByD_C_C(Date dayId, long classPK)
+	public DaysOfYear removeByD_CPK(Date dayId, long classPK)
 		throws NoSuchDaysOfYearException, SystemException {
-		DaysOfYear daysOfYear = findByD_C_C(dayId, classPK);
+		DaysOfYear daysOfYear = findByD_CPK(dayId, classPK);
 
 		return remove(daysOfYear);
 	}
@@ -3120,8 +3120,8 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByD_C_C(Date dayId, long classPK) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_C_C;
+	public int countByD_CPK(Date dayId, long classPK) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_D_CPK;
 
 		Object[] finderArgs = new Object[] { dayId, classPK };
 
@@ -3136,15 +3136,15 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 			boolean bindDayId = false;
 
 			if (dayId == null) {
-				query.append(_FINDER_COLUMN_D_C_C_DAYID_1);
+				query.append(_FINDER_COLUMN_D_CPK_DAYID_1);
 			}
 			else {
 				bindDayId = true;
 
-				query.append(_FINDER_COLUMN_D_C_C_DAYID_2);
+				query.append(_FINDER_COLUMN_D_CPK_DAYID_2);
 			}
 
-			query.append(_FINDER_COLUMN_D_C_C_CLASSPK_2);
+			query.append(_FINDER_COLUMN_D_CPK_CLASSPK_2);
 
 			String sql = query.toString();
 
@@ -3180,9 +3180,9 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_D_C_C_DAYID_1 = "daysOfYear.dayId IS NULL AND ";
-	private static final String _FINDER_COLUMN_D_C_C_DAYID_2 = "daysOfYear.dayId = ? AND ";
-	private static final String _FINDER_COLUMN_D_C_C_CLASSPK_2 = "daysOfYear.classPK = ?";
+	private static final String _FINDER_COLUMN_D_CPK_DAYID_1 = "daysOfYear.dayId IS NULL AND ";
+	private static final String _FINDER_COLUMN_D_CPK_DAYID_2 = "daysOfYear.dayId = ? AND ";
+	private static final String _FINDER_COLUMN_D_CPK_CLASSPK_2 = "daysOfYear.classPK = ?";
 
 	public DaysOfYearPersistenceImpl() {
 		setModelClass(DaysOfYear.class);
@@ -3204,7 +3204,7 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 				daysOfYear.getClassPK()
 			}, daysOfYear);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_CPK,
 			new Object[] { daysOfYear.getDayId(), daysOfYear.getClassPK() },
 			daysOfYear);
 
@@ -3295,9 +3295,9 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 
 			args = new Object[] { daysOfYear.getDayId(), daysOfYear.getClassPK() };
 
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_C_C, args,
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_CPK, args,
 				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C, args,
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_CPK, args,
 				daysOfYear);
 		}
 		else {
@@ -3317,14 +3317,14 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 			}
 
 			if ((daysOfYearModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_D_C_C.getColumnBitmask()) != 0) {
+					FINDER_PATH_FETCH_BY_D_CPK.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						daysOfYear.getDayId(), daysOfYear.getClassPK()
 					};
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_C_C, args,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_CPK, args,
 					Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_C_C, args,
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_CPK, args,
 					daysOfYear);
 			}
 		}
@@ -3355,18 +3355,18 @@ public class DaysOfYearPersistenceImpl extends BasePersistenceImpl<DaysOfYear>
 
 		args = new Object[] { daysOfYear.getDayId(), daysOfYear.getClassPK() };
 
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_C_C, args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_C_C, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_CPK, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_CPK, args);
 
 		if ((daysOfYearModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_D_C_C.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_D_CPK.getColumnBitmask()) != 0) {
 			args = new Object[] {
 					daysOfYearModelImpl.getOriginalDayId(),
 					daysOfYearModelImpl.getOriginalClassPK()
 				};
 
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_C_C, args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_C_C, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_D_CPK, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_CPK, args);
 		}
 	}
 

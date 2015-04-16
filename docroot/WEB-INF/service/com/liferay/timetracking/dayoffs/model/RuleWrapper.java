@@ -405,7 +405,7 @@ public class RuleWrapper implements Rule, ModelWrapper<Rule> {
 	}
 
 	@Override
-	public int compareTo(Rule rule) {
+	public int compareTo(com.liferay.timetracking.dayoffs.model.Rule rule) {
 		return _rule.compareTo(rule);
 	}
 
@@ -415,17 +415,17 @@ public class RuleWrapper implements Rule, ModelWrapper<Rule> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<Rule> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.liferay.timetracking.dayoffs.model.Rule> toCacheModel() {
 		return _rule.toCacheModel();
 	}
 
 	@Override
-	public Rule toEscapedModel() {
+	public com.liferay.timetracking.dayoffs.model.Rule toEscapedModel() {
 		return new RuleWrapper(_rule.toEscapedModel());
 	}
 
 	@Override
-	public Rule toUnescapedModel() {
+	public com.liferay.timetracking.dayoffs.model.Rule toUnescapedModel() {
 		return new RuleWrapper(_rule.toUnescapedModel());
 	}
 

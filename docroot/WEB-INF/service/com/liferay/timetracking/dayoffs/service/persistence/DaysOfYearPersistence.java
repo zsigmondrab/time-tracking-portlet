@@ -815,7 +815,7 @@ public interface DaysOfYearPersistence extends BasePersistence<DaysOfYear> {
 	* @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.timetracking.dayoffs.model.DaysOfYear findByD_C_C(
+	public com.liferay.timetracking.dayoffs.model.DaysOfYear findByD_CPK(
 		java.util.Date dayId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException;
@@ -828,7 +828,7 @@ public interface DaysOfYearPersistence extends BasePersistence<DaysOfYear> {
 	* @return the matching days of year, or <code>null</code> if a matching days of year could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByD_C_C(
+	public com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByD_CPK(
 		java.util.Date dayId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -841,7 +841,7 @@ public interface DaysOfYearPersistence extends BasePersistence<DaysOfYear> {
 	* @return the matching days of year, or <code>null</code> if a matching days of year could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByD_C_C(
+	public com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByD_CPK(
 		java.util.Date dayId, long classPK, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -853,7 +853,7 @@ public interface DaysOfYearPersistence extends BasePersistence<DaysOfYear> {
 	* @return the days of year that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.timetracking.dayoffs.model.DaysOfYear removeByD_C_C(
+	public com.liferay.timetracking.dayoffs.model.DaysOfYear removeByD_CPK(
 		java.util.Date dayId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException;
@@ -866,7 +866,7 @@ public interface DaysOfYearPersistence extends BasePersistence<DaysOfYear> {
 	* @return the number of matching days of years
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByD_C_C(java.util.Date dayId, long classPK)
+	public int countByD_CPK(java.util.Date dayId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

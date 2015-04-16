@@ -1022,11 +1022,11 @@ public class DaysOfYearUtil {
 	* @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.timetracking.dayoffs.model.DaysOfYear findByD_C_C(
+	public static com.liferay.timetracking.dayoffs.model.DaysOfYear findByD_CPK(
 		java.util.Date dayId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException {
-		return getPersistence().findByD_C_C(dayId, classPK);
+		return getPersistence().findByD_CPK(dayId, classPK);
 	}
 
 	/**
@@ -1037,10 +1037,10 @@ public class DaysOfYearUtil {
 	* @return the matching days of year, or <code>null</code> if a matching days of year could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByD_C_C(
+	public static com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByD_CPK(
 		java.util.Date dayId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByD_C_C(dayId, classPK);
+		return getPersistence().fetchByD_CPK(dayId, classPK);
 	}
 
 	/**
@@ -1052,10 +1052,10 @@ public class DaysOfYearUtil {
 	* @return the matching days of year, or <code>null</code> if a matching days of year could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByD_C_C(
+	public static com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByD_CPK(
 		java.util.Date dayId, long classPK, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByD_C_C(dayId, classPK, retrieveFromCache);
+		return getPersistence().fetchByD_CPK(dayId, classPK, retrieveFromCache);
 	}
 
 	/**
@@ -1066,11 +1066,11 @@ public class DaysOfYearUtil {
 	* @return the days of year that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.timetracking.dayoffs.model.DaysOfYear removeByD_C_C(
+	public static com.liferay.timetracking.dayoffs.model.DaysOfYear removeByD_CPK(
 		java.util.Date dayId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException {
-		return getPersistence().removeByD_C_C(dayId, classPK);
+		return getPersistence().removeByD_CPK(dayId, classPK);
 	}
 
 	/**
@@ -1081,9 +1081,9 @@ public class DaysOfYearUtil {
 	* @return the number of matching days of years
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByD_C_C(java.util.Date dayId, long classPK)
+	public static int countByD_CPK(java.util.Date dayId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByD_C_C(dayId, classPK);
+		return getPersistence().countByD_CPK(dayId, classPK);
 	}
 
 	/**
