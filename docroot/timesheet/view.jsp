@@ -1,3 +1,20 @@
 <%@ include file="/init.jsp" %>
 
-This is the <b><%= HtmlUtil.escape(portletDisplay.getTitle()) %></b> portlet.
+<%
+	String redirect = PortalUtil.getCurrentURL(renderRequest);
+
+	boolean hasConfigurePermission = WorkDayPermission.contains(
+			permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+%>
+
+<aui:button-row>
+	<c:if test='<%= hasConfigurePermission %>'>
+		<liferay-security:permissionsURL
+			modelResource="com.liferay.timetracking.timesheet.model"
+			modelResourceDescription="Permissions"
+			resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+			var="permissionsURL" />
+
+		<aui:button value="permissions" onClick="<%= permissionsURL %>" />
+	</c:if>
+</aui:button-row>
