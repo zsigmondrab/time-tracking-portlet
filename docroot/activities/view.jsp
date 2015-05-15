@@ -1,4 +1,4 @@
-<%@ include file="/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
