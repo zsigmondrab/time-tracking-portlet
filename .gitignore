@@ -1,5 +1,8 @@
+.sass-cache
+.sass_cache_*.css
+_sass_cache_*.css
+
 /bin
 /docroot/WEB-INF/classes
 /docroot/WEB-INF/lib
 
-/**/.sass-cache
