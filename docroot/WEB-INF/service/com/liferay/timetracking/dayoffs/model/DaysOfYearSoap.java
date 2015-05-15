@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * This class is used by SOAP remote services, specifically {@link com.liferay.timetracking.dayoffs.service.http.DaysOfYearServiceSoap}.
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see com.liferay.timetracking.dayoffs.service.http.DaysOfYearServiceSoap
  * @generated
  */
