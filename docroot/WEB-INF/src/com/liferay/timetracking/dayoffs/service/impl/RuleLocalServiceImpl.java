@@ -14,6 +14,9 @@
 
 package com.liferay.timetracking.dayoffs.service.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.timetracking.dayoffs.model.Rule;
+import com.liferay.timetracking.dayoffs.model.impl.RuleImpl;
 import com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl;
 
 /**
@@ -26,14 +29,20 @@ import com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl;
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl
  * @see com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil
  */
 public class RuleLocalServiceImpl extends RuleLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil} to access the rule local service.
-	 */
+
+	@Override
+	public Rule addRule(String ruleName, double multiplier)
+		throws SystemException {
+
+		Rule rule = new RuleImpl();
+
+		addRule(rule);
+
+		return rule;
+	}
 }

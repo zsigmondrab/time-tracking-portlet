@@ -280,6 +280,13 @@ public class RuleLocalServiceWrapper implements RuleLocalService,
 		return _ruleLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public com.liferay.timetracking.dayoffs.model.Rule addRule(
+		java.lang.String ruleName, double multiplier)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ruleLocalService.addRule(ruleName, multiplier);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
