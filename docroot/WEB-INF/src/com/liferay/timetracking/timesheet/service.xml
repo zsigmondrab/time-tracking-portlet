@@ -36,8 +36,15 @@
 			<order-column name="endTime" />
 		</order>
 
+		<!-- Finder methods -->
+
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
+		</finder>
+		<finder name="S_E_U" return-type="Collection">
+			<finder-column name="startTime" comparator="&gt;" />
+			<finder-column name="endTime" comparator="&lt;" />
+			<finder-column name="userId" />
 		</finder>
 	</entity>
 </service-builder>
