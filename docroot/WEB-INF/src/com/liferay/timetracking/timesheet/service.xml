@@ -35,5 +35,10 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
+		<finder name="S_E_U" return-type="Collection">
+			<finder-column name="startTime" comparator="&gt;" />
+			<finder-column name="endTime" comparator="&lt;" />
+			<finder-column name="userId" />
+		</finder>
 	</entity>
 </service-builder>
