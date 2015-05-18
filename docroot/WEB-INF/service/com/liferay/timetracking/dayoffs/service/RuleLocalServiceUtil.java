@@ -274,9 +274,13 @@ public class RuleLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* @throws PortalException
+	*/
 	public static com.liferay.timetracking.dayoffs.model.Rule addRule(
 		java.lang.String ruleName, double multiplier)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().addRule(ruleName, multiplier);
 	}
 

@@ -280,10 +280,14 @@ public class RuleLocalServiceWrapper implements RuleLocalService,
 		return _ruleLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* @throws PortalException
+	*/
 	@Override
 	public com.liferay.timetracking.dayoffs.model.Rule addRule(
 		java.lang.String ruleName, double multiplier)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _ruleLocalService.addRule(ruleName, multiplier);
 	}
 

@@ -250,7 +250,11 @@ public interface RuleLocalService extends BaseLocalService, InvokableLocalServic
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	/**
+	* @throws PortalException
+	*/
 	public com.liferay.timetracking.dayoffs.model.Rule addRule(
 		java.lang.String ruleName, double multiplier)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }
