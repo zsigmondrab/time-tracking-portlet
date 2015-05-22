@@ -24,7 +24,7 @@ import com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil;
 import com.liferay.timetracking.dayoffs.service.RuleServiceUtil;
 
 /**
- * @author László Hudák
+ * @author Laszlo Hudak
  */
 public class ClpMessageListener extends BaseMessageListener {
 	public static String getServletContextName() {

@@ -26,7 +26,7 @@ import com.liferay.portal.service.InvokableService;
  * checks based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see DaysOfYearService
  * @see com.liferay.timetracking.dayoffs.service.base.DaysOfYearServiceBaseImpl
  * @see com.liferay.timetracking.dayoffs.service.impl.DaysOfYearServiceImpl

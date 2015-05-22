@@ -26,7 +26,7 @@ import com.liferay.portal.service.InvokableLocalService;
  * based on the propagated JAAS credentials because this service can only be
  * accessed from within the same VM.
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see RuleLocalService
  * @see com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl
  * @see com.liferay.timetracking.dayoffs.service.impl.RuleLocalServiceImpl
@@ -272,6 +272,16 @@ public class RuleLocalServiceUtil {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
 		return getService().invokeMethod(name, parameterTypes, arguments);
+	}
+
+	/**
+	* @throws PortalException
+	*/
+	public static com.liferay.timetracking.dayoffs.model.Rule addRule(
+		java.lang.String ruleName, double multiplier)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().addRule(ruleName, multiplier);
 	}
 
 	public static void clearService() {

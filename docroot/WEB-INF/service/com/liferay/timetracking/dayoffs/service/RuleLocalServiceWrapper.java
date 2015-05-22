@@ -19,7 +19,7 @@ import com.liferay.portal.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link RuleLocalService}.
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see RuleLocalService
  * @generated
  */
@@ -278,6 +278,17 @@ public class RuleLocalServiceWrapper implements RuleLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
 		return _ruleLocalService.invokeMethod(name, parameterTypes, arguments);
+	}
+
+	/**
+	* @throws PortalException
+	*/
+	@Override
+	public com.liferay.timetracking.dayoffs.model.Rule addRule(
+		java.lang.String ruleName, double multiplier)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ruleLocalService.addRule(ruleName, multiplier);
 	}
 
 	/**

@@ -37,7 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author László Hudák
+ * @author Laszlo Hudak
  */
 public class DaysOfYearClp extends BaseModelImpl<DaysOfYear>
 	implements DaysOfYear {
