@@ -10,10 +10,6 @@
 
 		<column name="ruleId" primary="true" type="long"/>
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -35,8 +31,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 		<finder name="Multiplier" return-type="Collection">
 			<finder-column name="multiplier" />

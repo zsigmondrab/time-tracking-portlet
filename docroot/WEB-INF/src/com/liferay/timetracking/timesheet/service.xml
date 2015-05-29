@@ -10,10 +10,6 @@
 
 		<column name="workDayId" primary="true" type="long"/>
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -36,8 +32,8 @@
 			<order-column name="endTime" />
 		</order>
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 	</entity>
 </service-builder>
