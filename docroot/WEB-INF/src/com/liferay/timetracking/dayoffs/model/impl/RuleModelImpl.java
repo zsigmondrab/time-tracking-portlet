@@ -66,7 +66,6 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 	public static final String TABLE_NAME = "TimeTracking_Rule";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "ruleId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -75,7 +74,7 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 			{ "name", Types.VARCHAR },
 			{ "multiplier", Types.DOUBLE }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TimeTracking_Rule (ruleId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,multiplier DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table TimeTracking_Rule (ruleId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,multiplier DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table TimeTracking_Rule";
 	public static final String ORDER_BY_JPQL = " ORDER BY rule.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY TimeTracking_Rule.name ASC";
@@ -91,7 +90,7 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.timetracking.dayoffs.model.Rule"),
 			true);
-	public static long GROUPID_COLUMN_BITMASK = 1L;
+	public static long COMPANYID_COLUMN_BITMASK = 1L;
 	public static long MULTIPLIER_COLUMN_BITMASK = 2L;
 	public static long NAME_COLUMN_BITMASK = 4L;
 
@@ -109,7 +108,6 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 		Rule model = new RuleImpl();
 
 		model.setRuleId(soapModel.getRuleId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -182,7 +180,6 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("ruleId", getRuleId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -200,12 +197,6 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 
 		if (ruleId != null) {
 			setRuleId(ruleId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -264,36 +255,25 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -436,7 +416,6 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 		RuleImpl ruleImpl = new RuleImpl();
 
 		ruleImpl.setRuleId(getRuleId());
-		ruleImpl.setGroupId(getGroupId());
 		ruleImpl.setCompanyId(getCompanyId());
 		ruleImpl.setUserId(getUserId());
 		ruleImpl.setUserName(getUserName());
@@ -494,9 +473,9 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 	public void resetOriginalValues() {
 		RuleModelImpl ruleModelImpl = this;
 
-		ruleModelImpl._originalGroupId = ruleModelImpl._groupId;
+		ruleModelImpl._originalCompanyId = ruleModelImpl._companyId;
 
-		ruleModelImpl._setOriginalGroupId = false;
+		ruleModelImpl._setOriginalCompanyId = false;
 
 		ruleModelImpl._originalName = ruleModelImpl._name;
 
@@ -512,8 +491,6 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 		RuleCacheModel ruleCacheModel = new RuleCacheModel();
 
 		ruleCacheModel.ruleId = getRuleId();
-
-		ruleCacheModel.groupId = getGroupId();
 
 		ruleCacheModel.companyId = getCompanyId();
 
@@ -560,12 +537,10 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{ruleId=");
 		sb.append(getRuleId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -587,7 +562,7 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.timetracking.dayoffs.model.Rule");
@@ -596,10 +571,6 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 		sb.append(
 			"<column><column-name>ruleId</column-name><column-value><![CDATA[");
 		sb.append(getRuleId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -638,10 +609,9 @@ public class RuleModelImpl extends BaseModelImpl<Rule> implements RuleModel {
 	private static ClassLoader _classLoader = Rule.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Rule.class };
 	private long _ruleId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

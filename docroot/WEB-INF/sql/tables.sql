@@ -1,6 +1,5 @@
 create table TimeTracking_Activity (
 	activityId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -39,7 +38,6 @@ create table TimeTracking_DaysOfYear (
 
 create table TimeTracking_Rule (
 	ruleId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -63,7 +61,6 @@ create table TimeTracking_Ruling (
 
 create table TimeTracking_WorkDay (
 	workDayId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

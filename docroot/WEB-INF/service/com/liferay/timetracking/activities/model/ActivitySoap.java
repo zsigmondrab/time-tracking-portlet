@@ -32,7 +32,6 @@ public class ActivitySoap implements Serializable {
 		ActivitySoap soapModel = new ActivitySoap();
 
 		soapModel.setActivityId(model.getActivityId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -99,14 +98,6 @@ public class ActivitySoap implements Serializable {
 		_activityId = activityId;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -156,7 +147,6 @@ public class ActivitySoap implements Serializable {
 	}
 
 	private long _activityId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

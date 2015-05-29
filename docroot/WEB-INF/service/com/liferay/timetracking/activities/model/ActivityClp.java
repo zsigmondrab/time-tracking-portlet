@@ -75,7 +75,6 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("activityId", getActivityId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -92,12 +91,6 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 
 		if (activityId != null) {
 			setActivityId(activityId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -153,29 +146,6 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 				Method method = clazz.getMethod("setActivityId", long.class);
 
 				method.invoke(_activityRemoteModel, activityId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
-		if (_activityRemoteModel != null) {
-			try {
-				Class<?> clazz = _activityRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setGroupId", long.class);
-
-				method.invoke(_activityRemoteModel, groupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -401,7 +371,6 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 		ActivityClp clone = new ActivityClp();
 
 		clone.setActivityId(getActivityId());
-		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -458,12 +427,10 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{activityId=");
 		sb.append(getActivityId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -483,7 +450,7 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.timetracking.activities.model.Activity");
@@ -492,10 +459,6 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 		sb.append(
 			"<column><column-name>activityId</column-name><column-value><![CDATA[");
 		sb.append(getActivityId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -528,7 +491,6 @@ public class ActivityClp extends BaseModelImpl<Activity> implements Activity {
 	}
 
 	private long _activityId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;

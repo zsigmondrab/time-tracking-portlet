@@ -16,9 +16,9 @@ package com.liferay.timetracking.activities.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -40,7 +40,7 @@ import java.util.Date;
  * @see com.liferay.timetracking.activities.model.impl.ActivityModelImpl
  * @generated
  */
-public interface ActivityModel extends BaseModel<Activity>, GroupedModel {
+public interface ActivityModel extends AuditedModel, BaseModel<Activity> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -74,22 +74,6 @@ public interface ActivityModel extends BaseModel<Activity>, GroupedModel {
 	 * @param activityId the activity ID of this activity
 	 */
 	public void setActivityId(long activityId);
-
-	/**
-	 * Returns the group ID of this activity.
-	 *
-	 * @return the group ID of this activity
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this activity.
-	 *
-	 * @param groupId the group ID of this activity
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this activity.

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -36,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.timetracking.timesheet.NoSuchWorkDayException;
@@ -82,67 +84,70 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(WorkDayModelImpl.ENTITY_CACHE_ENABLED,
 			WorkDayModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(WorkDayModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+		new FinderPath(WorkDayModelImpl.ENTITY_CACHE_ENABLED,
 			WorkDayModelImpl.FINDER_CACHE_ENABLED, WorkDayImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
 		new FinderPath(WorkDayModelImpl.ENTITY_CACHE_ENABLED,
 			WorkDayModelImpl.FINDER_CACHE_ENABLED, WorkDayImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
 			new String[] { Long.class.getName() },
-			WorkDayModelImpl.GROUPID_COLUMN_BITMASK |
+			WorkDayModelImpl.COMPANYID_COLUMN_BITMASK |
 			WorkDayModelImpl.STARTTIME_COLUMN_BITMASK |
 			WorkDayModelImpl.ENDTIME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(WorkDayModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(WorkDayModelImpl.ENTITY_CACHE_ENABLED,
 			WorkDayModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the work daies where groupId = &#63;.
+	 * Returns all the work daies where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching work daies
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<WorkDay> findByGroupId(long groupId) throws SystemException {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<WorkDay> findByCompanyId(long companyId)
+		throws SystemException {
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
-	 * Returns a range of all the work daies where groupId = &#63;.
+	 * Returns a range of all the work daies where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of work daies
 	 * @param end the upper bound of the range of work daies (not inclusive)
 	 * @return the range of matching work daies
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<WorkDay> findByGroupId(long groupId, int start, int end)
+	public List<WorkDay> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, start, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the work daies where groupId = &#63;.
+	 * Returns an ordered range of all the work daies where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of work daies
 	 * @param end the upper bound of the range of work daies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -150,7 +155,7 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<WorkDay> findByGroupId(long groupId, int start, int end,
+	public List<WorkDay> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -159,12 +164,12 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId, start, end, orderByComparator };
 		}
 
 		List<WorkDay> list = (List<WorkDay>)FinderCacheUtil.getResult(finderPath,
@@ -172,7 +177,7 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 		if ((list != null) && !list.isEmpty()) {
 			for (WorkDay workDay : list) {
-				if ((groupId != workDay.getGroupId())) {
+				if ((companyId != workDay.getCompanyId())) {
 					list = null;
 
 					break;
@@ -193,7 +198,7 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 			query.append(_SQL_SELECT_WORKDAY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -215,7 +220,7 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (!pagination) {
 					list = (List<WorkDay>)QueryUtil.list(q, getDialect(),
@@ -248,19 +253,19 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 	}
 
 	/**
-	 * Returns the first work day in the ordered set where groupId = &#63;.
+	 * Returns the first work day in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching work day
 	 * @throws com.liferay.timetracking.timesheet.NoSuchWorkDayException if a matching work day could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public WorkDay findByGroupId_First(long groupId,
+	public WorkDay findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWorkDayException, SystemException {
-		WorkDay workDay = fetchByGroupId_First(groupId, orderByComparator);
+		WorkDay workDay = fetchByCompanyId_First(companyId, orderByComparator);
 
 		if (workDay != null) {
 			return workDay;
@@ -270,8 +275,8 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -279,17 +284,17 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 	}
 
 	/**
-	 * Returns the first work day in the ordered set where groupId = &#63;.
+	 * Returns the first work day in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching work day, or <code>null</code> if a matching work day could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public WorkDay fetchByGroupId_First(long groupId,
+	public WorkDay fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<WorkDay> list = findByGroupId(groupId, 0, 1, orderByComparator);
+		List<WorkDay> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -299,19 +304,19 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 	}
 
 	/**
-	 * Returns the last work day in the ordered set where groupId = &#63;.
+	 * Returns the last work day in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching work day
 	 * @throws com.liferay.timetracking.timesheet.NoSuchWorkDayException if a matching work day could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public WorkDay findByGroupId_Last(long groupId,
+	public WorkDay findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWorkDayException, SystemException {
-		WorkDay workDay = fetchByGroupId_Last(groupId, orderByComparator);
+		WorkDay workDay = fetchByCompanyId_Last(companyId, orderByComparator);
 
 		if (workDay != null) {
 			return workDay;
@@ -321,8 +326,8 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -330,23 +335,23 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 	}
 
 	/**
-	 * Returns the last work day in the ordered set where groupId = &#63;.
+	 * Returns the last work day in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching work day, or <code>null</code> if a matching work day could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public WorkDay fetchByGroupId_Last(long groupId,
+	public WorkDay fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByGroupId(groupId);
+		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<WorkDay> list = findByGroupId(groupId, count - 1, count,
+		List<WorkDay> list = findByCompanyId(companyId, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -357,18 +362,18 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 	}
 
 	/**
-	 * Returns the work daies before and after the current work day in the ordered set where groupId = &#63;.
+	 * Returns the work daies before and after the current work day in the ordered set where companyId = &#63;.
 	 *
 	 * @param workDayId the primary key of the current work day
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next work day
 	 * @throws com.liferay.timetracking.timesheet.NoSuchWorkDayException if a work day with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public WorkDay[] findByGroupId_PrevAndNext(long workDayId, long groupId,
-		OrderByComparator orderByComparator)
+	public WorkDay[] findByCompanyId_PrevAndNext(long workDayId,
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchWorkDayException, SystemException {
 		WorkDay workDay = findByPrimaryKey(workDayId);
 
@@ -379,12 +384,12 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 			WorkDay[] array = new WorkDayImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, workDay, groupId,
+			array[0] = getByCompanyId_PrevAndNext(session, workDay, companyId,
 					orderByComparator, true);
 
 			array[1] = workDay;
 
-			array[2] = getByGroupId_PrevAndNext(session, workDay, groupId,
+			array[2] = getByCompanyId_PrevAndNext(session, workDay, companyId,
 					orderByComparator, false);
 
 			return array;
@@ -397,8 +402,8 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 		}
 	}
 
-	protected WorkDay getByGroupId_PrevAndNext(Session session,
-		WorkDay workDay, long groupId, OrderByComparator orderByComparator,
+	protected WorkDay getByCompanyId_PrevAndNext(Session session,
+		WorkDay workDay, long companyId, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
 
@@ -412,7 +417,7 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 		query.append(_SQL_SELECT_WORKDAY_WHERE);
 
-		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -482,7 +487,7 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(workDay);
@@ -503,31 +508,343 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 	}
 
 	/**
-	 * Removes all the work daies where groupId = &#63; from the database.
+	 * Returns all the work daies that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @return the matching work daies that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByGroupId(long groupId) throws SystemException {
-		for (WorkDay workDay : findByGroupId(groupId, QueryUtil.ALL_POS,
+	public List<WorkDay> filterFindByCompanyId(long companyId)
+		throws SystemException {
+		return filterFindByCompanyId(companyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the work daies that the user has permission to view where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of work daies
+	 * @param end the upper bound of the range of work daies (not inclusive)
+	 * @return the range of matching work daies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<WorkDay> filterFindByCompanyId(long companyId, int start,
+		int end) throws SystemException {
+		return filterFindByCompanyId(companyId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the work daies that the user has permissions to view where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of work daies
+	 * @param end the upper bound of the range of work daies (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching work daies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<WorkDay> filterFindByCompanyId(long companyId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByCompanyId(companyId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(WorkDayModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(WorkDayModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				WorkDay.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, WorkDayImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, WorkDayImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			return (List<WorkDay>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the work daies before and after the current work day in the ordered set of work daies that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param workDayId the primary key of the current work day
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next work day
+	 * @throws com.liferay.timetracking.timesheet.NoSuchWorkDayException if a work day with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public WorkDay[] filterFindByCompanyId_PrevAndNext(long workDayId,
+		long companyId, OrderByComparator orderByComparator)
+		throws NoSuchWorkDayException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByCompanyId_PrevAndNext(workDayId, companyId,
+				orderByComparator);
+		}
+
+		WorkDay workDay = findByPrimaryKey(workDayId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			WorkDay[] array = new WorkDayImpl[3];
+
+			array[0] = filterGetByCompanyId_PrevAndNext(session, workDay,
+					companyId, orderByComparator, true);
+
+			array[1] = workDay;
+
+			array[2] = filterGetByCompanyId_PrevAndNext(session, workDay,
+					companyId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected WorkDay filterGetByCompanyId_PrevAndNext(Session session,
+		WorkDay workDay, long companyId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(WorkDayModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(WorkDayModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				WorkDay.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, WorkDayImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, WorkDayImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(workDay);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WorkDay> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the work daies where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByCompanyId(long companyId) throws SystemException {
+		for (WorkDay workDay : findByCompanyId(companyId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
 			remove(workDay);
 		}
 	}
 
 	/**
-	 * Returns the number of work daies where groupId = &#63;.
+	 * Returns the number of work daies where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching work daies
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByGroupId(long groupId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+	public int countByCompanyId(long companyId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -537,7 +854,7 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 			query.append(_SQL_COUNT_WORKDAY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -550,7 +867,7 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 
@@ -569,7 +886,55 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "workDay.groupId = ?";
+	/**
+	 * Returns the number of work daies that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @return the number of matching work daies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByCompanyId(long companyId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByCompanyId(companyId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_WORKDAY_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				WorkDay.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "workDay.companyId = ?";
 
 	public WorkDayPersistenceImpl() {
 		setModelClass(WorkDay.class);
@@ -795,19 +1160,21 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 
 		else {
 			if ((workDayModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						workDayModelImpl.getOriginalGroupId()
+						workDayModelImpl.getOriginalCompanyId()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 
-				args = new Object[] { workDayModelImpl.getGroupId() };
+				args = new Object[] { workDayModelImpl.getCompanyId() };
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 			}
 		}
@@ -829,7 +1196,6 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 		workDayImpl.setPrimaryKey(workDay.getPrimaryKey());
 
 		workDayImpl.setWorkDayId(workDay.getWorkDayId());
-		workDayImpl.setGroupId(workDay.getGroupId());
 		workDayImpl.setCompanyId(workDay.getCompanyId());
 		workDayImpl.setUserId(workDay.getUserId());
 		workDayImpl.setUserName(workDay.getUserName());
@@ -1149,7 +1515,17 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 	private static final String _SQL_SELECT_WORKDAY_WHERE = "SELECT workDay FROM WorkDay workDay WHERE ";
 	private static final String _SQL_COUNT_WORKDAY = "SELECT COUNT(workDay) FROM WorkDay workDay";
 	private static final String _SQL_COUNT_WORKDAY_WHERE = "SELECT COUNT(workDay) FROM WorkDay workDay WHERE ";
+	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "workDay.workDayId";
+	private static final String _FILTER_SQL_SELECT_WORKDAY_WHERE = "SELECT DISTINCT {workDay.*} FROM TimeTracking_WorkDay workDay WHERE ";
+	private static final String _FILTER_SQL_SELECT_WORKDAY_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {TimeTracking_WorkDay.*} FROM (SELECT DISTINCT workDay.workDayId FROM TimeTracking_WorkDay workDay WHERE ";
+	private static final String _FILTER_SQL_SELECT_WORKDAY_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN TimeTracking_WorkDay ON TEMP_TABLE.workDayId = TimeTracking_WorkDay.workDayId";
+	private static final String _FILTER_SQL_COUNT_WORKDAY_WHERE = "SELECT COUNT(DISTINCT workDay.workDayId) AS COUNT_VALUE FROM TimeTracking_WorkDay workDay WHERE ";
+	private static final String _FILTER_ENTITY_ALIAS = "workDay";
+	private static final String _FILTER_ENTITY_TABLE = "TimeTracking_WorkDay";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "workDay.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "TimeTracking_WorkDay.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WorkDay exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No WorkDay exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(

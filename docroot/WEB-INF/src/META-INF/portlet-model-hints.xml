@@ -3,7 +3,6 @@
 <model-hints>
 	<model name="com.liferay.timetracking.activities.model.Activity">
 		<field name="activityId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -26,7 +25,6 @@
 	</model>
 	<model name="com.liferay.timetracking.timesheet.model.WorkDay">
 		<field name="workDayId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -52,7 +50,6 @@
 	</model>
 	<model name="com.liferay.timetracking.dayoffs.model.Rule">
 		<field name="ruleId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

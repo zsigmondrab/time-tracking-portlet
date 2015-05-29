@@ -37,12 +37,10 @@ import java.util.Date;
 public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{workDayId=");
 		sb.append(workDayId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -71,7 +69,6 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 		WorkDayImpl workDayImpl = new WorkDayImpl();
 
 		workDayImpl.setWorkDayId(workDayId);
-		workDayImpl.setGroupId(groupId);
 		workDayImpl.setCompanyId(companyId);
 		workDayImpl.setUserId(userId);
 
@@ -122,7 +119,6 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		workDayId = objectInput.readLong();
-		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
@@ -138,7 +134,6 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(workDayId);
-		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
 
@@ -158,7 +153,6 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 	}
 
 	public long workDayId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

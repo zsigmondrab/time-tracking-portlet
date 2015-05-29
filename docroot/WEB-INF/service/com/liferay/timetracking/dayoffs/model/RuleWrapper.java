@@ -50,7 +50,6 @@ public class RuleWrapper implements Rule, ModelWrapper<Rule> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("ruleId", getRuleId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -68,12 +67,6 @@ public class RuleWrapper implements Rule, ModelWrapper<Rule> {
 
 		if (ruleId != null) {
 			setRuleId(ruleId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -157,26 +150,6 @@ public class RuleWrapper implements Rule, ModelWrapper<Rule> {
 	@Override
 	public void setRuleId(long ruleId) {
 		_rule.setRuleId(ruleId);
-	}
-
-	/**
-	* Returns the group ID of this rule.
-	*
-	* @return the group ID of this rule
-	*/
-	@Override
-	public long getGroupId() {
-		return _rule.getGroupId();
-	}
-
-	/**
-	* Sets the group ID of this rule.
-	*
-	* @param groupId the group ID of this rule
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_rule.setGroupId(groupId);
 	}
 
 	/**

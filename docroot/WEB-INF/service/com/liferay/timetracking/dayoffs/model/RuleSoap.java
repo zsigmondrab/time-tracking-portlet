@@ -32,7 +32,6 @@ public class RuleSoap implements Serializable {
 		RuleSoap soapModel = new RuleSoap();
 
 		soapModel.setRuleId(model.getRuleId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -100,14 +99,6 @@ public class RuleSoap implements Serializable {
 		_ruleId = ruleId;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -165,7 +156,6 @@ public class RuleSoap implements Serializable {
 	}
 
 	private long _ruleId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

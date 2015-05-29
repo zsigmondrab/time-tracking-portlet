@@ -10,7 +10,6 @@
 	<mapped-superclass class="com.liferay.timetracking.activities.model.impl.ActivityModelImpl">
 		<attributes>
 			<id name="activityId" />
-			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
@@ -57,7 +56,6 @@
 	<mapped-superclass class="com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl">
 		<attributes>
 			<id name="workDayId" />
-			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
@@ -110,7 +108,6 @@
 	<mapped-superclass class="com.liferay.timetracking.dayoffs.model.impl.RuleModelImpl">
 		<attributes>
 			<id name="ruleId" />
-			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />

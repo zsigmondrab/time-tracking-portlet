@@ -50,7 +50,6 @@ public class ActivityWrapper implements Activity, ModelWrapper<Activity> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("activityId", getActivityId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -67,12 +66,6 @@ public class ActivityWrapper implements Activity, ModelWrapper<Activity> {
 
 		if (activityId != null) {
 			setActivityId(activityId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -150,26 +143,6 @@ public class ActivityWrapper implements Activity, ModelWrapper<Activity> {
 	@Override
 	public void setActivityId(long activityId) {
 		_activity.setActivityId(activityId);
-	}
-
-	/**
-	* Returns the group ID of this activity.
-	*
-	* @return the group ID of this activity
-	*/
-	@Override
-	public long getGroupId() {
-		return _activity.getGroupId();
-	}
-
-	/**
-	* Sets the group ID of this activity.
-	*
-	* @param groupId the group ID of this activity
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_activity.setGroupId(groupId);
 	}
 
 	/**

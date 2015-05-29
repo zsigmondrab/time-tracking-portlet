@@ -50,7 +50,6 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("workDayId", getWorkDayId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -70,12 +69,6 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 
 		if (workDayId != null) {
 			setWorkDayId(workDayId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -171,26 +164,6 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 	@Override
 	public void setWorkDayId(long workDayId) {
 		_workDay.setWorkDayId(workDayId);
-	}
-
-	/**
-	* Returns the group ID of this work day.
-	*
-	* @return the group ID of this work day
-	*/
-	@Override
-	public long getGroupId() {
-		return _workDay.getGroupId();
-	}
-
-	/**
-	* Sets the group ID of this work day.
-	*
-	* @param groupId the group ID of this work day
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_workDay.setGroupId(groupId);
 	}
 
 	/**

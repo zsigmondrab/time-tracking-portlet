@@ -67,7 +67,6 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 	public static final String TABLE_NAME = "TimeTracking_Activity";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "activityId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -75,7 +74,7 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TimeTracking_Activity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table TimeTracking_Activity (activityId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table TimeTracking_Activity";
 	public static final String ORDER_BY_JPQL = " ORDER BY activity.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY TimeTracking_Activity.name ASC";
@@ -91,7 +90,7 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.timetracking.activities.model.Activity"),
 			true);
-	public static long GROUPID_COLUMN_BITMASK = 1L;
+	public static long COMPANYID_COLUMN_BITMASK = 1L;
 	public static long NAME_COLUMN_BITMASK = 2L;
 
 	/**
@@ -108,7 +107,6 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		Activity model = new ActivityImpl();
 
 		model.setActivityId(soapModel.getActivityId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -180,7 +178,6 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("activityId", getActivityId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -197,12 +194,6 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 
 		if (activityId != null) {
 			setActivityId(activityId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -255,36 +246,25 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -396,7 +376,6 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		ActivityImpl activityImpl = new ActivityImpl();
 
 		activityImpl.setActivityId(getActivityId());
-		activityImpl.setGroupId(getGroupId());
 		activityImpl.setCompanyId(getCompanyId());
 		activityImpl.setUserId(getUserId());
 		activityImpl.setUserName(getUserName());
@@ -453,9 +432,9 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 	public void resetOriginalValues() {
 		ActivityModelImpl activityModelImpl = this;
 
-		activityModelImpl._originalGroupId = activityModelImpl._groupId;
+		activityModelImpl._originalCompanyId = activityModelImpl._companyId;
 
-		activityModelImpl._setOriginalGroupId = false;
+		activityModelImpl._setOriginalCompanyId = false;
 
 		activityModelImpl._columnBitmask = 0;
 	}
@@ -465,8 +444,6 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		ActivityCacheModel activityCacheModel = new ActivityCacheModel();
 
 		activityCacheModel.activityId = getActivityId();
-
-		activityCacheModel.groupId = getGroupId();
 
 		activityCacheModel.companyId = getCompanyId();
 
@@ -511,12 +488,10 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{activityId=");
 		sb.append(getActivityId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -536,7 +511,7 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.timetracking.activities.model.Activity");
@@ -545,10 +520,6 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 		sb.append(
 			"<column><column-name>activityId</column-name><column-value><![CDATA[");
 		sb.append(getActivityId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -585,10 +556,9 @@ public class ActivityModelImpl extends BaseModelImpl<Activity>
 			Activity.class
 		};
 	private long _activityId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

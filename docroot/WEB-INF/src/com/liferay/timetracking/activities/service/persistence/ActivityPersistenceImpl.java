@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -36,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.timetracking.activities.NoSuchActivityException;
@@ -82,66 +84,69 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ActivityModelImpl.ENTITY_CACHE_ENABLED,
 			ActivityModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(ActivityModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+		new FinderPath(ActivityModelImpl.ENTITY_CACHE_ENABLED,
 			ActivityModelImpl.FINDER_CACHE_ENABLED, ActivityImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
 		new FinderPath(ActivityModelImpl.ENTITY_CACHE_ENABLED,
 			ActivityModelImpl.FINDER_CACHE_ENABLED, ActivityImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
 			new String[] { Long.class.getName() },
-			ActivityModelImpl.GROUPID_COLUMN_BITMASK |
+			ActivityModelImpl.COMPANYID_COLUMN_BITMASK |
 			ActivityModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(ActivityModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(ActivityModelImpl.ENTITY_CACHE_ENABLED,
 			ActivityModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the activities where groupId = &#63;.
+	 * Returns all the activities where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Activity> findByGroupId(long groupId) throws SystemException {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<Activity> findByCompanyId(long companyId)
+		throws SystemException {
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
-	 * Returns a range of all the activities where groupId = &#63;.
+	 * Returns a range of all the activities where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.activities.model.impl.ActivityModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of activities
 	 * @param end the upper bound of the range of activities (not inclusive)
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Activity> findByGroupId(long groupId, int start, int end)
+	public List<Activity> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, start, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the activities where groupId = &#63;.
+	 * Returns an ordered range of all the activities where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.activities.model.impl.ActivityModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of activities
 	 * @param end the upper bound of the range of activities (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -149,7 +154,7 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Activity> findByGroupId(long groupId, int start, int end,
+	public List<Activity> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -158,12 +163,12 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId, start, end, orderByComparator };
 		}
 
 		List<Activity> list = (List<Activity>)FinderCacheUtil.getResult(finderPath,
@@ -171,7 +176,7 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 		if ((list != null) && !list.isEmpty()) {
 			for (Activity activity : list) {
-				if ((groupId != activity.getGroupId())) {
+				if ((companyId != activity.getCompanyId())) {
 					list = null;
 
 					break;
@@ -192,7 +197,7 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 			query.append(_SQL_SELECT_ACTIVITY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -214,7 +219,7 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (!pagination) {
 					list = (List<Activity>)QueryUtil.list(q, getDialect(),
@@ -247,19 +252,19 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 	}
 
 	/**
-	 * Returns the first activity in the ordered set where groupId = &#63;.
+	 * Returns the first activity in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching activity
 	 * @throws com.liferay.timetracking.activities.NoSuchActivityException if a matching activity could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Activity findByGroupId_First(long groupId,
+	public Activity findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
-		Activity activity = fetchByGroupId_First(groupId, orderByComparator);
+		Activity activity = fetchByCompanyId_First(companyId, orderByComparator);
 
 		if (activity != null) {
 			return activity;
@@ -269,8 +274,8 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -278,17 +283,17 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 	}
 
 	/**
-	 * Returns the first activity in the ordered set where groupId = &#63;.
+	 * Returns the first activity in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching activity, or <code>null</code> if a matching activity could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Activity fetchByGroupId_First(long groupId,
+	public Activity fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<Activity> list = findByGroupId(groupId, 0, 1, orderByComparator);
+		List<Activity> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -298,19 +303,19 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 	}
 
 	/**
-	 * Returns the last activity in the ordered set where groupId = &#63;.
+	 * Returns the last activity in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching activity
 	 * @throws com.liferay.timetracking.activities.NoSuchActivityException if a matching activity could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Activity findByGroupId_Last(long groupId,
+	public Activity findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
-		Activity activity = fetchByGroupId_Last(groupId, orderByComparator);
+		Activity activity = fetchByCompanyId_Last(companyId, orderByComparator);
 
 		if (activity != null) {
 			return activity;
@@ -320,8 +325,8 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -329,23 +334,23 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 	}
 
 	/**
-	 * Returns the last activity in the ordered set where groupId = &#63;.
+	 * Returns the last activity in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching activity, or <code>null</code> if a matching activity could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Activity fetchByGroupId_Last(long groupId,
+	public Activity fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByGroupId(groupId);
+		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<Activity> list = findByGroupId(groupId, count - 1, count,
+		List<Activity> list = findByCompanyId(companyId, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -356,18 +361,18 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 	}
 
 	/**
-	 * Returns the activities before and after the current activity in the ordered set where groupId = &#63;.
+	 * Returns the activities before and after the current activity in the ordered set where companyId = &#63;.
 	 *
 	 * @param activityId the primary key of the current activity
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next activity
 	 * @throws com.liferay.timetracking.activities.NoSuchActivityException if a activity with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Activity[] findByGroupId_PrevAndNext(long activityId, long groupId,
-		OrderByComparator orderByComparator)
+	public Activity[] findByCompanyId_PrevAndNext(long activityId,
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		Activity activity = findByPrimaryKey(activityId);
 
@@ -378,12 +383,12 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 			Activity[] array = new ActivityImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, activity, groupId,
+			array[0] = getByCompanyId_PrevAndNext(session, activity, companyId,
 					orderByComparator, true);
 
 			array[1] = activity;
 
-			array[2] = getByGroupId_PrevAndNext(session, activity, groupId,
+			array[2] = getByCompanyId_PrevAndNext(session, activity, companyId,
 					orderByComparator, false);
 
 			return array;
@@ -396,8 +401,8 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 		}
 	}
 
-	protected Activity getByGroupId_PrevAndNext(Session session,
-		Activity activity, long groupId, OrderByComparator orderByComparator,
+	protected Activity getByCompanyId_PrevAndNext(Session session,
+		Activity activity, long companyId, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
 
@@ -411,7 +416,7 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 		query.append(_SQL_SELECT_ACTIVITY_WHERE);
 
-		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -481,7 +486,7 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(activity);
@@ -502,31 +507,343 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 	}
 
 	/**
-	 * Removes all the activities where groupId = &#63; from the database.
+	 * Returns all the activities that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @return the matching activities that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByGroupId(long groupId) throws SystemException {
-		for (Activity activity : findByGroupId(groupId, QueryUtil.ALL_POS,
+	public List<Activity> filterFindByCompanyId(long companyId)
+		throws SystemException {
+		return filterFindByCompanyId(companyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the activities that the user has permission to view where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.activities.model.impl.ActivityModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of activities
+	 * @param end the upper bound of the range of activities (not inclusive)
+	 * @return the range of matching activities that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Activity> filterFindByCompanyId(long companyId, int start,
+		int end) throws SystemException {
+		return filterFindByCompanyId(companyId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the activities that the user has permissions to view where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.activities.model.impl.ActivityModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of activities
+	 * @param end the upper bound of the range of activities (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching activities that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Activity> filterFindByCompanyId(long companyId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByCompanyId(companyId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ACTIVITY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_ACTIVITY_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ACTIVITY_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(ActivityModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(ActivityModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Activity.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, ActivityImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, ActivityImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			return (List<Activity>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the activities before and after the current activity in the ordered set of activities that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param activityId the primary key of the current activity
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next activity
+	 * @throws com.liferay.timetracking.activities.NoSuchActivityException if a activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Activity[] filterFindByCompanyId_PrevAndNext(long activityId,
+		long companyId, OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByCompanyId_PrevAndNext(activityId, companyId,
+				orderByComparator);
+		}
+
+		Activity activity = findByPrimaryKey(activityId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Activity[] array = new ActivityImpl[3];
+
+			array[0] = filterGetByCompanyId_PrevAndNext(session, activity,
+					companyId, orderByComparator, true);
+
+			array[1] = activity;
+
+			array[2] = filterGetByCompanyId_PrevAndNext(session, activity,
+					companyId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Activity filterGetByCompanyId_PrevAndNext(Session session,
+		Activity activity, long companyId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ACTIVITY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_ACTIVITY_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ACTIVITY_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(ActivityModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(ActivityModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Activity.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, ActivityImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, ActivityImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(activity);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Activity> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the activities where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByCompanyId(long companyId) throws SystemException {
+		for (Activity activity : findByCompanyId(companyId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
 			remove(activity);
 		}
 	}
 
 	/**
-	 * Returns the number of activities where groupId = &#63;.
+	 * Returns the number of activities where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByGroupId(long groupId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+	public int countByCompanyId(long companyId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -536,7 +853,7 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 			query.append(_SQL_COUNT_ACTIVITY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -549,7 +866,7 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 
@@ -568,7 +885,55 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "activity.groupId = ?";
+	/**
+	 * Returns the number of activities that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @return the number of matching activities that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByCompanyId(long companyId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByCompanyId(companyId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_ACTIVITY_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Activity.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "activity.companyId = ?";
 
 	public ActivityPersistenceImpl() {
 		setModelClass(Activity.class);
@@ -795,19 +1160,21 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 
 		else {
 			if ((activityModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						activityModelImpl.getOriginalGroupId()
+						activityModelImpl.getOriginalCompanyId()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 
-				args = new Object[] { activityModelImpl.getGroupId() };
+				args = new Object[] { activityModelImpl.getCompanyId() };
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 			}
 		}
@@ -829,7 +1196,6 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 		activityImpl.setPrimaryKey(activity.getPrimaryKey());
 
 		activityImpl.setActivityId(activity.getActivityId());
-		activityImpl.setGroupId(activity.getGroupId());
 		activityImpl.setCompanyId(activity.getCompanyId());
 		activityImpl.setUserId(activity.getUserId());
 		activityImpl.setUserName(activity.getUserName());
@@ -1147,7 +1513,17 @@ public class ActivityPersistenceImpl extends BasePersistenceImpl<Activity>
 	private static final String _SQL_SELECT_ACTIVITY_WHERE = "SELECT activity FROM Activity activity WHERE ";
 	private static final String _SQL_COUNT_ACTIVITY = "SELECT COUNT(activity) FROM Activity activity";
 	private static final String _SQL_COUNT_ACTIVITY_WHERE = "SELECT COUNT(activity) FROM Activity activity WHERE ";
+	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "activity.activityId";
+	private static final String _FILTER_SQL_SELECT_ACTIVITY_WHERE = "SELECT DISTINCT {activity.*} FROM TimeTracking_Activity activity WHERE ";
+	private static final String _FILTER_SQL_SELECT_ACTIVITY_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {TimeTracking_Activity.*} FROM (SELECT DISTINCT activity.activityId FROM TimeTracking_Activity activity WHERE ";
+	private static final String _FILTER_SQL_SELECT_ACTIVITY_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN TimeTracking_Activity ON TEMP_TABLE.activityId = TimeTracking_Activity.activityId";
+	private static final String _FILTER_SQL_COUNT_ACTIVITY_WHERE = "SELECT COUNT(DISTINCT activity.activityId) AS COUNT_VALUE FROM TimeTracking_Activity activity WHERE ";
+	private static final String _FILTER_ENTITY_ALIAS = "activity";
+	private static final String _FILTER_ENTITY_TABLE = "TimeTracking_Activity";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "activity.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "TimeTracking_Activity.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Activity exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Activity exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(

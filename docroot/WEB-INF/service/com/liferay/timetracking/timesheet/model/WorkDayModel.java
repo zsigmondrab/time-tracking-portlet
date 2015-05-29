@@ -16,9 +16,9 @@ package com.liferay.timetracking.timesheet.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -40,7 +40,7 @@ import java.util.Date;
  * @see com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl
  * @generated
  */
-public interface WorkDayModel extends BaseModel<WorkDay>, GroupedModel {
+public interface WorkDayModel extends AuditedModel, BaseModel<WorkDay> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -74,22 +74,6 @@ public interface WorkDayModel extends BaseModel<WorkDay>, GroupedModel {
 	 * @param workDayId the work day ID of this work day
 	 */
 	public void setWorkDayId(long workDayId);
-
-	/**
-	 * Returns the group ID of this work day.
-	 *
-	 * @return the group ID of this work day
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this work day.
-	 *
-	 * @param groupId the group ID of this work day
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this work day.

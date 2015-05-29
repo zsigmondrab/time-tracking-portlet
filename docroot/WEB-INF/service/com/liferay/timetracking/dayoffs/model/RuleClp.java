@@ -75,7 +75,6 @@ public class RuleClp extends BaseModelImpl<Rule> implements Rule {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("ruleId", getRuleId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -93,12 +92,6 @@ public class RuleClp extends BaseModelImpl<Rule> implements Rule {
 
 		if (ruleId != null) {
 			setRuleId(ruleId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -160,29 +153,6 @@ public class RuleClp extends BaseModelImpl<Rule> implements Rule {
 				Method method = clazz.getMethod("setRuleId", long.class);
 
 				method.invoke(_ruleRemoteModel, ruleId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
-		if (_ruleRemoteModel != null) {
-			try {
-				Class<?> clazz = _ruleRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setGroupId", long.class);
-
-				method.invoke(_ruleRemoteModel, groupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -431,7 +401,6 @@ public class RuleClp extends BaseModelImpl<Rule> implements Rule {
 		RuleClp clone = new RuleClp();
 
 		clone.setRuleId(getRuleId());
-		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -489,12 +458,10 @@ public class RuleClp extends BaseModelImpl<Rule> implements Rule {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{ruleId=");
 		sb.append(getRuleId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -516,7 +483,7 @@ public class RuleClp extends BaseModelImpl<Rule> implements Rule {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.timetracking.dayoffs.model.Rule");
@@ -525,10 +492,6 @@ public class RuleClp extends BaseModelImpl<Rule> implements Rule {
 		sb.append(
 			"<column><column-name>ruleId</column-name><column-value><![CDATA[");
 		sb.append(getRuleId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -565,7 +528,6 @@ public class RuleClp extends BaseModelImpl<Rule> implements Rule {
 	}
 
 	private long _ruleId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;

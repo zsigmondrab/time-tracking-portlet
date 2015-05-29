@@ -37,12 +37,10 @@ import java.util.Date;
 public class ActivityCacheModel implements CacheModel<Activity>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{activityId=");
 		sb.append(activityId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -65,7 +63,6 @@ public class ActivityCacheModel implements CacheModel<Activity>, Externalizable 
 		ActivityImpl activityImpl = new ActivityImpl();
 
 		activityImpl.setActivityId(activityId);
-		activityImpl.setGroupId(groupId);
 		activityImpl.setCompanyId(companyId);
 		activityImpl.setUserId(userId);
 
@@ -105,7 +102,6 @@ public class ActivityCacheModel implements CacheModel<Activity>, Externalizable 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		activityId = objectInput.readLong();
-		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
@@ -118,7 +114,6 @@ public class ActivityCacheModel implements CacheModel<Activity>, Externalizable 
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(activityId);
-		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
 
@@ -141,7 +136,6 @@ public class ActivityCacheModel implements CacheModel<Activity>, Externalizable 
 	}
 
 	public long activityId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

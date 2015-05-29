@@ -37,12 +37,10 @@ import java.util.Date;
 public class RuleCacheModel implements CacheModel<Rule>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{ruleId=");
 		sb.append(ruleId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -67,7 +65,6 @@ public class RuleCacheModel implements CacheModel<Rule>, Externalizable {
 		RuleImpl ruleImpl = new RuleImpl();
 
 		ruleImpl.setRuleId(ruleId);
-		ruleImpl.setGroupId(groupId);
 		ruleImpl.setCompanyId(companyId);
 		ruleImpl.setUserId(userId);
 
@@ -109,7 +106,6 @@ public class RuleCacheModel implements CacheModel<Rule>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		ruleId = objectInput.readLong();
-		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
@@ -123,7 +119,6 @@ public class RuleCacheModel implements CacheModel<Rule>, Externalizable {
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(ruleId);
-		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
 
@@ -148,7 +143,6 @@ public class RuleCacheModel implements CacheModel<Rule>, Externalizable {
 	}
 
 	public long ruleId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

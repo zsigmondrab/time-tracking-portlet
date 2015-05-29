@@ -76,7 +76,6 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("workDayId", getWorkDayId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -96,12 +95,6 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 
 		if (workDayId != null) {
 			setWorkDayId(workDayId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -175,29 +168,6 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 				Method method = clazz.getMethod("setWorkDayId", long.class);
 
 				method.invoke(_workDayRemoteModel, workDayId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
-		if (_workDayRemoteModel != null) {
-			try {
-				Class<?> clazz = _workDayRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setGroupId", long.class);
-
-				method.invoke(_workDayRemoteModel, groupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -492,7 +462,6 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		WorkDayClp clone = new WorkDayClp();
 
 		clone.setWorkDayId(getWorkDayId());
-		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -558,12 +527,10 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{workDayId=");
 		sb.append(getWorkDayId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -589,7 +556,7 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.timetracking.timesheet.model.WorkDay");
@@ -598,10 +565,6 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		sb.append(
 			"<column><column-name>workDayId</column-name><column-value><![CDATA[");
 		sb.append(getWorkDayId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -646,7 +609,6 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 	}
 
 	private long _workDayId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
