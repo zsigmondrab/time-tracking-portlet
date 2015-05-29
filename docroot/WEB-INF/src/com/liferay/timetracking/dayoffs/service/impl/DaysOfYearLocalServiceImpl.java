@@ -31,7 +31,7 @@ import com.liferay.timetracking.dayoffs.service.base.DaysOfYearLocalServiceBaseI
  * @see com.liferay.timetracking.dayoffs.service.DaysOfYearLocalServiceUtil
  */
 public class DaysOfYearLocalServiceImpl extends DaysOfYearLocalServiceBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.dayoffs.service.DaysOfYearLocalServiceUtil} to access the days of year local service.

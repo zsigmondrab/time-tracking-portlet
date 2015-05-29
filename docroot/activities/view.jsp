@@ -8,13 +8,13 @@
 %>
 
 <aui:button-row>
-	<c:if test='<%= hasConfigurePermission %>'>
+	<c:if test="<%= hasConfigurePermission %>">
 		<liferay-security:permissionsURL
 			modelResource="com.liferay.timetracking.activities.model"
 			modelResourceDescription="Permissions"
 			resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
 			var="permissionsURL" />
 
-		<aui:button value="permissions" onClick="<%= permissionsURL %>" />
+		<aui:button onClick="<%= permissionsURL %>" value="permissions" />
 	</c:if>
 </aui:button-row>

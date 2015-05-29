@@ -24,7 +24,7 @@ package com.liferay.timetracking.dayoffs.model.impl;
  * @author LĂˇszlĂł HudĂˇk
  */
 public class DaysOfYearImpl extends DaysOfYearBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a days of year model instance should use the {@link com.liferay.timetracking.dayoffs.model.DaysOfYear} interface instead.

@@ -8,7 +8,7 @@
 
 		<!-- PK Fields -->
 
-		<column name="activityId" primary="true" type="long"/>
+		<column name="activityId" primary="true" type="long" />
 
 		<!-- Audit fields -->
 

@@ -24,7 +24,7 @@ package com.liferay.timetracking.timesheet.model.impl;
  * @author Laszlo Hudak, Istvan Sajtos
  */
 public class WorkDayImpl extends WorkDayBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a work day model instance should use the {@link com.liferay.timetracking.timesheet.model.WorkDay} interface instead.

@@ -31,7 +31,7 @@ import com.liferay.timetracking.activities.service.base.ActivityServiceBaseImpl;
  * @see com.liferay.timetracking.activities.service.ActivityServiceUtil
  */
 public class ActivityServiceImpl extends ActivityServiceBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.activities.service.ActivityServiceUtil} to access the activity remote service.

@@ -24,7 +24,7 @@ package com.liferay.timetracking.activities.model.impl;
  * @author Laszlo Hudak, Adam T. Nagy
  */
 public class ActivityImpl extends ActivityBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a activity model instance should use the {@link com.liferay.timetracking.activities.model.Activity} interface instead.

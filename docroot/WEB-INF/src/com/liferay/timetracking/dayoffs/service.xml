@@ -3,12 +3,12 @@
 <service-builder package-path="com.liferay.timetracking.dayoffs">
 	<author>Laszlo Hudak</author>
 	<namespace>TimeTracking</namespace>
-	
+
 	<entity name="Rule" local-service="true" remote-service="true">
 
 		<!-- PK Fields -->
 
-		<column name="ruleId" primary="true" type="long"/>
+		<column name="ruleId" primary="true" type="long" />
 
 		<!-- Audit fields -->
 
@@ -46,7 +46,7 @@
 
 		<!-- PK Fields -->
 
-		<column name="dayOfYearId" primary="true" type="long"/>
+		<column name="dayOfYearId" primary="true" type="long" />
 
 		<!-- Group instance -->
 

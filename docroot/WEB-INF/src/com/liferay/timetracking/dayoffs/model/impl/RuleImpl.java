@@ -24,7 +24,7 @@ package com.liferay.timetracking.dayoffs.model.impl;
  * @author LÃ¡szlÃ³ HudÃ¡k
  */
 public class RuleImpl extends RuleBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a rule model instance should use the {@link com.liferay.timetracking.dayoffs.model.Rule} interface instead.

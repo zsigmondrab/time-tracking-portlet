@@ -32,7 +32,7 @@ import com.liferay.timetracking.activities.service.base.ActivityAssignmentLocalS
  */
 public class ActivityAssignmentLocalServiceImpl
 	extends ActivityAssignmentLocalServiceBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.activities.service.ActivityAssignmentLocalServiceUtil} to access the activity assignment local service.

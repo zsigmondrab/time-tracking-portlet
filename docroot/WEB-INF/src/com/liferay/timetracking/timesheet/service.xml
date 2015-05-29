@@ -8,7 +8,7 @@
 
 		<!-- PK Fields -->
 
-		<column name="workDayId" primary="true" type="long"/>
+		<column name="workDayId" primary="true" type="long" />
 
 		<!-- Audit fields -->
 

@@ -32,7 +32,7 @@ import com.liferay.timetracking.activities.service.base.ActivityAssignmentServic
  */
 public class ActivityAssignmentServiceImpl
 	extends ActivityAssignmentServiceBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.activities.service.ActivityAssignmentServiceUtil} to access the activity assignment remote service.

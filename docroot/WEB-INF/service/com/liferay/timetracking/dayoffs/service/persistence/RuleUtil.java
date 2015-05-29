@@ -361,18 +361,6 @@ public class RuleUtil {
 	}
 
 	/**
-	* Returns the number of rules that the user has permission to view where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @return the number of matching rules that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int filterCountByGroupId(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterCountByGroupId(groupId);
-	}
-
-	/**
 	* Returns all the rules where multiplier = &#63;.
 	*
 	* @param multiplier the multiplier

@@ -31,7 +31,7 @@ import com.liferay.timetracking.timesheet.service.base.WorkDayLocalServiceBaseIm
  * @see com.liferay.timetracking.timesheet.service.WorkDayLocalServiceUtil
  */
 public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.timesheet.service.WorkDayLocalServiceUtil} to access the work day local service.

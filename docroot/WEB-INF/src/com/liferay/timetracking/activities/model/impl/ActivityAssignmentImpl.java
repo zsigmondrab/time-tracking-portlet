@@ -24,7 +24,7 @@ package com.liferay.timetracking.activities.model.impl;
  * @author Laszlo Hudak, Adam T. Nagy
  */
 public class ActivityAssignmentImpl extends ActivityAssignmentBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a activity assignment model instance should use the {@link com.liferay.timetracking.activities.model.ActivityAssignment} interface instead.

@@ -3,25 +3,25 @@
 
 <project name="time-tracking-portlet" basedir="." default="deploy">
 	<import file="../build-common-portlet.xml" />
-	
+
 	<target name="build-services">
 		<antcall target="build-service-activities" />
 		<antcall target="build-service-dayoffs" />
 		<antcall target="build-service-timesheet" />
 	</target>
-	
+
 	<target name="build-service-activities">
 		<antcall target="build-service">
 			<param name="service.input.file" value="${basedir}/docroot/WEB-INF/src/com/liferay/timetracking/activities/service.xml" />
 		</antcall>
 	</target>
-	
+
 	<target name="build-service-dayoffs">
 		<antcall target="build-service">
 			<param name="service.input.file" value="${basedir}/docroot/WEB-INF/src/com/liferay/timetracking/dayoffs/service.xml" />
 		</antcall>
 	</target>
-	
+
 	<target name="build-service-timesheet">
 		<antcall target="build-service">
 			<param name="service.input.file" value="${basedir}/docroot/WEB-INF/src/com/liferay/timetracking/timesheet/service.xml" />

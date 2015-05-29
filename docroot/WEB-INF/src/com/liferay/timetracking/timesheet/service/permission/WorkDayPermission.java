@@ -7,7 +7,6 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.timetracking.timesheet.model.WorkDay;
-
 public class WorkDayPermission {
 
 	public static void check(PermissionChecker permissionChecker, long workDayId,
