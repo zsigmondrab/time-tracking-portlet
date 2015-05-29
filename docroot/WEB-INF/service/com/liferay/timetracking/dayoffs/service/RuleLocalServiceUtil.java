@@ -274,6 +274,25 @@ public class RuleLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Adds a Rule with the given name and multiplier and default audit
+	* parameters
+	*
+	* @param name the name of the rule
+	* @param multiplier the value indicateing if the user is allowed to work
+	on the day to which the rule is assigne and also can be used for
+	calculating the salary
+	* @return the web content article
+	* @throws PortalException if a portal exception occurred
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.timetracking.dayoffs.model.Rule addRule(
+		java.lang.String ruleName, double multiplier)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().addRule(ruleName, multiplier);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
