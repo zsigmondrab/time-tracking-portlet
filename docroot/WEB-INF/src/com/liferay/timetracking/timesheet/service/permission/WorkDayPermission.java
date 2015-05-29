@@ -1,42 +1,49 @@
 package com.liferay.timetracking.timesheet.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.timetracking.timesheet.model.WorkDay;
 
 public class WorkDayPermission {
 
-	public static final String RESOURCE_NAME = "com.liferay.timetracking.activities.model";
-
-	public static void check(PermissionChecker permissionChecker, long groupId,
+	public static void check(PermissionChecker permissionChecker, long workDayId,
 			String actionId) throws PortalException {
 
-		if (!contains(permissionChecker, groupId, actionId)) {
+		if (!contains(permissionChecker, workDayId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(PermissionChecker permissionChecker,
-			WorkDay workDay, String actionId) {
+			long workDayId, String actionId) {
 
-		if (permissionChecker.hasOwnerPermission(workDay.getCompanyId(),
-				WorkDay.class.getName(), workDay.getWorkDayId(),
-				workDay.getUserId(), actionId)) {
+		try {
+			if (workDayId != ResourceConstants.PRIMKEY_DNE) {
+				if (permissionChecker.hasOwnerPermission(
+						permissionChecker.getCompanyId(), WorkDay.class.getName(),
+						workDayId, permissionChecker.getUserId(), actionId)) {
 
-			return true;
+					return true;
+				}
+			}
+
+			if (permissionChecker.hasPermission(
+					0, WorkDay.class.getName(), workDayId, actionId)) {
+
+				return true;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
-		return permissionChecker.hasPermission(workDay.getGroupId(),
-				WorkDay.class.getName(), workDay.getWorkDayId(),
-				actionId);
+		return false;
 	}
 
-	public static boolean contains(PermissionChecker permissionChecker,
-			long groupId, String actionId) {
-
-		return permissionChecker.hasPermission(groupId, RESOURCE_NAME, groupId,
-				actionId);
-	}
+	private static Log _log = LogFactoryUtil.getLog(WorkDayPermission.class);
 
 }

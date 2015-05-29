@@ -1,42 +1,49 @@
 package com.liferay.timetracking.dayoffs.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.timetracking.dayoffs.model.Rule;
 
 public class RulePermission {
 
-	public static final String RESOURCE_NAME = "com.liferay.timetracking.activities.model";
-
-	public static void check(PermissionChecker permissionChecker, long groupId,
+	public static void check(PermissionChecker permissionChecker, long ruleId,
 			String actionId) throws PortalException {
 
-		if (!contains(permissionChecker, groupId, actionId)) {
+		if (!contains(permissionChecker, ruleId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(PermissionChecker permissionChecker,
-			Rule rule, String actionId) {
+			long ruleId, String actionId) {
 
-		if (permissionChecker.hasOwnerPermission(rule.getCompanyId(),
-				Rule.class.getName(), rule.getRuleId(),
-				rule.getUserId(), actionId)) {
+		try {
+			if (ruleId != ResourceConstants.PRIMKEY_DNE) {
+				if (permissionChecker.hasOwnerPermission(
+						permissionChecker.getCompanyId(), Rule.class.getName(),
+						ruleId, permissionChecker.getUserId(), actionId)) {
 
-			return true;
+					return true;
+				}
+			}
+
+			if (permissionChecker.hasPermission(
+					0, Rule.class.getName(), ruleId, actionId)) {
+
+				return true;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
-		return permissionChecker.hasPermission(rule.getGroupId(),
-				Rule.class.getName(), rule.getRuleId(),
-				actionId);
+		return false;
 	}
 
-	public static boolean contains(PermissionChecker permissionChecker,
-			long groupId, String actionId) {
-
-		return permissionChecker.hasPermission(groupId, RESOURCE_NAME, groupId,
-				actionId);
-	}
+	private static Log _log = LogFactoryUtil.getLog(RulePermission.class);
 
 }
