@@ -19,7 +19,7 @@ import com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @generated
  */
 public class RuleLocalServiceClpInvoker {

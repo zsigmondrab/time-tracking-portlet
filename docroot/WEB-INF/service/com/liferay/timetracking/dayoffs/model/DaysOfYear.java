@@ -19,7 +19,7 @@ import com.liferay.portal.model.PersistedModel;
 /**
  * The extended model interface for the DaysOfYear service. Represents a row in the &quot;TimeTracking_DaysOfYear&quot; database table, with each column mapped to a property of this class.
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see DaysOfYearModel
  * @see com.liferay.timetracking.dayoffs.model.impl.DaysOfYearImpl
  * @see com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl

@@ -21,7 +21,7 @@ import com.liferay.timetracking.dayoffs.model.DaysOfYear;
 import com.liferay.timetracking.dayoffs.service.DaysOfYearLocalServiceUtil;
 
 /**
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @generated
  */
 public abstract class DaysOfYearActionableDynamicQuery

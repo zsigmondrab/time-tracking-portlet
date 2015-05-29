@@ -21,7 +21,7 @@ import com.liferay.timetracking.dayoffs.model.Rule;
 import com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil;
 
 /**
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @generated
  */
 public abstract class RuleActionableDynamicQuery

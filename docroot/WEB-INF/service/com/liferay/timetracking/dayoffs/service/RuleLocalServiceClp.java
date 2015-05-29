@@ -17,7 +17,7 @@ package com.liferay.timetracking.dayoffs.service;
 import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @generated
  */
 public class RuleLocalServiceClp implements RuleLocalService {
