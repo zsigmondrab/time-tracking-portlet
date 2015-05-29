@@ -25,7 +25,7 @@ import com.liferay.timetracking.dayoffs.model.DaysOfYear;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see DaysOfYearPersistenceImpl
  * @see DaysOfYearUtil
  * @generated

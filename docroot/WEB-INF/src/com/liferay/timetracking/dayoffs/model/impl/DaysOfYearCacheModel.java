@@ -30,7 +30,7 @@ import java.util.Date;
 /**
  * The cache model class for representing DaysOfYear in entity cache.
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see DaysOfYear
  * @generated
  */

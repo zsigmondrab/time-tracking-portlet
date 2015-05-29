@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author László Hudák
+ * @author Laszlo Hudak
  */
 public class RuleClp extends BaseModelImpl<Rule> implements Rule {
 	public RuleClp() {

@@ -26,7 +26,7 @@ import java.util.Map;
  * This class is a wrapper for {@link Rule}.
  * </p>
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see Rule
  * @generated
  */

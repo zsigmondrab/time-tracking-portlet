@@ -25,7 +25,7 @@ import com.liferay.timetracking.dayoffs.model.Rule;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see RulePersistenceImpl
  * @see RuleUtil
  * @generated
@@ -246,6 +246,16 @@ public interface RulePersistence extends BasePersistence<Rule> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int filterCountByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of rules that the user has permission to view where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @return the number of matching rules that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
