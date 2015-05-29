@@ -281,6 +281,26 @@ public class RuleLocalServiceWrapper implements RuleLocalService,
 	}
 
 	/**
+	* Adds a Rule with the given name and multiplier and default audit
+	* parameters
+	*
+	* @param name the name of the rule
+	* @param multiplier the value indicateing if the user is allowed to work
+	on the day to which the rule is assigne and also can be used for
+	calculating the salary
+	* @return the web content article
+	* @throws PortalException if a portal exception occurred
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public com.liferay.timetracking.dayoffs.model.Rule addRule(
+		java.lang.String ruleName, double multiplier)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ruleLocalService.addRule(ruleName, multiplier);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public RuleLocalService getWrappedRuleLocalService() {
