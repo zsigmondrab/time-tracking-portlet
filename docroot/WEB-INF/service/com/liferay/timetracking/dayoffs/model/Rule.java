@@ -19,7 +19,7 @@ import com.liferay.portal.model.PersistedModel;
 /**
  * The extended model interface for the Rule service. Represents a row in the &quot;TimeTracking_Rule&quot; database table, with each column mapped to a property of this class.
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see RuleModel
  * @see com.liferay.timetracking.dayoffs.model.impl.RuleImpl
  * @see com.liferay.timetracking.dayoffs.model.impl.RuleModelImpl

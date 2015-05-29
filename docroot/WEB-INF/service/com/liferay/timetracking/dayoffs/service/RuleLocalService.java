@@ -30,7 +30,7 @@ import com.liferay.portal.service.PersistedModelLocalService;
  * credentials because this service can only be accessed from within the same
  * VM.
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see RuleLocalServiceUtil
  * @see com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl
  * @see com.liferay.timetracking.dayoffs.service.impl.RuleLocalServiceImpl
@@ -249,4 +249,21 @@ public interface RuleLocalService extends BaseLocalService, InvokableLocalServic
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	/**
+	* Adds a Rule with the given name and multiplier and default audit
+	* parameters
+	*
+	* @param name the name of the rule
+	* @param multiplier the value indicateing if the user is allowed to work
+	on the day to which the rule is assigne and also can be used for
+	calculating the salary
+	* @return the web content article
+	* @throws PortalException if a portal exception occurred
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.timetracking.dayoffs.model.Rule addRule(
+		java.lang.String ruleName, double multiplier)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

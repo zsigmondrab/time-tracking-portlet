@@ -48,7 +48,7 @@ package com.liferay.timetracking.dayoffs.service.http;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see RuleServiceHttp
  * @see com.liferay.timetracking.dayoffs.model.RuleSoap
  * @see com.liferay.timetracking.dayoffs.service.RuleServiceUtil
