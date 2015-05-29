@@ -31,7 +31,7 @@ import com.liferay.timetracking.dayoffs.service.base.RuleServiceBaseImpl;
  * @see com.liferay.timetracking.dayoffs.service.RuleServiceUtil
  */
 public class RuleServiceImpl extends RuleServiceBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.dayoffs.service.RuleServiceUtil} to access the rule remote service.
