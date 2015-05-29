@@ -27,3 +27,4 @@ create index IX_E5EB27D5 on TimeTracking_Ruling (ruleName);
 
 create index IX_99F1B072 on TimeTracking_WorkDay (companyId);
 create index IX_40AFAB74 on TimeTracking_WorkDay (groupId);
+create index IX_B9F9C449 on TimeTracking_WorkDay (startTime, endTime, userId);

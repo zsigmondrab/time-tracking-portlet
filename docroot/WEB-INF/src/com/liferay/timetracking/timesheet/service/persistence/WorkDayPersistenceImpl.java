@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -49,6 +50,7 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -935,6 +937,1085 @@ public class WorkDayPersistenceImpl extends BasePersistenceImpl<WorkDay>
 	}
 
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "workDay.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_S_E_U = new FinderPath(WorkDayModelImpl.ENTITY_CACHE_ENABLED,
+			WorkDayModelImpl.FINDER_CACHE_ENABLED, WorkDayImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByS_E_U",
+			new String[] {
+				Date.class.getName(), Date.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_S_E_U = new FinderPath(WorkDayModelImpl.ENTITY_CACHE_ENABLED,
+			WorkDayModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByS_E_U",
+			new String[] {
+				Date.class.getName(), Date.class.getName(), Long.class.getName()
+			});
+
+	/**
+	 * Returns all the work daies where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @return the matching work daies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<WorkDay> findByS_E_U(Date startTime, Date endTime, long userId)
+		throws SystemException {
+		return findByS_E_U(startTime, endTime, userId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the work daies where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of work daies
+	 * @param end the upper bound of the range of work daies (not inclusive)
+	 * @return the range of matching work daies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<WorkDay> findByS_E_U(Date startTime, Date endTime, long userId,
+		int start, int end) throws SystemException {
+		return findByS_E_U(startTime, endTime, userId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the work daies where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of work daies
+	 * @param end the upper bound of the range of work daies (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching work daies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<WorkDay> findByS_E_U(Date startTime, Date endTime, long userId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_S_E_U;
+		finderArgs = new Object[] {
+				startTime, endTime, userId,
+				
+				start, end, orderByComparator
+			};
+
+		List<WorkDay> list = (List<WorkDay>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (WorkDay workDay : list) {
+				if ((startTime.getTime() >= workDay.getStartTime().getTime()) ||
+						(endTime.getTime() <= workDay.getEndTime().getTime()) ||
+						(userId != workDay.getUserId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_WORKDAY_WHERE);
+
+			boolean bindStartTime = false;
+
+			if (startTime == null) {
+				query.append(_FINDER_COLUMN_S_E_U_STARTTIME_1);
+			}
+			else {
+				bindStartTime = true;
+
+				query.append(_FINDER_COLUMN_S_E_U_STARTTIME_2);
+			}
+
+			boolean bindEndTime = false;
+
+			if (endTime == null) {
+				query.append(_FINDER_COLUMN_S_E_U_ENDTIME_1);
+			}
+			else {
+				bindEndTime = true;
+
+				query.append(_FINDER_COLUMN_S_E_U_ENDTIME_2);
+			}
+
+			query.append(_FINDER_COLUMN_S_E_U_USERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(WorkDayModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindStartTime) {
+					qPos.add(CalendarUtil.getTimestamp(startTime));
+				}
+
+				if (bindEndTime) {
+					qPos.add(CalendarUtil.getTimestamp(endTime));
+				}
+
+				qPos.add(userId);
+
+				if (!pagination) {
+					list = (List<WorkDay>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<WorkDay>(list);
+				}
+				else {
+					list = (List<WorkDay>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first work day in the ordered set where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching work day
+	 * @throws com.liferay.timetracking.timesheet.NoSuchWorkDayException if a matching work day could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public WorkDay findByS_E_U_First(Date startTime, Date endTime, long userId,
+		OrderByComparator orderByComparator)
+		throws NoSuchWorkDayException, SystemException {
+		WorkDay workDay = fetchByS_E_U_First(startTime, endTime, userId,
+				orderByComparator);
+
+		if (workDay != null) {
+			return workDay;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("startTime=");
+		msg.append(startTime);
+
+		msg.append(", endTime=");
+		msg.append(endTime);
+
+		msg.append(", userId=");
+		msg.append(userId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchWorkDayException(msg.toString());
+	}
+
+	/**
+	 * Returns the first work day in the ordered set where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching work day, or <code>null</code> if a matching work day could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public WorkDay fetchByS_E_U_First(Date startTime, Date endTime,
+		long userId, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<WorkDay> list = findByS_E_U(startTime, endTime, userId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last work day in the ordered set where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching work day
+	 * @throws com.liferay.timetracking.timesheet.NoSuchWorkDayException if a matching work day could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public WorkDay findByS_E_U_Last(Date startTime, Date endTime, long userId,
+		OrderByComparator orderByComparator)
+		throws NoSuchWorkDayException, SystemException {
+		WorkDay workDay = fetchByS_E_U_Last(startTime, endTime, userId,
+				orderByComparator);
+
+		if (workDay != null) {
+			return workDay;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("startTime=");
+		msg.append(startTime);
+
+		msg.append(", endTime=");
+		msg.append(endTime);
+
+		msg.append(", userId=");
+		msg.append(userId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchWorkDayException(msg.toString());
+	}
+
+	/**
+	 * Returns the last work day in the ordered set where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching work day, or <code>null</code> if a matching work day could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public WorkDay fetchByS_E_U_Last(Date startTime, Date endTime, long userId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByS_E_U(startTime, endTime, userId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<WorkDay> list = findByS_E_U(startTime, endTime, userId, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the work daies before and after the current work day in the ordered set where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * @param workDayId the primary key of the current work day
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next work day
+	 * @throws com.liferay.timetracking.timesheet.NoSuchWorkDayException if a work day with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public WorkDay[] findByS_E_U_PrevAndNext(long workDayId, Date startTime,
+		Date endTime, long userId, OrderByComparator orderByComparator)
+		throws NoSuchWorkDayException, SystemException {
+		WorkDay workDay = findByPrimaryKey(workDayId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			WorkDay[] array = new WorkDayImpl[3];
+
+			array[0] = getByS_E_U_PrevAndNext(session, workDay, startTime,
+					endTime, userId, orderByComparator, true);
+
+			array[1] = workDay;
+
+			array[2] = getByS_E_U_PrevAndNext(session, workDay, startTime,
+					endTime, userId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected WorkDay getByS_E_U_PrevAndNext(Session session, WorkDay workDay,
+		Date startTime, Date endTime, long userId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WORKDAY_WHERE);
+
+		boolean bindStartTime = false;
+
+		if (startTime == null) {
+			query.append(_FINDER_COLUMN_S_E_U_STARTTIME_1);
+		}
+		else {
+			bindStartTime = true;
+
+			query.append(_FINDER_COLUMN_S_E_U_STARTTIME_2);
+		}
+
+		boolean bindEndTime = false;
+
+		if (endTime == null) {
+			query.append(_FINDER_COLUMN_S_E_U_ENDTIME_1);
+		}
+		else {
+			bindEndTime = true;
+
+			query.append(_FINDER_COLUMN_S_E_U_ENDTIME_2);
+		}
+
+		query.append(_FINDER_COLUMN_S_E_U_USERID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(WorkDayModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindStartTime) {
+			qPos.add(CalendarUtil.getTimestamp(startTime));
+		}
+
+		if (bindEndTime) {
+			qPos.add(CalendarUtil.getTimestamp(endTime));
+		}
+
+		qPos.add(userId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(workDay);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WorkDay> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns all the work daies that the user has permission to view where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @return the matching work daies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<WorkDay> filterFindByS_E_U(Date startTime, Date endTime,
+		long userId) throws SystemException {
+		return filterFindByS_E_U(startTime, endTime, userId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the work daies that the user has permission to view where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of work daies
+	 * @param end the upper bound of the range of work daies (not inclusive)
+	 * @return the range of matching work daies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<WorkDay> filterFindByS_E_U(Date startTime, Date endTime,
+		long userId, int start, int end) throws SystemException {
+		return filterFindByS_E_U(startTime, endTime, userId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the work daies that the user has permissions to view where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.timesheet.model.impl.WorkDayModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of work daies
+	 * @param end the upper bound of the range of work daies (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching work daies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<WorkDay> filterFindByS_E_U(Date startTime, Date endTime,
+		long userId, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByS_E_U(startTime, endTime, userId, start, end,
+				orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		boolean bindStartTime = false;
+
+		if (startTime == null) {
+			query.append(_FINDER_COLUMN_S_E_U_STARTTIME_1);
+		}
+		else {
+			bindStartTime = true;
+
+			query.append(_FINDER_COLUMN_S_E_U_STARTTIME_2);
+		}
+
+		boolean bindEndTime = false;
+
+		if (endTime == null) {
+			query.append(_FINDER_COLUMN_S_E_U_ENDTIME_1);
+		}
+		else {
+			bindEndTime = true;
+
+			query.append(_FINDER_COLUMN_S_E_U_ENDTIME_2);
+		}
+
+		query.append(_FINDER_COLUMN_S_E_U_USERID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(WorkDayModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(WorkDayModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				WorkDay.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, WorkDayImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, WorkDayImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (bindStartTime) {
+				qPos.add(CalendarUtil.getTimestamp(startTime));
+			}
+
+			if (bindEndTime) {
+				qPos.add(CalendarUtil.getTimestamp(endTime));
+			}
+
+			qPos.add(userId);
+
+			return (List<WorkDay>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the work daies before and after the current work day in the ordered set of work daies that the user has permission to view where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * @param workDayId the primary key of the current work day
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next work day
+	 * @throws com.liferay.timetracking.timesheet.NoSuchWorkDayException if a work day with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public WorkDay[] filterFindByS_E_U_PrevAndNext(long workDayId,
+		Date startTime, Date endTime, long userId,
+		OrderByComparator orderByComparator)
+		throws NoSuchWorkDayException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByS_E_U_PrevAndNext(workDayId, startTime, endTime,
+				userId, orderByComparator);
+		}
+
+		WorkDay workDay = findByPrimaryKey(workDayId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			WorkDay[] array = new WorkDayImpl[3];
+
+			array[0] = filterGetByS_E_U_PrevAndNext(session, workDay,
+					startTime, endTime, userId, orderByComparator, true);
+
+			array[1] = workDay;
+
+			array[2] = filterGetByS_E_U_PrevAndNext(session, workDay,
+					startTime, endTime, userId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected WorkDay filterGetByS_E_U_PrevAndNext(Session session,
+		WorkDay workDay, Date startTime, Date endTime, long userId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		boolean bindStartTime = false;
+
+		if (startTime == null) {
+			query.append(_FINDER_COLUMN_S_E_U_STARTTIME_1);
+		}
+		else {
+			bindStartTime = true;
+
+			query.append(_FINDER_COLUMN_S_E_U_STARTTIME_2);
+		}
+
+		boolean bindEndTime = false;
+
+		if (endTime == null) {
+			query.append(_FINDER_COLUMN_S_E_U_ENDTIME_1);
+		}
+		else {
+			bindEndTime = true;
+
+			query.append(_FINDER_COLUMN_S_E_U_ENDTIME_2);
+		}
+
+		query.append(_FINDER_COLUMN_S_E_U_USERID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_WORKDAY_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(WorkDayModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(WorkDayModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				WorkDay.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, WorkDayImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, WorkDayImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindStartTime) {
+			qPos.add(CalendarUtil.getTimestamp(startTime));
+		}
+
+		if (bindEndTime) {
+			qPos.add(CalendarUtil.getTimestamp(endTime));
+		}
+
+		qPos.add(userId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(workDay);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WorkDay> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the work daies where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63; from the database.
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByS_E_U(Date startTime, Date endTime, long userId)
+		throws SystemException {
+		for (WorkDay workDay : findByS_E_U(startTime, endTime, userId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(workDay);
+		}
+	}
+
+	/**
+	 * Returns the number of work daies where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @return the number of matching work daies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByS_E_U(Date startTime, Date endTime, long userId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_S_E_U;
+
+		Object[] finderArgs = new Object[] { startTime, endTime, userId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_WORKDAY_WHERE);
+
+			boolean bindStartTime = false;
+
+			if (startTime == null) {
+				query.append(_FINDER_COLUMN_S_E_U_STARTTIME_1);
+			}
+			else {
+				bindStartTime = true;
+
+				query.append(_FINDER_COLUMN_S_E_U_STARTTIME_2);
+			}
+
+			boolean bindEndTime = false;
+
+			if (endTime == null) {
+				query.append(_FINDER_COLUMN_S_E_U_ENDTIME_1);
+			}
+			else {
+				bindEndTime = true;
+
+				query.append(_FINDER_COLUMN_S_E_U_ENDTIME_2);
+			}
+
+			query.append(_FINDER_COLUMN_S_E_U_USERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindStartTime) {
+					qPos.add(CalendarUtil.getTimestamp(startTime));
+				}
+
+				if (bindEndTime) {
+					qPos.add(CalendarUtil.getTimestamp(endTime));
+				}
+
+				qPos.add(userId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of work daies that the user has permission to view where startTime &gt; &#63; and endTime &lt; &#63; and userId = &#63;.
+	 *
+	 * @param startTime the start time
+	 * @param endTime the end time
+	 * @param userId the user ID
+	 * @return the number of matching work daies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByS_E_U(Date startTime, Date endTime, long userId)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByS_E_U(startTime, endTime, userId);
+		}
+
+		StringBundler query = new StringBundler(4);
+
+		query.append(_FILTER_SQL_COUNT_WORKDAY_WHERE);
+
+		boolean bindStartTime = false;
+
+		if (startTime == null) {
+			query.append(_FINDER_COLUMN_S_E_U_STARTTIME_1);
+		}
+		else {
+			bindStartTime = true;
+
+			query.append(_FINDER_COLUMN_S_E_U_STARTTIME_2);
+		}
+
+		boolean bindEndTime = false;
+
+		if (endTime == null) {
+			query.append(_FINDER_COLUMN_S_E_U_ENDTIME_1);
+		}
+		else {
+			bindEndTime = true;
+
+			query.append(_FINDER_COLUMN_S_E_U_ENDTIME_2);
+		}
+
+		query.append(_FINDER_COLUMN_S_E_U_USERID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				WorkDay.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (bindStartTime) {
+				qPos.add(CalendarUtil.getTimestamp(startTime));
+			}
+
+			if (bindEndTime) {
+				qPos.add(CalendarUtil.getTimestamp(endTime));
+			}
+
+			qPos.add(userId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_S_E_U_STARTTIME_1 = "workDay.startTime > NULL AND ";
+	private static final String _FINDER_COLUMN_S_E_U_STARTTIME_2 = "workDay.startTime > ? AND ";
+	private static final String _FINDER_COLUMN_S_E_U_ENDTIME_1 = "workDay.endTime < NULL AND ";
+	private static final String _FINDER_COLUMN_S_E_U_ENDTIME_2 = "workDay.endTime < ? AND ";
+	private static final String _FINDER_COLUMN_S_E_U_USERID_2 = "workDay.userId = ?";
 
 	public WorkDayPersistenceImpl() {
 		setModelClass(WorkDay.class);

@@ -285,6 +285,42 @@ public class WorkDayLocalServiceWrapper implements WorkDayLocalService,
 	}
 
 	/**
+	* NOTE FOR DEVELOPERS:
+	*
+	* Never reference this interface directly. Always use {@link com.liferay.timetracking.timesheet.service.WorkDayLocalServiceUtil} to access the work day local service.
+	*/
+	@Override
+	public com.liferay.timetracking.timesheet.model.WorkDay addWorkDay(
+		long userId, long companyId, long startTime, long endTime,
+		long dayOfYearId, int pause,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _workDayLocalService.addWorkDay(userId, companyId, startTime,
+			endTime, dayOfYearId, pause, serviceContext);
+	}
+
+	@Override
+	public com.liferay.timetracking.timesheet.model.WorkDay updateWorkDay(
+		long userId, long workDayId, long startTime, long endTime,
+		long dayOfYearId, int pause,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _workDayLocalService.updateWorkDay(userId, workDayId, startTime,
+			endTime, dayOfYearId, pause, serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
+		long userId, long startTime, long endTime, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _workDayLocalService.getWorkDays(userId, startTime, endTime,
+			start, end, orderByComparator);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public WorkDayLocalService getWrappedWorkDayLocalService() {

@@ -95,8 +95,9 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 				"value.object.column.bitmask.enabled.com.liferay.timetracking.timesheet.model.WorkDay"),
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long STARTTIME_COLUMN_BITMASK = 2L;
-	public static long ENDTIME_COLUMN_BITMASK = 4L;
+	public static long ENDTIME_COLUMN_BITMASK = 2L;
+	public static long STARTTIME_COLUMN_BITMASK = 4L;
+	public static long USERID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -304,6 +305,14 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -315,6 +324,10 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -376,7 +389,15 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 	public void setStartTime(Date startTime) {
 		_columnBitmask = -1L;
 
+		if (_originalStartTime == null) {
+			_originalStartTime = _startTime;
+		}
+
 		_startTime = startTime;
+	}
+
+	public Date getOriginalStartTime() {
+		return _originalStartTime;
 	}
 
 	@JSON
@@ -389,7 +410,15 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 	public void setEndTime(Date endTime) {
 		_columnBitmask = -1L;
 
+		if (_originalEndTime == null) {
+			_originalEndTime = _endTime;
+		}
+
 		_endTime = endTime;
+	}
+
+	public Date getOriginalEndTime() {
+		return _originalEndTime;
 	}
 
 	@JSON
@@ -503,6 +532,14 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		workDayModelImpl._originalCompanyId = workDayModelImpl._companyId;
 
 		workDayModelImpl._setOriginalCompanyId = false;
+
+		workDayModelImpl._originalUserId = workDayModelImpl._userId;
+
+		workDayModelImpl._setOriginalUserId = false;
+
+		workDayModelImpl._originalStartTime = workDayModelImpl._startTime;
+
+		workDayModelImpl._originalEndTime = workDayModelImpl._endTime;
 
 		workDayModelImpl._columnBitmask = 0;
 	}
@@ -661,12 +698,16 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _dayOfYearId;
 	private Date _startTime;
+	private Date _originalStartTime;
 	private Date _endTime;
+	private Date _originalEndTime;
 	private int _pause;
 	private long _columnBitmask;
 	private WorkDay _escapedModel;
