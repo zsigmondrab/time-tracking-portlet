@@ -20,12 +20,14 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.timetracking.timesheet.model.WorkDay;
 import com.liferay.timetracking.timesheet.service.base.WorkDayLocalServiceBaseImpl;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -44,79 +46,65 @@ import java.util.TimeZone;
  * @see com.liferay.timetracking.timesheet.service.WorkDayLocalServiceUtil
  */
 public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
+
 	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.timesheet.service.WorkDayLocalServiceUtil} to access the work day local service.
 	 */
+	public WorkDay addWorkDay(long userId, long companyId,
+			long startTime, long endTime, long dayOfYearId, int pause,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
 
-	public WorkDay addWorkDay(long endTime, long dayOfYearId, int pause, long startTime,
-		long userId, ServiceContext serviceContext)
-		throws SystemException, PortalException {
+		Date now = new Date();
 
 		long workDayId = counterLocalService.increment();
 
 		WorkDay workDay = workDayPersistence.create(workDayId);
 
-		// Group instance
-
-		workDay.setGroupId(serviceContext.getScopeGroupId());
-
-		// Audit fields
-
-		workDay.setCompanyId(serviceContext.getCompanyId());
+		workDay.setCompanyId(companyId);
 		workDay.setUserId(userId);
-		workDay.setUserName(UserLocalServiceUtil.getUserById(userId).
-			getFullName());
+		workDay.setUserName(UserLocalServiceUtil.getUserById(
+			userId).getFullName());
+
+		workDay.setCreateDate(now);
+		workDay.setModifiedDate(now);
 
 		TimeZone timeZone = TimeZoneUtil.getTimeZone(StringPool.UTC);
-		Calendar now = CalendarFactoryUtil.getCalendar(timeZone);
-
-		workDay.setCreateDate(now.getTime());
-		workDay.setModifiedDate(now.getTime());
-
-		// Other Fields
 
 		Calendar start = CalendarFactoryUtil.getCalendar(timeZone);
 		start.setTimeInMillis(startTime);
-		
-		workDay.setStartTime(start.getTime());
-		
+
 		Calendar end = CalendarFactoryUtil.getCalendar(timeZone);
 		end.setTimeInMillis(endTime);
 
+		workDay.setDayOfYearId(dayOfYearId);
 		workDay.setEndTime(end.getTime());
 		workDay.setPause(pause);
-		workDay.setDayOfYearId(dayOfYearId);
+		workDay.setStartTime(start.getTime());
 
 		workDayPersistence.update(workDay);
 
 		return workDay;
 	}
 
-	public WorkDay updateWorkDay(long endTime, long dayOfYearId, int pause, long startTime,
-		long userId, long workDayId, ServiceContext serviceContext)
-		throws SystemException, PortalException {
+	public WorkDay updateWorkDay(long userId, long workDayId, long startTime,
+			long endTime, long dayOfYearId, int pause,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Date now = new Date();
 
 		WorkDay workDay = workDayPersistence.findByPrimaryKey(workDayId);
 
-		// Group instance
-
-		workDay.setGroupId(serviceContext.getScopeGroupId());
-
-		// Audit fields
-
-		workDay.setCompanyId(serviceContext.getCompanyId());
 		workDay.setUserId(userId);
 		workDay.setUserName(UserLocalServiceUtil.getUserById(userId).
 			getFullName());
 
+		workDay.setModifiedDate(now);
+
 		TimeZone timeZone = TimeZoneUtil.getTimeZone(StringPool.UTC);
-		Calendar now = CalendarFactoryUtil.getCalendar(timeZone);
-
-		workDay.setModifiedDate(now.getTime());
-
-		// Other Fields
 
 		Calendar start = CalendarFactoryUtil.getCalendar(timeZone);
 		start.setTimeInMillis(startTime);
@@ -124,10 +112,9 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		Calendar end = CalendarFactoryUtil.getCalendar(timeZone);
 		end.setTimeInMillis(endTime);
 
-		workDay.setStartTime(start.getTime());
 		workDay.setEndTime(end.getTime());
 		workDay.setPause(pause);
-
+		workDay.setStartTime(start.getTime());
 		workDay.setDayOfYearId(dayOfYearId);
 
 		workDayPersistence.update(workDay);
@@ -135,17 +122,21 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		return workDay;
 	}
 
-	public List<WorkDay> getWorkDays(long fromDate, long toDate, long userId,
-		int start, int end, OrderByComparator orderByComparator)
+	public List<WorkDay> getWorkDays(long userId, long startTime,
+			long endTime, int start, int end,
+			OrderByComparator orderByComparator)
 		throws SystemException {
 
 		TimeZone timeZone = TimeZoneUtil.getTimeZone(StringPool.UTC);
 
-		Calendar from = CalendarFactoryUtil.getCalendar(timeZone);
-		Calendar to = CalendarFactoryUtil.getCalendar(timeZone);
+		Calendar startCalendar = CalendarFactoryUtil.getCalendar(timeZone);
+		startCalendar.setTimeInMillis(startTime);
+
+		Calendar endCalendar = CalendarFactoryUtil.getCalendar(timeZone);
+		endCalendar.setTimeInMillis(endTime);
 
 		List<WorkDay> workDays = workDayPersistence.findByS_E_U(
-			from.getTime(), to.getTime(), userId);
+			startCalendar.getTime(), endCalendar.getTime(), userId);
 
 		return workDays;
 	}
