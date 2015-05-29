@@ -14,7 +14,18 @@
 
 package com.liferay.timetracking.dayoffs.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.timetracking.dayoffs.model.Rule;
+import com.liferay.timetracking.dayoffs.model.impl.RuleImpl;
 import com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl;
+
+import java.util.Date;
 
 /**
  * The implementation of the rule local service.
@@ -26,14 +37,53 @@ import com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl;
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author LÃ¡szlÃ³ HudÃ¡k
+ * @author Laszlo Hudak
  * @see com.liferay.timetracking.dayoffs.service.base.RuleLocalServiceBaseImpl
  * @see com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil
  */
 public class RuleLocalServiceImpl extends RuleLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil} to access the rule local service.
+
+	/**
+	 * Adds a Rule with the given name and multiplier and default audit 
+	 * parameters
+	 * 
+	 * @param name the name of the rule
+	 * @param multiplier the value indicateing if the user is allowed to work 
+	 *        on the day to which the rule is assigne and also can be used for 
+	 *        calculating the salary
+	 * @return the web content article
+	 * @throws PortalException if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
+	public Rule addRule(String ruleName, double multiplier)
+		throws SystemException, PortalException {
+
+		Rule rule = new RuleImpl();
+		long companyId = PortalUtil.getDefaultCompanyId();
+		Group group = GroupLocalServiceUtil.getCompanyGroup(companyId);
+		User user = UserLocalServiceUtil.getDefaultUser(companyId);
+		Date now = new Date();
+
+		// PK Fields
+		rule.setRuleId(counterLocalService.increment());
+
+		// Group instance
+		rule.setGroupId(group.getGroupId());
+
+		//Audit fields
+		rule.setCompanyId(companyId);
+		rule.setUserId(user.getUserId());
+		rule.setUserName(user.getFullName());
+		rule.setCreateDate(now);
+		rule.setModifiedDate(now);
+
+		//Other Fields
+		rule.setName(ruleName);
+		rule.setMultiplier(multiplier);
+
+		addRule(rule);
+
+		return rule;
+	}
 }
