@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="docroot/WEB-INF/service"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="/liferay-portal-src-6.2-ce-ga3"/>
+	<classpathentry kind="lib" path="/liferay-portal-src-6.2-ce-ga3/lib/global/portlet.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
