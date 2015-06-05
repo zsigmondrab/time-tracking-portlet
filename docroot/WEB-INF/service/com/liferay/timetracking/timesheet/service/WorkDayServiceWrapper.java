@@ -56,6 +56,16 @@ public class WorkDayServiceWrapper implements WorkDayService,
 		return _workDayService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
+		long userId, long companyId, long startTime, long endTime, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _workDayService.getWorkDays(userId, companyId, startTime,
+			endTime, start, end, orderByComparator);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

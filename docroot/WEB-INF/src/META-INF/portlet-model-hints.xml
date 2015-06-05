@@ -33,7 +33,7 @@
 		<field name="dayOfYearId" type="long" />
 		<field name="startTime" type="Date" />
 		<field name="endTime" type="Date" />
-		<field name="pause" type="int" />
+		<field name="break_" type="int" />
 	</model>
 	<model name="com.liferay.timetracking.dayoffs.model.DaysOfYear">
 		<field name="dayOfYearId" type="long" />

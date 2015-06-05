@@ -14,6 +14,13 @@
 
 package com.liferay.timetracking.timesheet.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.liferay.timetracking.timesheet.service.WorkDayServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.liferay.timetracking.timesheet.service.WorkDayServiceUtil} service utility. The
@@ -55,4 +62,24 @@ package com.liferay.timetracking.timesheet.service.http;
  * @generated
  */
 public class WorkDayServiceSoap {
+	public static com.liferay.timetracking.timesheet.model.WorkDaySoap[] getWorkDays(
+		long userId, long companyId, long startTime, long endTime, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> returnValue =
+				WorkDayServiceUtil.getWorkDays(userId, companyId, startTime,
+					endTime, start, end, orderByComparator);
+
+			return com.liferay.timetracking.timesheet.model.WorkDaySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(WorkDayServiceSoap.class);
 }

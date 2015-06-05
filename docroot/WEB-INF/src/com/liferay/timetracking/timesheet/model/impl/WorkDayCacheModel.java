@@ -57,8 +57,8 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 		sb.append(startTime);
 		sb.append(", endTime=");
 		sb.append(endTime);
-		sb.append(", pause=");
-		sb.append(pause);
+		sb.append(", break_=");
+		sb.append(break_);
 		sb.append("}");
 
 		return sb.toString();
@@ -109,7 +109,7 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 			workDayImpl.setEndTime(new Date(endTime));
 		}
 
-		workDayImpl.setPause(pause);
+		workDayImpl.setBreak_(break_);
 
 		workDayImpl.resetOriginalValues();
 
@@ -127,7 +127,7 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 		dayOfYearId = objectInput.readLong();
 		startTime = objectInput.readLong();
 		endTime = objectInput.readLong();
-		pause = objectInput.readInt();
+		break_ = objectInput.readInt();
 	}
 
 	@Override
@@ -149,7 +149,7 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 		objectOutput.writeLong(dayOfYearId);
 		objectOutput.writeLong(startTime);
 		objectOutput.writeLong(endTime);
-		objectOutput.writeInt(pause);
+		objectOutput.writeInt(break_);
 	}
 
 	public long workDayId;
@@ -161,5 +161,5 @@ public class WorkDayCacheModel implements CacheModel<WorkDay>, Externalizable {
 	public long dayOfYearId;
 	public long startTime;
 	public long endTime;
-	public int pause;
+	public int break_;
 }

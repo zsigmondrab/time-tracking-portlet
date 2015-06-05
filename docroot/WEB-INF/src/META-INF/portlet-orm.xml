@@ -72,7 +72,7 @@
 			<basic name="endTime">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="pause" />
+			<basic name="break_" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

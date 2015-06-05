@@ -31,6 +31,13 @@ public class WorkDayServiceClp implements WorkDayService {
 		_methodName1 = "setBeanIdentifier";
 
 		_methodParameterTypes1 = new String[] { "java.lang.String" };
+
+		_methodName3 = "getWorkDays";
+
+		_methodParameterTypes3 = new String[] {
+				"long", "long", "long", "long", "int", "int",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
 	}
 
 	@Override
@@ -83,9 +90,57 @@ public class WorkDayServiceClp implements WorkDayService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
+		long userId, long companyId, long startTime, long endTime, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName3,
+					_methodParameterTypes3,
+					new Object[] {
+						userId,
+						
+					companyId,
+						
+					startTime,
+						
+					endTime,
+						
+					start,
+						
+					end,
+						
+					ClpSerializer.translateInput(orderByComparator)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.timetracking.timesheet.model.WorkDay>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
 	private String _methodName1;
 	private String[] _methodParameterTypes1;
+	private String _methodName3;
+	private String[] _methodParameterTypes3;
 }

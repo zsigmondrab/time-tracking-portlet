@@ -11,7 +11,6 @@ import java.io.IOException;
 import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
 public class TimesheetPortlet extends MVCPortlet {
 
 	@Override

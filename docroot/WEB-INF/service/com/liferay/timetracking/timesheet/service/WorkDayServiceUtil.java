@@ -63,6 +63,16 @@ public class WorkDayServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
+		long userId, long companyId, long startTime, long endTime, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getWorkDays(userId, companyId, startTime, endTime, start,
+			end, orderByComparator);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

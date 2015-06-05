@@ -14,11 +14,6 @@
 
 package com.liferay.timetracking.timesheet.service.impl;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -29,6 +24,11 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.timetracking.timesheet.model.WorkDay;
 import com.liferay.timetracking.timesheet.service.base.WorkDayLocalServiceBaseImpl;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 /**
  * The implementation of the work day local service.
@@ -64,8 +64,8 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 
 		workDay.setCompanyId(companyId);
 		workDay.setUserId(userId);
-		workDay.setUserName(UserLocalServiceUtil.getUserById(
-			userId).getFullName());
+		workDay.setUserName(
+			UserLocalServiceUtil.getUserById(userId).getFullName());
 
 		workDay.setCreateDate(now);
 		workDay.setModifiedDate(now);
@@ -86,6 +86,25 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		workDayPersistence.update(workDay);
 
 		return workDay;
+	}
+
+	public List<WorkDay> getWorkDays(long userId, long companyId,
+			long startTime, long endTime, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		TimeZone timeZone = TimeZoneUtil.getTimeZone(StringPool.UTC);
+
+		Calendar startCalendar = CalendarFactoryUtil.getCalendar(timeZone);
+		startCalendar.setTimeInMillis(startTime);
+
+		Calendar endCalendar = CalendarFactoryUtil.getCalendar(timeZone);
+		endCalendar.setTimeInMillis(endTime);
+
+		List<WorkDay> workDays = workDayPersistence.filterFindByS_E_U(
+			startCalendar.getTime(), endCalendar.getTime(), userId);
+
+		return workDays;
 	}
 
 	public WorkDay updateWorkDay(long userId, long workDayId, long startTime,
@@ -119,25 +138,6 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		workDayPersistence.update(workDay);
 
 		return workDay;
-	}
-
-	public List<WorkDay> getWorkDays(long userId, long companyId,
-			long startTime, long endTime, int start, int end,
-			OrderByComparator orderByComparator)
-		throws SystemException {
-
-		TimeZone timeZone = TimeZoneUtil.getTimeZone(StringPool.UTC);
-
-		Calendar startCalendar = CalendarFactoryUtil.getCalendar(timeZone);
-		startCalendar.setTimeInMillis(startTime);
-
-		Calendar endCalendar = CalendarFactoryUtil.getCalendar(timeZone);
-		endCalendar.setTimeInMillis(endTime);
-
-		List<WorkDay> workDays = workDayPersistence.filterFindByS_E_U(
-			startCalendar.getTime(), endCalendar.getTime(), userId);
-
-		return workDays;
 	}
 
 }

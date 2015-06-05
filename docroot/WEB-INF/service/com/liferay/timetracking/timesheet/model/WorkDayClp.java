@@ -84,7 +84,7 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		attributes.put("dayOfYearId", getDayOfYearId());
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
-		attributes.put("pause", getPause());
+		attributes.put("break_", getBreak_());
 
 		return attributes;
 	}
@@ -145,10 +145,10 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 			setEndTime(endTime);
 		}
 
-		Integer pause = (Integer)attributes.get("pause");
+		Integer break_ = (Integer)attributes.get("break_");
 
-		if (pause != null) {
-			setPause(pause);
+		if (break_ != null) {
+			setBreak_(break_);
 		}
 	}
 
@@ -370,21 +370,21 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 	}
 
 	@Override
-	public int getPause() {
-		return _pause;
+	public int getBreak_() {
+		return _break_;
 	}
 
 	@Override
-	public void setPause(int pause) {
-		_pause = pause;
+	public void setBreak_(int break_) {
+		_break_ = break_;
 
 		if (_workDayRemoteModel != null) {
 			try {
 				Class<?> clazz = _workDayRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setPause", int.class);
+				Method method = clazz.getMethod("setBreak_", int.class);
 
-				method.invoke(_workDayRemoteModel, pause);
+				method.invoke(_workDayRemoteModel, break_);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -470,7 +470,7 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		clone.setDayOfYearId(getDayOfYearId());
 		clone.setStartTime(getStartTime());
 		clone.setEndTime(getEndTime());
-		clone.setPause(getPause());
+		clone.setBreak_(getBreak_());
 
 		return clone;
 	}
@@ -547,8 +547,8 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		sb.append(getStartTime());
 		sb.append(", endTime=");
 		sb.append(getEndTime());
-		sb.append(", pause=");
-		sb.append(getPause());
+		sb.append(", break_=");
+		sb.append(getBreak_());
 		sb.append("}");
 
 		return sb.toString();
@@ -599,8 +599,8 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 		sb.append(getEndTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>pause</column-name><column-value><![CDATA[");
-		sb.append(getPause());
+			"<column><column-name>break_</column-name><column-value><![CDATA[");
+		sb.append(getBreak_());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -618,7 +618,7 @@ public class WorkDayClp extends BaseModelImpl<WorkDay> implements WorkDay {
 	private long _dayOfYearId;
 	private Date _startTime;
 	private Date _endTime;
-	private int _pause;
+	private int _break_;
 	private BaseModel<?> _workDayRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.timetracking.timesheet.service.ClpSerializer.class;
 }

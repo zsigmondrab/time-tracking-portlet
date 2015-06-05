@@ -76,9 +76,9 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 			{ "dayOfYearId", Types.BIGINT },
 			{ "startTime", Types.TIMESTAMP },
 			{ "endTime", Types.TIMESTAMP },
-			{ "pause", Types.INTEGER }
+			{ "break_", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TimeTracking_WorkDay (workDayId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,dayOfYearId LONG,startTime DATE null,endTime DATE null,pause INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table TimeTracking_WorkDay (workDayId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,dayOfYearId LONG,startTime DATE null,endTime DATE null,break_ INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table TimeTracking_WorkDay";
 	public static final String ORDER_BY_JPQL = " ORDER BY workDay.startTime ASC, workDay.endTime ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY TimeTracking_WorkDay.startTime ASC, TimeTracking_WorkDay.endTime ASC";
@@ -121,7 +121,7 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		model.setDayOfYearId(soapModel.getDayOfYearId());
 		model.setStartTime(soapModel.getStartTime());
 		model.setEndTime(soapModel.getEndTime());
-		model.setPause(soapModel.getPause());
+		model.setBreak_(soapModel.getBreak_());
 
 		return model;
 	}
@@ -195,7 +195,7 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		attributes.put("dayOfYearId", getDayOfYearId());
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
-		attributes.put("pause", getPause());
+		attributes.put("break_", getBreak_());
 
 		return attributes;
 	}
@@ -256,10 +256,10 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 			setEndTime(endTime);
 		}
 
-		Integer pause = (Integer)attributes.get("pause");
+		Integer break_ = (Integer)attributes.get("break_");
 
-		if (pause != null) {
-			setPause(pause);
+		if (break_ != null) {
+			setBreak_(break_);
 		}
 	}
 
@@ -423,13 +423,13 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 
 	@JSON
 	@Override
-	public int getPause() {
-		return _pause;
+	public int getBreak_() {
+		return _break_;
 	}
 
 	@Override
-	public void setPause(int pause) {
-		_pause = pause;
+	public void setBreak_(int break_) {
+		_break_ = break_;
 	}
 
 	public long getColumnBitmask() {
@@ -472,7 +472,7 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		workDayImpl.setDayOfYearId(getDayOfYearId());
 		workDayImpl.setStartTime(getStartTime());
 		workDayImpl.setEndTime(getEndTime());
-		workDayImpl.setPause(getPause());
+		workDayImpl.setBreak_(getBreak_());
 
 		workDayImpl.resetOriginalValues();
 
@@ -600,7 +600,7 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 			workDayCacheModel.endTime = Long.MIN_VALUE;
 		}
 
-		workDayCacheModel.pause = getPause();
+		workDayCacheModel.break_ = getBreak_();
 
 		return workDayCacheModel;
 	}
@@ -627,8 +627,8 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		sb.append(getStartTime());
 		sb.append(", endTime=");
 		sb.append(getEndTime());
-		sb.append(", pause=");
-		sb.append(getPause());
+		sb.append(", break_=");
+		sb.append(getBreak_());
 		sb.append("}");
 
 		return sb.toString();
@@ -679,8 +679,8 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 		sb.append(getEndTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>pause</column-name><column-value><![CDATA[");
-		sb.append(getPause());
+			"<column><column-name>break_</column-name><column-value><![CDATA[");
+		sb.append(getBreak_());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -708,7 +708,7 @@ public class WorkDayModelImpl extends BaseModelImpl<WorkDay>
 	private Date _originalStartTime;
 	private Date _endTime;
 	private Date _originalEndTime;
-	private int _pause;
+	private int _break_;
 	private long _columnBitmask;
 	private WorkDay _escapedModel;
 }

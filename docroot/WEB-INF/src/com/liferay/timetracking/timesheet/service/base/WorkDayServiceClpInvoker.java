@@ -31,6 +31,13 @@ public class WorkDayServiceClpInvoker {
 		_methodName19 = "setBeanIdentifier";
 
 		_methodParameterTypes19 = new String[] { "java.lang.String" };
+
+		_methodName24 = "getWorkDays";
+
+		_methodParameterTypes24 = new String[] {
+				"long", "long", "long", "long", "int", "int",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -47,6 +54,17 @@ public class WorkDayServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName24.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes24, parameterTypes)) {
+			return WorkDayServiceUtil.getWorkDays(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				((Long)arguments[3]).longValue(),
+				((Integer)arguments[4]).intValue(),
+				((Integer)arguments[5]).intValue(),
+				(com.liferay.portal.kernel.util.OrderByComparator)arguments[6]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -54,4 +72,6 @@ public class WorkDayServiceClpInvoker {
 	private String[] _methodParameterTypes18;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

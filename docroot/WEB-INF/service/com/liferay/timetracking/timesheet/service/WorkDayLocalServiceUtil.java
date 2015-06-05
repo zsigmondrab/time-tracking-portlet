@@ -282,33 +282,34 @@ public class WorkDayLocalServiceUtil {
 	*/
 	public static com.liferay.timetracking.timesheet.model.WorkDay addWorkDay(
 		long userId, long companyId, long startTime, long endTime,
-		long dayOfYearId, int pause,
+		long dayOfYearId, int break_,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addWorkDay(userId, companyId, startTime, endTime,
-			dayOfYearId, pause, serviceContext);
+			dayOfYearId, break_, serviceContext);
 	}
 
 	public static com.liferay.timetracking.timesheet.model.WorkDay updateWorkDay(
 		long userId, long workDayId, long startTime, long endTime,
-		long dayOfYearId, int pause,
+		long dayOfYearId, int break_,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateWorkDay(userId, workDayId, startTime, endTime,
-			dayOfYearId, pause, serviceContext);
+			dayOfYearId, break_, serviceContext);
 	}
 
 	public static java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
-		long userId, long startTime, long endTime, int start, int end,
+		long userId, long companyId, long startTime, long endTime, int start,
+		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getWorkDays(userId, startTime, endTime, start, end,
-			orderByComparator);
+				   .getWorkDays(userId, companyId, startTime, endTime, start,
+			end, orderByComparator);
 	}
 
 	public static void clearService() {

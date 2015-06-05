@@ -69,5 +69,5 @@ create table TimeTracking_WorkDay (
 	dayOfYearId LONG,
 	startTime DATE null,
 	endTime DATE null,
-	pause INTEGER
+	break_ INTEGER
 );

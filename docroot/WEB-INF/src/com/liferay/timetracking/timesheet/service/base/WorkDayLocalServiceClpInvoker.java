@@ -131,7 +131,7 @@ public class WorkDayLocalServiceClpInvoker {
 		_methodName42 = "getWorkDays";
 
 		_methodParameterTypes42 = new String[] {
-				"long", "long", "long", "int", "int",
+				"long", "long", "long", "long", "int", "int",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 	}
@@ -264,9 +264,10 @@ public class WorkDayLocalServiceClpInvoker {
 			return WorkDayLocalServiceUtil.getWorkDays(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
-				((Integer)arguments[3]).intValue(),
+				((Long)arguments[3]).longValue(),
 				((Integer)arguments[4]).intValue(),
-				(com.liferay.portal.kernel.util.OrderByComparator)arguments[5]);
+				((Integer)arguments[5]).intValue(),
+				(com.liferay.portal.kernel.util.OrderByComparator)arguments[6]);
 		}
 
 		throw new UnsupportedOperationException();

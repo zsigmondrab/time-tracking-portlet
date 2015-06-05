@@ -58,7 +58,7 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 		attributes.put("dayOfYearId", getDayOfYearId());
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
-		attributes.put("pause", getPause());
+		attributes.put("break_", getBreak_());
 
 		return attributes;
 	}
@@ -119,10 +119,10 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 			setEndTime(endTime);
 		}
 
-		Integer pause = (Integer)attributes.get("pause");
+		Integer break_ = (Integer)attributes.get("break_");
 
-		if (pause != null) {
-			setPause(pause);
+		if (break_ != null) {
+			setBreak_(break_);
 		}
 	}
 
@@ -349,23 +349,23 @@ public class WorkDayWrapper implements WorkDay, ModelWrapper<WorkDay> {
 	}
 
 	/**
-	* Returns the pause of this work day.
+	* Returns the break_ of this work day.
 	*
-	* @return the pause of this work day
+	* @return the break_ of this work day
 	*/
 	@Override
-	public int getPause() {
-		return _workDay.getPause();
+	public int getBreak_() {
+		return _workDay.getBreak_();
 	}
 
 	/**
-	* Sets the pause of this work day.
+	* Sets the break_ of this work day.
 	*
-	* @param pause the pause of this work day
+	* @param break_ the break_ of this work day
 	*/
 	@Override
-	public void setPause(int pause) {
-		_workDay.setPause(pause);
+	public void setBreak_(int break_) {
+		_workDay.setBreak_(break_);
 	}
 
 	@Override

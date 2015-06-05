@@ -48,7 +48,7 @@
 		<property name="dayOfYearId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="startTime" type="org.hibernate.type.TimestampType" />
 		<property name="endTime" type="org.hibernate.type.TimestampType" />
-		<property name="pause" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="break_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.timetracking.dayoffs.model.impl.DaysOfYearImpl" table="TimeTracking_DaysOfYear">
 		<cache usage="read-write" />

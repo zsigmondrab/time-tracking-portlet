@@ -216,18 +216,18 @@ public interface WorkDayModel extends AuditedModel, BaseModel<WorkDay> {
 	public void setEndTime(Date endTime);
 
 	/**
-	 * Returns the pause of this work day.
+	 * Returns the break_ of this work day.
 	 *
-	 * @return the pause of this work day
+	 * @return the break_ of this work day
 	 */
-	public int getPause();
+	public int getBreak_();
 
 	/**
-	 * Sets the pause of this work day.
+	 * Sets the break_ of this work day.
 	 *
-	 * @param pause the pause of this work day
+	 * @param break_ the break_ of this work day
 	 */
-	public void setPause(int pause);
+	public void setBreak_(int break_);
 
 	@Override
 	public boolean isNew();
