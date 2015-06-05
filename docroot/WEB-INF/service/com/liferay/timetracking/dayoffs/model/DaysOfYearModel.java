@@ -17,9 +17,9 @@ package com.liferay.timetracking.dayoffs.model;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.AttachedModel;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -41,8 +41,8 @@ import java.util.Date;
  * @see com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl
  * @generated
  */
-public interface DaysOfYearModel extends AttachedModel, BaseModel<DaysOfYear>,
-	GroupedModel {
+public interface DaysOfYearModel extends AttachedModel, AuditedModel,
+	BaseModel<DaysOfYear> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -76,22 +76,6 @@ public interface DaysOfYearModel extends AttachedModel, BaseModel<DaysOfYear>,
 	 * @param dayOfYearId the day of year ID of this days of year
 	 */
 	public void setDayOfYearId(long dayOfYearId);
-
-	/**
-	 * Returns the group ID of this days of year.
-	 *
-	 * @return the group ID of this days of year
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this days of year.
-	 *
-	 * @param groupId the group ID of this days of year
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this days of year.

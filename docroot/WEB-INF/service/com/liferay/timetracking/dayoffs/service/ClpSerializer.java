@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 
 import com.liferay.timetracking.dayoffs.model.DaysOfYearClp;
+import com.liferay.timetracking.dayoffs.model.DaysOffCounterClp;
 import com.liferay.timetracking.dayoffs.model.RuleClp;
 
 import java.io.ObjectInputStream;
@@ -103,6 +104,10 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
+		if (oldModelClassName.equals(DaysOffCounterClp.class.getName())) {
+			return translateInputDaysOffCounter(oldModel);
+		}
+
 		if (oldModelClassName.equals(DaysOfYearClp.class.getName())) {
 			return translateInputDaysOfYear(oldModel);
 		}
@@ -124,6 +129,16 @@ public class ClpSerializer {
 		}
 
 		return newList;
+	}
+
+	public static Object translateInputDaysOffCounter(BaseModel<?> oldModel) {
+		DaysOffCounterClp oldClpModel = (DaysOffCounterClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getDaysOffCounterRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
 	}
 
 	public static Object translateInputDaysOfYear(BaseModel<?> oldModel) {
@@ -162,6 +177,43 @@ public class ClpSerializer {
 		Class<?> oldModelClass = oldModel.getClass();
 
 		String oldModelClassName = oldModelClass.getName();
+
+		if (oldModelClassName.equals(
+					"com.liferay.timetracking.dayoffs.model.impl.DaysOffCounterImpl")) {
+			return translateOutputDaysOffCounter(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
 
 		if (oldModelClassName.equals(
 					"com.liferay.timetracking.dayoffs.model.impl.DaysOfYearImpl")) {
@@ -318,6 +370,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"com.liferay.timetracking.dayoffs.NoSuchDaysOffCounterException")) {
+			return new com.liferay.timetracking.dayoffs.NoSuchDaysOffCounterException();
+		}
+
+		if (className.equals(
 					"com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException")) {
 			return new com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException();
 		}
@@ -328,6 +385,16 @@ public class ClpSerializer {
 		}
 
 		return throwable;
+	}
+
+	public static Object translateOutputDaysOffCounter(BaseModel<?> oldModel) {
+		DaysOffCounterClp newModel = new DaysOffCounterClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setDaysOffCounterRemoteModel(oldModel);
+
+		return newModel;
 	}
 
 	public static Object translateOutputDaysOfYear(BaseModel<?> oldModel) {

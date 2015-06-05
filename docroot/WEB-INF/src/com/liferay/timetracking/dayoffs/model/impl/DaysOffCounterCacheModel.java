@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 
-import com.liferay.timetracking.dayoffs.model.DaysOfYear;
+import com.liferay.timetracking.dayoffs.model.DaysOffCounter;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -28,20 +28,20 @@ import java.io.ObjectOutput;
 import java.util.Date;
 
 /**
- * The cache model class for representing DaysOfYear in entity cache.
+ * The cache model class for representing DaysOffCounter in entity cache.
  *
  * @author Laszlo Hudak
- * @see DaysOfYear
+ * @see DaysOffCounter
  * @generated
  */
-public class DaysOfYearCacheModel implements CacheModel<DaysOfYear>,
+public class DaysOffCounterCacheModel implements CacheModel<DaysOffCounter>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(25);
 
-		sb.append("{dayOfYearId=");
-		sb.append(dayOfYearId);
+		sb.append("{dayOffCounterId=");
+		sb.append(dayOffCounterId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -52,82 +52,91 @@ public class DaysOfYearCacheModel implements CacheModel<DaysOfYear>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", dayId=");
-		sb.append(dayId);
+		sb.append(", workerUserId=");
+		sb.append(workerUserId);
+		sb.append(", workerUserName=");
+		sb.append(workerUserName);
 		sb.append(", ruleId=");
 		sb.append(ruleId);
-		sb.append(", classNameId=");
-		sb.append(classNameId);
-		sb.append(", classPK=");
-		sb.append(classPK);
+		sb.append(", year=");
+		sb.append(year);
+		sb.append(", allDays=");
+		sb.append(allDays);
+		sb.append(", remainingDays=");
+		sb.append(remainingDays);
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	@Override
-	public DaysOfYear toEntityModel() {
-		DaysOfYearImpl daysOfYearImpl = new DaysOfYearImpl();
+	public DaysOffCounter toEntityModel() {
+		DaysOffCounterImpl daysOffCounterImpl = new DaysOffCounterImpl();
 
-		daysOfYearImpl.setDayOfYearId(dayOfYearId);
-		daysOfYearImpl.setCompanyId(companyId);
-		daysOfYearImpl.setUserId(userId);
+		daysOffCounterImpl.setDayOffCounterId(dayOffCounterId);
+		daysOffCounterImpl.setCompanyId(companyId);
+		daysOffCounterImpl.setUserId(userId);
 
 		if (userName == null) {
-			daysOfYearImpl.setUserName(StringPool.BLANK);
+			daysOffCounterImpl.setUserName(StringPool.BLANK);
 		}
 		else {
-			daysOfYearImpl.setUserName(userName);
+			daysOffCounterImpl.setUserName(userName);
 		}
 
 		if (createDate == Long.MIN_VALUE) {
-			daysOfYearImpl.setCreateDate(null);
+			daysOffCounterImpl.setCreateDate(null);
 		}
 		else {
-			daysOfYearImpl.setCreateDate(new Date(createDate));
+			daysOffCounterImpl.setCreateDate(new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
-			daysOfYearImpl.setModifiedDate(null);
+			daysOffCounterImpl.setModifiedDate(null);
 		}
 		else {
-			daysOfYearImpl.setModifiedDate(new Date(modifiedDate));
+			daysOffCounterImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		if (dayId == Long.MIN_VALUE) {
-			daysOfYearImpl.setDayId(null);
+		daysOffCounterImpl.setWorkerUserId(workerUserId);
+
+		if (workerUserName == null) {
+			daysOffCounterImpl.setWorkerUserName(StringPool.BLANK);
 		}
 		else {
-			daysOfYearImpl.setDayId(new Date(dayId));
+			daysOffCounterImpl.setWorkerUserName(workerUserName);
 		}
 
-		daysOfYearImpl.setRuleId(ruleId);
-		daysOfYearImpl.setClassNameId(classNameId);
-		daysOfYearImpl.setClassPK(classPK);
+		daysOffCounterImpl.setRuleId(ruleId);
+		daysOffCounterImpl.setYear(year);
+		daysOffCounterImpl.setAllDays(allDays);
+		daysOffCounterImpl.setRemainingDays(remainingDays);
 
-		daysOfYearImpl.resetOriginalValues();
+		daysOffCounterImpl.resetOriginalValues();
 
-		return daysOfYearImpl;
+		return daysOffCounterImpl;
 	}
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		dayOfYearId = objectInput.readLong();
+		dayOffCounterId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		dayId = objectInput.readLong();
+		workerUserId = objectInput.readLong();
+		workerUserName = objectInput.readUTF();
 		ruleId = objectInput.readLong();
-		classNameId = objectInput.readLong();
-		classPK = objectInput.readLong();
+		year = objectInput.readInt();
+		allDays = objectInput.readInt();
+		remainingDays = objectInput.readInt();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
-		objectOutput.writeLong(dayOfYearId);
+		objectOutput.writeLong(dayOffCounterId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
 
@@ -140,20 +149,31 @@ public class DaysOfYearCacheModel implements CacheModel<DaysOfYear>,
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
-		objectOutput.writeLong(dayId);
+		objectOutput.writeLong(workerUserId);
+
+		if (workerUserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(workerUserName);
+		}
+
 		objectOutput.writeLong(ruleId);
-		objectOutput.writeLong(classNameId);
-		objectOutput.writeLong(classPK);
+		objectOutput.writeInt(year);
+		objectOutput.writeInt(allDays);
+		objectOutput.writeInt(remainingDays);
 	}
 
-	public long dayOfYearId;
+	public long dayOffCounterId;
 	public long companyId;
 	public long userId;
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long dayId;
+	public long workerUserId;
+	public String workerUserName;
 	public long ruleId;
-	public long classNameId;
-	public long classPK;
+	public int year;
+	public int allDays;
+	public int remainingDays;
 }

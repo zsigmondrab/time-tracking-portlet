@@ -69,7 +69,6 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 	public static final String TABLE_NAME = "TimeTracking_DaysOfYear";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "dayOfYearId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -80,7 +79,7 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TimeTracking_DaysOfYear (dayOfYearId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,dayId DATE null,ruleId LONG,classNameId LONG,classPK LONG)";
+	public static final String TABLE_SQL_CREATE = "create table TimeTracking_DaysOfYear (dayOfYearId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,dayId DATE null,ruleId LONG,classNameId LONG,classPK LONG)";
 	public static final String TABLE_SQL_DROP = "drop table TimeTracking_DaysOfYear";
 	public static final String ORDER_BY_JPQL = " ORDER BY daysOfYear.dayId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY TimeTracking_DaysOfYear.dayId ASC";
@@ -98,8 +97,8 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 			true);
 	public static long CLASSNAMEID_COLUMN_BITMASK = 1L;
 	public static long CLASSPK_COLUMN_BITMASK = 2L;
-	public static long DAYID_COLUMN_BITMASK = 4L;
-	public static long GROUPID_COLUMN_BITMASK = 8L;
+	public static long COMPANYID_COLUMN_BITMASK = 4L;
+	public static long DAYID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -115,7 +114,6 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 		DaysOfYear model = new DaysOfYearImpl();
 
 		model.setDayOfYearId(soapModel.getDayOfYearId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -190,7 +188,6 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("dayOfYearId", getDayOfYearId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -210,12 +207,6 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 
 		if (dayOfYearId != null) {
 			setDayOfYearId(dayOfYearId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -286,36 +277,25 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -507,7 +487,6 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 		DaysOfYearImpl daysOfYearImpl = new DaysOfYearImpl();
 
 		daysOfYearImpl.setDayOfYearId(getDayOfYearId());
-		daysOfYearImpl.setGroupId(getGroupId());
 		daysOfYearImpl.setCompanyId(getCompanyId());
 		daysOfYearImpl.setUserId(getUserId());
 		daysOfYearImpl.setUserName(getUserName());
@@ -567,9 +546,9 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 	public void resetOriginalValues() {
 		DaysOfYearModelImpl daysOfYearModelImpl = this;
 
-		daysOfYearModelImpl._originalGroupId = daysOfYearModelImpl._groupId;
+		daysOfYearModelImpl._originalCompanyId = daysOfYearModelImpl._companyId;
 
-		daysOfYearModelImpl._setOriginalGroupId = false;
+		daysOfYearModelImpl._setOriginalCompanyId = false;
 
 		daysOfYearModelImpl._originalDayId = daysOfYearModelImpl._dayId;
 
@@ -589,8 +568,6 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 		DaysOfYearCacheModel daysOfYearCacheModel = new DaysOfYearCacheModel();
 
 		daysOfYearCacheModel.dayOfYearId = getDayOfYearId();
-
-		daysOfYearCacheModel.groupId = getGroupId();
 
 		daysOfYearCacheModel.companyId = getCompanyId();
 
@@ -642,12 +619,10 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{dayOfYearId=");
 		sb.append(getDayOfYearId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -673,7 +648,7 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.timetracking.dayoffs.model.DaysOfYear");
@@ -682,10 +657,6 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 		sb.append(
 			"<column><column-name>dayOfYearId</column-name><column-value><![CDATA[");
 		sb.append(getDayOfYearId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -734,10 +705,9 @@ public class DaysOfYearModelImpl extends BaseModelImpl<DaysOfYear>
 			DaysOfYear.class
 		};
 	private long _dayOfYearId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

@@ -78,10 +78,34 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.timetracking.dayoffs.model.impl.DaysOffCounterModelImpl">
+		<attributes>
+			<id name="dayOffCounterId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="workerUserId" />
+			<basic name="workerUserName" />
+			<basic name="ruleId" />
+			<basic name="year" />
+			<basic name="allDays" />
+			<basic name="remainingDays" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+			<transient name="workerUserUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl">
 		<attributes>
 			<id name="dayOfYearId" />
-			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
@@ -134,6 +158,10 @@
 	</entity>
 	<entity class="com.liferay.timetracking.timesheet.model.impl.WorkDayImpl" name="WorkDay">
 		<table name="TimeTracking_WorkDay" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.timetracking.dayoffs.model.impl.DaysOffCounterImpl" name="DaysOffCounter">
+		<table name="TimeTracking_DaysOffCounter" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.timetracking.dayoffs.model.impl.DaysOfYearImpl" name="DaysOfYear">

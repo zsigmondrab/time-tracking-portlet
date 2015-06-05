@@ -5,6 +5,7 @@
 	<import class="com.liferay.timetracking.activities.model.Activity" />
 	<import class="com.liferay.timetracking.activities.model.ActivityAssignment" />
 	<import class="com.liferay.timetracking.timesheet.model.WorkDay" />
+	<import class="com.liferay.timetracking.dayoffs.model.DaysOffCounter" />
 	<import class="com.liferay.timetracking.dayoffs.model.DaysOfYear" />
 	<import class="com.liferay.timetracking.dayoffs.model.Rule" />
 	<class name="com.liferay.timetracking.activities.model.impl.ActivityImpl" table="TimeTracking_Activity">
@@ -49,12 +50,28 @@
 		<property name="endTime" type="org.hibernate.type.TimestampType" />
 		<property name="break_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
+	<class name="com.liferay.timetracking.dayoffs.model.impl.DaysOffCounterImpl" table="TimeTracking_DaysOffCounter">
+		<cache usage="read-write" />
+		<id name="dayOffCounterId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="workerUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="workerUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ruleId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="year" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="allDays" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="remainingDays" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
 	<class name="com.liferay.timetracking.dayoffs.model.impl.DaysOfYearImpl" table="TimeTracking_DaysOfYear">
 		<cache usage="read-write" />
 		<id name="dayOfYearId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
