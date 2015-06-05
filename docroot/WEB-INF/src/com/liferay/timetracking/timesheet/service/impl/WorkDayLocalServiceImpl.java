@@ -14,7 +14,6 @@
 
 package com.liferay.timetracking.timesheet.service.impl;
 
-import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -23,7 +22,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -58,7 +56,8 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.timesheet.service.WorkDayLocalServiceUtil} to access the work day local service.
 	 */
-	public WorkDay addWorkDay(long userId, long companyId,
+	public WorkDay addWorkDay(
+			long userId, long companyId,
 			long startTime, long endTime, long dayOfYearId, int break_,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -97,7 +96,8 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		return workDay;
 	}
 
-	public List<WorkDay> getWorkDays(long userId, long companyId,
+	public List<WorkDay> getWorkDays(
+			long userId, long companyId,
 			long startTime, long endTime, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {
@@ -116,7 +116,8 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		return workDays;
 	}
 
-	public WorkDay updateWorkDay(long userId, long workDayId, long startTime,
+	public WorkDay updateWorkDay(
+			long userId, long workDayId, long startTime,
 			long endTime, long dayOfYearId, int break_,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {

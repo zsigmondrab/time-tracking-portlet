@@ -49,9 +49,9 @@ public class WorkDayServiceImpl extends WorkDayServiceBaseImpl {
 			serviceContext);
 	}
 
-	public List<WorkDay> getWorkDays(long userId, long companyId,
-			long startTime, long endTime, int start, int end,
-			OrderByComparator orderByComparator)
+	public List<WorkDay> getWorkDays(
+			long userId, long companyId, long startTime, long endTime,
+			int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 
 		return workDayLocalService.getWorkDays(userId, companyId, startTime,
