@@ -14,22 +14,21 @@
 
 package com.liferay.timetracking.timesheet.service.impl;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.timetracking.timesheet.model.WorkDay;
 import com.liferay.timetracking.timesheet.service.base.WorkDayLocalServiceBaseImpl;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
 
 /**
  * The implementation of the work day local service.
@@ -53,7 +52,7 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.timesheet.service.WorkDayLocalServiceUtil} to access the work day local service.
 	 */
 	public WorkDay addWorkDay(long userId, long companyId,
-			long startTime, long endTime, long dayOfYearId, int pause,
+			long startTime, long endTime, long dayOfYearId, int break_,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -81,7 +80,7 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 
 		workDay.setDayOfYearId(dayOfYearId);
 		workDay.setEndTime(end.getTime());
-		workDay.setPause(pause);
+		workDay.setBreak_(break_);
 		workDay.setStartTime(start.getTime());
 
 		workDayPersistence.update(workDay);
@@ -90,7 +89,7 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 	}
 
 	public WorkDay updateWorkDay(long userId, long workDayId, long startTime,
-			long endTime, long dayOfYearId, int pause,
+			long endTime, long dayOfYearId, int break_,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -113,7 +112,7 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		end.setTimeInMillis(endTime);
 
 		workDay.setEndTime(end.getTime());
-		workDay.setPause(pause);
+		workDay.setBreak_(break_);
 		workDay.setStartTime(start.getTime());
 		workDay.setDayOfYearId(dayOfYearId);
 
@@ -122,8 +121,8 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		return workDay;
 	}
 
-	public List<WorkDay> getWorkDays(long userId, long startTime,
-			long endTime, int start, int end,
+	public List<WorkDay> getWorkDays(long userId, long companyId,
+			long startTime, long endTime, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
@@ -135,9 +134,10 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		Calendar endCalendar = CalendarFactoryUtil.getCalendar(timeZone);
 		endCalendar.setTimeInMillis(endTime);
 
-		List<WorkDay> workDays = workDayPersistence.findByS_E_U(
+		List<WorkDay> workDays = workDayPersistence.filterFindByS_E_U(
 			startCalendar.getTime(), endCalendar.getTime(), userId);
 
 		return workDays;
 	}
+
 }
