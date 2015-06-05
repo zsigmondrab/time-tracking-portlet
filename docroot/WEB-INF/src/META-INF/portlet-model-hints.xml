@@ -34,9 +34,22 @@
 		<field name="endTime" type="Date" />
 		<field name="break_" type="int" />
 	</model>
+	<model name="com.liferay.timetracking.dayoffs.model.DaysOffCounter">
+		<field name="dayOffCounterId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="workerUserId" type="long" />
+		<field name="workerUserName" type="String" />
+		<field name="ruleId" type="long" />
+		<field name="year" type="int" />
+		<field name="allDays" type="int" />
+		<field name="remainingDays" type="int" />
+	</model>
 	<model name="com.liferay.timetracking.dayoffs.model.DaysOfYear">
 		<field name="dayOfYearId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.timetracking.dayoffs.service.ClpSerializer;
 import com.liferay.timetracking.dayoffs.service.DaysOfYearLocalServiceUtil;
 import com.liferay.timetracking.dayoffs.service.DaysOfYearServiceUtil;
+import com.liferay.timetracking.dayoffs.service.DaysOffCounterLocalServiceUtil;
+import com.liferay.timetracking.dayoffs.service.DaysOffCounterServiceUtil;
 import com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil;
 import com.liferay.timetracking.dayoffs.service.RuleServiceUtil;
 
@@ -38,6 +40,9 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
+			DaysOffCounterLocalServiceUtil.clearService();
+
+			DaysOffCounterServiceUtil.clearService();
 			DaysOfYearLocalServiceUtil.clearService();
 
 			DaysOfYearServiceUtil.clearService();
