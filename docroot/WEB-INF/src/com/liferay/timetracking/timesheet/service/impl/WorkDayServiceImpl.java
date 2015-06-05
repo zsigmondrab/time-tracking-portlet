@@ -14,6 +14,11 @@
 
 package com.liferay.timetracking.timesheet.service.impl;
 
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.timetracking.timesheet.model.WorkDay;
 import com.liferay.timetracking.timesheet.service.base.WorkDayServiceBaseImpl;
 
 /**
@@ -31,9 +36,14 @@ import com.liferay.timetracking.timesheet.service.base.WorkDayServiceBaseImpl;
  * @see com.liferay.timetracking.timesheet.service.WorkDayServiceUtil
  */
 public class WorkDayServiceImpl extends WorkDayServiceBaseImpl {
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.timesheet.service.WorkDayServiceUtil} to access the work day remote service.
-	 */
+
+	public List<WorkDay> getWorkDays(long userId, long companyId,
+			long startTime, long endTime, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		return workDayLocalService.getWorkDays(userId, companyId, startTime,
+			endTime, start, end, orderByComparator);
+	}
+
 }
