@@ -301,6 +301,16 @@ public class WorkDayLocalServiceWrapper implements WorkDayLocalService,
 	}
 
 	@Override
+	public java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
+		long userId, long companyId, long startTime, long endTime, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _workDayLocalService.getWorkDays(userId, companyId, startTime,
+			endTime, start, end, orderByComparator);
+	}
+
+	@Override
 	public com.liferay.timetracking.timesheet.model.WorkDay updateWorkDay(
 		long userId, long workDayId, long startTime, long endTime,
 		long dayOfYearId, int break_,
@@ -309,16 +319,6 @@ public class WorkDayLocalServiceWrapper implements WorkDayLocalService,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _workDayLocalService.updateWorkDay(userId, workDayId, startTime,
 			endTime, dayOfYearId, break_, serviceContext);
-	}
-
-	@Override
-	public java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
-		long userId, long companyId, long startTime, long endTime, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _workDayLocalService.getWorkDays(userId, companyId, startTime,
-			endTime, start, end, orderByComparator);
 	}
 
 	/**
