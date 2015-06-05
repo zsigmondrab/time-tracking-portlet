@@ -6,6 +6,7 @@ create index IX_9DC2208D on TimeTracking_ActivityAssignment (groupId);
 
 create index IX_DA8BA622 on TimeTracking_DaysOfYear (classNameId);
 create index IX_4E8B0AB7 on TimeTracking_DaysOfYear (classPK);
+create index IX_EDF9D5FC on TimeTracking_DaysOfYear (companyId);
 create index IX_59886E9B on TimeTracking_DaysOfYear (dayId);
 create index IX_5C1C5E93 on TimeTracking_DaysOfYear (dayId, classNameId);
 create index IX_BB722AB0 on TimeTracking_DaysOfYear (dayId, classNameId, classPK);
@@ -16,6 +17,20 @@ create index IX_BE92ACEF on TimeTracking_DaysOfYear (dayOfYearId);
 create index IX_F6B7AB7E on TimeTracking_DaysOfYear (groupId);
 create index IX_542F601F on TimeTracking_DaysOfYear (unitId);
 create index IX_19E5F9FE on TimeTracking_DaysOfYear (unitType);
+
+create index IX_187DEE23 on TimeTracking_DaysOffCounter (allDays);
+create index IX_D39FA7F8 on TimeTracking_DaysOffCounter (remainingDays);
+create index IX_FE6A8C30 on TimeTracking_DaysOffCounter (ruleId);
+create index IX_520F6121 on TimeTracking_DaysOffCounter (ruleId, year);
+create index IX_4BDF39DD on TimeTracking_DaysOffCounter (workerUserId);
+create index IX_9FCB0FC8 on TimeTracking_DaysOffCounter (workerUserId, ruleId);
+create index IX_A474D2B9 on TimeTracking_DaysOffCounter (workerUserId, ruleId, year);
+create index IX_E24590E on TimeTracking_DaysOffCounter (workerUserId, year);
+create index IX_D975B74D on TimeTracking_DaysOffCounter (workerUserName);
+create index IX_7F851D38 on TimeTracking_DaysOffCounter (workerUserName, ruleId);
+create index IX_266B0C29 on TimeTracking_DaysOffCounter (workerUserName, ruleId, year);
+create index IX_22E3027E on TimeTracking_DaysOffCounter (workerUserName, year);
+create index IX_47C7CF76 on TimeTracking_DaysOffCounter (year);
 
 create index IX_6DD0B84B on TimeTracking_Rule (companyId);
 create index IX_F030D58D on TimeTracking_Rule (groupId);

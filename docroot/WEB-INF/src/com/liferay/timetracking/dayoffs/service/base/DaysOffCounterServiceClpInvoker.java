@@ -14,7 +14,7 @@
 
 package com.liferay.timetracking.dayoffs.service.base;
 
-import com.liferay.timetracking.dayoffs.service.RuleServiceUtil;
+import com.liferay.timetracking.dayoffs.service.DaysOffCounterServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,8 +22,8 @@ import java.util.Arrays;
  * @author Laszlo Hudak
  * @generated
  */
-public class RuleServiceClpInvoker {
-	public RuleServiceClpInvoker() {
+public class DaysOffCounterServiceClpInvoker {
+	public DaysOffCounterServiceClpInvoker() {
 		_methodName30 = "getBeanIdentifier";
 
 		_methodParameterTypes30 = new String[] {  };
@@ -37,12 +37,12 @@ public class RuleServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName30.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
-			return RuleServiceUtil.getBeanIdentifier();
+			return DaysOffCounterServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName31.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
-			RuleServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			DaysOffCounterServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}

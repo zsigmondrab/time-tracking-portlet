@@ -21,32 +21,34 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.liferay.timetracking.dayoffs.service.http.DaysOfYearServiceSoap}.
+ * This class is used by SOAP remote services, specifically {@link com.liferay.timetracking.dayoffs.service.http.DaysOffCounterServiceSoap}.
  *
  * @author Laszlo Hudak
- * @see com.liferay.timetracking.dayoffs.service.http.DaysOfYearServiceSoap
+ * @see com.liferay.timetracking.dayoffs.service.http.DaysOffCounterServiceSoap
  * @generated
  */
-public class DaysOfYearSoap implements Serializable {
-	public static DaysOfYearSoap toSoapModel(DaysOfYear model) {
-		DaysOfYearSoap soapModel = new DaysOfYearSoap();
+public class DaysOffCounterSoap implements Serializable {
+	public static DaysOffCounterSoap toSoapModel(DaysOffCounter model) {
+		DaysOffCounterSoap soapModel = new DaysOffCounterSoap();
 
-		soapModel.setDayOfYearId(model.getDayOfYearId());
+		soapModel.setDayOffCounterId(model.getDayOffCounterId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setDayId(model.getDayId());
+		soapModel.setWorkerUserId(model.getWorkerUserId());
+		soapModel.setWorkerUserName(model.getWorkerUserName());
 		soapModel.setRuleId(model.getRuleId());
-		soapModel.setClassNameId(model.getClassNameId());
-		soapModel.setClassPK(model.getClassPK());
+		soapModel.setYear(model.getYear());
+		soapModel.setAllDays(model.getAllDays());
+		soapModel.setRemainingDays(model.getRemainingDays());
 
 		return soapModel;
 	}
 
-	public static DaysOfYearSoap[] toSoapModels(DaysOfYear[] models) {
-		DaysOfYearSoap[] soapModels = new DaysOfYearSoap[models.length];
+	public static DaysOffCounterSoap[] toSoapModels(DaysOffCounter[] models) {
+		DaysOffCounterSoap[] soapModels = new DaysOffCounterSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -55,14 +57,14 @@ public class DaysOfYearSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static DaysOfYearSoap[][] toSoapModels(DaysOfYear[][] models) {
-		DaysOfYearSoap[][] soapModels = null;
+	public static DaysOffCounterSoap[][] toSoapModels(DaysOffCounter[][] models) {
+		DaysOffCounterSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new DaysOfYearSoap[models.length][models[0].length];
+			soapModels = new DaysOffCounterSoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new DaysOfYearSoap[0][0];
+			soapModels = new DaysOffCounterSoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -72,33 +74,33 @@ public class DaysOfYearSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static DaysOfYearSoap[] toSoapModels(List<DaysOfYear> models) {
-		List<DaysOfYearSoap> soapModels = new ArrayList<DaysOfYearSoap>(models.size());
+	public static DaysOffCounterSoap[] toSoapModels(List<DaysOffCounter> models) {
+		List<DaysOffCounterSoap> soapModels = new ArrayList<DaysOffCounterSoap>(models.size());
 
-		for (DaysOfYear model : models) {
+		for (DaysOffCounter model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new DaysOfYearSoap[soapModels.size()]);
+		return soapModels.toArray(new DaysOffCounterSoap[soapModels.size()]);
 	}
 
-	public DaysOfYearSoap() {
+	public DaysOffCounterSoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _dayOfYearId;
+		return _dayOffCounterId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setDayOfYearId(pk);
+		setDayOffCounterId(pk);
 	}
 
-	public long getDayOfYearId() {
-		return _dayOfYearId;
+	public long getDayOffCounterId() {
+		return _dayOffCounterId;
 	}
 
-	public void setDayOfYearId(long dayOfYearId) {
-		_dayOfYearId = dayOfYearId;
+	public void setDayOffCounterId(long dayOffCounterId) {
+		_dayOffCounterId = dayOffCounterId;
 	}
 
 	public long getCompanyId() {
@@ -141,12 +143,20 @@ public class DaysOfYearSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public Date getDayId() {
-		return _dayId;
+	public long getWorkerUserId() {
+		return _workerUserId;
 	}
 
-	public void setDayId(Date dayId) {
-		_dayId = dayId;
+	public void setWorkerUserId(long workerUserId) {
+		_workerUserId = workerUserId;
+	}
+
+	public String getWorkerUserName() {
+		return _workerUserName;
+	}
+
+	public void setWorkerUserName(String workerUserName) {
+		_workerUserName = workerUserName;
 	}
 
 	public long getRuleId() {
@@ -157,30 +167,40 @@ public class DaysOfYearSoap implements Serializable {
 		_ruleId = ruleId;
 	}
 
-	public long getClassNameId() {
-		return _classNameId;
+	public int getYear() {
+		return _year;
 	}
 
-	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
+	public void setYear(int year) {
+		_year = year;
 	}
 
-	public long getClassPK() {
-		return _classPK;
+	public int getAllDays() {
+		return _allDays;
 	}
 
-	public void setClassPK(long classPK) {
-		_classPK = classPK;
+	public void setAllDays(int allDays) {
+		_allDays = allDays;
 	}
 
-	private long _dayOfYearId;
+	public int getRemainingDays() {
+		return _remainingDays;
+	}
+
+	public void setRemainingDays(int remainingDays) {
+		_remainingDays = remainingDays;
+	}
+
+	private long _dayOffCounterId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private Date _dayId;
+	private long _workerUserId;
+	private String _workerUserName;
 	private long _ruleId;
-	private long _classNameId;
-	private long _classPK;
+	private int _year;
+	private int _allDays;
+	private int _remainingDays;
 }

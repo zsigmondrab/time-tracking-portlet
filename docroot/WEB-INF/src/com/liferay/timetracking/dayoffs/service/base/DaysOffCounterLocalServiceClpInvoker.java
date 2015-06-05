@@ -14,7 +14,7 @@
 
 package com.liferay.timetracking.dayoffs.service.base;
 
-import com.liferay.timetracking.dayoffs.service.RuleLocalServiceUtil;
+import com.liferay.timetracking.dayoffs.service.DaysOffCounterLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,26 +22,26 @@ import java.util.Arrays;
  * @author Laszlo Hudak
  * @generated
  */
-public class RuleLocalServiceClpInvoker {
-	public RuleLocalServiceClpInvoker() {
-		_methodName0 = "addRule";
+public class DaysOffCounterLocalServiceClpInvoker {
+	public DaysOffCounterLocalServiceClpInvoker() {
+		_methodName0 = "addDaysOffCounter";
 
 		_methodParameterTypes0 = new String[] {
-				"com.liferay.timetracking.dayoffs.model.Rule"
+				"com.liferay.timetracking.dayoffs.model.DaysOffCounter"
 			};
 
-		_methodName1 = "createRule";
+		_methodName1 = "createDaysOffCounter";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteRule";
+		_methodName2 = "deleteDaysOffCounter";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteRule";
+		_methodName3 = "deleteDaysOffCounter";
 
 		_methodParameterTypes3 = new String[] {
-				"com.liferay.timetracking.dayoffs.model.Rule"
+				"com.liferay.timetracking.dayoffs.model.DaysOffCounter"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class RuleLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchRule";
+		_methodName10 = "fetchDaysOffCounter";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getRule";
+		_methodName11 = "getDaysOffCounter";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class RuleLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getRules";
+		_methodName13 = "getDaysOffCounters";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getRulesCount";
+		_methodName14 = "getDaysOffCountersCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateRule";
+		_methodName15 = "updateDaysOffCounter";
 
 		_methodParameterTypes15 = new String[] {
-				"com.liferay.timetracking.dayoffs.model.Rule"
+				"com.liferay.timetracking.dayoffs.model.DaysOffCounter"
 			};
 
 		_methodName46 = "getBeanIdentifier";
@@ -114,53 +114,55 @@ public class RuleLocalServiceClpInvoker {
 
 		_methodParameterTypes47 = new String[] { "java.lang.String" };
 
-		_methodName52 = "addRule";
+		_methodName52 = "takeOffDays";
 
-		_methodParameterTypes52 = new String[] { "java.lang.String", "double" };
+		_methodParameterTypes52 = new String[] {
+				"long", "long", "long", "int", "int"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return RuleLocalServiceUtil.addRule((com.liferay.timetracking.dayoffs.model.Rule)arguments[0]);
+			return DaysOffCounterLocalServiceUtil.addDaysOffCounter((com.liferay.timetracking.dayoffs.model.DaysOffCounter)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return RuleLocalServiceUtil.createRule(((Long)arguments[0]).longValue());
+			return DaysOffCounterLocalServiceUtil.createDaysOffCounter(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return RuleLocalServiceUtil.deleteRule(((Long)arguments[0]).longValue());
+			return DaysOffCounterLocalServiceUtil.deleteDaysOffCounter(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return RuleLocalServiceUtil.deleteRule((com.liferay.timetracking.dayoffs.model.Rule)arguments[0]);
+			return DaysOffCounterLocalServiceUtil.deleteDaysOffCounter((com.liferay.timetracking.dayoffs.model.DaysOffCounter)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return RuleLocalServiceUtil.dynamicQuery();
+			return DaysOffCounterLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return RuleLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return DaysOffCounterLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return RuleLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return DaysOffCounterLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return RuleLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return DaysOffCounterLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -168,62 +170,65 @@ public class RuleLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return RuleLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return DaysOffCounterLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return RuleLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return DaysOffCounterLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return RuleLocalServiceUtil.fetchRule(((Long)arguments[0]).longValue());
+			return DaysOffCounterLocalServiceUtil.fetchDaysOffCounter(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return RuleLocalServiceUtil.getRule(((Long)arguments[0]).longValue());
+			return DaysOffCounterLocalServiceUtil.getDaysOffCounter(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return RuleLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return DaysOffCounterLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return RuleLocalServiceUtil.getRules(((Integer)arguments[0]).intValue(),
+			return DaysOffCounterLocalServiceUtil.getDaysOffCounters(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return RuleLocalServiceUtil.getRulesCount();
+			return DaysOffCounterLocalServiceUtil.getDaysOffCountersCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return RuleLocalServiceUtil.updateRule((com.liferay.timetracking.dayoffs.model.Rule)arguments[0]);
+			return DaysOffCounterLocalServiceUtil.updateDaysOffCounter((com.liferay.timetracking.dayoffs.model.DaysOffCounter)arguments[0]);
 		}
 
 		if (_methodName46.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
-			return RuleLocalServiceUtil.getBeanIdentifier();
+			return DaysOffCounterLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
-			RuleLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			DaysOffCounterLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName52.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
-			return RuleLocalServiceUtil.addRule((java.lang.String)arguments[0],
-				((Double)arguments[1]).doubleValue());
+			return DaysOffCounterLocalServiceUtil.takeOffDays(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				((Integer)arguments[3]).intValue(),
+				((Integer)arguments[4]).intValue());
 		}
 
 		throw new UnsupportedOperationException();

@@ -34,6 +34,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.timetracking.dayoffs.model.DaysOfYear;
 import com.liferay.timetracking.dayoffs.service.DaysOfYearLocalService;
 import com.liferay.timetracking.dayoffs.service.persistence.DaysOfYearPersistence;
+import com.liferay.timetracking.dayoffs.service.persistence.DaysOffCounterPersistence;
 import com.liferay.timetracking.dayoffs.service.persistence.RulePersistence;
 
 import java.io.Serializable;
@@ -279,6 +280,63 @@ public abstract class DaysOfYearLocalServiceBaseImpl
 	public DaysOfYear updateDaysOfYear(DaysOfYear daysOfYear)
 		throws SystemException {
 		return daysOfYearPersistence.update(daysOfYear);
+	}
+
+	/**
+	 * Returns the days off counter local service.
+	 *
+	 * @return the days off counter local service
+	 */
+	public com.liferay.timetracking.dayoffs.service.DaysOffCounterLocalService getDaysOffCounterLocalService() {
+		return daysOffCounterLocalService;
+	}
+
+	/**
+	 * Sets the days off counter local service.
+	 *
+	 * @param daysOffCounterLocalService the days off counter local service
+	 */
+	public void setDaysOffCounterLocalService(
+		com.liferay.timetracking.dayoffs.service.DaysOffCounterLocalService daysOffCounterLocalService) {
+		this.daysOffCounterLocalService = daysOffCounterLocalService;
+	}
+
+	/**
+	 * Returns the days off counter remote service.
+	 *
+	 * @return the days off counter remote service
+	 */
+	public com.liferay.timetracking.dayoffs.service.DaysOffCounterService getDaysOffCounterService() {
+		return daysOffCounterService;
+	}
+
+	/**
+	 * Sets the days off counter remote service.
+	 *
+	 * @param daysOffCounterService the days off counter remote service
+	 */
+	public void setDaysOffCounterService(
+		com.liferay.timetracking.dayoffs.service.DaysOffCounterService daysOffCounterService) {
+		this.daysOffCounterService = daysOffCounterService;
+	}
+
+	/**
+	 * Returns the days off counter persistence.
+	 *
+	 * @return the days off counter persistence
+	 */
+	public DaysOffCounterPersistence getDaysOffCounterPersistence() {
+		return daysOffCounterPersistence;
+	}
+
+	/**
+	 * Sets the days off counter persistence.
+	 *
+	 * @param daysOffCounterPersistence the days off counter persistence
+	 */
+	public void setDaysOffCounterPersistence(
+		DaysOffCounterPersistence daysOffCounterPersistence) {
+		this.daysOffCounterPersistence = daysOffCounterPersistence;
 	}
 
 	/**
@@ -570,6 +628,12 @@ public abstract class DaysOfYearLocalServiceBaseImpl
 		}
 	}
 
+	@BeanReference(type = com.liferay.timetracking.dayoffs.service.DaysOffCounterLocalService.class)
+	protected com.liferay.timetracking.dayoffs.service.DaysOffCounterLocalService daysOffCounterLocalService;
+	@BeanReference(type = com.liferay.timetracking.dayoffs.service.DaysOffCounterService.class)
+	protected com.liferay.timetracking.dayoffs.service.DaysOffCounterService daysOffCounterService;
+	@BeanReference(type = DaysOffCounterPersistence.class)
+	protected DaysOffCounterPersistence daysOffCounterPersistence;
 	@BeanReference(type = com.liferay.timetracking.dayoffs.service.DaysOfYearLocalService.class)
 	protected com.liferay.timetracking.dayoffs.service.DaysOfYearLocalService daysOfYearLocalService;
 	@BeanReference(type = com.liferay.timetracking.dayoffs.service.DaysOfYearService.class)

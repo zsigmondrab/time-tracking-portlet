@@ -50,7 +50,6 @@ public class DaysOfYearWrapper implements DaysOfYear, ModelWrapper<DaysOfYear> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("dayOfYearId", getDayOfYearId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -70,12 +69,6 @@ public class DaysOfYearWrapper implements DaysOfYear, ModelWrapper<DaysOfYear> {
 
 		if (dayOfYearId != null) {
 			setDayOfYearId(dayOfYearId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -171,26 +164,6 @@ public class DaysOfYearWrapper implements DaysOfYear, ModelWrapper<DaysOfYear> {
 	@Override
 	public void setDayOfYearId(long dayOfYearId) {
 		_daysOfYear.setDayOfYearId(dayOfYearId);
-	}
-
-	/**
-	* Returns the group ID of this days of year.
-	*
-	* @return the group ID of this days of year
-	*/
-	@Override
-	public long getGroupId() {
-		return _daysOfYear.getGroupId();
-	}
-
-	/**
-	* Sets the group ID of this days of year.
-	*
-	* @param groupId the group ID of this days of year
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_daysOfYear.setGroupId(groupId);
 	}
 
 	/**

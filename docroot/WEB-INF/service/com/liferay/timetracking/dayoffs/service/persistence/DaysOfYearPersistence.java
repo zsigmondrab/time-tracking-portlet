@@ -38,144 +38,6 @@ public interface DaysOfYearPersistence extends BasePersistence<DaysOfYear> {
 	 */
 
 	/**
-	* Returns all the days of years where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @return the matching days of years
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.timetracking.dayoffs.model.DaysOfYear> findByGroupId(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns a range of all the days of years where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of days of years
-	* @param end the upper bound of the range of days of years (not inclusive)
-	* @return the range of matching days of years
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.timetracking.dayoffs.model.DaysOfYear> findByGroupId(
-		long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns an ordered range of all the days of years where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of days of years
-	* @param end the upper bound of the range of days of years (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching days of years
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.timetracking.dayoffs.model.DaysOfYear> findByGroupId(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the first days of year in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching days of year
-	* @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.timetracking.dayoffs.model.DaysOfYear findByGroupId_First(
-		long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException;
-
-	/**
-	* Returns the first days of year in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching days of year, or <code>null</code> if a matching days of year could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByGroupId_First(
-		long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the last days of year in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching days of year
-	* @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.timetracking.dayoffs.model.DaysOfYear findByGroupId_Last(
-		long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException;
-
-	/**
-	* Returns the last days of year in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching days of year, or <code>null</code> if a matching days of year could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByGroupId_Last(
-		long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the days of years before and after the current days of year in the ordered set where groupId = &#63;.
-	*
-	* @param dayOfYearId the primary key of the current days of year
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next days of year
-	* @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a days of year with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.timetracking.dayoffs.model.DaysOfYear[] findByGroupId_PrevAndNext(
-		long dayOfYearId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException;
-
-	/**
-	* Removes all the days of years where groupId = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByGroupId(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of days of years where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @return the number of matching days of years
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByGroupId(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Returns all the days of years where classNameId = &#63;.
 	*
 	* @param classNameId the class name ID
@@ -449,6 +311,144 @@ public interface DaysOfYearPersistence extends BasePersistence<DaysOfYear> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByClassPK(long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the days of years where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @return the matching days of years
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.timetracking.dayoffs.model.DaysOfYear> findByCompanyId(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the days of years where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param start the lower bound of the range of days of years
+	* @param end the upper bound of the range of days of years (not inclusive)
+	* @return the range of matching days of years
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.timetracking.dayoffs.model.DaysOfYear> findByCompanyId(
+		long companyId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the days of years where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.dayoffs.model.impl.DaysOfYearModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param start the lower bound of the range of days of years
+	* @param end the upper bound of the range of days of years (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching days of years
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.timetracking.dayoffs.model.DaysOfYear> findByCompanyId(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first days of year in the ordered set where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching days of year
+	* @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.timetracking.dayoffs.model.DaysOfYear findByCompanyId_First(
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException;
+
+	/**
+	* Returns the first days of year in the ordered set where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching days of year, or <code>null</code> if a matching days of year could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByCompanyId_First(
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last days of year in the ordered set where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching days of year
+	* @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a matching days of year could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.timetracking.dayoffs.model.DaysOfYear findByCompanyId_Last(
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException;
+
+	/**
+	* Returns the last days of year in the ordered set where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching days of year, or <code>null</code> if a matching days of year could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.timetracking.dayoffs.model.DaysOfYear fetchByCompanyId_Last(
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the days of years before and after the current days of year in the ordered set where companyId = &#63;.
+	*
+	* @param dayOfYearId the primary key of the current days of year
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next days of year
+	* @throws com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException if a days of year with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.timetracking.dayoffs.model.DaysOfYear[] findByCompanyId_PrevAndNext(
+		long dayOfYearId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.timetracking.dayoffs.NoSuchDaysOfYearException;
+
+	/**
+	* Removes all the days of years where companyId = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of days of years where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @return the number of matching days of years
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
