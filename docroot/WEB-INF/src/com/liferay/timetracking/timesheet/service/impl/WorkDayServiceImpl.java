@@ -14,8 +14,10 @@
 
 package com.liferay.timetracking.timesheet.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.timetracking.timesheet.model.WorkDay;
 import com.liferay.timetracking.timesheet.service.base.WorkDayServiceBaseImpl;
 
@@ -37,6 +39,16 @@ import java.util.List;
  */
 public class WorkDayServiceImpl extends WorkDayServiceBaseImpl {
 
+	public WorkDay addWorkDay(
+			long userId, long companyId, long startTime, long endTime,
+			long dayOfYearId, int break_, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return workDayLocalService.addWorkDay(
+			userId, companyId, startTime, endTime, dayOfYearId, break_,
+			serviceContext);
+	}
+
 	public List<WorkDay> getWorkDays(long userId, long companyId,
 			long startTime, long endTime, int start, int end,
 			OrderByComparator orderByComparator)
@@ -44,6 +56,16 @@ public class WorkDayServiceImpl extends WorkDayServiceBaseImpl {
 
 		return workDayLocalService.getWorkDays(userId, companyId, startTime,
 			endTime, start, end, orderByComparator);
+	}
+
+	public WorkDay updateWorkDay(
+			long userId, long workDayId, long startTime, long endTime,
+			long dayOfYearId, int break_, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return workDayLocalService.updateWorkDay(
+			userId, workDayId, startTime, endTime, dayOfYearId, break_,
+			serviceContext);
 	}
 
 }
