@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.util.LocaleUtil"%>
 <%@ include file="init.jsp" %>
 
 <article>
@@ -6,7 +7,7 @@
 	<aui:script use="timesheet">
 		var timesheetViews = [
 			new Liferay.TimesheetMonthView({
-				headerElements: ['days', 'startTime', 'endTime', 'lunch', 'allTime', 'workTime', 'overTime'],
+				headerElements: ['<%= LanguageUtil.get(pageContext, "days") %>', '<%= LanguageUtil.get(pageContext, "start-time") %>', '<%= LanguageUtil.get(pageContext, "end-time") %>', '<%= LanguageUtil.get(pageContext, "lunch") %>', '<%= LanguageUtil.get(pageContext, "all-time") %>', '<%= LanguageUtil.get(pageContext, "work-time") %>', '<%= LanguageUtil.get(pageContext, "over-time") %>'],
 				userId: <%= themeDisplay.getUserId() %>
 			})
 		];

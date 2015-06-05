@@ -13,6 +13,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
+page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.timetracking.activities.service.permission.ActivityPermission" %><%@
 page import="com.liferay.timetracking.dayoffs.service.permission.RulePermission" %><%@
 page import="com.liferay.timetracking.timesheet.service.permission.WorkDayPermission" %>
