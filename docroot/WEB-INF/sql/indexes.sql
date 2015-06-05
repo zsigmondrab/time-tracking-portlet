@@ -1,6 +1,7 @@
 create index IX_A5A0B898 on TimeTracking_Activity (companyId);
 create index IX_50AE851A on TimeTracking_Activity (groupId);
 
+create index IX_FC3B434B on TimeTracking_ActivityAssignment (companyId);
 create index IX_9DC2208D on TimeTracking_ActivityAssignment (groupId);
 
 create index IX_DA8BA622 on TimeTracking_DaysOfYear (classNameId);

@@ -68,7 +68,6 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 	public static final String TABLE_NAME = "TimeTracking_ActivityAssignment";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "activityAssignmentId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -79,7 +78,7 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 			{ "startTime", Types.TIMESTAMP },
 			{ "endTime", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TimeTracking_ActivityAssignment (activityAssignmentId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,activityId LONG,workDayId LONG,startTime DATE null,endTime DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table TimeTracking_ActivityAssignment (activityAssignmentId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,activityId LONG,workDayId LONG,startTime DATE null,endTime DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table TimeTracking_ActivityAssignment";
 	public static final String ORDER_BY_JPQL = " ORDER BY activityAssignment.startTime ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY TimeTracking_ActivityAssignment.startTime ASC";
@@ -95,7 +94,7 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.timetracking.activities.model.ActivityAssignment"),
 			true);
-	public static long GROUPID_COLUMN_BITMASK = 1L;
+	public static long COMPANYID_COLUMN_BITMASK = 1L;
 	public static long STARTTIME_COLUMN_BITMASK = 2L;
 
 	/**
@@ -112,7 +111,6 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 		ActivityAssignment model = new ActivityAssignmentImpl();
 
 		model.setActivityAssignmentId(soapModel.getActivityAssignmentId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -188,7 +186,6 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("activityAssignmentId", getActivityAssignmentId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -208,12 +205,6 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 
 		if (activityAssignmentId != null) {
 			setActivityAssignmentId(activityAssignmentId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -284,36 +275,25 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -453,7 +433,6 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 		ActivityAssignmentImpl activityAssignmentImpl = new ActivityAssignmentImpl();
 
 		activityAssignmentImpl.setActivityAssignmentId(getActivityAssignmentId());
-		activityAssignmentImpl.setGroupId(getGroupId());
 		activityAssignmentImpl.setCompanyId(getCompanyId());
 		activityAssignmentImpl.setUserId(getUserId());
 		activityAssignmentImpl.setUserName(getUserName());
@@ -514,9 +493,9 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 	public void resetOriginalValues() {
 		ActivityAssignmentModelImpl activityAssignmentModelImpl = this;
 
-		activityAssignmentModelImpl._originalGroupId = activityAssignmentModelImpl._groupId;
+		activityAssignmentModelImpl._originalCompanyId = activityAssignmentModelImpl._companyId;
 
-		activityAssignmentModelImpl._setOriginalGroupId = false;
+		activityAssignmentModelImpl._setOriginalCompanyId = false;
 
 		activityAssignmentModelImpl._columnBitmask = 0;
 	}
@@ -526,8 +505,6 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 		ActivityAssignmentCacheModel activityAssignmentCacheModel = new ActivityAssignmentCacheModel();
 
 		activityAssignmentCacheModel.activityAssignmentId = getActivityAssignmentId();
-
-		activityAssignmentCacheModel.groupId = getGroupId();
 
 		activityAssignmentCacheModel.companyId = getCompanyId();
 
@@ -586,12 +563,10 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{activityAssignmentId=");
 		sb.append(getActivityAssignmentId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -617,7 +592,7 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -627,10 +602,6 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 		sb.append(
 			"<column><column-name>activityAssignmentId</column-name><column-value><![CDATA[");
 		sb.append(getActivityAssignmentId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -679,10 +650,9 @@ public class ActivityAssignmentModelImpl extends BaseModelImpl<ActivityAssignmen
 			ActivityAssignment.class
 		};
 	private long _activityAssignmentId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

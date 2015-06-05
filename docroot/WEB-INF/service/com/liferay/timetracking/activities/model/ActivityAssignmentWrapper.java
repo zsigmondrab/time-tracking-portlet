@@ -51,7 +51,6 @@ public class ActivityAssignmentWrapper implements ActivityAssignment,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("activityAssignmentId", getActivityAssignmentId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -71,12 +70,6 @@ public class ActivityAssignmentWrapper implements ActivityAssignment,
 
 		if (activityAssignmentId != null) {
 			setActivityAssignmentId(activityAssignmentId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -172,26 +165,6 @@ public class ActivityAssignmentWrapper implements ActivityAssignment,
 	@Override
 	public void setActivityAssignmentId(long activityAssignmentId) {
 		_activityAssignment.setActivityAssignmentId(activityAssignmentId);
-	}
-
-	/**
-	* Returns the group ID of this activity assignment.
-	*
-	* @return the group ID of this activity assignment
-	*/
-	@Override
-	public long getGroupId() {
-		return _activityAssignment.getGroupId();
-	}
-
-	/**
-	* Sets the group ID of this activity assignment.
-	*
-	* @param groupId the group ID of this activity assignment
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_activityAssignment.setGroupId(groupId);
 	}
 
 	/**

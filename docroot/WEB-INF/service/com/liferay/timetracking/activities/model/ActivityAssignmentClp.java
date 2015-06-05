@@ -77,7 +77,6 @@ public class ActivityAssignmentClp extends BaseModelImpl<ActivityAssignment>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("activityAssignmentId", getActivityAssignmentId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -97,12 +96,6 @@ public class ActivityAssignmentClp extends BaseModelImpl<ActivityAssignment>
 
 		if (activityAssignmentId != null) {
 			setActivityAssignmentId(activityAssignmentId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -178,29 +171,6 @@ public class ActivityAssignmentClp extends BaseModelImpl<ActivityAssignment>
 
 				method.invoke(_activityAssignmentRemoteModel,
 					activityAssignmentId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
-		if (_activityAssignmentRemoteModel != null) {
-			try {
-				Class<?> clazz = _activityAssignmentRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setGroupId", long.class);
-
-				method.invoke(_activityAssignmentRemoteModel, groupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -497,7 +467,6 @@ public class ActivityAssignmentClp extends BaseModelImpl<ActivityAssignment>
 		ActivityAssignmentClp clone = new ActivityAssignmentClp();
 
 		clone.setActivityAssignmentId(getActivityAssignmentId());
-		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -558,12 +527,10 @@ public class ActivityAssignmentClp extends BaseModelImpl<ActivityAssignment>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{activityAssignmentId=");
 		sb.append(getActivityAssignmentId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -589,7 +556,7 @@ public class ActivityAssignmentClp extends BaseModelImpl<ActivityAssignment>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -599,10 +566,6 @@ public class ActivityAssignmentClp extends BaseModelImpl<ActivityAssignment>
 		sb.append(
 			"<column><column-name>activityAssignmentId</column-name><column-value><![CDATA[");
 		sb.append(getActivityAssignmentId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -647,7 +610,6 @@ public class ActivityAssignmentClp extends BaseModelImpl<ActivityAssignment>
 	}
 
 	private long _activityAssignmentId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;

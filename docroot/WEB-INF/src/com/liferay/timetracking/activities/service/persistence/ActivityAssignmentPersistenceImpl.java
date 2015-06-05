@@ -84,69 +84,71 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ActivityAssignmentModelImpl.ENTITY_CACHE_ENABLED,
 			ActivityAssignmentModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(ActivityAssignmentModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+		new FinderPath(ActivityAssignmentModelImpl.ENTITY_CACHE_ENABLED,
 			ActivityAssignmentModelImpl.FINDER_CACHE_ENABLED,
 			ActivityAssignmentImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
 		new FinderPath(ActivityAssignmentModelImpl.ENTITY_CACHE_ENABLED,
 			ActivityAssignmentModelImpl.FINDER_CACHE_ENABLED,
 			ActivityAssignmentImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
 			new String[] { Long.class.getName() },
-			ActivityAssignmentModelImpl.GROUPID_COLUMN_BITMASK |
+			ActivityAssignmentModelImpl.COMPANYID_COLUMN_BITMASK |
 			ActivityAssignmentModelImpl.STARTTIME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(ActivityAssignmentModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(ActivityAssignmentModelImpl.ENTITY_CACHE_ENABLED,
 			ActivityAssignmentModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the activity assignments where groupId = &#63;.
+	 * Returns all the activity assignments where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching activity assignments
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ActivityAssignment> findByGroupId(long groupId)
+	public List<ActivityAssignment> findByCompanyId(long companyId)
 		throws SystemException {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
-	 * Returns a range of all the activity assignments where groupId = &#63;.
+	 * Returns a range of all the activity assignments where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.activities.model.impl.ActivityAssignmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of activity assignments
 	 * @param end the upper bound of the range of activity assignments (not inclusive)
 	 * @return the range of matching activity assignments
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ActivityAssignment> findByGroupId(long groupId, int start,
+	public List<ActivityAssignment> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
-		return findByGroupId(groupId, start, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the activity assignments where groupId = &#63;.
+	 * Returns an ordered range of all the activity assignments where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.timetracking.activities.model.impl.ActivityAssignmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of activity assignments
 	 * @param end the upper bound of the range of activity assignments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -154,7 +156,7 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ActivityAssignment> findByGroupId(long groupId, int start,
+	public List<ActivityAssignment> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -163,12 +165,12 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId, start, end, orderByComparator };
 		}
 
 		List<ActivityAssignment> list = (List<ActivityAssignment>)FinderCacheUtil.getResult(finderPath,
@@ -176,7 +178,7 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 		if ((list != null) && !list.isEmpty()) {
 			for (ActivityAssignment activityAssignment : list) {
-				if ((groupId != activityAssignment.getGroupId())) {
+				if ((companyId != activityAssignment.getCompanyId())) {
 					list = null;
 
 					break;
@@ -197,7 +199,7 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 			query.append(_SQL_SELECT_ACTIVITYASSIGNMENT_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -219,7 +221,7 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (!pagination) {
 					list = (List<ActivityAssignment>)QueryUtil.list(q,
@@ -252,19 +254,19 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 	}
 
 	/**
-	 * Returns the first activity assignment in the ordered set where groupId = &#63;.
+	 * Returns the first activity assignment in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching activity assignment
 	 * @throws com.liferay.timetracking.activities.NoSuchActivityAssignmentException if a matching activity assignment could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ActivityAssignment findByGroupId_First(long groupId,
+	public ActivityAssignment findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityAssignmentException, SystemException {
-		ActivityAssignment activityAssignment = fetchByGroupId_First(groupId,
+		ActivityAssignment activityAssignment = fetchByCompanyId_First(companyId,
 				orderByComparator);
 
 		if (activityAssignment != null) {
@@ -275,8 +277,8 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -284,17 +286,17 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 	}
 
 	/**
-	 * Returns the first activity assignment in the ordered set where groupId = &#63;.
+	 * Returns the first activity assignment in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching activity assignment, or <code>null</code> if a matching activity assignment could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ActivityAssignment fetchByGroupId_First(long groupId,
+	public ActivityAssignment fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<ActivityAssignment> list = findByGroupId(groupId, 0, 1,
+		List<ActivityAssignment> list = findByCompanyId(companyId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -305,19 +307,19 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 	}
 
 	/**
-	 * Returns the last activity assignment in the ordered set where groupId = &#63;.
+	 * Returns the last activity assignment in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching activity assignment
 	 * @throws com.liferay.timetracking.activities.NoSuchActivityAssignmentException if a matching activity assignment could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ActivityAssignment findByGroupId_Last(long groupId,
+	public ActivityAssignment findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityAssignmentException, SystemException {
-		ActivityAssignment activityAssignment = fetchByGroupId_Last(groupId,
+		ActivityAssignment activityAssignment = fetchByCompanyId_Last(companyId,
 				orderByComparator);
 
 		if (activityAssignment != null) {
@@ -328,8 +330,8 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -337,23 +339,23 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 	}
 
 	/**
-	 * Returns the last activity assignment in the ordered set where groupId = &#63;.
+	 * Returns the last activity assignment in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching activity assignment, or <code>null</code> if a matching activity assignment could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ActivityAssignment fetchByGroupId_Last(long groupId,
+	public ActivityAssignment fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByGroupId(groupId);
+		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<ActivityAssignment> list = findByGroupId(groupId, count - 1,
+		List<ActivityAssignment> list = findByCompanyId(companyId, count - 1,
 				count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -364,18 +366,18 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 	}
 
 	/**
-	 * Returns the activity assignments before and after the current activity assignment in the ordered set where groupId = &#63;.
+	 * Returns the activity assignments before and after the current activity assignment in the ordered set where companyId = &#63;.
 	 *
 	 * @param activityAssignmentId the primary key of the current activity assignment
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next activity assignment
 	 * @throws com.liferay.timetracking.activities.NoSuchActivityAssignmentException if a activity assignment with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ActivityAssignment[] findByGroupId_PrevAndNext(
-		long activityAssignmentId, long groupId,
+	public ActivityAssignment[] findByCompanyId_PrevAndNext(
+		long activityAssignmentId, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityAssignmentException, SystemException {
 		ActivityAssignment activityAssignment = findByPrimaryKey(activityAssignmentId);
@@ -387,13 +389,13 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 			ActivityAssignment[] array = new ActivityAssignmentImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, activityAssignment,
-					groupId, orderByComparator, true);
+			array[0] = getByCompanyId_PrevAndNext(session, activityAssignment,
+					companyId, orderByComparator, true);
 
 			array[1] = activityAssignment;
 
-			array[2] = getByGroupId_PrevAndNext(session, activityAssignment,
-					groupId, orderByComparator, false);
+			array[2] = getByCompanyId_PrevAndNext(session, activityAssignment,
+					companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -405,8 +407,8 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 		}
 	}
 
-	protected ActivityAssignment getByGroupId_PrevAndNext(Session session,
-		ActivityAssignment activityAssignment, long groupId,
+	protected ActivityAssignment getByCompanyId_PrevAndNext(Session session,
+		ActivityAssignment activityAssignment, long companyId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -420,7 +422,7 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 		query.append(_SQL_SELECT_ACTIVITYASSIGNMENT_WHERE);
 
-		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -490,7 +492,7 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(activityAssignment);
@@ -511,31 +513,31 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 	}
 
 	/**
-	 * Removes all the activity assignments where groupId = &#63; from the database.
+	 * Removes all the activity assignments where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByGroupId(long groupId) throws SystemException {
-		for (ActivityAssignment activityAssignment : findByGroupId(groupId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByCompanyId(long companyId) throws SystemException {
+		for (ActivityAssignment activityAssignment : findByCompanyId(
+				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(activityAssignment);
 		}
 	}
 
 	/**
-	 * Returns the number of activity assignments where groupId = &#63;.
+	 * Returns the number of activity assignments where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching activity assignments
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByGroupId(long groupId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+	public int countByCompanyId(long companyId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -545,7 +547,7 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 			query.append(_SQL_COUNT_ACTIVITYASSIGNMENT_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -558,7 +560,7 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 
@@ -577,7 +579,7 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "activityAssignment.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "activityAssignment.companyId = ?";
 
 	public ActivityAssignmentPersistenceImpl() {
 		setModelClass(ActivityAssignment.class);
@@ -807,19 +809,21 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 
 		else {
 			if ((activityAssignmentModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						activityAssignmentModelImpl.getOriginalGroupId()
+						activityAssignmentModelImpl.getOriginalCompanyId()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 
-				args = new Object[] { activityAssignmentModelImpl.getGroupId() };
+				args = new Object[] { activityAssignmentModelImpl.getCompanyId() };
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 			}
 		}
@@ -843,7 +847,6 @@ public class ActivityAssignmentPersistenceImpl extends BasePersistenceImpl<Activ
 		activityAssignmentImpl.setPrimaryKey(activityAssignment.getPrimaryKey());
 
 		activityAssignmentImpl.setActivityAssignmentId(activityAssignment.getActivityAssignmentId());
-		activityAssignmentImpl.setGroupId(activityAssignment.getGroupId());
 		activityAssignmentImpl.setCompanyId(activityAssignment.getCompanyId());
 		activityAssignmentImpl.setUserId(activityAssignment.getUserId());
 		activityAssignmentImpl.setUserName(activityAssignment.getUserName());

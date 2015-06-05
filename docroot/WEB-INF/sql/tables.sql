@@ -10,7 +10,6 @@ create table TimeTracking_Activity (
 
 create table TimeTracking_ActivityAssignment (
 	activityAssignmentId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

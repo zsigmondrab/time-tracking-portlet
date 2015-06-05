@@ -29,7 +29,6 @@
 	<mapped-superclass class="com.liferay.timetracking.activities.model.impl.ActivityAssignmentModelImpl">
 		<attributes>
 			<id name="activityAssignmentId" />
-			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />

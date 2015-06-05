@@ -38,12 +38,10 @@ public class ActivityAssignmentCacheModel implements CacheModel<ActivityAssignme
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{activityAssignmentId=");
 		sb.append(activityAssignmentId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -72,7 +70,6 @@ public class ActivityAssignmentCacheModel implements CacheModel<ActivityAssignme
 		ActivityAssignmentImpl activityAssignmentImpl = new ActivityAssignmentImpl();
 
 		activityAssignmentImpl.setActivityAssignmentId(activityAssignmentId);
-		activityAssignmentImpl.setGroupId(groupId);
 		activityAssignmentImpl.setCompanyId(companyId);
 		activityAssignmentImpl.setUserId(userId);
 
@@ -122,7 +119,6 @@ public class ActivityAssignmentCacheModel implements CacheModel<ActivityAssignme
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		activityAssignmentId = objectInput.readLong();
-		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
@@ -138,7 +134,6 @@ public class ActivityAssignmentCacheModel implements CacheModel<ActivityAssignme
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(activityAssignmentId);
-		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
 
@@ -158,7 +153,6 @@ public class ActivityAssignmentCacheModel implements CacheModel<ActivityAssignme
 	}
 
 	public long activityAssignmentId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;
