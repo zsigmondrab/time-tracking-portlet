@@ -14,14 +14,21 @@
 
 package com.liferay.timetracking.timesheet.service.impl;
 
+import com.liferay.portal.DuplicateUserEmailAddressException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.timetracking.timesheet.BreakException;
+import com.liferay.timetracking.timesheet.DateIntervalException;
 import com.liferay.timetracking.timesheet.model.WorkDay;
 import com.liferay.timetracking.timesheet.service.base.WorkDayLocalServiceBaseImpl;
 
@@ -55,6 +62,8 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 			long startTime, long endTime, long dayOfYearId, int break_,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		validate(userId, companyId, startTime, endTime, break_);
 
 		Date now = new Date();
 
@@ -116,6 +125,8 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 
 		WorkDay workDay = workDayPersistence.findByPrimaryKey(workDayId);
 
+		validate(userId, workDay.getCompanyId(), startTime, endTime, break_);
+
 		workDay.setUserId(userId);
 		workDay.setUserName(UserLocalServiceUtil.getUserById(userId).
 			getFullName());
@@ -138,6 +149,41 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		workDayPersistence.update(workDay);
 
 		return workDay;
+	}
+
+	protected void validate(
+			long companyId, long userId, long startTime, long endTime,
+			int break_)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.fetchByC_U(companyId, userId);
+
+		if (user != null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append("No User exists with the key {");
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", userId=");
+			msg.append(userId);
+
+			msg.append("}");
+
+			throw new NoSuchUserException(msg.toString());
+		}
+
+		Date startTimeDate = new Date(startTime);
+		Date endTimeDate = new Date(endTime);
+
+		if (startTimeDate.after(endTimeDate)) {
+			throw new DateIntervalException();
+		}
+
+		if (break_ < 30) {
+			throw new BreakException();
+		}
 	}
 
 }
