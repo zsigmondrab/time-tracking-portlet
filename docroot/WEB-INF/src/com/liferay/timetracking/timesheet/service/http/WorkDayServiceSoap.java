@@ -62,6 +62,25 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class WorkDayServiceSoap {
+	public static com.liferay.timetracking.timesheet.model.WorkDaySoap addWorkDay(
+		long userId, long companyId, long startTime, long endTime,
+		long dayOfYearId, int break_,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.timetracking.timesheet.model.WorkDay returnValue = WorkDayServiceUtil.addWorkDay(userId,
+					companyId, startTime, endTime, dayOfYearId, break_,
+					serviceContext);
+
+			return com.liferay.timetracking.timesheet.model.WorkDaySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.timetracking.timesheet.model.WorkDaySoap[] getWorkDays(
 		long userId, long companyId, long startTime, long endTime, int start,
 		int end,
@@ -73,6 +92,25 @@ public class WorkDayServiceSoap {
 					endTime, start, end, orderByComparator);
 
 			return com.liferay.timetracking.timesheet.model.WorkDaySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.timetracking.timesheet.model.WorkDaySoap updateWorkDay(
+		long userId, long workDayId, long startTime, long endTime,
+		long dayOfYearId, int break_,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.timetracking.timesheet.model.WorkDay returnValue = WorkDayServiceUtil.updateWorkDay(userId,
+					workDayId, startTime, endTime, dayOfYearId, break_,
+					serviceContext);
+
+			return com.liferay.timetracking.timesheet.model.WorkDaySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

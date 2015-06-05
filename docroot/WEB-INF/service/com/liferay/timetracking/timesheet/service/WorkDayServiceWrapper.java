@@ -57,6 +57,17 @@ public class WorkDayServiceWrapper implements WorkDayService,
 	}
 
 	@Override
+	public com.liferay.timetracking.timesheet.model.WorkDay addWorkDay(
+		long userId, long companyId, long startTime, long endTime,
+		long dayOfYearId, int break_,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _workDayService.addWorkDay(userId, companyId, startTime,
+			endTime, dayOfYearId, break_, serviceContext);
+	}
+
+	@Override
 	public java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
 		long userId, long companyId, long startTime, long endTime, int start,
 		int end,
@@ -64,6 +75,17 @@ public class WorkDayServiceWrapper implements WorkDayService,
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _workDayService.getWorkDays(userId, companyId, startTime,
 			endTime, start, end, orderByComparator);
+	}
+
+	@Override
+	public com.liferay.timetracking.timesheet.model.WorkDay updateWorkDay(
+		long userId, long workDayId, long startTime, long endTime,
+		long dayOfYearId, int break_,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _workDayService.updateWorkDay(userId, workDayId, startTime,
+			endTime, dayOfYearId, break_, serviceContext);
 	}
 
 	/**

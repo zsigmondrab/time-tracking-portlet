@@ -121,18 +121,18 @@ public class WorkDayLocalServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName41 = "updateWorkDay";
+		_methodName41 = "getWorkDays";
 
 		_methodParameterTypes41 = new String[] {
-				"long", "long", "long", "long", "long", "int",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName42 = "getWorkDays";
-
-		_methodParameterTypes42 = new String[] {
 				"long", "long", "long", "long", "int", "int",
 				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+
+		_methodName42 = "updateWorkDay";
+
+		_methodParameterTypes42 = new String[] {
+				"long", "long", "long", "long", "long", "int",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -250,17 +250,6 @@ public class WorkDayLocalServiceClpInvoker {
 
 		if (_methodName41.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
-			return WorkDayLocalServiceUtil.updateWorkDay(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				((Long)arguments[2]).longValue(),
-				((Long)arguments[3]).longValue(),
-				((Long)arguments[4]).longValue(),
-				((Integer)arguments[5]).intValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[6]);
-		}
-
-		if (_methodName42.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
 			return WorkDayLocalServiceUtil.getWorkDays(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -268,6 +257,17 @@ public class WorkDayLocalServiceClpInvoker {
 				((Integer)arguments[4]).intValue(),
 				((Integer)arguments[5]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[6]);
+		}
+
+		if (_methodName42.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
+			return WorkDayLocalServiceUtil.updateWorkDay(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				((Long)arguments[3]).longValue(),
+				((Long)arguments[4]).longValue(),
+				((Integer)arguments[5]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
 		throw new UnsupportedOperationException();
