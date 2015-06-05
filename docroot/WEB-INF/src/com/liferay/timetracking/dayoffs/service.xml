@@ -48,10 +48,6 @@
 
 		<column name="dayOfYearId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -75,14 +71,14 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
 		<finder name="ClassNameId" return-type="Collection">
 			<finder-column name="classNameId" />
 		</finder>
 		<finder name="ClassPK" return-type="Collection">
 			<finder-column name="classPK" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="CompanyId" />
 		</finder>
 		<finder name="DayId" return-type="Collection">
 			<finder-column name="dayId" />
