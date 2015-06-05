@@ -275,6 +275,30 @@ public class DaysOffCounterLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Upon taking a day off, this method registers how many more days can the
+	* user take off or throws Exception if there are no more days left.
+	*
+	* @param userId the id of the user who approves the days off
+	* @param workerUserId the id of the user who wants to take the days off
+	* @param ruleId the id of the rule which determines the type of the days
+	off
+	* @param year which year does the user want to take off the days
+	* @return the updated registry entry
+	* @throws PortalException if a portal exception occurred
+	* @throws SystemException if a system exception occurred
+	* @throws NoMoreDaysLeftException if the user doesn't have any more days
+	to take off
+	*/
+	public static com.liferay.timetracking.dayoffs.model.DaysOffCounter takeOffDays(
+		long userId, long workerUserId, long ruleId, int year, int numberOfDays)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.timetracking.dayoffs.NoMoreDaysLeftException {
+		return getService()
+				   .takeOffDays(userId, workerUserId, ruleId, year, numberOfDays);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
