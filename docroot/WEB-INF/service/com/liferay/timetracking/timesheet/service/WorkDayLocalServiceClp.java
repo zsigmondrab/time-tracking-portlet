@@ -121,18 +121,18 @@ public class WorkDayLocalServiceClp implements WorkDayLocalService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName20 = "updateWorkDay";
+		_methodName20 = "getWorkDays";
 
 		_methodParameterTypes20 = new String[] {
-				"long", "long", "long", "long", "long", "int",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName21 = "getWorkDays";
-
-		_methodParameterTypes21 = new String[] {
 				"long", "long", "long", "long", "int", "int",
 				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+
+		_methodName21 = "updateWorkDay";
+
+		_methodParameterTypes21 = new String[] {
+				"long", "long", "long", "long", "long", "int",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -738,6 +738,52 @@ public class WorkDayLocalServiceClp implements WorkDayLocalService {
 	}
 
 	@Override
+	public java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
+		long userId, long companyId, long startTime, long endTime, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] {
+						userId,
+						
+					companyId,
+						
+					startTime,
+						
+					endTime,
+						
+					start,
+						
+					end,
+						
+					ClpSerializer.translateInput(orderByComparator)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.timetracking.timesheet.model.WorkDay>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public com.liferay.timetracking.timesheet.model.WorkDay updateWorkDay(
 		long userId, long workDayId, long startTime, long endTime,
 		long dayOfYearId, int break_,
@@ -747,8 +793,8 @@ public class WorkDayLocalServiceClp implements WorkDayLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20,
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] {
 						userId,
 						
@@ -786,52 +832,6 @@ public class WorkDayLocalServiceClp implements WorkDayLocalService {
 		}
 
 		return (com.liferay.timetracking.timesheet.model.WorkDay)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
-		long userId, long companyId, long startTime, long endTime, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21,
-					new Object[] {
-						userId,
-						
-					companyId,
-						
-					startTime,
-						
-					endTime,
-						
-					start,
-						
-					end,
-						
-					ClpSerializer.translateInput(orderByComparator)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List<com.liferay.timetracking.timesheet.model.WorkDay>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableLocalService _invokableLocalService;

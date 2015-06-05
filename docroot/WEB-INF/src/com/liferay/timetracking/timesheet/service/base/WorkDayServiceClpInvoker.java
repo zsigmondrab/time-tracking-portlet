@@ -32,11 +32,25 @@ public class WorkDayServiceClpInvoker {
 
 		_methodParameterTypes19 = new String[] { "java.lang.String" };
 
-		_methodName24 = "getWorkDays";
+		_methodName24 = "addWorkDay";
 
 		_methodParameterTypes24 = new String[] {
+				"long", "long", "long", "long", "long", "int",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName25 = "getWorkDays";
+
+		_methodParameterTypes25 = new String[] {
 				"long", "long", "long", "long", "int", "int",
 				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+
+		_methodName26 = "updateWorkDay";
+
+		_methodParameterTypes26 = new String[] {
+				"long", "long", "long", "long", "long", "int",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -56,6 +70,17 @@ public class WorkDayServiceClpInvoker {
 
 		if (_methodName24.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes24, parameterTypes)) {
+			return WorkDayServiceUtil.addWorkDay(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				((Long)arguments[3]).longValue(),
+				((Long)arguments[4]).longValue(),
+				((Integer)arguments[5]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[6]);
+		}
+
+		if (_methodName25.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes25, parameterTypes)) {
 			return WorkDayServiceUtil.getWorkDays(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -63,6 +88,17 @@ public class WorkDayServiceClpInvoker {
 				((Integer)arguments[4]).intValue(),
 				((Integer)arguments[5]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[6]);
+		}
+
+		if (_methodName26.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
+			return WorkDayServiceUtil.updateWorkDay(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				((Long)arguments[3]).longValue(),
+				((Long)arguments[4]).longValue(),
+				((Integer)arguments[5]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -74,4 +110,8 @@ public class WorkDayServiceClpInvoker {
 	private String[] _methodParameterTypes19;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
 }
