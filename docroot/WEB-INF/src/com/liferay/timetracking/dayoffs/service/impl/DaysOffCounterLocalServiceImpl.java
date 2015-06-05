@@ -14,7 +14,15 @@
 
 package com.liferay.timetracking.dayoffs.service.impl;
 
+import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.timetracking.dayoffs.NoMoreDaysLeftException;
+import com.liferay.timetracking.dayoffs.model.DaysOffCounter;
 import com.liferay.timetracking.dayoffs.service.base.DaysOffCounterLocalServiceBaseImpl;
+import com.liferay.timetracking.dayoffs.service.persistence.DaysOffCounterUtil;
+
+import java.util.Date;
 
 /**
  * The implementation of the days off counter local service.
@@ -32,9 +40,44 @@ import com.liferay.timetracking.dayoffs.service.base.DaysOffCounterLocalServiceB
  */
 public class DaysOffCounterLocalServiceImpl
 	extends DaysOffCounterLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
+	
+	/**
+	 * Upon taking a day off, this method registers how many more days can the 
+	 * user take off or throws Exception if there are no more days left.
 	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.dayoffs.service.DaysOffCounterLocalServiceUtil} to access the days off counter local service.
+	 * @param userId the id of the user who approves the days off
+	 * @param workerUserId the id of the user who wants to take the days off
+	 * @param ruleId the id of the rule which determines the type of the days 
+	 *        off
+	 * @param year which year does the user want to take off the days
+	 * @return the updated registry entry
+	 * @throws PortalException if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 * @throws NoMoreDaysLeftException if the user doesn't have any more days
+	 *         to take off
 	 */
+	@Override
+	public DaysOffCounter takeOffDays(
+			long userId, long workerUserId, long ruleId, int year,
+			int numberOfDays) 
+		throws PortalException, SystemException, NoMoreDaysLeftException {
+
+		DaysOffCounter daysOffCounter = 
+			DaysOffCounterUtil.fetchByWUI_RI_Y(workerUserId, ruleId, year);
+
+		int remainingDays = daysOffCounter.getRemainingDays();
+
+		if (remainingDays - numberOfDays < 0) {
+			throw new NoMoreDaysLeftException(
+				numberOfDays + " days can't be taken off. The user has only " +
+				remainingDays + " days left.");
+		}
+
+		daysOffCounter.setRemainingDays(remainingDays - numberOfDays);
+		daysOffCounter.setUserId(userId);
+		daysOffCounter.setModifiedDate(new Date());
+
+		daysOffCounterLocalService.updateDaysOffCounter(daysOffCounter);
+		return daysOffCounter;
+	}
 }
