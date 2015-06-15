@@ -129,11 +129,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="WorkerUserId" return-type="DayOffCounter">
+		<finder name="WorkerUserId" return-type="Collection">
 			<finder-column name="workerUserId" />
-		</finder>
-		<finder name="WorkerUserName" return-type="DayOffCounter">
-			<finder-column name="workerUserName" />
 		</finder>
 		<finder name="RuleId" return-type="Collection">
 			<finder-column name="ruleId" />
@@ -141,42 +138,22 @@
 		<finder name="Year" return-type="Collection">
 			<finder-column name="year" />
 		</finder>
-		<finder name="AllDays" return-type="Collection">
-			<finder-column name="allDays" />
+		<finder name="R_Y" return-type="Collection">
+			<finder-column name="ruleId" />
+			<finder-column name="year" />
 		</finder>
-		<finder name="RemainingDays" return-type="Collection">
-			<finder-column name="remainingDays" />
-		</finder>
-		<finder name="WUI_RI" return-type="Collection">
+		<finder name="W_R" return-type="Collection">
 			<finder-column name="workerUserId" />
 			<finder-column name="ruleId" />
 		</finder>
-		<finder name="WUN_RI" return-type="Collection">
-			<finder-column name="workerUserName" />
-			<finder-column name="ruleId" />
-		</finder>
-		<finder name="WUI_Y" return-type="Collection">
+		<finder name="W_Y" return-type="Collection">
 			<finder-column name="workerUserId" />
 			<finder-column name="year" />
 		</finder>
-		<finder name="WUN_Y" return-type="Collection">
-			<finder-column name="workerUserName" />
-			<finder-column name="year" />
-		</finder>
-		<finder name="WUI_RI_Y" return-type="DayOffCounter">
+		<finder name="W_R_Y" return-type="DayOffCounter">
 			<finder-column name="workerUserId" />
 			<finder-column name="ruleId" />
 			<finder-column name="year" />
 		</finder>
-		<finder name="WUN_RI_Y" return-type="DayOffCounter">
-			<finder-column name="workerUserName" />
-			<finder-column name="ruleId" />
-			<finder-column name="year" />
-		</finder>
-		<finder name="RI_Y" return-type="Collection">
-			<finder-column name="ruleId" />
-			<finder-column name="year" />
-		</finder>
-		
 	</entity>
 </service-builder>
