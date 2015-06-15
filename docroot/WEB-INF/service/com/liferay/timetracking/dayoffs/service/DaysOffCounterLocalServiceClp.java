@@ -676,8 +676,7 @@ public class DaysOffCounterLocalServiceClp implements DaysOffCounterLocalService
 	public com.liferay.timetracking.dayoffs.model.DaysOffCounter takeOffDays(
 		long userId, long workerUserId, long ruleId, int year, int numberOfDays)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.timetracking.dayoffs.NoMoreDaysLeftException {
+			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
@@ -704,10 +703,6 @@ public class DaysOffCounterLocalServiceClp implements DaysOffCounterLocalService
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof com.liferay.timetracking.dayoffs.NoMoreDaysLeftException) {
-				throw (com.liferay.timetracking.dayoffs.NoMoreDaysLeftException)t;
 			}
 
 			if (t instanceof RuntimeException) {

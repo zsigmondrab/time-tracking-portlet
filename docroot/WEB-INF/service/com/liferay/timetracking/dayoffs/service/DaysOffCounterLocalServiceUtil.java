@@ -293,8 +293,7 @@ public class DaysOffCounterLocalServiceUtil {
 	public static com.liferay.timetracking.dayoffs.model.DaysOffCounter takeOffDays(
 		long userId, long workerUserId, long ruleId, int year, int numberOfDays)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.timetracking.dayoffs.NoMoreDaysLeftException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .takeOffDays(userId, workerUserId, ruleId, year, numberOfDays);
 	}
