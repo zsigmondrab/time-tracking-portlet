@@ -509,8 +509,7 @@ public class DaysOffCounterWrapper implements DaysOffCounter,
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.timetracking.dayoffs.model.DaysOffCounter daysOffCounter) {
+	public int compareTo(DaysOffCounter daysOffCounter) {
 		return _daysOffCounter.compareTo(daysOffCounter);
 	}
 
@@ -520,17 +519,17 @@ public class DaysOffCounterWrapper implements DaysOffCounter,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<com.liferay.timetracking.dayoffs.model.DaysOffCounter> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<DaysOffCounter> toCacheModel() {
 		return _daysOffCounter.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.DaysOffCounter toEscapedModel() {
+	public DaysOffCounter toEscapedModel() {
 		return new DaysOffCounterWrapper(_daysOffCounter.toEscapedModel());
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.DaysOffCounter toUnescapedModel() {
+	public DaysOffCounter toUnescapedModel() {
 		return new DaysOffCounterWrapper(_daysOffCounter.toUnescapedModel());
 	}
 

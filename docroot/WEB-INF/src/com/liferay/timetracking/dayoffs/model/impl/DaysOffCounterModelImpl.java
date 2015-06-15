@@ -95,12 +95,10 @@ public class DaysOffCounterModelImpl extends BaseModelImpl<DaysOffCounter>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.timetracking.dayoffs.model.DaysOffCounter"),
 			true);
-	public static long ALLDAYS_COLUMN_BITMASK = 1L;
-	public static long REMAININGDAYS_COLUMN_BITMASK = 2L;
-	public static long RULEID_COLUMN_BITMASK = 4L;
-	public static long WORKERUSERID_COLUMN_BITMASK = 8L;
-	public static long WORKERUSERNAME_COLUMN_BITMASK = 16L;
-	public static long YEAR_COLUMN_BITMASK = 32L;
+	public static long RULEID_COLUMN_BITMASK = 1L;
+	public static long WORKERUSERID_COLUMN_BITMASK = 2L;
+	public static long YEAR_COLUMN_BITMASK = 4L;
+	public static long WORKERUSERNAME_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -412,15 +410,7 @@ public class DaysOffCounterModelImpl extends BaseModelImpl<DaysOffCounter>
 	public void setWorkerUserName(String workerUserName) {
 		_columnBitmask = -1L;
 
-		if (_originalWorkerUserName == null) {
-			_originalWorkerUserName = _workerUserName;
-		}
-
 		_workerUserName = workerUserName;
-	}
-
-	public String getOriginalWorkerUserName() {
-		return GetterUtil.getString(_originalWorkerUserName);
 	}
 
 	@JSON
@@ -477,19 +467,7 @@ public class DaysOffCounterModelImpl extends BaseModelImpl<DaysOffCounter>
 
 	@Override
 	public void setAllDays(int allDays) {
-		_columnBitmask |= ALLDAYS_COLUMN_BITMASK;
-
-		if (!_setOriginalAllDays) {
-			_setOriginalAllDays = true;
-
-			_originalAllDays = _allDays;
-		}
-
 		_allDays = allDays;
-	}
-
-	public int getOriginalAllDays() {
-		return _originalAllDays;
 	}
 
 	@JSON
@@ -500,19 +478,7 @@ public class DaysOffCounterModelImpl extends BaseModelImpl<DaysOffCounter>
 
 	@Override
 	public void setRemainingDays(int remainingDays) {
-		_columnBitmask |= REMAININGDAYS_COLUMN_BITMASK;
-
-		if (!_setOriginalRemainingDays) {
-			_setOriginalRemainingDays = true;
-
-			_originalRemainingDays = _remainingDays;
-		}
-
 		_remainingDays = remainingDays;
-	}
-
-	public int getOriginalRemainingDays() {
-		return _originalRemainingDays;
 	}
 
 	public long getColumnBitmask() {
@@ -612,8 +578,6 @@ public class DaysOffCounterModelImpl extends BaseModelImpl<DaysOffCounter>
 
 		daysOffCounterModelImpl._setOriginalWorkerUserId = false;
 
-		daysOffCounterModelImpl._originalWorkerUserName = daysOffCounterModelImpl._workerUserName;
-
 		daysOffCounterModelImpl._originalRuleId = daysOffCounterModelImpl._ruleId;
 
 		daysOffCounterModelImpl._setOriginalRuleId = false;
@@ -621,14 +585,6 @@ public class DaysOffCounterModelImpl extends BaseModelImpl<DaysOffCounter>
 		daysOffCounterModelImpl._originalYear = daysOffCounterModelImpl._year;
 
 		daysOffCounterModelImpl._setOriginalYear = false;
-
-		daysOffCounterModelImpl._originalAllDays = daysOffCounterModelImpl._allDays;
-
-		daysOffCounterModelImpl._setOriginalAllDays = false;
-
-		daysOffCounterModelImpl._originalRemainingDays = daysOffCounterModelImpl._remainingDays;
-
-		daysOffCounterModelImpl._setOriginalRemainingDays = false;
 
 		daysOffCounterModelImpl._columnBitmask = 0;
 	}
@@ -801,7 +757,6 @@ public class DaysOffCounterModelImpl extends BaseModelImpl<DaysOffCounter>
 	private long _originalWorkerUserId;
 	private boolean _setOriginalWorkerUserId;
 	private String _workerUserName;
-	private String _originalWorkerUserName;
 	private long _ruleId;
 	private long _originalRuleId;
 	private boolean _setOriginalRuleId;
@@ -809,11 +764,7 @@ public class DaysOffCounterModelImpl extends BaseModelImpl<DaysOffCounter>
 	private int _originalYear;
 	private boolean _setOriginalYear;
 	private int _allDays;
-	private int _originalAllDays;
-	private boolean _setOriginalAllDays;
 	private int _remainingDays;
-	private int _originalRemainingDays;
-	private boolean _setOriginalRemainingDays;
 	private long _columnBitmask;
 	private DaysOffCounter _escapedModel;
 }
