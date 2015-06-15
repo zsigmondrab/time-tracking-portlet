@@ -60,17 +60,15 @@ public class DaysOffCounterLocalServiceImpl
 	public DaysOffCounter takeOffDays(
 			long userId, long workerUserId, long ruleId, int year,
 			int numberOfDays) 
-		throws PortalException, SystemException, NoMoreDaysLeftException {
+		throws PortalException, SystemException {
 
-		DaysOffCounter daysOffCounter = 
-			DaysOffCounterUtil.fetchByWUI_RI_Y(workerUserId, ruleId, year);
+		DaysOffCounter daysOffCounter = DaysOffCounterUtil.fetchByW_R_Y(
+			workerUserId, ruleId, year);
 
 		int remainingDays = daysOffCounter.getRemainingDays();
 
 		if (remainingDays - numberOfDays < 0) {
-			throw new NoMoreDaysLeftException(
-				numberOfDays + " days can't be taken off. The user has only " +
-				remainingDays + " days left.");
+			throw new NoMoreDaysLeftException();
 		}
 
 		daysOffCounter.setRemainingDays(remainingDays - numberOfDays);
@@ -78,6 +76,7 @@ public class DaysOffCounterLocalServiceImpl
 		daysOffCounter.setModifiedDate(new Date());
 
 		daysOffCounterLocalService.updateDaysOffCounter(daysOffCounter);
+
 		return daysOffCounter;
 	}
 }

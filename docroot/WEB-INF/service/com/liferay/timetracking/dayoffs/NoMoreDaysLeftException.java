@@ -1,9 +1,10 @@
 package com.liferay.timetracking.dayoffs;
 
-public class NoMoreDaysLeftException extends Exception {
+import com.liferay.portal.kernel.exception.PortalException;
+
+public class NoMoreDaysLeftException extends PortalException {
 
 	public NoMoreDaysLeftException() {
-		super();
 	}
 
 	public NoMoreDaysLeftException(String msg) {
@@ -18,7 +19,4 @@ public class NoMoreDaysLeftException extends Exception {
 		super(cause);
 	}
 
-	public NoMoreDaysLeftException(int remainingDays, int numberofDays) {
-		super();
-	}
 }
