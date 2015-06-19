@@ -40,7 +40,25 @@ import java.util.Date;
  */
 public class DaysOffCounterLocalServiceImpl
 	extends DaysOffCounterLocalServiceBaseImpl {
-	
+
+	/**
+	 * Returns the the amount of days a person can take off for the year.
+	 * @param workerUserId
+	 * @param ruleId
+	 * @param year
+	 * @return The remaining days
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	public int getRemainingDays(long workerUserId, long ruleId, int year) 
+		throws PortalException, SystemException {
+
+		DaysOffCounter dayOffCounter = daysOffCounterPersistence.fetchByW_R_Y(
+			workerUserId, ruleId, year);
+
+		return dayOffCounter.getRemainingDays();
+	}
+
 	/**
 	 * Upon taking a day off, this method registers how many more days can the 
 	 * user take off or throws Exception if there are no more days left.
