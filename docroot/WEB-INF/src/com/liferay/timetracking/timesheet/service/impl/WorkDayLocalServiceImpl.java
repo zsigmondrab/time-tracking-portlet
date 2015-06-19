@@ -14,6 +14,12 @@
 
 package com.liferay.timetracking.timesheet.service.impl;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.TimeZone;
+
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -27,13 +33,9 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.timetracking.timesheet.BreakException;
 import com.liferay.timetracking.timesheet.DateIntervalException;
+import com.liferay.timetracking.timesheet.InvalidTimeAmountException;
 import com.liferay.timetracking.timesheet.model.WorkDay;
 import com.liferay.timetracking.timesheet.service.base.WorkDayLocalServiceBaseImpl;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
 
 /**
  * The implementation of the work day local service.
@@ -56,6 +58,7 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.timetracking.timesheet.service.WorkDayLocalServiceUtil} to access the work day local service.
 	 */
+	@Override
 	public WorkDay addWorkDay(
 			long userId, long companyId,
 			long startTime, long endTime, long dayOfYearId, int break_,
@@ -96,6 +99,7 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		return workDay;
 	}
 
+	@Override
 	public List<WorkDay> getWorkDays(
 			long userId, long companyId,
 			long startTime, long endTime, int start, int end,
@@ -116,6 +120,7 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		return workDays;
 	}
 
+	@Override
 	public WorkDay updateWorkDay(
 			long userId, long workDayId, long startTime,
 			long endTime, long dayOfYearId, int break_,
@@ -184,6 +189,16 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 
 		if (break_ < 30) {
 			throw new BreakException();
+		}
+
+		GregorianCalendar minutesDiff = new GregorianCalendar();
+
+		minutesDiff.setTimeInMillis(endTime - startTime);
+
+		int minutes = minutesDiff.get(GregorianCalendar.MINUTE);
+
+		if ((minutes - break_) < 0) {
+			throw new InvalidTimeAmountException();
 		}
 	}
 
