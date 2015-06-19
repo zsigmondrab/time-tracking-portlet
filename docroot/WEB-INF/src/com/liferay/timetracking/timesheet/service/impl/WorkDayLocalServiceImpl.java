@@ -16,7 +16,6 @@ package com.liferay.timetracking.timesheet.service.impl;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -34,6 +33,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.timetracking.timesheet.BreakException;
 import com.liferay.timetracking.timesheet.DateIntervalException;
 import com.liferay.timetracking.timesheet.InvalidTimeAmountException;
+import com.liferay.timetracking.timesheet.MissingStartDateException;
 import com.liferay.timetracking.timesheet.model.WorkDay;
 import com.liferay.timetracking.timesheet.service.base.WorkDayLocalServiceBaseImpl;
 
@@ -162,6 +162,10 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 			int break_)
 		throws PortalException, SystemException {
 
+		if (startTime == 0) {
+			throw new MissingStartDateException();
+		}
+
 		User user = userPersistence.fetchByC_U(companyId, userId);
 
 		if (user != null) {
@@ -180,25 +184,27 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 			throw new NoSuchUserException(msg.toString());
 		}
 
-		Date startTimeDate = new Date(startTime);
-		Date endTimeDate = new Date(endTime);
+		if (endTime > 0) {
+			Date startTimeDate = new Date(startTime);
+			Date endTimeDate = new Date(endTime);
 
-		if (startTimeDate.after(endTimeDate)) {
-			throw new DateIntervalException();
-		}
+			if (startTimeDate.after(endTimeDate)) {
+				throw new DateIntervalException();
+			}
 
-		if (break_ < 30) {
-			throw new BreakException();
-		}
+			if (break_ > 0) {
+				if (break_ < 30) {
+					throw new BreakException();
+				}
 
-		GregorianCalendar minutesDiff = new GregorianCalendar();
+				long diff = endTime - startTime;
 
-		minutesDiff.setTimeInMillis(endTime - startTime);
+				long diffInMinutes = diff / 1000 / 60;
 
-		int minutes = minutesDiff.get(GregorianCalendar.MINUTE);
-
-		if ((minutes - break_) < 0) {
-			throw new InvalidTimeAmountException();
+				if ((diffInMinutes - break_) < 0) {
+					throw new InvalidTimeAmountException();
+				}
+			}
 		}
 	}
 
