@@ -114,9 +114,13 @@ public class DaysOffCounterLocalServiceClpInvoker {
 
 		_methodParameterTypes47 = new String[] { "java.lang.String" };
 
-		_methodName52 = "takeOffDays";
+		_methodName52 = "getRemainingDays";
 
-		_methodParameterTypes52 = new String[] {
+		_methodParameterTypes52 = new String[] { "long", "long", "int" };
+
+		_methodName53 = "takeOffDays";
+
+		_methodParameterTypes53 = new String[] {
 				"long", "long", "long", "int", "int"
 			};
 	}
@@ -224,6 +228,13 @@ public class DaysOffCounterLocalServiceClpInvoker {
 
 		if (_methodName52.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+			return DaysOffCounterLocalServiceUtil.getRemainingDays(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
 			return DaysOffCounterLocalServiceUtil.takeOffDays(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -272,4 +283,6 @@ public class DaysOffCounterLocalServiceClpInvoker {
 	private String[] _methodParameterTypes47;
 	private String _methodName52;
 	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
 }

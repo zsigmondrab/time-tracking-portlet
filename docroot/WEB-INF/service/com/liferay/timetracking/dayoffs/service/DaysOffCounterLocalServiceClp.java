@@ -115,9 +115,13 @@ public class DaysOffCounterLocalServiceClp implements DaysOffCounterLocalService
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "takeOffDays";
+		_methodName19 = "getRemainingDays";
 
-		_methodParameterTypes19 = new String[] {
+		_methodParameterTypes19 = new String[] { "long", "long", "int" };
+
+		_methodName20 = "takeOffDays";
+
+		_methodParameterTypes20 = new String[] {
 				"long", "long", "long", "int", "int"
 			};
 	}
@@ -673,8 +677,7 @@ public class DaysOffCounterLocalServiceClp implements DaysOffCounterLocalService
 	}
 
 	@Override
-	public com.liferay.timetracking.dayoffs.model.DaysOffCounter takeOffDays(
-		long userId, long workerUserId, long ruleId, int year, int numberOfDays)
+	public int getRemainingDays(long workerUserId, long ruleId, int year)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -682,6 +685,41 @@ public class DaysOffCounterLocalServiceClp implements DaysOffCounterLocalService
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
 					_methodParameterTypes19,
+					new Object[] { workerUserId, ruleId, year });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public com.liferay.timetracking.dayoffs.model.DaysOffCounter takeOffDays(
+		long userId, long workerUserId, long ruleId, int year, int numberOfDays)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
 					new Object[] {
 						userId,
 						
@@ -756,4 +794,6 @@ public class DaysOffCounterLocalServiceClp implements DaysOffCounterLocalService
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

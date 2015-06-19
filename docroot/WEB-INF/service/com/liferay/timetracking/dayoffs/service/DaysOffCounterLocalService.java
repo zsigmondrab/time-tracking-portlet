@@ -255,6 +255,21 @@ public interface DaysOffCounterLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	/**
+	* Returns the the amount of days a person can take off for the year.
+	*
+	* @param workerUserId
+	* @param ruleId
+	* @param year
+	* @return The remaining days
+	* @throws PortalException
+	* @throws SystemException
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getRemainingDays(long workerUserId, long ruleId, int year)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Upon taking a day off, this method registers how many more days can the
 	* user take off or throws Exception if there are no more days left.
 	*
