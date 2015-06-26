@@ -86,13 +86,16 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		Calendar start = CalendarFactoryUtil.getCalendar(timeZone);
 		start.setTimeInMillis(startTime);
 
-		Calendar end = CalendarFactoryUtil.getCalendar(timeZone);
-		end.setTimeInMillis(endTime);
-
 		workDay.setDayOfYearId(dayOfYearId);
-		workDay.setEndTime(end.getTime());
 		workDay.setBreak_(break_);
 		workDay.setStartTime(start.getTime());
+
+		if (endTime != 0) {
+			Calendar end = CalendarFactoryUtil.getCalendar(timeZone);
+			end.setTimeInMillis(endTime);
+
+			workDay.setEndTime(end.getTime());
+		}
 
 		workDayPersistence.update(workDay);
 
