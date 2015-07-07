@@ -104,9 +104,7 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 
 	@Override
 	public List<WorkDay> getWorkDays(
-			long userId, long companyId,
-			long startTime, long endTime, int start, int end,
-			OrderByComparator orderByComparator)
+			long userId, long startTime, long endTime)
 		throws SystemException {
 
 		TimeZone timeZone = TimeZoneUtil.getTimeZone(StringPool.UTC);
