@@ -123,10 +123,7 @@ public class WorkDayLocalServiceClp implements WorkDayLocalService {
 
 		_methodName20 = "getWorkDays";
 
-		_methodParameterTypes20 = new String[] {
-				"long", "long", "long", "long", "int", "int",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
+		_methodParameterTypes20 = new String[] { "long", "long", "long" };
 
 		_methodName21 = "updateWorkDay";
 
@@ -739,30 +736,14 @@ public class WorkDayLocalServiceClp implements WorkDayLocalService {
 
 	@Override
 	public java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
-		long userId, long companyId, long startTime, long endTime, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		long userId, long startTime, long endTime)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20,
-					new Object[] {
-						userId,
-						
-					companyId,
-						
-					startTime,
-						
-					endTime,
-						
-					start,
-						
-					end,
-						
-					ClpSerializer.translateInput(orderByComparator)
-					});
+					new Object[] { userId, startTime, endTime });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

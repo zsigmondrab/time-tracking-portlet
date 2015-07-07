@@ -41,10 +41,7 @@ public class WorkDayServiceClpInvoker {
 
 		_methodName25 = "getWorkDays";
 
-		_methodParameterTypes25 = new String[] {
-				"long", "long", "long", "long", "int", "int",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
+		_methodParameterTypes25 = new String[] { "long", "long", "long" };
 
 		_methodName26 = "updateWorkDay";
 
@@ -83,11 +80,7 @@ public class WorkDayServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes25, parameterTypes)) {
 			return WorkDayServiceUtil.getWorkDays(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
-				((Long)arguments[2]).longValue(),
-				((Long)arguments[3]).longValue(),
-				((Integer)arguments[4]).intValue(),
-				((Integer)arguments[5]).intValue(),
-				(com.liferay.portal.kernel.util.OrderByComparator)arguments[6]);
+				((Long)arguments[2]).longValue());
 		}
 
 		if (_methodName26.equals(name) &&

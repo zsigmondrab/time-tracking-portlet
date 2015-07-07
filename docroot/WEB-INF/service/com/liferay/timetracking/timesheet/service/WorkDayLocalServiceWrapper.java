@@ -302,12 +302,9 @@ public class WorkDayLocalServiceWrapper implements WorkDayLocalService,
 
 	@Override
 	public java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> getWorkDays(
-		long userId, long companyId, long startTime, long endTime, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		long userId, long startTime, long endTime)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _workDayLocalService.getWorkDays(userId, companyId, startTime,
-			endTime, start, end, orderByComparator);
+		return _workDayLocalService.getWorkDays(userId, startTime, endTime);
 	}
 
 	@Override

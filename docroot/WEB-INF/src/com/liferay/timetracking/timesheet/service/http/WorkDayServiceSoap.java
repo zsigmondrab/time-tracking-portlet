@@ -82,14 +82,10 @@ public class WorkDayServiceSoap {
 	}
 
 	public static com.liferay.timetracking.timesheet.model.WorkDaySoap[] getWorkDays(
-		long userId, long companyId, long startTime, long endTime, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws RemoteException {
+		long userId, long startTime, long endTime) throws RemoteException {
 		try {
 			java.util.List<com.liferay.timetracking.timesheet.model.WorkDay> returnValue =
-				WorkDayServiceUtil.getWorkDays(userId, companyId, startTime,
-					endTime, start, end, orderByComparator);
+				WorkDayServiceUtil.getWorkDays(userId, startTime, endTime);
 
 			return com.liferay.timetracking.timesheet.model.WorkDaySoap.toSoapModels(returnValue);
 		}
