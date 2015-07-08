@@ -3,10 +3,16 @@ package com.liferay.timetracking.timesheet.portlet;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.timetracking.timesheet.model.WorkDay;
+import com.liferay.timetracking.timesheet.service.WorkDayServiceUtil;
+import com.liferay.timetracking.timesheet.util.TimesheetUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
@@ -38,7 +44,21 @@ public class TimesheetPortlet extends MVCPortlet {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortalException, SystemException {
 
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		long endTime = ParamUtil.getLong(resourceRequest, "intervalEndTime");
+
+		long startTime = ParamUtil.getLong(
+			resourceRequest, "intervalStartTime");
+
+		long userId = ParamUtil.getLong(resourceRequest, "userId");
+
+		List<WorkDay> workDays = WorkDayServiceUtil.getWorkDays(
+			userId, startTime, endTime);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		JSONArray jsonArray = TimesheetUtil.toTimesheetDaysJSONArray(
+			themeDisplay, workDays);
 
 		writeJSON(resourceRequest, resourceResponse, jsonArray);
 	}
