@@ -184,8 +184,9 @@ AUI.add(
 		TPL_FORM = '<form class="' + 'timesheet-day-recorder-form' + '" id="timesheetDayRecorderForm"></form>',
 		TPL_RECORDER_BODY_CONTENT = '<input type="hidden" name="startDate" value="{startDate}" />' +
 			'<input type="hidden" name="endDate" value="{endDate}" />' +
+			'<input type="hidden" name="breakTime" value="{breakTime}" />' +
 			'<input class="' + [CSS_TIMESHEET_DAY_RECORDER_CONTENT, CSS_FORM_CONTROL]
-				.join(' ') + '" id="timesheedDayContent" name="content" value="{content}" />',
+				.join(' ') + '" id="{id}" name="content" value="{content}" />',
 		TPL_RECORDER_HEADER_CONTENT = '<span class="field-name">{fieldName}</span>',
 		TPL_TVT_CONTAINER = '<div class="' + CSS_TVT_CONTAINER + '">' +
 						 '<div class="' + CSS_TVT_ROW_CONTAINER + '"></div>' +
@@ -2093,11 +2094,11 @@ AUI.add(
 
 				var timesheetDay = instance.get(TIMESHEET_DAY),
 					formValues = instance.serializeForm(),
-					timeValues = formValues.content.split(':'),
 					selectedNode = instance.get('selectedNode'),
 					fieldName = selectedNode.getData(FIELD_NAME),
 					currentDate = selectedNode.getData('date'),
 					rowIndex = selectedNode.getData('rowIndex'),
+					timeValues,
 					workDate;
 
 				if (!timesheetDay) {
@@ -2110,17 +2111,23 @@ AUI.add(
 
 				timesheetDay.set('rowIndex', rowIndex);
 
-				workDate = DateMath.add(currentDate, DateMath.HOUR, timeValues[0]);
-				workDate = DateMath.add(workDate, DateMath.MINUTES, timeValues[1]);
+				try {
+					timeValues = formValues.content.split(':');
 
-				if (fieldName === START_TIME) {
-					timesheetDay.set(START_DATE, workDate);
+					workDate = DateMath.add(currentDate, DateMath.HOUR, timeValues[0]);
+					workDate = DateMath.add(workDate, DateMath.MINUTES, timeValues[1]);
+
+					if (fieldName === START_TIME) {
+						timesheetDay.set(START_DATE, workDate);
+					}
+					else if (fieldName === END_TIME) {
+						timesheetDay.set(END_DATE, workDate);
+					}
 				}
-				else if (fieldName === END_TIME) {
-					timesheetDay.set(END_DATE, workDate);
-				}
-				else if (fieldName === LUNCH_TIME) {
-					timesheetDay.set(LUNCH_TIME, workDate.getTime() - currentDate.getTime());
+				catch (error) {
+					if (fieldName === BREAK_TIME) {
+						timesheetDay.set(BREAK_TIME, formValues.content);
+					}
 				}
 
 				return timesheetDay;
@@ -2138,7 +2145,7 @@ AUI.add(
 			/**
 			* TimesheetDayRecorder
 			*/
-			populateForm: function() {
+			populateForm: function(fieldName) {
 				var instance = this;
 
 				var bodyTemplate = instance.get('bodyTemplate'),
@@ -2151,12 +2158,12 @@ AUI.add(
 				if (!instance.timepicker) {
 					instance.timepicker = new A.TimePicker({
 						mask: '%H:%M',
-						trigger: '#timesheedDayContent',
 						on: {
 							selectionChange: function(event) {
 
 							}
-						}
+						},
+						trigger: '#timesheetDayContent'
 					});
 				}
 
@@ -2201,12 +2208,14 @@ AUI.add(
 				var instance = this;
 
 				var	popover = instance.popover,
-					boundingBox = popover.get('boundingBox');
+					boundingBox = popover.get('boundingBox'),
+					selectedNode = instance.get('selectedNode'),
+					fieldName = selectedNode.getData(FIELD_NAME);
 
 				boundingBox.addClass('timesheet-popover');
 
 				if (event.newVal) {
-					instance.populateForm();
+					instance.populateForm(fieldName);
 
 					if (!instance.get('event')) {
 						var contentNode = instance.getContentNode();
