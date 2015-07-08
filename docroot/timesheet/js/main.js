@@ -1615,7 +1615,7 @@ AUI.add(
 				var	intervalStartDate = instance._findCurrentIntervalStart(),
 					startDateRef = DateMath.toMidnight(intervalStartDate),
 					intervalStartDate = DateMath.toMidnight(DateMath.findMonthStart(startDateRef)),
-					intervalEndDate = DateMath.toMidnight(DateMath.findMonthEnd(startDateRef)),
+					intervalEndDate = DateMath.findMonthEnd(startDateRef),
 					cacheKey = String(intervalStartDate.getTime()).concat(intervalStartDate.getTime()).concat(intervalEndDate.getTime()),
 					rowDataTableNode = instance.rowDataTableStack[cacheKey],
 					timesheet = instance.get(TIMESHEET);
