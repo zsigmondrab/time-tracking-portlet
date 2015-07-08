@@ -35,6 +35,7 @@ AUI.add(
 		ACTIVE_VIEW = 'activeView',
 		ALL = 'all',
 		BASE_WORK_TIME = 'baseWorkTime',
+		BREAK_TIME = 'breakTime',
 		BTN = 'btn',
 		BUTTON = 'button',
 		CHEVRON = 'chevron',
@@ -44,6 +45,7 @@ AUI.add(
 		COLUMN_HEADER_NODE = 'columnHeaderNode',
 		COLUMN_ELEMENT_HEADER = 'columnElementHeader',
 		COLUMN_TABLE_GRID = 'columnTableGrid',
+		COMPANY_ID = 'companyId',
 		CONTAINER = 'container',
 		CONTENT = 'content',
 		CONTROL = 'control',
@@ -52,6 +54,7 @@ AUI.add(
 		DATA = 'data',
 		DATE = 'date',
 		DAY = 'day',
+		DAY_OF_YEAR_ID = 'dayOfYearId',
 		DAY_RECORDER = 'dayRecorder',
 		DISABLED = 'disabled',
 		DISPLAY_DAYS_INTERVAL = 'displayDaysInterval',
@@ -76,7 +79,6 @@ AUI.add(
 		ICONS = 'icons',
 		LEFT = 'left',
 		LOCALE = 'locale',
-		LUNCH_TIME = 'lunchTime',
 		NAME = 'name',
 		NAV = 'nav',
 		NAV_NODE = 'navNode',
@@ -112,6 +114,7 @@ AUI.add(
 		TODAY_DATE = 'todayDate',
 		TR = 'tr',
 		TRIGGER_NODE = 'triggerNode',
+		USER_ID = 'userId',
 		VIEW = 'view',
 		VIEW_DATE = 'viewDate',
 		VIEW_DATE_NODE = 'viewDateNode',
@@ -225,6 +228,21 @@ AUI.add(
 		NAME: TIMESHEET_DAY,
 
 		ATTRS: {
+			breakTime: {
+				validator: isNumber,
+				value: 0
+			},
+
+			companyId: {
+				validator: isNumber,
+				value: themeDisplay.getCompanyId()
+			},
+
+			dayOfYearId: {
+				validator: isNumber,
+				value: 0
+			},
+
 			endDate: {
 				validator: isDate
 			},
@@ -233,8 +251,9 @@ AUI.add(
 				validator: isNumber
 			},
 
-			lunchTime: {
-				validator: isNumber
+			id: {
+				validator: isNumber,
+				value: 0
 			},
 
 			rowIndex: {
@@ -250,11 +269,13 @@ AUI.add(
 			},
 
 			userId: {
-				validator: isString
+				validator: isString,
+				value: themeDisplay.getUserId()
 			},
 
 			userName: {
-				validator: isString
+				validator: isString,
+				value: themeDisplay.getUserName()
 			}
 		},
 
@@ -320,7 +341,7 @@ AUI.add(
 				var params = {
 					endDate: instance.get('startDate'),
 					id: instance.get('id'),
-					lunchTime: instance.get('lunchTime'),
+					breakTime: instance.get('breakTime'),
 					startDate: instance.get('startDate'),
 					userId: instance.get('userId')
 				}
@@ -422,12 +443,12 @@ AUI.add(
 			var instance = this;
 
 			var endTime = timesheetDay.get(END_DATE),
-				lunchTime = timesheetDay.get(LUNCH_TIME),
+				breakTime = timesheetDay.get(BREAK_TIME),
 				startTime = timesheetDay.get(START_DATE),
 				workTime = '';
 
-			if (endTime && startTime && lunchTime) {
-				workTime = endTime.getTime() - startTime.getTime() - lunchTime;
+			if (endTime && startTime && breakTime) {
+				workTime = endTime.getTime() - startTime.getTime() - (breakTime * 60000);
 			}
 
 			return workTime
@@ -1737,7 +1758,7 @@ AUI.add(
 					}
 					else if (i === 3) {
 						columnNode.addClass('timesheet-day-content');
-						columnNode.setData(FIELD_NAME, LUNCH_TIME);
+						columnNode.setData(FIELD_NAME, BREAK_TIME);
 					}
 
 					if (i === 1 || i === 2 || i === 3) {
@@ -1829,8 +1850,8 @@ AUI.add(
 					else if ((i == 2) && timesheetDay.get(END_DATE)) {
 						columnDataNode.html(rowDateFormatter.call(instance, timesheetDay.get(END_DATE)));
 					}
-					else if ((i == 3) && timesheetDay.get(LUNCH_TIME)) {
-						columnDataNode.html(String(timesheetDay.get(LUNCH_TIME) / 60000).concat(' min'));
+					else if ((i == 3) && timesheetDay.get(BREAK_TIME)) {
+						columnDataNode.html(String(timesheetDay.get(BREAK_TIME)));
 					}
 					else if (i == 4) {
 						var allTime = timesheet.calculateAllTime(timesheetDay);
@@ -1967,7 +1988,7 @@ AUI.add(
 						description: 'Description',
 						edit: 'Edit',
 						endTime: 'End Time',
-						lunchTime: 'Lunch Time',
+						breakTime: 'Lunch Time',
 						save: 'Save',
 						startTime: 'Start Time'
 						},
@@ -2036,8 +2057,10 @@ AUI.add(
 				else if (fieldName === END_TIME) {
 					content = contentDateFormatter.call(timesheet, timesheetDay.get(END_DATE));
 				}
-				else if (fieldName === LUNCH_TIME) {
-					content = contentDateFormatter.call(timesheet, timesheetDay.get(LUNCH_TIME));
+				else if (fieldName === BREAK_TIME) {
+					content = contentDateFormatter.call(timesheet, timesheetDay.get(BREAK_TIME));
+
+					id = 'timesheetDayContentBreak';
 				}
 
 				if (!isUndefined(endDate)) {
