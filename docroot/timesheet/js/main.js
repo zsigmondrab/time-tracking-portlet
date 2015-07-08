@@ -1621,11 +1621,12 @@ AUI.add(
 					timesheet = instance.get(TIMESHEET);
 
 				if (!rowDataTableNode) {
-					var params = {};
-
-					params.userId = instance.get('userId');
-					params.intervalStartTime = intervalStartDate.getTime();
-					params.intervalEndTime = intervalEndDate.getTime();
+					var params = {
+						companyId: timesheet.get(COMPANY_ID),
+						intervalEndTime: intervalEndDate.getTime(),
+						intervalStartTime: intervalStartDate.getTime(),
+						userId: instance.get(USER_ID)
+					};
 
 					timesheet.invokeResourceURL(
 						"timesheetDays",
@@ -2044,11 +2045,13 @@ AUI.add(
 				var	strings = instance.get('strings'),
 					timesheetDay = instance.get(TIMESHEET_DAY) || instance,
 					content = '',
+					breakTime = timesheetDay.get(BREAK_TIME),
 					endDate = timesheetDay.get('endDate'), endTime = '',
 					startDate = timesheetDay.get('startDate'), startTime = '',
 					selectedNode = instance.get('selectedNode'),
 					fieldName = selectedNode.getData(FIELD_NAME),
 					timesheet = instance.get(TIMESHEET),
+					id = 'timesheetDayContent',
 					contentDateFormatter = instance.get('contentDateFormatter');
 
 				if (fieldName === START_TIME) {
@@ -2072,10 +2075,12 @@ AUI.add(
 				}
 
 				return {
+					breakTime: breakTime,
 					content: content,
 					date: new Date(),
 					endDate: endDate,
 					fieldName: strings[fieldName],
+					id: id,
 					startDate: startDate
 				};
 			},
@@ -2315,15 +2320,38 @@ AUI.add(
 				var	eventName = instance.get(TIMESHEET_DAY) ? 'edit' : 'save',
 					selectedNode = instance.get('selectedNode'),
 					timesheet = instance.get(TIMESHEET),
-					timesheetDay = instance.getUpdatedTimesheetDay();
+					timesheetDay = instance.getUpdatedTimesheetDay(),
+					serviceObject;
+
+				if (eventName === 'edit') {
+					serviceObject = {
+						'/time-tracking-portlet.workday/update-work-day': {
+							userId: timesheetDay.get(USER_ID),
+							workDayId: timesheetDay.get('id'),
+							startTime: timesheetDay.get('startDate') ? timesheetDay.get('startDate').getTime() : 0,
+							endTime: timesheetDay.get('endDate') ? timesheetDay.get('endDate').getTime() : 0,
+							dayOfYearId: timesheetDay.get(DAY_OF_YEAR_ID),
+							break_: timesheetDay.get(BREAK_TIME),
+							serviceContext: {}
+						}
+					}
+				}
+				else {
+					serviceObject = {
+						'/time-tracking-portlet.workday/add-work-day': {
+							userId: timesheetDay.get(USER_ID),
+							companyId: timesheetDay.get(COMPANY_ID),
+							startTime: timesheetDay.get('startDate') ? timesheetDay.get('startDate').getTime() : 0,
+							endTime: timesheetDay.get('endDate') ? timesheetDay.get('endDate').getTime() : 0,
+							dayOfYearId: timesheetDay.get(DAY_OF_YEAR_ID),
+							break_: timesheetDay.get(BREAK_TIME),
+							serviceContext: {}
+						}
+					}
+				}
 
 				timesheet.invokeService(
-					{
-						'/time-tracking-portlet.workday/add-work-day': {
-							startDate: timesheetDay.get('startDate') ? timesheetDay.get('startDate').getTime() : 0,
-							endDate: timesheetDay.get('endDate') ? timesheetDay.get('endDate').getTime() : 0
-						}
-					},
+					serviceObject,
 					{
 						failure: function() {
 							//instance.destroyEvent(schedulerEvent);
@@ -2353,6 +2381,8 @@ AUI.add(
 
 								}
 								else {
+									timesheetDay.set('id', data.workDayId);
+
 									instance.fire(eventName, {
 										timesheetDay: timesheetDay,
 										currentDate: selectedNode.getData('date')
