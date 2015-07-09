@@ -77,6 +77,8 @@ AUI.add(
 		ICON_NEXT_NODE = 'iconNextNode',
 		ICON_PREV_NODE = 'iconPrevNode',
 		ICONS = 'icons',
+		ID = 'id',
+		JSON = 'json',
 		LEFT = 'left',
 		LOCALE = 'locale',
 		NAME = 'name',
@@ -142,7 +144,7 @@ AUI.add(
 		getCN = A.ClassNameManager.getClassName,
 
 		CSS_BTN = getCN(BTN),
-		CSS_FORM_CONTROL = getCN('form', 'control'),
+		CSS_FORM_CONTROL = getCN(FORM, CONTROL),
 		CSS_ICON = getCN(ICON),
 		CSS_TIMESHEET_CONTROLS = getCN(TIMESHEET_BASE, CONTROLS),
 		CSS_TIMESHEET_HD = getCN(TIMESHEET_BASE, HD),
@@ -309,8 +311,8 @@ AUI.add(
 				var instance = this;
 
 				instance.setAttrs({
-					endDate: DateMath.clone(timesheetDay.get('endDate')),
-					startDate: DateMath.clone(timesheetDay.get('startDate'))
+					endDate: DateMath.clone(timesheetDay.get(END_DATE)),
+					startDate: DateMath.clone(timesheetDay.get(START_DATE))
 				},
 				options);
 			},
@@ -340,11 +342,11 @@ AUI.add(
 				var instance = this;
 
 				var params = {
-					endDate: instance.get('startDate'),
-					id: instance.get('id'),
-					breakTime: instance.get('breakTime'),
-					startDate: instance.get('startDate'),
-					userId: instance.get('userId')
+					endDate: instance.get(END_DATE),
+					id: instance.get(ID),
+					breakTime: instance.get(BREAK_TIME),
+					startDate: instance.get(START_DATE),
+					userId: instance.get(USER_ID)
 				}
 			}
 		}
@@ -489,11 +491,11 @@ AUI.add(
 				timesheetDaysAsObject = instance._timesheetDaysAsObject,
 				startDate, endDate;
 
-			endDate = new Date(timesheetDay.get('endTime'));
-			timesheetDay.set('endDate', endDate);
+			endDate = new Date(timesheetDay.get(END_TIME));
+			timesheetDay.set(END_DATE, endDate);
 
-			startDate = new Date(timesheetDay.get('startTime'));
-			timesheetDay.set('startDate', startDate);
+			startDate = new Date(timesheetDay.get(START_TIME));
+			timesheetDay.set(START_DATE, startDate);
 
 			timesheetDay.set(TIMESHEET, instance);
 
@@ -521,7 +523,7 @@ AUI.add(
 			A.io.request(
 				url.toString(),
 				{
-					dataType: 'json',
+					dataType: JSON,
 					on: {
 						success: function() {
 							callback(this.get('responseData'));
@@ -544,7 +546,7 @@ AUI.add(
 						cmd: A.JSON.stringify(payload),
 						p_auth: Liferay.authToken
 					},
-					dataType: 'JSON',
+					dataType: JSON,
 					on: {
 						failure: callback.failure,
 						start: callback.start,
@@ -1464,7 +1466,7 @@ AUI.add(
 
 				var displayRows = instance.get(DISPLAY_ROWS),
 					rowRenderedColumns = 0,
-					timesheet = instance.get('timesheet'),
+					timesheet = instance.get(TIMESHEET),
 					timesheetDaysAsObject = timesheet._timesheetDaysAsObject;
 
 				instance.loopDates(rowStartDate, rowEndDate, function(celDate, index) {
@@ -2350,8 +2352,8 @@ AUI.add(
 						'/time-tracking-portlet.workday/add-work-day': {
 							userId: timesheetDay.get(USER_ID),
 							companyId: timesheetDay.get(COMPANY_ID),
-							startTime: timesheetDay.get('startDate') ? timesheetDay.get('startDate').getTime() : 0,
-							endTime: timesheetDay.get('endDate') ? timesheetDay.get('endDate').getTime() : 0,
+							startTime: timesheetDay.get(START_DATE) ? timesheetDay.get(START_DATE).getTime() : 0,
+							endTime: timesheetDay.get(END_DATE) ? timesheetDay.get(END_DATE).getTime() : 0,
 							dayOfYearId: timesheetDay.get(DAY_OF_YEAR_ID),
 							break_: timesheetDay.get(BREAK_TIME),
 							serviceContext: {}
