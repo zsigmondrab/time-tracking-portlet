@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.timetracking.timesheet.service.persistence.WorkDayFinder.countByStartTimeEndTimeUserId">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				TimeTracking_WorkDay
+			WHERE
+				TimeTracking_WorkDay.startTime > ? AND
+				(TimeTracking_WorkDay.endTime < ? OR
+					TimeTracking_WorkDay.endTime IS NULL) AND
+				TimeTracking_WorkDay.userId = ?
+			ORDER BY
+				TimeTracking_WorkDay.startTime ASC,
+				TimeTracking_WorkDay.endTime ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.timetracking.timesheet.service.persistence.WorkDayFinder.findByStartTimeEndTimeUserId">
+		<![CDATA[
+			SELECT
+				{TimeTracking_WorkDay.*}
+			FROM
+				TimeTracking_WorkDay
+			WHERE
+				TimeTracking_WorkDay.startTime > ? AND
+				(TimeTracking_WorkDay.endTime < ? OR
+					TimeTracking_WorkDay.endTime IS NULL) AND
+				TimeTracking_WorkDay.userId = ?
+			ORDER BY
+				TimeTracking_WorkDay.startTime ASC,
+				TimeTracking_WorkDay.endTime ASC
+		]]>
+	</sql>
+</custom-sql>
