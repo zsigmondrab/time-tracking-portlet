@@ -5,6 +5,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.timetracking.timesheet.model.WorkDay;
 
@@ -23,7 +25,14 @@ public class TimesheetUtil {
 
 		jsonObject.put("breakTime", workDay.getBreak_());
 		jsonObject.put("companyId", workDay.getCompanyId());
-		jsonObject.put("endTime", endTime.getTime());
+
+		if (Validator.isNotNull(endTime)) {
+			jsonObject.put("endTime", endTime.getTime());
+		}
+		else {
+			jsonObject.put("endTime", "0");
+		}
+			
 		jsonObject.put("id", workDay.getWorkDayId());
 		jsonObject.put("startTime", startTime.getTime());
 		jsonObject.put("userId", workDay.getUserId());
