@@ -11,11 +11,9 @@ import com.liferay.timetracking.timesheet.model.WorkDay;
 import java.util.Date;
 import java.util.List;
 
-
 public class TimesheetUtil {
 
-	public static JSONObject toTimesheetDayJSONObject(
-			ThemeDisplay themeDisplay, WorkDay workDay)
+	public static JSONObject toTimesheetDayJSONObject(WorkDay workDay)
 		throws SystemException {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -44,9 +42,9 @@ public class TimesheetUtil {
 		}
 
 		for (WorkDay workDay : workDays) {
-			jsonArray.put(toTimesheetDayJSONObject(themeDisplay, workDay));
+			jsonArray.put(toTimesheetDayJSONObject(workDay));
 		}
-	
+
 		return jsonArray;
 	}
 
