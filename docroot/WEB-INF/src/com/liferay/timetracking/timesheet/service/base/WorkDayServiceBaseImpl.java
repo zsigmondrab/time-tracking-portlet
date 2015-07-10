@@ -24,6 +24,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.timetracking.timesheet.model.WorkDay;
 import com.liferay.timetracking.timesheet.service.WorkDayService;
+import com.liferay.timetracking.timesheet.service.persistence.WorkDayFinder;
 import com.liferay.timetracking.timesheet.service.persistence.WorkDayPersistence;
 
 import javax.sql.DataSource;
@@ -102,6 +103,24 @@ public abstract class WorkDayServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setWorkDayPersistence(WorkDayPersistence workDayPersistence) {
 		this.workDayPersistence = workDayPersistence;
+	}
+
+	/**
+	 * Returns the work day finder.
+	 *
+	 * @return the work day finder
+	 */
+	public WorkDayFinder getWorkDayFinder() {
+		return workDayFinder;
+	}
+
+	/**
+	 * Sets the work day finder.
+	 *
+	 * @param workDayFinder the work day finder
+	 */
+	public void setWorkDayFinder(WorkDayFinder workDayFinder) {
+		this.workDayFinder = workDayFinder;
 	}
 
 	/**
@@ -281,6 +300,8 @@ public abstract class WorkDayServiceBaseImpl extends BaseServiceImpl
 	protected com.liferay.timetracking.timesheet.service.WorkDayService workDayService;
 	@BeanReference(type = WorkDayPersistence.class)
 	protected WorkDayPersistence workDayPersistence;
+	@BeanReference(type = WorkDayFinder.class)
+	protected WorkDayFinder workDayFinder;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

@@ -10,6 +10,7 @@
 	<bean id="com.liferay.timetracking.timesheet.service.WorkDayLocalService" class="com.liferay.timetracking.timesheet.service.impl.WorkDayLocalServiceImpl" />
 	<bean id="com.liferay.timetracking.timesheet.service.WorkDayService" class="com.liferay.timetracking.timesheet.service.impl.WorkDayServiceImpl" />
 	<bean id="com.liferay.timetracking.timesheet.service.persistence.WorkDayPersistence" class="com.liferay.timetracking.timesheet.service.persistence.WorkDayPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.timetracking.timesheet.service.persistence.WorkDayFinder" class="com.liferay.timetracking.timesheet.service.persistence.WorkDayFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.timetracking.dayoffs.service.DaysOffCounterLocalService" class="com.liferay.timetracking.dayoffs.service.impl.DaysOffCounterLocalServiceImpl" />
 	<bean id="com.liferay.timetracking.dayoffs.service.DaysOffCounterService" class="com.liferay.timetracking.dayoffs.service.impl.DaysOffCounterServiceImpl" />
 	<bean id="com.liferay.timetracking.dayoffs.service.persistence.DaysOffCounterPersistence" class="com.liferay.timetracking.dayoffs.service.persistence.DaysOffCounterPersistenceImpl" parent="basePersistence" />

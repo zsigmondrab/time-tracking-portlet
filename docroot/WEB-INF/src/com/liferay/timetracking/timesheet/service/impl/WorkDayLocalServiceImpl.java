@@ -14,16 +14,10 @@
 
 package com.liferay.timetracking.timesheet.service.impl;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
@@ -36,6 +30,11 @@ import com.liferay.timetracking.timesheet.InvalidTimeAmountException;
 import com.liferay.timetracking.timesheet.MissingStartDateException;
 import com.liferay.timetracking.timesheet.model.WorkDay;
 import com.liferay.timetracking.timesheet.service.base.WorkDayLocalServiceBaseImpl;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 /**
  * The implementation of the work day local service.
@@ -115,7 +114,7 @@ public class WorkDayLocalServiceImpl extends WorkDayLocalServiceBaseImpl {
 		Calendar endCalendar = CalendarFactoryUtil.getCalendar(timeZone);
 		endCalendar.setTimeInMillis(endTime);
 
-		List<WorkDay> workDays = workDayPersistence.filterFindByS_E_U(
+		List<WorkDay> workDays = workDayFinder.findByStartTimeEndTimeUserId(
 			startCalendar.getTime(), endCalendar.getTime(), userId);
 
 		return workDays;
